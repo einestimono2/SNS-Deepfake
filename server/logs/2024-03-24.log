@@ -1,0 +1,173 @@
+[19:48:18] [dev] [32minfo[39m: [32mServer is running at http://localhost:8888[39m
+[19:48:18] [dev] [32minfo[39m: [32mRedis connected with apn1-guiding-walrus-34926.upstash.io:34926[39m
+[19:48:19] [dev] [32minfo[39m: [32mPostgreSQL connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[19:48:58] [dev] [32minfo[39m: [32m	Server is running at http://localhost:8888[39m
+[19:48:58] [dev] [32minfo[39m: [32m	Redis connected with apn1-guiding-walrus-34926.upstash.io:34926[39m
+[19:48:59] [dev] [32minfo[39m: [32m	PostgreSQL connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[19:49:11] [DEV] [32MINFO[39M: [32m	Server is running at http://localhost:8888[39m
+[19:49:11] [DEV] [32MINFO[39M: [32m	Redis connected with apn1-guiding-walrus-34926.upstash.io:34926[39m
+[19:49:13] [DEV] [32MINFO[39M: [32m	PostgreSQL connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[19:49:42] [DEV] [32MINFO[39M: [32m	Server is running at http://localhost:8888[39m
+[19:49:42] [DEV] [32MINFO[39M: [32m	Redis connected with apn1-guiding-walrus-34926.upstash.io:34926[39m
+[19:49:43] [DEV] [32MINFO[39M: [32m	PostgreSQL connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[19:50:01] [DEV] [32minfo[39m: [32m	Server is running at http://localhost:8888[39m
+[19:50:01] [DEV] [32minfo[39m: [32m	Redis connected with apn1-guiding-walrus-34926.upstash.io:34926[39m
+[19:50:02] [DEV] [32minfo[39m: [32m	PostgreSQL connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[19:50:10] [dev] [32minfo[39m: [32m	Server is running at http://localhost:8888[39m
+[19:50:10] [dev] [32minfo[39m: [32m	Redis connected with apn1-guiding-walrus-34926.upstash.io:34926[39m
+[19:50:13] [dev] [32minfo[39m: [32m	PostgreSQL connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[19:50:28] [dev] [32MINFO[39M: [32m	Server is running at http://localhost:8888[39m
+[19:50:28] [dev] [32MINFO[39M: [32m	Redis connected with apn1-guiding-walrus-34926.upstash.io:34926[39m
+[19:50:29] [dev] [32MINFO[39M: [32m	PostgreSQL connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[19:50:37] [dev] [32minfo[39m: [32m	Server is running at http://localhost:8888[39m
+[19:50:37] [dev] [32minfo[39m: [32m	Redis connected with apn1-guiding-walrus-34926.upstash.io:34926[39m
+[19:50:42] [DEV] [32minfo[39m: [32m	Server is running at http://localhost:8888[39m
+[19:50:42] [DEV] [32minfo[39m: [32m	Redis connected with apn1-guiding-walrus-34926.upstash.io:34926[39m
+[19:50:44] [DEV] [32minfo[39m: [32m	PostgreSQL connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[19:51:12] [DEV] [32MINFO[39M: [32m	Server is running at http://localhost:8888[39m
+[19:51:12] [DEV] [32MINFO[39M: [32m	Redis connected with apn1-guiding-walrus-34926.upstash.io:34926[39m
+[19:51:13] [DEV] [32MINFO[39M: [32m	PostgreSQL connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[19:51:28] [DEV] [32minfo[39m: [32m	Server is running at http://localhost:8888[39m
+[19:51:28] [DEV] [32minfo[39m: [32m	Redis connected with apn1-guiding-walrus-34926.upstash.io:34926[39m
+[19:51:29] [DEV] [32minfo[39m: [32m	PostgreSQL connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[19:52:55] [DEV] [32minfo[39m: [32mServer is running at http://localhost:8888[39m
+[19:52:55] [DEV] [32minfo[39m: [32mRedis connected with apn1-guiding-walrus-34926.upstash.io:34926[39m
+[19:52:56] [DEV] [32minfo[39m: [32mPostgreSQL connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[19:53:33] [DEV] [32minfo[39m: [32m	Server is running at http://localhost:8888[39m
+[19:53:33] [DEV] [32minfo[39m: [32m	Redis connected with apn1-guiding-walrus-34926.upstash.io:34926[39m
+[19:53:34] [DEV] [32minfo[39m: [32m	PostgreSQL connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[19:58:03] [DEV] [32minfo[39m: [32m	Redis connected with apn1-guiding-walrus-34926.upstash.io:34926[39m
+[20:02:34] [DEV] [32minfo[39m: [32m	Redis connected with apn1-guiding-walrus-34926.upstash.io:34926[39m
+[20:02:44] [DEV] [32minfo[39m: [32m	Server is running at http://localhost:8888[39m
+[20:02:44] [DEV] [32minfo[39m: [32m	Redis connected with apn1-guiding-walrus-34926.upstash.io:34926[39m
+[20:02:46] [DEV] [32minfo[39m: [32m	PostgreSQL connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[20:02:53] [DEV] [32minfo[39m: [32m	Server is running at http://localhost:8888[39m
+[20:02:53] [DEV] [32minfo[39m: [32m	Redis connected with apn1-guiding-walrus-34926.upstash.io:34926[39m
+[20:02:54] [DEV] [32minfo[39m: [32m	PostgreSQL connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[20:07:23] [DEV] [32minfo[39m: [32m	Redis connected with apn1-guiding-walrus-34926.upstash.io:34926[39m
+[20:11:53] [DEV] [32minfo[39m: [32m	Redis connected with apn1-guiding-walrus-34926.upstash.io:34926[39m
+[20:16:24] [DEV] [32minfo[39m: [32m	Redis connected with apn1-guiding-walrus-34926.upstash.io:34926[39m
+[20:20:54] [DEV] [32minfo[39m: [32m	Redis connected with apn1-guiding-walrus-34926.upstash.io:34926[39m
+[20:25:24] [DEV] [32minfo[39m: [32m	Redis connected with apn1-guiding-walrus-34926.upstash.io:34926[39m
+[20:29:54] [DEV] [32minfo[39m: [32m	Redis connected with apn1-guiding-walrus-34926.upstash.io:34926[39m
+[20:34:25] [DEV] [32minfo[39m: [32m	Redis connected with apn1-guiding-walrus-34926.upstash.io:34926[39m
+[20:38:55] [DEV] [32minfo[39m: [32m	Redis connected with apn1-guiding-walrus-34926.upstash.io:34926[39m
+[20:43:25] [DEV] [32minfo[39m: [32m	Redis connected with apn1-guiding-walrus-34926.upstash.io:34926[39m
+[20:47:56] [DEV] [32minfo[39m: [32m	Redis connected with apn1-guiding-walrus-34926.upstash.io:34926[39m
+[20:52:26] [DEV] [32minfo[39m: [32m	Redis connected with apn1-guiding-walrus-34926.upstash.io:34926[39m
+[20:56:56] [DEV] [32minfo[39m: [32m	Redis connected with apn1-guiding-walrus-34926.upstash.io:34926[39m
+[21:03:01] [DEV] [32minfo[39m: [32m	Server is running at http://localhost:8888[39m
+[21:03:02] [DEV] [32minfo[39m: [32m	Redis connected with apn1-guiding-walrus-34926.upstash.io:34926[39m
+[21:03:04] [DEV] [32minfo[39m: [32m	PostgreSQL connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[21:03:47] [DEV] [32minfo[39m: [32m	Server is running at http://localhost:8888[39m
+[21:03:47] [DEV] [32minfo[39m: [32m	Redis connected with apn1-guiding-walrus-34926.upstash.io:34926[39m
+[21:03:51] [DEV] [32minfo[39m: [32m	Server is running at http://localhost:8888[39m
+[21:03:51] [DEV] [32minfo[39m: [32m	Redis connected with apn1-guiding-walrus-34926.upstash.io:34926[39m
+[21:03:52] [DEV] [32minfo[39m: [32m	PostgreSQL connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[21:04:00] [DEV] [32minfo[39m: [32m	Server is running at http://localhost:8888[39m
+[21:04:00] [DEV] [32minfo[39m: [32m	Redis connected with apn1-guiding-walrus-34926.upstash.io:34926[39m
+[21:04:02] [DEV] [32minfo[39m: [32m	PostgreSQL connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[21:05:23] [DEV] [32minfo[39m: [32m	Server is running at http://localhost:8888[39m
+[21:05:23] [DEV] [32minfo[39m: [32m	Redis connected with apn1-guiding-walrus-34926.upstash.io:34926[39m
+[21:05:24] [DEV] [32minfo[39m: [32m	PostgreSQL connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[22:19:14] [DEV] [32minfo[39m: [32m	Server is running at http://localhost:8888[39m
+[22:19:14] [DEV] [32minfo[39m: [32m	Redis connected with apn1-guiding-walrus-34926.upstash.io:34926[39m
+[22:19:15] [DEV] [32minfo[39m: [32m	PostgreSQL connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[22:20:50] [DEV] [32minfo[39m: [32m	Server is running at http://localhost:8888[39m
+[22:20:50] [DEV] [32minfo[39m: [32m	Redis connected with apn1-guiding-walrus-34926.upstash.io:34926[39m
+[22:20:54] [DEV] [32minfo[39m: [32m	Server is running at http://localhost:8888[39m
+[22:20:54] [DEV] [32minfo[39m: [32m	Redis connected with apn1-guiding-walrus-34926.upstash.io:34926[39m
+[22:20:55] [DEV] [32minfo[39m: [32m	PostgreSQL connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[22:21:34] [DEV] [32minfo[39m: [32m	Server is running at http://localhost:8888[39m
+[22:21:34] [DEV] [32minfo[39m: [32m	Redis connected with apn1-guiding-walrus-34926.upstash.io:34926[39m
+[22:21:36] [DEV] [32minfo[39m: [32m	PostgreSQL connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[22:21:43] [DEV] [32minfo[39m: [32m	Server is running at http://localhost:8888[39m
+[22:21:43] [DEV] [32minfo[39m: [32m	Redis connected with apn1-guiding-walrus-34926.upstash.io:34926[39m
+[22:21:45] [DEV] [32minfo[39m: [32m	PostgreSQL connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[22:25:34] [DEV] [32minfo[39m: [32m	Server is running at http://localhost:8888[39m
+[22:25:34] [DEV] [32minfo[39m: [32m	Redis connected with apn1-guiding-walrus-34926.upstash.io:34926[39m
+[22:25:35] [DEV] [32minfo[39m: [32m	PostgreSQL connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[22:28:00] [DEV] [32minfo[39m: [32m	Server is running at http://localhost:8888[39m
+[22:28:01] [DEV] [32minfo[39m: [32m	Redis connected with apn1-guiding-walrus-34926.upstash.io:34926[39m
+[22:28:02] [DEV] [32minfo[39m: [32m	PostgreSQL connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[22:32:25] [DEV] [32minfo[39m: [32m	Server is running at http://localhost:8888[39m
+[22:32:25] [DEV] [32minfo[39m: [32m	Redis connected with apn1-guiding-walrus-34926.upstash.io:34926[39m
+[22:32:27] [DEV] [32minfo[39m: [32m	PostgreSQL connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[22:33:24] [DEV] [32minfo[39m: [32m	Server is running at http://localhost:8888[39m
+[22:33:24] [DEV] [32minfo[39m: [32m	Redis connected with apn1-guiding-walrus-34926.upstash.io:34926[39m
+[22:33:26] [DEV] [32minfo[39m: [32m	PostgreSQL connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[22:36:37] [DEV] [32minfo[39m: [32m	Server is running at http://localhost:8888[39m
+[22:36:37] [DEV] [32minfo[39m: [32m	Redis connected with apn1-guiding-walrus-34926.upstash.io:34926[39m
+[22:36:39] [DEV] [32minfo[39m: [32m	PostgreSQL connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[22:36:57] [DEV] [32minfo[39m: [32m	Server is running at http://localhost:8888[39m
+[22:36:57] [DEV] [32minfo[39m: [32m	Redis connected with apn1-guiding-walrus-34926.upstash.io:34926[39m
+[22:36:59] [DEV] [32minfo[39m: [32m	PostgreSQL connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[22:37:09] [DEV] [32minfo[39m: [32m	Server is running at http://localhost:8888[39m
+[22:37:09] [DEV] [32minfo[39m: [32m	Redis connected with apn1-guiding-walrus-34926.upstash.io:34926[39m
+[22:37:10] [DEV] [32minfo[39m: [32m	PostgreSQL connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[22:41:39] [DEV] [32minfo[39m: [32m	Redis connected with apn1-guiding-walrus-34926.upstash.io:34926[39m
+[22:42:03] [DEV] [32minfo[39m: [32m	Server is running at http://localhost:8888[39m
+[22:42:03] [DEV] [32minfo[39m: [32m	Redis connected with apn1-guiding-walrus-34926.upstash.io:34926[39m
+[22:42:04] [DEV] [32minfo[39m: [32m	PostgreSQL connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[22:42:24] [DEV] [32minfo[39m: [32m	Server is running at http://localhost:8888[39m
+[22:42:24] [DEV] [32minfo[39m: [32m	Redis connected with apn1-guiding-walrus-34926.upstash.io:34926[39m
+[22:42:26] [DEV] [32minfo[39m: [32m	PostgreSQL connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[22:42:32] [DEV] [32minfo[39m: [32m	Server is running at http://localhost:8888[39m
+[22:42:32] [DEV] [32minfo[39m: [32m	Redis connected with apn1-guiding-walrus-34926.upstash.io:34926[39m
+[22:42:34] [DEV] [32minfo[39m: [32m	Server is running at http://localhost:8888[39m
+[22:42:34] [DEV] [32minfo[39m: [32m	Redis connected with apn1-guiding-walrus-34926.upstash.io:34926[39m
+[22:42:35] [DEV] [32minfo[39m: [32m	PostgreSQL connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[22:43:43] [DEV] [32minfo[39m: [32m	Server is running at http://localhost:8888[39m
+[22:43:44] [DEV] [32minfo[39m: [32m	Redis connected with apn1-guiding-walrus-34926.upstash.io:34926[39m
+[22:43:45] [DEV] [32minfo[39m: [32m	PostgreSQL connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[22:43:48] [DEV] [32minfo[39m: [32m	Server is running at http://localhost:8888[39m
+[22:43:48] [DEV] [32minfo[39m: [32m	Redis connected with apn1-guiding-walrus-34926.upstash.io:34926[39m
+[22:43:49] [DEV] [32minfo[39m: [32m	PostgreSQL connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[22:44:11] [DEV] [32minfo[39m: [32m	Server is running at http://localhost:8888[39m
+[22:44:11] [DEV] [32minfo[39m: [32m	Redis connected with apn1-guiding-walrus-34926.upstash.io:34926[39m
+[22:44:12] [DEV] [32minfo[39m: [32m	PostgreSQL connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[22:45:45] [DEV] [32minfo[39m: [32m	Server is running at http://localhost:8888[39m
+[22:45:45] [DEV] [32minfo[39m: [32m	Redis connected with apn1-guiding-walrus-34926.upstash.io:34926[39m
+[22:45:47] [DEV] [32minfo[39m: [32m	PostgreSQL connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[22:46:38] [DEV] [32minfo[39m: [32m	Server is running at http://localhost:8888[39m
+[22:46:38] [DEV] [32minfo[39m: [32m	Redis connected with apn1-guiding-walrus-34926.upstash.io:34926[39m
+[22:46:40] [DEV] [32minfo[39m: [32m	PostgreSQL connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[22:47:15] [DEV] [32minfo[39m: [32m	Server is running at http://localhost:8888[39m
+[22:47:15] [DEV] [32minfo[39m: [32m	Redis connected with apn1-guiding-walrus-34926.upstash.io:34926[39m
+[22:47:17] [DEV] [32minfo[39m: [32m	PostgreSQL connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[22:47:24] [TEST] [31merror[39m: [31m	[TypeError]: Cannot read properties of undefined (reading 'status')[39m
+[22:49:34] [DEV] [32minfo[39m: [32m	Server is running at http://localhost:8888[39m
+[22:49:35] [DEV] [32minfo[39m: [32m	Redis connected with apn1-guiding-walrus-34926.upstash.io:34926[39m
+[22:49:36] [DEV] [32minfo[39m: [32m	PostgreSQL connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[22:49:39] [TEST] [31merror[39m: [31m	[TypeError]: Cannot read properties of undefined (reading 'status')[39m
+[22:51:31] [DEV] [32minfo[39m: [32m	Server is running at http://localhost:8888[39m
+[22:51:31] [DEV] [32minfo[39m: [32m	Redis connected with apn1-guiding-walrus-34926.upstash.io:34926[39m
+[22:51:32] [DEV] [32minfo[39m: [32m	PostgreSQL connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[22:51:55] [TEST] [31merror[39m: [31m	[TypeError]: Cannot read properties of undefined (reading 'status')[39m
+[22:53:09] [DEV] [32minfo[39m: [32m	Server is running at http://localhost:8888[39m
+[22:53:09] [DEV] [32minfo[39m: [32m	Redis connected with apn1-guiding-walrus-34926.upstash.io:34926[39m
+[22:53:10] [DEV] [32minfo[39m: [32m	PostgreSQL connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[22:53:50] [TEST] [31merror[39m: [31m	[TypeError]: Cannot read properties of undefined (reading 'status')[39m
+[22:57:39] [DEV] [32minfo[39m: [32m	Redis connected with apn1-guiding-walrus-34926.upstash.io:34926[39m
+[22:58:13] [DEV] [32minfo[39m: [32m	Server is running at http://localhost:8888[39m
+[22:58:13] [DEV] [32minfo[39m: [32m	Redis connected with apn1-guiding-walrus-34926.upstash.io:34926[39m
+[22:58:14] [DEV] [32minfo[39m: [32m	PostgreSQL connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[22:58:33] [DEV] [32minfo[39m: [32m	Server is running at http://localhost:8888[39m
+[22:58:33] [DEV] [32minfo[39m: [32m	Redis connected with apn1-guiding-walrus-34926.upstash.io:34926[39m
+[22:58:34] [DEV] [32minfo[39m: [32m	PostgreSQL connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[23:00:11] [TEST] [31merror[39m: [31m	[TypeError]: Cannot read properties of undefined (reading 'status')[39m
+[23:06:30] [DEV] [32minfo[39m: [32m	Server is running at http://localhost:8888[39m
+[23:06:30] [DEV] [32minfo[39m: [32m	Redis connected with apn1-guiding-walrus-34926.upstash.io:34926[39m
+[23:06:31] [DEV] [32minfo[39m: [32m	PostgreSQL connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[23:06:58] [DEV] [31merror[39m: [31m	[TypeError]: Cannot read properties of undefined (reading 'status')[39m
+[23:08:19] [DEV] [32minfo[39m: [32m	Server is running at http://localhost:8888[39m
+[23:08:19] [DEV] [32minfo[39m: [32m	Redis connected with apn1-guiding-walrus-34926.upstash.io:34926[39m
+[23:08:21] [DEV] [32minfo[39m: [32m	PostgreSQL connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[23:08:29] [DEV] [31merror[39m: [31m	[TypeError]: Cannot read properties of undefined (reading 'status')[39m
+[23:08:32] [DEV] [31merror[39m: [31m	[TypeError]: Cannot read properties of undefined (reading 'status')[39m
+[23:09:44] [DEV] [32minfo[39m: [32m	Server is running at http://localhost:8888[39m
+[23:09:44] [DEV] [32minfo[39m: [32m	Redis connected with apn1-guiding-walrus-34926.upstash.io:34926[39m
+[23:09:46] [DEV] [32minfo[39m: [32m	PostgreSQL connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[23:10:46] [DEV] [32minfo[39m: [32m	Server is running at http://localhost:8888[39m
+[23:10:46] [DEV] [32minfo[39m: [32m	Redis connected with apn1-guiding-walrus-34926.upstash.io:34926[39m
+[23:10:47] [DEV] [32minfo[39m: [32m	PostgreSQL connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m

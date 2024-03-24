@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Run husky hook in server
+if git diff --name-only --cached | grep 'server/';
+  then
+    cd server
+    yarn lint-staged
+fi

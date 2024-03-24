@@ -1,0 +1,32 @@
+{
+    // Set the default
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+
+    // Enable per-language
+    "[javascript]": {
+        "editor.formatOnSave": true
+    },
+    "javascript.referencesCodeLens.enabled": true,
+    "javascript.referencesCodeLens.showOnAllFunctions": true,
+    "javascript.inlayHints.functionLikeReturnTypes.enabled": true,
+    "javascript.inlayHints.enumMemberValues.enabled": true,
+    "javascript.inlayHints.parameterNames.enabled": "all",
+    "javascript.inlayHints.variableTypes.enabled": true,
+    "javascript.inlayHints.propertyDeclarationTypes.enabled": true,
+    "javascript.inlayHints.parameterTypes.enabled": true,
+    "javascript.preferGoToSourceDefinition": true,
+    "javascript.suggest.completeFunctionCalls": true,
+    "javascript.preferences.importModuleSpecifier": "non-relative",
+    "javascript.updateImportsOnFileMove.enabled": "always",
+
+    "[json]": {
+        "editor.formatOnSave": true
+    },
+
+    "editor.codeActionsOnSave": {
+        "source.fixAll": "always",
+        "source.fixAll.eslint": "always",
+        "source.organizeImports": "always"
+    }
+}

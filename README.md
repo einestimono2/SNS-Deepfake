@@ -1,1 +1,1 @@
-# SNS-Deepfake
+# SNS Deepfake

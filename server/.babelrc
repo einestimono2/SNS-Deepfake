@@ -1,0 +1,32 @@
+{
+  "presets": [["@babel/preset-env", { "targets": { "node": "current" } }]],
+  "env": {
+    "testing": {
+      "presets": [["@babel/preset-env", { "targets": { "node": "current" } }]]
+    }
+  },
+  "plugins": [
+    ["@babel/transform-runtime"],
+    [
+      "module-resolver",
+      {
+        "root": ["."],
+        "alias": {
+          "##/*": "./src/*.js",
+          "#configs": "./src/configs/index.js",
+          "#configs/*": "./src/configs/*.js",
+          "#constants": "./src/constants/index.js",
+          "#constants/*": "./src/constants/*.js",
+          "#dbs": "./src/dbs/index.js",
+          "#dbs/*": "./src/dbs/*.js",
+          "#middlewares": "./src/middlewares/index.js",
+          "#middlewares/*": "./src/middlewares/*.js",
+          "#modules": "./src/modules/index.js",
+          "#modules/*": "./src/modules/*/index.js",
+          "#utils": "./src/utils/index.js",
+          "#utils/*": "./src/utils/*.js"
+        }
+      }
+    ]
+  ]
+}
