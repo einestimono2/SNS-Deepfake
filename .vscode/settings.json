@@ -2,17 +2,22 @@
     // Set the default
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2,
+    "editor.detectIndentation": true,
+    "editor.indentSize": "tabSize",
 
     // Enable per-language
     "[javascript]": {
         "editor.formatOnSave": true
     },
+
+    // Set hint ở bên cạnh ()
     "javascript.referencesCodeLens.enabled": true,
-    "javascript.referencesCodeLens.showOnAllFunctions": true,
-    "javascript.inlayHints.functionLikeReturnTypes.enabled": true,
-    "javascript.inlayHints.enumMemberValues.enabled": true,
-    "javascript.inlayHints.parameterNames.enabled": "all",
-    "javascript.inlayHints.variableTypes.enabled": true,
+    "javascript.referencesCodeLens.showOnAllFunctions": false,
+    "javascript.inlayHints.functionLikeReturnTypes.enabled": false, // return type của function
+    "javascript.inlayHints.enumMemberValues.enabled": true, // value của enum
+    "javascript.inlayHints.parameterNames.enabled": "all", // hiển thị tên param tương ứng khi truyền vào function
+    "javascript.inlayHints.variableTypes.enabled": true, //
     "javascript.inlayHints.propertyDeclarationTypes.enabled": true,
     "javascript.inlayHints.parameterTypes.enabled": true,
     "javascript.preferGoToSourceDefinition": true,

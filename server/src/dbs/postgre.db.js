@@ -1,24 +1,39 @@
 import { Sequelize } from 'sequelize';
 
-import { isDevelopment, postgre } from '#configs';
+import { isDevelopment, postgre as postgreConfigs } from '#configs';
 import { logger } from '#utils';
 
-// Instance
 class PostgreDatabase {
-  static instance;
+  static instance = null;
 
-  // constructor() {
-  //   this.connect();
-  // }
+  sequelize;
 
-  connect() {
-    const sequelize = new Sequelize({
-      database: postgre.database,
-      username: postgre.username,
-      password: postgre.password,
-      host: postgre.host,
-      port: postgre.port,
-      dialect: postgre.dialect,
+  constructor() {
+    if (PostgreDatabase.instance) {
+      return PostgreDatabase.instance;
+    }
+
+    this.initConnection();
+
+    PostgreDatabase.instance = this;
+  }
+
+  static getInstance() {
+    if (!PostgreDatabase.instance) {
+      return new PostgreDatabase();
+    }
+
+    return PostgreDatabase.instance;
+  }
+
+  initConnection() {
+    this.sequelize = new Sequelize({
+      database: postgreConfigs.database,
+      username: postgreConfigs.username,
+      password: postgreConfigs.password,
+      host: postgreConfigs.host,
+      port: postgreConfigs.port,
+      dialect: postgreConfigs.dialect,
       timezone: '+07:00',
       // replication: ,
       pool: {
@@ -27,22 +42,19 @@ class PostgreDatabase {
       typeValidation: true,
       logQueryParameters: isDevelopment()
     });
-
-    sequelize
-      .authenticate()
-      .then(() => {
-        logger.info(`PostgreSQL connected with ${postgre.host}:${postgre.port}`);
-      })
-      .catch((error) => logger.error('Unable to connect to the database: ', error));
   }
 
-  static getInstance() {
-    if (!PostgreDatabase.instance) {
-      PostgreDatabase.instance = new PostgreDatabase();
-    }
-
-    return PostgreDatabase.instance;
+  testConnect() {
+    this.sequelize
+      .authenticate()
+      .then(() => {
+        logger.info(`PostgreSQL ⭐ Connected with ${postgreConfigs.host}:${postgreConfigs.port}`);
+      })
+      .catch((error) => {
+        logger.error('PostgreSQL ⭐ Unable to connect to the database: ', error);
+      });
   }
 }
 
 export const postgreDb = PostgreDatabase.getInstance();
+export const postgre = /** @type {Sequelize} */ (PostgreDatabase.getInstance().sequelize);

@@ -1,0 +1,45 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 7
+    },
+    "auditLog": "logs/logs-audit.json",
+    "files": [
+        {
+            "date": 1711392170424,
+            "name": "logs\\2024-03-26\\exception.log",
+            "hash": "44c7d9338f087624f1858b23251b6897d73882a38f0ca27f2ecac732801f2256"
+        },
+        {
+            "date": 1711392170462,
+            "name": "logs\\2024-03-26\\rejection.log",
+            "hash": "b3b5dc7afe0d10a2a6bc2cd5073bed0b9086364ae2b5418e2566a308026ed7ad"
+        },
+        {
+            "date": 1711392170486,
+            "name": "logs\\2024-03-26\\info.log",
+            "hash": "c43d31369d14cbaae1dc7cebbe160a3c6e620fa4bbaf6b83aa914e8048715580"
+        },
+        {
+            "date": 1711392170600,
+            "name": "logs\\2024-03-26\\error.log",
+            "hash": "e3bbff48b830705a637b319108b71ff6180cd909b9dfa70516c3f74ed72bad1a"
+        },
+        {
+            "date": 1711392170637,
+            "name": "logs\\2024-03-26\\warn.log",
+            "hash": "b549ebc8c8cec42b1c5c95b85979797b4af8db2dc3c9deed0cc1e179fbea9c8e"
+        },
+        {
+            "date": 1711392170701,
+            "name": "logs\\2024-03-26\\http.log",
+            "hash": "6984474beee7dabfec3957167ecc7114a52519cac8c9aa407644c9f895882eea"
+        },
+        {
+            "date": 1711392170750,
+            "name": "logs\\2024-03-26\\debug.log",
+            "hash": "c869f9dbcb748ba409b7f557c6e7b519a7e387e6db36fba628efd2c1906dff2e"
+        }
+    ],
+    "hashType": "sha256"
+}

@@ -1,0 +1,31 @@
+@dev_url=http://localhost:8888/api/v1/apikey
+
+### CREATE
+POST {{dev_url}}/create HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "test",
+  "expires": "2024-03-25"
+}
+
+
+### LIST
+GET {{dev_url}}/list HTTP/1.1
+Content-Type: application/json
+
+
+### DELETE
+DELETE {{dev_url}}/details/c87907a0-fb3a-4c8f-970b-75dc2e9c115f HTTP/1.1
+Content-Type: application/json
+
+
+### UPDATE
+PATCH {{dev_url}}/details/7eca3d62-aa78-4988-a1dd-9fb01c71aa55 HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "test2",
+  "status": false,
+  "expires": "2024-03-28"
+}

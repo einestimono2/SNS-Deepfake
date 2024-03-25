@@ -1,5 +1,5 @@
 import { Message, StatusCode } from '#constants';
-import { NotFoundError, UnauthorizedError } from '#modules';
+import { BadRequestError, NotFoundError, UnauthorizedError } from '#modules';
 import { logger } from '#utils';
 
 export function ErrorMiddleware(err, req, res, next) {
@@ -8,6 +8,14 @@ export function ErrorMiddleware(err, req, res, next) {
   err.statusCode = err.statusCode ?? StatusCode.INTERNAL_SERVER_ERROR_500;
   err.ec = err.ec ?? err.statusCode;
   err.message = err.message ?? Message.INTERNAL_SERVER_ERROR;
+
+  // SequelizeValidationError
+  if (err.name === 'SequelizeValidationError') {
+    // Only show first error
+    const firstError = err.errors[Object.keys(err.errors)[0]].message;
+
+    err = new BadRequestError(firstError);
+  }
 
   // Wrong JWT error
   if (err.name === 'JsonWebTokenError') {

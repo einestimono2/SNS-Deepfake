@@ -1,4 +1,3 @@
-/* eslint-disable import/first */
 import { createServer } from 'http';
 
 import { app } from '##/app';
@@ -14,7 +13,7 @@ SocketServer.getInstance(httpServer);
 
 //! Http Server
 export const server = httpServer.listen(PORT, () => {
-  logger.info(`Server is running at http://localhost:${PORT}`);
+  logger.info(`Server ⭐ Running at port ${PORT}`);
 });
 
 process.on('SIGINT', () => {

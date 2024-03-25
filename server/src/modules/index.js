@@ -1,15 +1,16 @@
 import express from 'express';
 import path from 'path';
 
-import { Message } from '#constants';
-import { NotFoundError } from '#modules';
+import { Message, Strings } from '#constants';
+import { apiKeyRouter } from './api_key/index.js';
+import { NotFoundError } from './core/index.js';
 
 export const routers = express.Router();
 
-// Test
+//! Check Health
 routers.use('/health', (_req, res) => {
   res.ok({
-    message: 'OK 🤗',
+    message: '🤗 OK 🤗',
     data: {
       uptime: process.uptime(),
       responseTime: process.hrtime(),
@@ -18,10 +19,11 @@ routers.use('/health', (_req, res) => {
   });
 });
 
-// Routes
+//! Routes
+routers.use(`${Strings.API_PREFIX}/apikey`, apiKeyRouter);
 
 //! Static - Import trước check Unknown route
-routers.use('/files', express.static(path.join(path.resolve(), '../uploads')));
+routers.use('/storage', express.static(path.join(path.resolve(), '../uploads')));
 
 //! Unknown route
 routers.get('*', (_req, _res, next) => {
@@ -29,4 +31,5 @@ routers.get('*', (_req, _res, next) => {
 });
 
 // - Export modules
+export * from './api_key/index.js';
 export * from './core/index.js';

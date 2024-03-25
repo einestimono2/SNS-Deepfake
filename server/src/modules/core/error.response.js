@@ -122,3 +122,13 @@ export class UnprocessableEntityError extends ErrorResponse {
     super(typeof message === 'string' ? message : message.msg, statusCode, ec);
   }
 }
+
+export class RedisTimeoutError extends ErrorResponse {
+  constructor(
+    message,
+    statusCode = StatusCode.INTERNAL_SERVER_ERROR_500,
+    ec = message.ec ?? StatusCode.INTERNAL_SERVER_ERROR_500
+  ) {
+    super(typeof message === 'string' ? message : message.msg, statusCode, ec);
+  }
+}

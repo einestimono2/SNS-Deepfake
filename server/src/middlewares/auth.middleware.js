@@ -2,33 +2,8 @@ import jwt from 'jsonwebtoken';
 
 import { redis } from '#configs';
 import { Message, Roles } from '#constants';
-import { CatchAsyncError } from '#middlewares';
+import { CatchAsyncError } from './async.middleware.js';
 import { BadRequestError, ForbiddenError, NotFoundError } from '#modules';
-
-//! Cookies session
-// export const isAuthenticated = CatchAsyncError(async (req: Request, res: Response, next: NextFunction) => {
-//   const accessToken = req.cookies.access_token;
-//   if (!accessToken) {
-//     next(new BadRequestError(Message.LOGIN_TO_ACCESS_RESOURCE));
-//     return;
-//   }
-
-//   const decodedData = jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET as string) as JwtPayload;
-//   if (!decodedData) {
-//     next(new BadRequestError(Message.TOKEN_IS_INVALID));
-//     return;
-//   }
-
-//   const user = await redis.get(decodedData.id);
-//   if (!user) {
-//     next(new BadRequestError(Message.USER_NOT_FOUND));
-//     return;
-//   }
-
-//   req.user = JSON.parse(user);
-
-//   next();
-// });
 
 //! Bearer Token
 export const isAuthenticated = CatchAsyncError(async (req, res, next) => {

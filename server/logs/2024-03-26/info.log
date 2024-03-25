@@ -1,0 +1,8 @@
+[01:42:56] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[01:42:56] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[01:42:58] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[01:42:58] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[01:45:20] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[01:45:20] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[01:45:21] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[01:45:21] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
