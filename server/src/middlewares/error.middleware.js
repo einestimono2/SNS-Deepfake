@@ -2,9 +2,11 @@ import { Message, StatusCode } from '#constants';
 import { BadRequestError, NotFoundError, UnauthorizedError } from '#modules';
 import { logger } from '#utils';
 
+// eslint-disable-next-line no-unused-vars
 export function ErrorMiddleware(err, req, res, next) {
   logger.error(`[${err.name}]: ${err.message}`);
 
+  // Inital values
   err.statusCode = err.statusCode ?? StatusCode.INTERNAL_SERVER_ERROR_500;
   err.ec = err.ec ?? err.statusCode;
   err.message = err.message ?? Message.INTERNAL_SERVER_ERROR;
@@ -29,8 +31,15 @@ export function ErrorMiddleware(err, req, res, next) {
 
   // File not exist
   if (err.code === 'ENOENT') {
-    next(new NotFoundError(Message.FILE_NOT_FOUND));
-    return;
+    err = new NotFoundError(Message.FILE_NOT_FOUND);
+  }
+
+  if (err.name === 'MulterError' && err.code === 'LIMIT_FILE_SIZE') {
+    if (err.field === 'images') {
+      err = new BadRequestError(Message.IMAGE_TOO_LARGE);
+    } else if (err.field === 'videos') {
+      err = new BadRequestError(Message.VIDEO_TOO_LARGE);
+    }
   }
 
   res.status(err.statusCode).json({

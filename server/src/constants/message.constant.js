@@ -24,5 +24,38 @@ export const Message = {
   REDIS_CONNECTION_ERROR: {
     ec: -101,
     msg: 'Unable to connect to Redis. Trying to reconnect!'
+  },
+  UNSUPPORTED_IMAGE_FORMAT: {
+    msg: 'Image format is not supported! (png|jpg|jpeg)'
+  },
+  UNSUPPORTED_VIDEO_FORMAT: {
+    msg: 'Video format is not supported! (mp4|mkv|mov|avi)'
+  },
+  IMAGE_TOO_LARGE: {
+    msg: 'Image size exceeds allowed size! (5 mb)'
+  },
+  VIDEO_TOO_LARGE: {
+    msg: 'Video size exceeds allowed size! (30 mb)'
+  },
+  IMAGE_EMPTY: {
+    msg: "Field 'images' can not be empty!"
+  },
+  VIDEO_EMPTY: {
+    msg: "Field 'videos' can not be empty!"
+  },
+  PATH_EMPTY: {
+    msg: "Param 'path' can not be empty!"
+  },
+  FILE_NOT_FOUND: {
+    msg: 'File does not exist!'
+  },
+  FILE_BROKEN: {
+    msg: 'There was a problem with the uploaded file. Please re-upload the file!'
+  },
+  IMAGE_NOT_FOUND: {
+    msg: 'Image does not exist!'
+  },
+  VIDEO_NOT_FOUND: {
+    msg: 'Video does not exist!'
   }
 };

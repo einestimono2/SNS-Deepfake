@@ -1,5 +1,6 @@
-import { app } from '##/app';
 import request from 'supertest';
+
+import { app } from '##/app';
 
 describe('Api Key API', () => {
   const created = [];

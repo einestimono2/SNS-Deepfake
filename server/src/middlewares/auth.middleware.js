@@ -1,8 +1,9 @@
 import jwt from 'jsonwebtoken';
 
+import { CatchAsyncError } from './async.middleware.js';
+
 import { redis } from '#configs';
 import { Message, Roles } from '#constants';
-import { CatchAsyncError } from './async.middleware.js';
 import { BadRequestError, ForbiddenError, NotFoundError } from '#modules';
 
 //! Bearer Token

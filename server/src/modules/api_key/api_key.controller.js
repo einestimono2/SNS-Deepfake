@@ -1,6 +1,6 @@
-import { CatchAsyncError } from '#middlewares';
-
 import { ApiKeyServices } from './api_key.service.js';
+
+import { CatchAsyncError } from '#middlewares';
 
 export class ApiKeyControllers {
   static createApiKey = CatchAsyncError(async (req, res) => {

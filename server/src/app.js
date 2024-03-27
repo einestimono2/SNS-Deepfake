@@ -8,13 +8,16 @@ import morgan from 'morgan';
 import { postgreDb } from '#dbs';
 import { ErrorMiddleware } from '#middlewares';
 import { routers } from '#modules';
-import { logger, verifyEnvironmentVariables } from '#utils';
+import { logger, uploadCleaningSchedule, verifyEnvironmentVariables } from '#utils';
 
 //! Cấu hình env
 dotenv.config();
 
 //! Kiểm tra biến môi trường
 verifyEnvironmentVariables();
+
+//! Dọn dẹp hình ảnh mỗi 12h đêm hàng ngày
+uploadCleaningSchedule.start();
 
 //! Khởi tạo
 const app = express();

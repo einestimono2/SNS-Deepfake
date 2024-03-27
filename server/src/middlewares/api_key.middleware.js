@@ -1,6 +1,7 @@
+import { CatchAsyncError } from './async.middleware.js';
+
 import { Message } from '#constants';
 import { ApiKeyServices, ForbiddenError } from '#modules';
-import { CatchAsyncError } from './async.middleware.js';
 
 export const apiKey = CatchAsyncError(async (req, res, next) => {
   const key = req.headers['x-api-key']?.toString();

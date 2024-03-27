@@ -1,0 +1,113 @@
+[22:44:50] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[22:44:51] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[22:44:52] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[22:44:53] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[22:46:37] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[22:46:37] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[22:46:39] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[22:46:39] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[22:47:00] [DEV] [[32minfo[39m]: [32m-----> Start cleaning up images & videos  <-----[39m
+[22:47:00] [DEV] [[32minfo[39m]: [32m| 1. __UNUSED_FILE___2jtmkm-97cfd1a8f3c8e83bd404fa7aebb38611.jpg[39m
+[22:47:00] [DEV] [[32minfo[39m]: [32m| 2. __UNUSED_FILE___7u9b43-97cfd1a8f3c8e83bd404fa7aebb38611.jpg[39m
+[22:47:00] [DEV] [[32minfo[39m]: [32m| 3. __UNUSED_FILE___8szs8-97cfd1a8f3c8e83bd404fa7aebb38611.jpg[39m
+[22:47:00] [DEV] [[32minfo[39m]: [32m| 4. __UNUSED_FILE___agv1ez-97cfd1a8f3c8e83bd404fa7aebb38611.jpg[39m
+[22:47:00] [DEV] [[32minfo[39m]: [32m| 5. __UNUSED_FILE___aveub6-97cfd1a8f3c8e83bd404fa7aebb38611.jpg[39m
+[22:47:00] [DEV] [[32minfo[39m]: [32m| 6. __UNUSED_FILE___b1eqjd-97cfd1a8f3c8e83bd404fa7aebb38611.jpg[39m
+[22:47:00] [DEV] [[32minfo[39m]: [32m| 7. __UNUSED_FILE___cjhdd1-97cfd1a8f3c8e83bd404fa7aebb38611.jpg[39m
+[22:47:00] [DEV] [[32minfo[39m]: [32m| 8. __UNUSED_FILE___cqbatw-97cfd1a8f3c8e83bd404fa7aebb38611.jpg[39m
+[22:47:00] [DEV] [[32minfo[39m]: [32m| 9. __UNUSED_FILE___fgm9qt-97cfd1a8f3c8e83bd404fa7aebb38611.jpg[39m
+[22:47:00] [DEV] [[32minfo[39m]: [32m| 10. __UNUSED_FILE___10w40o-short-video.mp4[39m
+[22:47:00] [DEV] [[32minfo[39m]: [32m| 11. __UNUSED_FILE___ch0af4-short-video.mp4[39m
+[22:47:00] [DEV] [[32minfo[39m]: [32m-----> Finish cleaning up images & videos <-----[39m
+[32m[39m
+[22:59:10] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[22:59:10] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[22:59:11] [DEV] [[32minfo[39m]: [32m-----> Start cleaning up images & videos  <-----[39m
+[22:59:11] [DEV] [[32minfo[39m]: [32m-----> Finish cleaning up images & videos <-----[39m
+[32m[39m
+[22:59:11] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[22:59:11] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[22:59:12] [DEV] [[32minfo[39m]: [32m-----> Start cleaning up images & videos  <-----[39m
+[22:59:12] [DEV] [[32minfo[39m]: [32m-----> Finish cleaning up images & videos <-----[39m
+[32m[39m
+[22:59:13] [DEV] [[32minfo[39m]: [32m-----> Start cleaning up images & videos  <-----[39m
+[22:59:13] [DEV] [[32minfo[39m]: [32m-----> Finish cleaning up images & videos <-----[39m
+[32m[39m
+[22:59:14] [DEV] [[32minfo[39m]: [32m-----> Start cleaning up images & videos  <-----[39m
+[22:59:14] [DEV] [[32minfo[39m]: [32m-----> Finish cleaning up images & videos <-----[39m
+[32m[39m
+[22:59:15] [DEV] [[32minfo[39m]: [32m-----> Start cleaning up images & videos  <-----[39m
+[22:59:15] [DEV] [[32minfo[39m]: [32m-----> Finish cleaning up images & videos <-----[39m
+[32m[39m
+[22:59:34] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[22:59:35] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[22:59:35] [DEV] [[32minfo[39m]: [32m-----> Start cleaning up images & videos  <-----[39m
+[22:59:35] [DEV] [[32minfo[39m]: [32m-----> Finish cleaning up images & videos <-----[39m
+[32m[39m
+[22:59:36] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[22:59:36] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[22:59:36] [DEV] [[32minfo[39m]: [32m-----> Start cleaning up images & videos  <-----[39m
+[22:59:36] [DEV] [[32minfo[39m]: [32m-----> Finish cleaning up images & videos <-----[39m
+[32m[39m[23:05:37] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[23:05:38] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[23:05:39] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[23:05:40] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[23:06:00] [DEV] [[32minfo[39m]: [32m-----> Start cleaning up images & videos  <-----[39m
+[23:06:00] [DEV] [[32minfo[39m]: [32m-----> Finish cleaning up images & videos <-----[39m
+[32m[39m
+[23:07:00] [DEV] [[32minfo[39m]: [32m-----> Start cleaning up images & videos  <-----[39m
+[23:07:00] [DEV] [[32minfo[39m]: [32m-----> Finish cleaning up images & videos <-----[39m
+[32m[39m
+[23:15:03] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[23:15:03] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[23:15:04] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[23:15:04] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[23:15:13] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[23:15:13] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[23:15:14] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[23:15:14] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[23:15:32] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[23:15:32] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[23:15:33] [DEV] [[32minfo[39m]: [32m-----> Start cleaning up images & videos  <-----[39m
+[23:15:33] [DEV] [[32minfo[39m]: [32m-----> Finish cleaning up images & videos <-----[39m
+[32m[39m
+[23:15:33] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[23:15:33] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[23:15:34] [DEV] [[32minfo[39m]: [32m-----> Start cleaning up images & videos  <-----[39m
+[23:15:34] [DEV] [[32minfo[39m]: [32m-----> Finish cleaning up images & videos <-----[39m
+[32m[39m
+[23:15:35] [DEV] [[32minfo[39m]: [32m-----> Start cleaning up images & videos  <-----[39m
+[23:15:35] [DEV] [[32minfo[39m]: [32m-----> Finish cleaning up images & videos <-----[39m
+[32m[39m
+[23:15:36] [DEV] [[32minfo[39m]: [32m-----> Start cleaning up images & videos  <-----[39m
+[23:15:36] [DEV] [[32minfo[39m]: [32m-----> Finish cleaning up images & videos <-----[39m
+[32m[39m
+[23:15:37] [DEV] [[32minfo[39m]: [32m-----> Start cleaning up images & videos  <-----[39m
+[23:15:37] [DEV] [[32minfo[39m]: [32m-----> Finish cleaning up images & videos <-----[39m
+[32m[39m
+[23:15:38] [DEV] [[32minfo[39m]: [32m-----> Start cleaning up images & videos  <-----[39m
+[23:15:38] [DEV] [[32minfo[39m]: [32m-----> Finish cleaning up images & videos <-----[39m
+[32m[39m
+[23:15:39] [DEV] [[32minfo[39m]: [32m-----> Start cleaning up images & videos  <-----[39m
+[23:15:39] [DEV] [[32minfo[39m]: [32m-----> Finish cleaning up images & videos <-----[39m
+[32m[39m
+[23:15:40] [DEV] [[32minfo[39m]: [32m-----> Start cleaning up images & videos  <-----[39m
+[23:15:40] [DEV] [[32minfo[39m]: [32m-----> Finish cleaning up images & videos <-----[39m
+[32m[39m
+[23:15:41] [DEV] [[32minfo[39m]: [32m-----> Start cleaning up images & videos  <-----[39m
+[23:15:41] [DEV] [[32minfo[39m]: [32m-----> Finish cleaning up images & videos <-----[39m
+[32m[39m
+[23:15:42] [DEV] [[32minfo[39m]: [32m-----> Start cleaning up images & videos  <-----[39m
+[23:15:42] [DEV] [[32minfo[39m]: [32m-----> Finish cleaning up images & videos <-----[39m
+[32m[39m
+[23:15:43] [DEV] [[32minfo[39m]: [32m-----> Start cleaning up images & videos  <-----[39m
+[23:15:43] [DEV] [[32minfo[39m]: [32m-----> Finish cleaning up images & videos <-----[39m
+[32m[39m
+[23:15:45] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[23:15:45] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[23:15:47] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[23:15:47] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[23:17:02] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[23:17:02] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[23:17:04] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[23:17:04] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m

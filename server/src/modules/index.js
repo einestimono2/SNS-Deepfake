@@ -1,13 +1,23 @@
 import express from 'express';
-import path from 'path';
 
-import { Message, Strings } from '#constants';
 import { apiKeyRouter } from './api_key/index.js';
 import { NotFoundError } from './core/index.js';
+import { uploadRouter } from './upload/index.js';
+
+import { Message, Strings } from '#constants';
+import { getStandardPath } from '#utils';
 
 export const routers = express.Router();
 
-//! Check Health
+// ----- List routes -----
+// 1. API Key
+routers.use(`${Strings.API_PREFIX}/apikey`, apiKeyRouter);
+// 2. Upload file & video
+routers.use(`${Strings.API_PREFIX}/upload`, uploadRouter);
+
+//
+
+// #. Check Health - test server
 routers.use('/health', (_req, res) => {
   res.ok({
     message: '🤗 OK 🤗',
@@ -19,16 +29,20 @@ routers.use('/health', (_req, res) => {
   });
 });
 
-//! Routes
-routers.use(`${Strings.API_PREFIX}/apikey`, apiKeyRouter);
+//
 
-//! Static - Import trước check Unknown route
-routers.use('/storage', express.static(path.join(path.resolve(), '../uploads')));
+//! Access video or image *Import trước check Unknown route*
+routers.use('/resources', express.static(getStandardPath('../../uploads')));
+
+// -----
 
 //! Unknown route
 routers.get('*', (_req, _res, next) => {
+  console.log(_req);
   next(new NotFoundError(Message.ROUTE_NOT_FOUND.msg));
 });
+
+// -----
 
 // - Export modules
 export * from './api_key/index.js';
