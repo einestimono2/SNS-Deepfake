@@ -1,0 +1,16 @@
+[00:01:15] [DEV] [[31merror[39m]: [31m[TypeError]: Cannot read properties of undefined (reading 'userID')[39m
+[00:02:44] [DEV] [[31merror[39m]: [31m[TypeError]: Cannot read properties of undefined (reading 'userID')[39m
+[00:04:06] [DEV] [[31merror[39m]: [31m[TypeError]: Cannot read properties of undefined (reading 'userID')[39m
+[00:04:34] [DEV] [[31merror[39m]: [31m[TypeError]: Cannot read properties of undefined (reading 'userID')[39m
+[00:05:29] [DEV] [[31merror[39m]: [31m[TypeError]: Cannot read properties of undefined (reading 'save')[39m
+[00:07:44] [DEV] [[31merror[39m]: [31m[TypeError]: Cannot read properties of undefined (reading 'save')[39m
+[00:09:45] [DEV] [[31merror[39m]: [31m[TypeError]: Cannot read properties of undefined (reading 'save')[39m
+[00:11:54] [DEV] [[31merror[39m]: [31m[TypeError]: Cannot read properties of undefined (reading 'save')[39m
+[00:17:46] [DEV] [[31merror[39m]: [31m[TypeError]: Cannot read properties of undefined (reading 'save')[39m
+[00:20:14] [DEV] [[31merror[39m]: [31m[TypeError]: VerifyCode.find is not a function[39m
+[00:21:06] [DEV] [[31merror[39m]: [31m[Error]: Code not found[39m
+[00:22:04] [DEV] [[31merror[39m]: [31m[TypeError]: Cannot read properties of undefined (reading 'save')[39m
+[00:23:57] [DEV] [[31merror[39m]: [31m[TypeError]: Cannot read properties of undefined (reading 'save')[39m
+[00:24:57] [DEV] [[31merror[39m]: [31m[TypeError]: Cannot read properties of undefined (reading 'save')[39m
+[00:25:15] [DEV] [[31merror[39m]: [31m[TypeError]: Cannot read properties of undefined (reading 'save')[39m
+[00:29:07] [DEV] [[31merror[39m]: [31m[Error]: Argument passed to findByPk is invalid: [object Object][39m

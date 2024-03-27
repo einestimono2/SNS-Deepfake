@@ -1,0 +1,319 @@
+[00:00:45] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[00:00:45] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[00:00:49] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[00:00:50] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[00:00:50] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[00:00:50] [DEV] [[32minfo[39m]: [32mTable 'Devices' synced![39m
+[00:00:50] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[00:00:50] [DEV] [[32minfo[39m]: [32mTable 'Families' synced![39m
+[00:01:12] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[00:01:12] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[00:01:15] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[00:01:16] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[00:01:16] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[00:01:16] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[00:01:16] [DEV] [[32minfo[39m]: [32mTable 'Devices' synced![39m
+[00:01:16] [DEV] [[32minfo[39m]: [32mTable 'Families' synced![39m
+[00:02:43] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[00:02:43] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[00:02:43] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[00:02:43] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[00:02:43] [DEV] [[32minfo[39m]: [32mTable 'Devices' synced![39m
+[00:02:43] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[00:02:43] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[00:02:43] [DEV] [[32minfo[39m]: [32mTable 'Families' synced![39m
+[00:04:05] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[00:04:05] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[00:04:06] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[00:04:06] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[00:04:06] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[00:04:06] [DEV] [[32minfo[39m]: [32mTable 'Devices' synced![39m
+[00:04:06] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[00:04:06] [DEV] [[32minfo[39m]: [32mTable 'Families' synced![39m
+[00:05:15] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[00:05:15] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[00:05:16] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[00:05:16] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[00:05:16] [DEV] [[32minfo[39m]: [32mTable 'Devices' synced![39m
+[00:05:16] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[00:05:16] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[00:05:16] [DEV] [[32minfo[39m]: [32mTable 'Families' synced![39m
+[00:05:28] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[00:05:28] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[00:05:29] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[00:05:29] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[00:05:29] [DEV] [[32minfo[39m]: [32mTable 'Devices' synced![39m
+[00:05:29] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[00:05:29] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[00:05:29] [DEV] [[32minfo[39m]: [32mTable 'Families' synced![39m
+[00:09:21] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[00:09:21] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[00:09:23] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[00:09:24] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[00:09:27] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[00:09:27] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[00:09:30] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[00:09:30] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[00:09:31] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[00:09:31] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[00:09:31] [DEV] [[32minfo[39m]: [32mTable 'Devices' synced![39m
+[00:09:31] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[00:09:31] [DEV] [[32minfo[39m]: [32mTable 'Families' synced![39m
+[00:09:31] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[00:09:39] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[00:09:39] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[00:09:40] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[00:09:41] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[00:09:41] [DEV] [[32minfo[39m]: [32mTable 'Devices' synced![39m
+[00:09:41] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[00:09:41] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[00:09:41] [DEV] [[32minfo[39m]: [32mTable 'Families' synced![39m
+[00:09:44] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[00:09:44] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[00:09:45] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[00:09:45] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[00:09:45] [DEV] [[32minfo[39m]: [32mTable 'Devices' synced![39m
+[00:09:45] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[00:09:45] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[00:09:45] [DEV] [[32minfo[39m]: [32mTable 'Families' synced![39m
+[00:11:24] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[00:11:24] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[00:11:25] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[00:11:25] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[00:11:25] [DEV] [[32minfo[39m]: [32mTable 'Devices' synced![39m
+[00:11:25] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[00:11:25] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[00:11:25] [DEV] [[32minfo[39m]: [32mTable 'Families' synced![39m
+[00:11:31] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[00:11:31] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[00:11:32] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[00:11:32] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[00:11:32] [DEV] [[32minfo[39m]: [32mTable 'Devices' synced![39m
+[00:11:32] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[00:11:32] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[00:11:32] [DEV] [[32minfo[39m]: [32mTable 'Families' synced![39m
+[00:11:39] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[00:11:39] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[00:11:44] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[00:11:44] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[00:11:47] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[00:11:47] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[00:11:48] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[00:11:48] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[00:11:48] [DEV] [[32minfo[39m]: [32mTable 'Devices' synced![39m
+[00:11:48] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[00:11:48] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[00:11:48] [DEV] [[32minfo[39m]: [32mTable 'Families' synced![39m
+[00:15:11] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[00:15:11] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[00:15:12] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[00:15:12] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[00:15:12] [DEV] [[32minfo[39m]: [32mTable 'Devices' synced![39m
+[00:15:12] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[00:15:12] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[00:15:12] [DEV] [[32minfo[39m]: [32mTable 'Families' synced![39m
+[00:15:14] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[00:15:14] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[00:15:18] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[00:15:18] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[00:15:19] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[00:15:19] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[00:15:19] [DEV] [[32minfo[39m]: [32mTable 'Devices' synced![39m
+[00:15:19] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[00:15:19] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[00:15:19] [DEV] [[32minfo[39m]: [32mTable 'Families' synced![39m
+[00:15:45] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[00:16:36] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[00:16:36] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[00:16:37] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[00:16:37] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[00:16:37] [DEV] [[32minfo[39m]: [32mTable 'Devices' synced![39m
+[00:16:37] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[00:16:37] [DEV] [[32minfo[39m]: [32mTable 'Families' synced![39m
+[00:16:37] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[00:16:59] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[00:16:59] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[00:17:00] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[00:17:00] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[00:17:00] [DEV] [[32minfo[39m]: [32mTable 'Devices' synced![39m
+[00:17:00] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[00:17:00] [DEV] [[32minfo[39m]: [32mTable 'Families' synced![39m
+[00:17:00] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[00:17:05] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[00:17:05] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[00:17:05] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[00:17:06] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[00:17:06] [DEV] [[32minfo[39m]: [32mTable 'Devices' synced![39m
+[00:17:06] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[00:17:06] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[00:17:06] [DEV] [[32minfo[39m]: [32mTable 'Families' synced![39m
+[00:17:38] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[00:17:38] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[00:17:38] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[00:17:39] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[00:17:39] [DEV] [[32minfo[39m]: [32mTable 'Devices' synced![39m
+[00:17:39] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[00:17:39] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[00:17:39] [DEV] [[32minfo[39m]: [32mTable 'Families' synced![39m
+[00:17:41] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[00:17:41] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[00:17:42] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[00:17:42] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[00:17:42] [DEV] [[32minfo[39m]: [32mTable 'Devices' synced![39m
+[00:17:42] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[00:17:42] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[00:17:42] [DEV] [[32minfo[39m]: [32mTable 'Families' synced![39m
+[00:18:42] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[00:18:42] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[00:18:43] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[00:18:43] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[00:18:43] [DEV] [[32minfo[39m]: [32mTable 'Devices' synced![39m
+[00:18:43] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[00:18:43] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[00:18:43] [DEV] [[32minfo[39m]: [32mTable 'Families' synced![39m
+[00:20:11] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[00:20:11] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[00:20:12] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[00:20:12] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[00:20:12] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[00:20:12] [DEV] [[32minfo[39m]: [32mTable 'Families' synced![39m
+[00:20:12] [DEV] [[32minfo[39m]: [32mTable 'Devices' synced![39m
+[00:20:12] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[00:20:35] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[00:20:35] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[00:20:36] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[00:20:36] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[00:20:36] [DEV] [[32minfo[39m]: [32mTable 'Devices' synced![39m
+[00:20:36] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[00:20:36] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[00:20:36] [DEV] [[32minfo[39m]: [32mTable 'Families' synced![39m
+[00:23:55] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[00:23:55] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[00:23:56] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[00:23:56] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[00:23:56] [DEV] [[32minfo[39m]: [32mTable 'Devices' synced![39m
+[00:23:56] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[00:23:56] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[00:23:57] [DEV] [[32minfo[39m]: [32mTable 'Families' synced![39m
+[00:24:54] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[00:24:55] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[00:24:56] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[00:24:56] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[00:24:56] [DEV] [[32minfo[39m]: [32mTable 'Devices' synced![39m
+[00:24:56] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[00:24:56] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[00:24:56] [DEV] [[32minfo[39m]: [32mTable 'Families' synced![39m
+[00:25:13] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[00:25:13] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[00:25:14] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[00:25:14] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[00:25:14] [DEV] [[32minfo[39m]: [32mTable 'Devices' synced![39m
+[00:25:14] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[00:25:14] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[00:25:14] [DEV] [[32minfo[39m]: [32mTable 'Families' synced![39m
+[00:28:59] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[00:28:59] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[00:29:00] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[00:29:00] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[00:29:00] [DEV] [[32minfo[39m]: [32mTable 'Devices' synced![39m
+[00:29:00] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[00:29:00] [DEV] [[32minfo[39m]: [32mTable 'Families' synced![39m
+[00:29:00] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[00:29:02] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[00:29:02] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[00:29:03] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[00:29:03] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[00:29:03] [DEV] [[32minfo[39m]: [32mTable 'Devices' synced![39m
+[00:29:03] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[00:29:03] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[00:29:03] [DEV] [[32minfo[39m]: [32mTable 'Families' synced![39m
+[00:29:36] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[00:29:36] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[00:29:37] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[00:29:37] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[00:29:37] [DEV] [[32minfo[39m]: [32mTable 'Devices' synced![39m
+[00:29:37] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[00:29:37] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[00:29:37] [DEV] [[32minfo[39m]: [32mTable 'Families' synced![39m
+[00:32:03] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[00:32:04] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[00:32:05] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[00:32:05] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[00:32:05] [DEV] [[32minfo[39m]: [32mTable 'Devices' synced![39m
+[00:32:05] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[00:32:05] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[00:32:05] [DEV] [[32minfo[39m]: [32mTable 'Families' synced![39m
+[00:33:29] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[00:33:29] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[00:33:33] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[00:33:33] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[00:33:34] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[00:33:34] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[00:33:34] [DEV] [[32minfo[39m]: [32mTable 'Devices' synced![39m
+[00:33:34] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[00:33:34] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[00:33:34] [DEV] [[32minfo[39m]: [32mTable 'Families' synced![39m
+[00:34:31] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[00:34:32] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[00:34:32] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[00:34:33] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[00:34:33] [DEV] [[32minfo[39m]: [32mTable 'Devices' synced![39m
+[00:34:33] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[00:34:33] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[00:34:33] [DEV] [[32minfo[39m]: [32mTable 'Families' synced![39m
+[00:36:45] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[00:36:45] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[00:36:46] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[00:36:46] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[00:36:46] [DEV] [[32minfo[39m]: [32mTable 'Devices' synced![39m
+[00:36:46] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[00:36:46] [DEV] [[32minfo[39m]: [32mTable 'Families' synced![39m
+[00:36:46] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[00:37:24] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[00:37:24] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[00:37:25] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[00:37:25] [DEV] [[32minfo[39m]: [32mTable 'Devices' synced![39m
+[00:37:25] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[00:37:25] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[00:37:25] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[00:37:25] [DEV] [[32minfo[39m]: [32mTable 'Families' synced![39m
+[00:37:29] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[00:37:29] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[00:37:30] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[00:37:30] [DEV] [[32minfo[39m]: [32mTable 'Devices' synced![39m
+[00:37:30] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[00:37:30] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[00:37:30] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[00:37:30] [DEV] [[32minfo[39m]: [32mTable 'Families' synced![39m
+[00:37:42] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[00:37:43] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[00:37:43] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[00:37:43] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[00:37:43] [DEV] [[32minfo[39m]: [32mTable 'Devices' synced![39m
+[00:37:43] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[00:37:43] [DEV] [[32minfo[39m]: [32mTable 'Families' synced![39m
+[00:37:43] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[00:38:00] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[00:38:01] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[00:38:02] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[00:38:02] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[00:38:02] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[00:38:02] [DEV] [[32minfo[39m]: [32mTable 'Devices' synced![39m
+[00:38:02] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[00:38:02] [DEV] [[32minfo[39m]: [32mTable 'Families' synced![39m
+[00:41:49] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[00:41:49] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[00:41:50] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[00:41:50] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[00:41:50] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[00:41:50] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[00:41:50] [DEV] [[32minfo[39m]: [32mTable 'Devices' synced![39m
+[00:41:50] [DEV] [[32minfo[39m]: [32mTable 'Families' synced![39m
+[02:09:42] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[02:09:42] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[02:09:43] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[02:09:43] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[02:24:04] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[02:24:05] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[02:24:06] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[02:24:06] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
