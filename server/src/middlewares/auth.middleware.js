@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 import { CatchAsyncError } from './async.middleware.js';
 
 import { redis } from '#configs';
-import { Message, Roles } from '#constants';
+import { Message } from '#constants';
 import { BadRequestError, ForbiddenError, NotFoundError } from '#modules';
 
 //! Bearer Token
@@ -15,23 +15,23 @@ export const isAuthenticated = CatchAsyncError(async (req, res, next) => {
   }
 
   // Giải mã lấy id
-  const payload = jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET);
+  const payload = jwt.verify(accessToken, process.env.JWT_SECRET);
   if (!payload) {
     next(new BadRequestError(Message.TOKEN_IS_INVALID));
     return;
   }
 
   // Check blacklist
-  const blacklist = await redis.get(`BL_${payload.id}`);
-  if (blacklist && blacklist === accessToken) {
-    next(new BadRequestError(Message.TOKEN_IS_INVALID_TRY_AGAIN));
-    return;
-  }
+  // const blacklist = await redis.get(`BL_${payload.id}`);
+  // if (blacklist && blacklist === accessToken) {
+  //   next(new BadRequestError(Message.TOKEN_IS_INVALID_TRY_AGAIN));
+  //   return;
+  // }
 
   // Gán theater khi token chưa cập nhật
-  if (!payload.theater && payload.role !== Roles.User) {
-    // payload.theater = (await ManagerModel.findById(payload.id))?.theater;
-  }
+  // if (!payload.theater && payload.role !== Roles.User) {
+  // payload.theater = (await ManagerModel.findById(payload.id))?.theater;
+  // }
 
   req.userPayload = payload;
   req.accessToken = accessToken;

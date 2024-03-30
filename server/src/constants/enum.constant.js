@@ -20,6 +20,26 @@ export const EnvTypes = {
 };
 
 export const Roles = {
-  User: 'user',
+  Parent: 'parent',
+  Children: 'children',
   Admin: 'admin'
+};
+export const accountStatus = {
+  Banned: -3,
+  Deactivated: -2,
+  Pending: -1,
+  Inactive: 0,
+  Active: 1
+};
+export const costs = {
+  createPost: 10,
+  editPost: 10,
+  deletePost: 10,
+  createMark: 2,
+  createFeel: 1
+};
+
+export const VerifyCodeStatus = {
+  Inactive: 0,
+  Active: 1
 };

@@ -17,7 +17,7 @@ export class UserControllers {
     const { email, password, uuid } = req.body;
     const user = await userServices.login(email, password, uuid);
     console.log(user);
-    res.ok({ message: 'Đăng nhập thành công' }, { data: user });
+    res.ok({ message: 'Đăng nhập thành công', data: user });
   });
 
   // 3--Lấy mã xác thực

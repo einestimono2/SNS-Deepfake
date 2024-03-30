@@ -40,6 +40,7 @@
     "no-await-in-loop": "off",
     "no-plusplus": "off",
     "func-names": "off",
-    "max-classes-per-file": "off"
+    "max-classes-per-file": "off",
+    "import/no-cycle":"off"
   }
 }

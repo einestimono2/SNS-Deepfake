@@ -69,4 +69,26 @@ export const setFileUsed = (filePath) => {
       throw new UnprocessableEntityError(Message.FILE_BROKEN);
     }
   });
+
+  //      / resources / images / filename
+  return `/${fileParts[1]}/${fileParts[2]}/${newFilename}`;
+};
+
+// Khi up anh / video bi loi --> reset ten file ve ban dau
+export const setFileUnused = (filePath) => {
+  const fileParts = filePath.split('/');
+  const newFilename = `${Strings.UNUSED_FILE_KEY}___${fileParts[3]}`; // + 3 do ___ phân cách
+
+  const oldPath = getStandardPath(`../../uploads/${fileParts[2]}/${fileParts[3]}`);
+  const newPath = getStandardPath(`../../uploads/${fileParts[2]}/${newFilename}`);
+
+  fs.rename(oldPath, newPath, (err) => {
+    // Có thể xảy ra lỗi vào trường hợp trình dọn rác xóa mất file đó trước khi thực hiện đổi tên
+    if (err) {
+      throw new UnprocessableEntityError(Message.FILE_BROKEN);
+    }
+  });
+
+  //      / resources / images / filename
+  return `/${fileParts[1]}/${fileParts[2]}/${newFilename}`;
 };

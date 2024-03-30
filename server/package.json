@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.24.1",
+    "bcryptjs": "^2.4.3",
     "compression": "^1.7.4",
     "connect-timeout": "^1.9.0",
     "cors": "^2.8.5",
@@ -67,17 +68,11 @@
   "imports": {
     "##/*": "./src/*.js",
     "#configs": "./src/configs/index.js",
-    "#configs/*": "./src/configs/*.js",
     "#constants": "./src/constants/index.js",
-    "#constants/*": "./src/constants/*.js",
     "#dbs": "./src/dbs/index.js",
-    "#dbs/*": "./src/dbs/*.js",
     "#middlewares": "./src/middlewares/index.js",
-    "#middlewares/*": "./src/middlewares/*.js",
     "#modules": "./src/modules/index.js",
-    "#modules/*": "./src/modules/*/index.js",
-    "#utils": "./src/utils/index.js",
-    "#utils/*": "./src/utils/*.js"
+    "#utils": "./src/utils/index.js"
   },
   "engines": {
     "node": ">=20.0.0",

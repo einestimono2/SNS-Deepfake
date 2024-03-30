@@ -29,5 +29,5 @@ export const Family = postgre.define('Family', {
 });
 (() => {
   // Code here
-  Family.sync().then(() => logger.info("Table 'Families' synced!"));
+  Family.sync({ alter: true }).then(() => logger.info("Table 'Family' synced!"));
 })();

@@ -2,15 +2,21 @@ import bcryptjs from 'bcryptjs';
 import dayjs from 'dayjs';
 import { Op } from 'sequelize';
 
-import { Message } from '##/constants/message.constant';
-import { BadRequestError, Family } from '#modules';
-import { User } from '#modules/user';
-import { VerifyCode } from '#modules/verify_code';
+// import { BadRequestError, Family } from '#modules';
+import { BadRequestError } from '../core/index.js';
+import { Family } from '../family/family.model.js';
+
+import { DevToken } from './dev_token/index.js';
+import { VerifyCode } from './verify_code/index.js';
+
+import { User } from './index.js';
+
+import { accountStatus, Message } from '#constants';
 // const catchAsyncError = require("../middleware/catchAsyncErrors");
 import { generateVerifyCode, signToken } from '#utils';
 
-// 1--Lấy mã xác thực
 export class userServices {
+  // 1--Lấy mã xác thực
   static async getVerifyCode(email) {
     const user = await User.findOne({
       where: { email }
@@ -19,12 +25,13 @@ export class userServices {
       throw new BadRequestError(Message.USER_NOT_FOUND);
     }
     const code = generateVerifyCode(6);
+    // Thêm dữ liệu vào bảng VerifyCode
     const verifyCode = await VerifyCode.create({
       userID: user.id,
       code,
       expiredAt: dayjs().add(30, 'minutes').toDate()
     });
-    verifyCode.status = 'inactive';
+    verifyCode.status = accountStatus.Inactive;
     await verifyCode.save();
     // Gửi mã code về mail
     // await sendMail(email, code);
@@ -42,24 +49,20 @@ export class userServices {
   }
 
   // 2--Tạo một tài khoản người dùng
-  static async signup(phonenumber, password, role, email, uuid) {
-    // if (!phonenumber || !password || !role || !email || !uuid) {
-    //   throw new BadRequestError(Message.NO_ENOUGH_INFORMATION);
-    // }
+  static async signup(email, password) {
+    // Kiểm tra email đã tồn tại chưa?
     if (await this.checkEmaiExit(email)) {
       throw new BadRequestError(Message.EMAIL_ALREADY_EXISTS);
     }
+    // Kiểm tra password có trùng email hay không?
     if (password.indexOf(email) !== -1) {
       throw new BadRequestError(Message.USER_IS_INVALID);
     }
     // Tạo tài khoản người dùng
     await User.create({
-      phone_number: phonenumber,
       password: await this.hashPassword(password),
-      role,
       email,
-      status: 'inactive',
-      uuid,
+      status: accountStatus.Inactive,
       coins: 50
     });
     // Thực hiện gửi mã xác thực về Email
@@ -83,12 +86,7 @@ export class userServices {
     user.token = signToken(user.id, uuid);
     await user.save();
     return {
-      id: user.id,
-      username: user.username,
-      token: user.token,
-      avatar: 'Đã tạo mới một avatar',
-      active: user.status,
-      coins: user.coins
+      user
     };
   }
 
@@ -98,9 +96,10 @@ export class userServices {
         email
       }
     });
+    // Kiểm tra mã code với thời gian hết hạn phải sau thời gian hiện tại
     const verifyCode = await VerifyCode.findOne({
       where: {
-        status: 'inactive',
+        status: accountStatus.Inactive,
         userID: user.id,
         code,
         expiredAt: { [Op.gt]: dayjs() }
@@ -110,7 +109,7 @@ export class userServices {
     if (!verifyCode) {
       throw new BadRequestError(Message.CODE_NOT_FOUND);
     }
-    verifyCode.status = 'inactive';
+    verifyCode.status = accountStatus.Inactive;
     await verifyCode.save();
     return verifyCode;
   }
@@ -118,22 +117,19 @@ export class userServices {
   // 4--- Kiểm tra mã xác thực
   static async checkVerifyCode(code, email) {
     const verifyCode = await this.verifyCode(email, code);
-    // console.log(verifyCode);
     const user = await User.findOne({
       where: {
         id: verifyCode.userID
       }
     });
-    // console.log(user);
     // Kiểm tra nếu role là bố mẹ thì tạo dữ liệu cho Bảng Family
     if (user.role === 'parent') {
       const family = await Family.create();
       user.family_id = family.id;
       await user.save();
     }
-
-    if (user.status === 'inactive') {
-      user.status = user.username ? 'inactive' : 'pending';
+    if (user.status === accountStatus.Inactive) {
+      user.status = user.username ? accountStatus.Inactive : accountStatus.Pending;
       await user.save();
     }
     return {
@@ -146,9 +142,11 @@ export class userServices {
   static async logout(user) {
     user.token = null;
     await user.save();
+    await DevToken.destroy({ userId: user.id });
     // Xóa 1 bản ghi ở Dev Token
     // await Device.destroy({ id: user.id });
     // res.status(200).json({ error: 'Đăng xuất thành công' });
+    return {};
   }
 
   // Profile

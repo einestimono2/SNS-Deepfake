@@ -57,5 +57,20 @@ export const Message = {
   },
   VIDEO_NOT_FOUND: {
     msg: 'Video does not exist!'
+  },
+  USER_IS_INVALID: {
+    msg: 'User is invalid!'
+  },
+  USER_NOT_FOUND: {
+    msg: 'User not found!'
+  },
+  NO_ENOUGH_COINS: {
+    msg: 'No enough coins'
+  },
+  POST_NOT_FOUND: {
+    msg: 'Post not found!'
+  },
+  CODE_NOT_FOUND: {
+    msg: 'Code not found!'
   }
 };
