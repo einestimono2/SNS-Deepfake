@@ -23,6 +23,7 @@ export const PostHistory = postgre.define('PostHistory', {
   // Code here
   PostHistory.sync({ alter: true }).then(() => logger.info("Table 'PostHistory' synced!"));
 })();
+
 // Định nghĩa các mối quan hệ
 // Block.belongsTo(User, {
 //   foreignKey: 'targetId',

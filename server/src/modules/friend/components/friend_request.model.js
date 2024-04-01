@@ -31,6 +31,7 @@ export const FriendRequest = postgre.define('FriendRequest', {
 //   as: 'user',
 //   onDelete: 'CASCADE'
 // });
+
 (() => {
   // Code here
   FriendRequest.sync({ alter: true }).then(() => logger.info("Table 'FriendRequest' synced!"));

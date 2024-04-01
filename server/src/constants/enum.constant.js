@@ -43,3 +43,11 @@ export const VerifyCodeStatus = {
   Inactive: 0,
   Active: 1
 };
+export const MarkType = {
+  Trust: 1,
+  Fake: 0
+};
+export const FeelType = {
+  Kudos: 1,
+  Disappointed: 0
+};

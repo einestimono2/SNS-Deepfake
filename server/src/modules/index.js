@@ -1,11 +1,11 @@
 import express from 'express';
 
-import { adminRouter } from './admin/index.js';
-import { apiKeyRouter } from './api_key/index.js';
+import { adminRouter } from './admin/admin.route.js';
+import { apiKeyRouter } from './api_key/api_key.route.js';
 import { NotFoundError } from './core/index.js';
-import { postRouter } from './post/index.js';
-import { uploadRouter } from './upload/index.js';
-import { userRouter } from './user/index.js';
+import { postRouter } from './post/post.route.js';
+import { uploadRouter } from './upload/upload.route.js';
+import { userRouter } from './user/user.route.js';
 
 import { Message, Strings } from '#constants';
 import { getStandardPath } from '#utils';
@@ -51,23 +51,6 @@ routers.get('*', (_req, _res, next) => {
 // -----
 
 // - Export modules
-export * from './api_key/index.js';
-export * from './block/index.js';
+export * from './api_key/api_key.model.js';
+export * from './api_key/api_key.service.js';
 export * from './core/index.js';
-export * from './friend/index.js';
-// export * from './dev_token/index.js';
-// export * from './friend/index.js';
-export * from './friend/friend_request/index.js';
-export * from './post/category/category.model.js';
-export * from './post/feel/feel.model.js';
-export * from './post/index.js';
-export * from './post/mark/mark.model.js';
-export * from './post/post_history/post.history.js';
-// export * from './post/post_image/index.js';
-// export * from './post/post_video/index.js';
-// export * from './post/post_view/post_view.model.js';
-export * from './post/report/report.model.js';
-export * from './push_setting/index.js';
-export * from './user/dev_token/device_token.model.js';
-export * from './user/index.js';
-export * from './user/verify_code/verify_code.model.js';

@@ -29,18 +29,10 @@ export const Feel = postgre.define('Feel', {
   }
 });
 
-// Định nghĩa các mối quan hệ
-// Friend.belongsTo(User, {
-//   foreignKey: 'targetId',
-//   as: 'target',
-//   onDelete: 'CASCADE'
-// });
-// Friend.belongsTo(User, {
-//   foreignKey: 'userId',
-//   as: 'user',
-//   onDelete: 'CASCADE'
-// });
 (() => {
   // Code here
   Feel.sync({ alter: true }).then(() => logger.info("Table 'Feel' synced!"));
 })();
+
+// Feel.belongsTo(User, { foreignKey: 'userId', onDelete: 'CASCADE' });
+// Feel.belongsTo(Post, { foreignKey: 'postId', onDelete: 'CASCADE' });

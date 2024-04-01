@@ -1,0 +1,1690 @@
+[09:35:24] [DEV] [[31merror[39m]: [31muncaughtException: Post is not defined[39m
+[31mReferenceError: Post is not defined[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/feel/feel.model.js:33:1[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:35:24] [DEV] [[31merror[39m]: [31muncaughtException: Post is not defined[39m
+[31mReferenceError: Post is not defined[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/feel/feel.model.js:33:1[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:35:24] [DEV] [[31merror[39m]: [31muncaughtException: Post is not defined[39m
+[31mReferenceError: Post is not defined[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/feel/feel.model.js:33:1[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:35:24] [DEV] [[31merror[39m]: [31muncaughtException: Post is not defined[39m
+[31mReferenceError: Post is not defined[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/feel/feel.model.js:33:1[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:35:24] [DEV] [[31merror[39m]: [31muncaughtException: Post is not defined[39m
+[31mReferenceError: Post is not defined[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/feel/feel.model.js:33:1[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:35:29] [DEV] [[31merror[39m]: [31muncaughtException: Post is not defined[39m
+[31mReferenceError: Post is not defined[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/feel/feel.model.js:32:1[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:35:29] [DEV] [[31merror[39m]: [31muncaughtException: Post is not defined[39m
+[31mReferenceError: Post is not defined[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/feel/feel.model.js:32:1[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:35:29] [DEV] [[31merror[39m]: [31muncaughtException: Post is not defined[39m
+[31mReferenceError: Post is not defined[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/feel/feel.model.js:32:1[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:35:29] [DEV] [[31merror[39m]: [31muncaughtException: Post is not defined[39m
+[31mReferenceError: Post is not defined[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/feel/feel.model.js:32:1[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:35:29] [DEV] [[31merror[39m]: [31muncaughtException: Post is not defined[39m
+[31mReferenceError: Post is not defined[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/feel/feel.model.js:32:1[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:36:30] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:36:30] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:36:30] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:36:30] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:36:30] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:36:34] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:36:34] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:36:34] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:36:34] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:36:34] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:37:12] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:37:12] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:37:12] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:37:12] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:37:12] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:37:16] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:37:16] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:37:16] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:37:16] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:37:16] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:38:14] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:38:14] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:38:14] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:38:14] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:38:14] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:38:18] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:38:18] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:38:18] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:38:18] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:38:18] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:42:44] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:42:44] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:42:44] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:42:44] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:42:44] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:43:05] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:43:05] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:43:05] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:43:05] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:43:05] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:43:49] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:43:49] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:43:49] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:43:49] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:43:49] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:43:52] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:43:52] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:43:52] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:43:52] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:43:52] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:53:19] [DEV] [[31merror[39m]: [31muncaughtException: Post is not defined[39m
+[31mReferenceError: Post is not defined[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/feel/feel.model.js:32:16[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:53:19] [DEV] [[31merror[39m]: [31muncaughtException: Post is not defined[39m
+[31mReferenceError: Post is not defined[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/feel/feel.model.js:32:16[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:53:19] [DEV] [[31merror[39m]: [31muncaughtException: Post is not defined[39m
+[31mReferenceError: Post is not defined[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/feel/feel.model.js:32:16[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:53:19] [DEV] [[31merror[39m]: [31muncaughtException: Post is not defined[39m
+[31mReferenceError: Post is not defined[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/feel/feel.model.js:32:16[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:53:19] [DEV] [[31merror[39m]: [31muncaughtException: Post is not defined[39m
+[31mReferenceError: Post is not defined[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/feel/feel.model.js:32:16[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:53:48] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:53:48] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:53:48] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:53:48] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:53:48] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:53:52] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:53:52] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:53:52] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:53:52] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:53:52] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:54:11] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:54:11] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:54:11] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:54:11] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:54:11] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:54:15] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:54:15] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:54:15] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:54:15] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:54:15] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:54:37] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:54:37] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:54:37] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:54:37] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:54:37] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:55:06] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:55:06] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:55:06] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:55:06] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:55:06] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:55:09] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:55:09] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:55:09] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:55:09] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:55:09] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:56:36] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:56:36] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:56:36] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:56:36] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[09:56:36] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[10:43:46] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[10:43:46] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[10:43:46] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[10:43:46] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[10:43:46] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[10:45:19] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[10:45:19] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[10:45:19] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[10:45:19] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[10:45:19] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[10:46:26] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[10:46:26] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[10:46:26] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[10:46:26] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[10:46:26] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[10:48:22] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[10:48:22] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[10:48:22] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[10:48:22] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[10:48:22] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[10:51:42] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[10:51:42] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[10:51:42] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[10:51:42] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[10:51:42] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[10:52:03] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[10:52:03] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[10:52:03] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[10:52:03] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[10:52:03] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[10:52:11] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[10:52:11] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[10:52:11] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[10:52:11] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[10:52:11] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[10:52:32] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[10:52:32] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[10:52:32] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[10:52:32] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[10:52:32] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[10:52:55] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[10:52:55] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[10:52:55] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[10:52:55] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[10:52:55] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[13:24:32] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[13:24:32] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[13:24:32] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[13:24:32] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[13:24:32] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[13:26:58] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[13:26:58] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[13:26:58] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[13:26:58] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[13:26:58] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[13:27:44] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[13:27:44] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[13:27:44] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[13:27:44] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[13:27:44] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[13:28:02] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[13:28:02] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[13:28:02] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[13:28:02] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[13:28:02] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[13:28:06] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[13:28:06] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[13:28:06] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[13:28:06] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[13:28:06] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[13:36:24] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[13:36:24] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[13:36:24] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[13:36:24] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[13:36:24] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[13:36:43] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[13:36:43] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[13:36:43] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[13:36:43] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[13:36:43] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[13:44:53] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[13:44:53] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[13:44:53] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[13:44:53] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[13:44:53] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[13:47:04] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[13:47:04] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[13:47:04] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[13:47:04] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[13:47:04] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[13:51:03] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[13:51:03] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[13:51:03] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[13:51:03] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[13:51:03] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[14:05:35] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'User' before initialization[39m
+[31mReferenceError: Cannot access 'User' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/user/verify_code/verify_code.model.js:30:22[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[14:05:35] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'User' before initialization[39m
+[31mReferenceError: Cannot access 'User' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/user/verify_code/verify_code.model.js:30:22[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[14:05:35] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'User' before initialization[39m
+[31mReferenceError: Cannot access 'User' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/user/verify_code/verify_code.model.js:30:22[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[14:05:35] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'User' before initialization[39m
+[31mReferenceError: Cannot access 'User' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/user/verify_code/verify_code.model.js:30:22[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[14:05:35] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'User' before initialization[39m
+[31mReferenceError: Cannot access 'User' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/user/verify_code/verify_code.model.js:30:22[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[14:11:10] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[14:11:10] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[14:11:10] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[14:11:10] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[14:11:10] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:57:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[20:35:21] [DEV] [[31merror[39m]: [31muncaughtException: require is not defined in ES module scope, you can use import instead[39m
+[31mThis file is being treated as an ES module because it has a '.js' file extension and 'C:\Users\fptshop\Workspace\SNS-Deepfake\server\package.json' contains "type": "module". To treat it as a CommonJS script, rename it to use the '.cjs' file extension.[39m
+[31mReferenceError: require is not defined in ES module scope, you can use import instead[39m
+[31mThis file is being treated as an ES module because it has a '.js' file extension and 'C:\Users\fptshop\Workspace\SNS-Deepfake\server\package.json' contains "type": "module". To treat it as a CommonJS script, rename it to use the '.cjs' file extension.[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.service.js:18:23[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[20:35:21] [DEV] [[31merror[39m]: [31muncaughtException: require is not defined in ES module scope, you can use import instead[39m
+[31mThis file is being treated as an ES module because it has a '.js' file extension and 'C:\Users\fptshop\Workspace\SNS-Deepfake\server\package.json' contains "type": "module". To treat it as a CommonJS script, rename it to use the '.cjs' file extension.[39m
+[31mReferenceError: require is not defined in ES module scope, you can use import instead[39m
+[31mThis file is being treated as an ES module because it has a '.js' file extension and 'C:\Users\fptshop\Workspace\SNS-Deepfake\server\package.json' contains "type": "module". To treat it as a CommonJS script, rename it to use the '.cjs' file extension.[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.service.js:18:23[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[20:35:21] [DEV] [[31merror[39m]: [31muncaughtException: require is not defined in ES module scope, you can use import instead[39m
+[31mThis file is being treated as an ES module because it has a '.js' file extension and 'C:\Users\fptshop\Workspace\SNS-Deepfake\server\package.json' contains "type": "module". To treat it as a CommonJS script, rename it to use the '.cjs' file extension.[39m
+[31mReferenceError: require is not defined in ES module scope, you can use import instead[39m
+[31mThis file is being treated as an ES module because it has a '.js' file extension and 'C:\Users\fptshop\Workspace\SNS-Deepfake\server\package.json' contains "type": "module". To treat it as a CommonJS script, rename it to use the '.cjs' file extension.[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.service.js:18:23[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[20:35:21] [DEV] [[31merror[39m]: [31muncaughtException: require is not defined in ES module scope, you can use import instead[39m
+[31mThis file is being treated as an ES module because it has a '.js' file extension and 'C:\Users\fptshop\Workspace\SNS-Deepfake\server\package.json' contains "type": "module". To treat it as a CommonJS script, rename it to use the '.cjs' file extension.[39m
+[31mReferenceError: require is not defined in ES module scope, you can use import instead[39m
+[31mThis file is being treated as an ES module because it has a '.js' file extension and 'C:\Users\fptshop\Workspace\SNS-Deepfake\server\package.json' contains "type": "module". To treat it as a CommonJS script, rename it to use the '.cjs' file extension.[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.service.js:18:23[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[20:35:21] [DEV] [[31merror[39m]: [31muncaughtException: require is not defined in ES module scope, you can use import instead[39m
+[31mThis file is being treated as an ES module because it has a '.js' file extension and 'C:\Users\fptshop\Workspace\SNS-Deepfake\server\package.json' contains "type": "module". To treat it as a CommonJS script, rename it to use the '.cjs' file extension.[39m
+[31mReferenceError: require is not defined in ES module scope, you can use import instead[39m
+[31mThis file is being treated as an ES module because it has a '.js' file extension and 'C:\Users\fptshop\Workspace\SNS-Deepfake\server\package.json' contains "type": "module". To treat it as a CommonJS script, rename it to use the '.cjs' file extension.[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.service.js:18:23[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[20:54:06] [DEV] [[31merror[39m]: [31muncaughtException: Feel is not defined[39m
+[31mReferenceError: Feel is not defined[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:61:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[20:54:06] [DEV] [[31merror[39m]: [31muncaughtException: Feel is not defined[39m
+[31mReferenceError: Feel is not defined[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:61:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[20:54:06] [DEV] [[31merror[39m]: [31muncaughtException: Feel is not defined[39m
+[31mReferenceError: Feel is not defined[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:61:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[20:54:06] [DEV] [[31merror[39m]: [31muncaughtException: Feel is not defined[39m
+[31mReferenceError: Feel is not defined[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:61:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[20:54:06] [DEV] [[31merror[39m]: [31muncaughtException: Feel is not defined[39m
+[31mReferenceError: Feel is not defined[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:61:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[20:54:33] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:62:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[20:54:33] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:62:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[20:54:33] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:62:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[20:54:33] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:62:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[20:54:33] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:62:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[21:02:23] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:62:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[21:02:23] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:62:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[21:02:23] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:62:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[21:02:23] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:62:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[21:02:23] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:62:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[21:12:13] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:62:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[21:12:13] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:62:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[21:12:13] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:62:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[21:12:13] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:62:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[21:12:13] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:62:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[21:15:23] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:62:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[21:15:23] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:62:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[21:15:23] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:62:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[21:15:23] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:62:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[21:15:23] [DEV] [[31merror[39m]: [31muncaughtException: Cannot access 'Feel' before initialization[39m
+[31mReferenceError: Cannot access 'Feel' before initialization[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/post/post.model.js:62:14[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m

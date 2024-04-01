@@ -5,8 +5,8 @@ import { CatchAsyncError } from '#middlewares';
 // 1--Đăng ký
 export class UserControllers {
   static register = CatchAsyncError(async (req, res) => {
-    const { phonenumber, password, role, email, uuid } = req.body;
-    await userServices.signup(phonenumber, password, role, email, uuid);
+    const { password, email } = req.body;
+    await userServices.signup(email, password);
     res.created({
       message: 'Mã code đã được gửi về mail của bạn'
     });

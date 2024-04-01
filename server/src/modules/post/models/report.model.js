@@ -34,6 +34,7 @@ export const Report = postgre.define('Report', {
     type: DataTypes.DATE
   }
 });
+
 (() => {
   // Code here
   Report.sync({ alter: true }).then(() => logger.info("Table 'Report' synced!"));

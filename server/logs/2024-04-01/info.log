@@ -1,0 +1,1760 @@
+[09:26:32] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[09:26:32] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[09:26:33] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[09:26:33] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[09:26:33] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[09:26:33] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[09:26:33] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[09:26:33] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[09:26:33] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[09:26:33] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[09:26:34] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[09:26:34] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[09:26:34] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[09:26:34] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[09:26:34] [DEV] [[32minfo[39m]: [32mTable 'Feel' synced![39m
+[09:26:34] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[09:26:34] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[09:26:34] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[09:26:34] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[09:26:34] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[09:26:34] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[09:35:25] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[09:35:25] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[09:35:26] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[09:35:26] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[09:35:26] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[09:35:26] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[09:35:26] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[09:35:26] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[09:35:30] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[09:35:31] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[09:35:31] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[09:35:31] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[09:35:31] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[09:35:31] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[09:35:31] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[09:35:31] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[09:35:31] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[09:36:32] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[09:36:36] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[09:36:36] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[09:36:36] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[09:36:36] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[09:36:36] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[09:36:36] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[09:36:36] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[09:36:36] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[09:36:36] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[09:36:36] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[09:36:36] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[09:36:36] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[09:36:36] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[09:36:36] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[09:36:36] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[09:36:36] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[09:36:37] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[09:37:13] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[09:37:17] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[09:37:18] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[09:37:18] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[09:37:18] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[09:37:18] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[09:37:18] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[09:37:18] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[09:37:18] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[09:37:18] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[09:37:18] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[09:37:18] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[09:37:18] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[09:37:18] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[09:37:18] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[09:37:18] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[09:37:18] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[09:37:19] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[09:38:15] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[09:38:16] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[09:38:16] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[09:38:19] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[09:38:20] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[09:38:20] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[09:38:20] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[09:38:20] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[09:38:20] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[09:38:20] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[09:38:20] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[09:38:20] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[09:38:20] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[09:38:20] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[09:38:20] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[09:38:20] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[09:38:20] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[09:38:20] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[09:38:20] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[09:38:21] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[09:42:46] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[09:42:46] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[09:42:46] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[09:42:46] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[09:42:46] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[09:42:46] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[09:42:46] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[09:42:46] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[09:42:46] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[09:42:46] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[09:42:46] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[09:42:46] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[09:42:46] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[09:42:46] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[09:42:46] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[09:42:47] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[09:42:47] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[09:43:06] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[09:43:06] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[09:43:06] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[09:43:06] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[09:43:06] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[09:43:06] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[09:43:07] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[09:43:07] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[09:43:07] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[09:43:07] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[09:43:07] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[09:43:07] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[09:43:07] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[09:43:07] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[09:43:07] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[09:43:07] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[09:43:07] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[09:43:53] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[09:43:54] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[09:43:54] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[09:43:54] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[09:43:54] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[09:43:54] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[09:43:54] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[09:43:54] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[09:43:54] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[09:43:54] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[09:43:54] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[09:43:54] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[09:43:54] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[09:43:54] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[09:43:54] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[09:43:54] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[09:43:54] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[09:44:22] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[09:44:22] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[09:44:23] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[09:44:23] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[09:44:24] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[09:44:24] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[09:44:24] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[09:44:24] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[09:44:24] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[09:44:24] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[09:44:24] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[09:44:24] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[09:44:24] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[09:44:24] [DEV] [[32minfo[39m]: [32mTable 'Feel' synced![39m
+[09:44:24] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[09:44:24] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[09:44:24] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[09:44:24] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[09:44:24] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[09:44:24] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[09:44:24] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[09:46:17] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[09:46:18] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[09:46:19] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[09:46:19] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[09:46:19] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[09:46:19] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[09:46:19] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[09:46:19] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[09:46:19] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[09:46:19] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[09:46:19] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[09:46:19] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[09:46:19] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[09:46:20] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[09:46:20] [DEV] [[32minfo[39m]: [32mTable 'Feel' synced![39m
+[09:46:20] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[09:46:20] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[09:46:20] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[09:46:20] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[09:46:20] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[09:46:20] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[09:53:13] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[09:53:14] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[09:53:15] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[09:53:15] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[09:53:15] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[09:53:15] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[09:53:15] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[09:53:15] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[09:53:15] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[09:53:15] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[09:53:15] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[09:53:15] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[09:53:15] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[09:53:16] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[09:53:16] [DEV] [[32minfo[39m]: [32mTable 'Feel' synced![39m
+[09:53:16] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[09:53:16] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[09:53:16] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[09:53:21] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[09:53:21] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[09:53:21] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[09:53:21] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[09:53:21] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[09:53:21] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[09:53:21] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[09:53:22] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[09:53:22] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[09:53:49] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[09:53:50] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[09:53:50] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[09:53:50] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[09:53:50] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[09:53:50] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[09:53:54] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[09:53:54] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[09:53:54] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[09:53:54] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[09:53:54] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[09:53:54] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[09:53:54] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[09:53:54] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[09:53:54] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[09:53:55] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[09:53:55] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[09:53:55] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[09:53:55] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[09:53:55] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[09:53:55] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[09:53:55] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[09:53:55] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[09:54:16] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[09:54:17] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[09:54:17] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[09:54:17] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[09:54:17] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[09:54:17] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[09:54:17] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[09:54:17] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[09:54:17] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[09:54:17] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[09:54:17] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[09:54:17] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[09:54:17] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[09:54:17] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[09:54:17] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[09:54:17] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[09:54:39] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[09:54:39] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[09:54:39] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[09:54:39] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[09:54:39] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[09:54:39] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[09:54:40] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[09:54:40] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[09:54:40] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[09:54:40] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[09:54:40] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[09:54:40] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[09:54:40] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[09:54:40] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[09:54:40] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[09:54:40] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[09:54:40] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[09:55:10] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[09:55:11] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[09:55:11] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[09:55:11] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[09:55:11] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[09:55:11] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[09:55:11] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[09:55:11] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[09:55:11] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[09:55:11] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[09:55:11] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[09:55:11] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[09:55:11] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[09:55:11] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[09:55:11] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[09:55:11] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[09:55:12] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[09:56:38] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[09:56:39] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[09:56:39] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[09:56:39] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[09:56:39] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[09:56:39] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[09:56:39] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[09:56:39] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[09:56:39] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[09:56:39] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[09:56:39] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[09:56:39] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[09:56:39] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[09:56:39] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[09:57:15] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[09:57:16] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[09:57:17] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[09:57:17] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[09:57:17] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[09:57:17] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[09:57:17] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[09:57:17] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[09:57:17] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[09:57:17] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[09:57:17] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[09:57:17] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[09:57:18] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[09:57:18] [DEV] [[32minfo[39m]: [32mTable 'Feel' synced![39m
+[09:57:18] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[09:57:18] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[09:57:18] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[09:57:18] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[09:57:18] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[09:57:18] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[09:57:18] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[09:57:43] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[09:57:43] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[09:57:44] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[09:57:44] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[09:57:45] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[09:57:45] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[09:57:45] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[09:57:45] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[09:57:45] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[09:57:45] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[09:57:45] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[09:57:45] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[09:57:45] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[09:57:45] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[09:57:45] [DEV] [[32minfo[39m]: [32mTable 'Feel' synced![39m
+[09:57:45] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[09:57:45] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[09:57:46] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[09:57:46] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[09:57:46] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[09:57:46] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[09:58:45] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[09:58:45] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[09:58:46] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[09:58:46] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[09:58:47] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[09:58:47] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[09:58:47] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[09:58:47] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[09:58:47] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[09:58:47] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[09:58:47] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[09:58:47] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[09:58:47] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[09:58:47] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[09:58:47] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[09:58:47] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[09:58:47] [DEV] [[32minfo[39m]: [32mTable 'Feel' synced![39m
+[09:58:47] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[09:58:48] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[09:58:48] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[09:58:48] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[09:59:15] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[09:59:15] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[09:59:16] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[09:59:16] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[09:59:17] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[09:59:17] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[09:59:17] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[09:59:17] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[09:59:17] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[09:59:17] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[09:59:17] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[09:59:17] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[09:59:17] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[09:59:17] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[09:59:17] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[09:59:17] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[09:59:17] [DEV] [[32minfo[39m]: [32mTable 'Feel' synced![39m
+[09:59:17] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[09:59:17] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[09:59:18] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[09:59:18] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[10:00:00] [DEV] [[32minfo[39m]: [32m-----> Start cleaning up images & videos  <-----[39m
+[10:00:00] [DEV] [[32minfo[39m]: [32m-----> Finish cleaning up images & videos <-----[39m
+[32m[39m
+[10:01:56] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[10:01:56] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[10:01:58] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[10:01:58] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[10:01:59] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[10:01:59] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[10:01:59] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[10:01:59] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[10:01:59] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[10:01:59] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[10:01:59] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[10:01:59] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[10:01:59] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[10:01:59] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[10:01:59] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[10:01:59] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[10:01:59] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[10:01:59] [DEV] [[32minfo[39m]: [32mTable 'Feel' synced![39m
+[10:01:59] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[10:01:59] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[10:02:00] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[10:42:33] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[10:42:33] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[10:42:34] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[10:42:35] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[10:42:35] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[10:42:35] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[10:42:35] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[10:42:35] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[10:42:35] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[10:42:35] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[10:42:35] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[10:42:35] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[10:42:35] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[10:42:35] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[10:42:35] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[10:42:35] [DEV] [[32minfo[39m]: [32mTable 'Feel' synced![39m
+[10:42:35] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[10:42:35] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[10:42:35] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[10:42:36] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[10:42:36] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[10:43:47] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[10:43:48] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[10:43:48] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[10:43:48] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[10:43:48] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[10:43:48] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[10:43:48] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[10:43:48] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[10:43:48] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[10:43:48] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[10:43:48] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[10:43:48] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[10:43:48] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[10:43:48] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[10:43:49] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[10:43:49] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[10:45:20] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[10:45:21] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[10:45:21] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[10:45:21] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[10:45:21] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[10:45:21] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[10:45:21] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[10:45:21] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[10:45:21] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[10:45:21] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[10:45:21] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[10:45:21] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[10:45:21] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[10:45:21] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[10:45:21] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[10:45:21] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[10:45:22] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[10:46:27] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[10:46:28] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[10:46:28] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[10:46:28] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[10:46:28] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[10:46:28] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[10:46:28] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[10:46:28] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[10:46:28] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[10:46:28] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[10:46:28] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[10:46:28] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[10:46:28] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[10:46:28] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[10:46:28] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[10:46:28] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[10:48:23] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[10:48:24] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[10:48:24] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[10:48:24] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[10:48:24] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[10:48:24] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[10:48:24] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[10:48:24] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[10:48:24] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[10:48:24] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[10:48:24] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[10:48:24] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[10:48:24] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[10:48:24] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[10:48:24] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[10:48:25] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[10:48:25] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[10:51:44] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[10:51:44] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[10:51:45] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[10:51:45] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[10:51:45] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[10:51:45] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[10:51:45] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[10:51:45] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[10:51:45] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[10:51:45] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[10:51:45] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[10:51:45] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[10:51:45] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[10:51:45] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[10:51:45] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[10:51:45] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[10:51:45] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[10:52:04] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[10:52:05] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[10:52:05] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[10:52:05] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[10:52:05] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[10:52:05] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[10:52:05] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[10:52:05] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[10:52:05] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[10:52:05] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[10:52:05] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[10:52:05] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[10:52:05] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[10:52:05] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[10:52:05] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[10:52:12] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[10:52:13] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[10:52:13] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[10:52:13] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[10:52:13] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[10:52:13] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[10:52:13] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[10:52:13] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[10:52:13] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[10:52:13] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[10:52:13] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[10:52:13] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[10:52:13] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[10:52:14] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[10:52:34] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[10:52:34] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[10:52:34] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[10:52:34] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[10:52:34] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[10:52:34] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[10:52:34] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[10:52:34] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[10:52:34] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[10:52:34] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[10:52:34] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[10:52:34] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[10:52:35] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[10:52:35] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[10:52:35] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[10:52:57] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[10:52:57] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[10:52:57] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[10:52:57] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[10:52:57] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[10:52:57] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[10:52:57] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[10:52:57] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[10:52:57] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[10:52:57] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[10:52:57] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[10:52:57] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[10:52:58] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[10:52:58] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[10:52:58] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[10:52:58] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[10:52:58] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[10:53:25] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[10:53:25] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[10:53:26] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[10:53:26] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[10:53:27] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[10:53:27] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[10:53:27] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[10:53:27] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[10:53:27] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[10:53:27] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[10:53:27] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[10:53:27] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[10:53:27] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[10:53:27] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[10:53:28] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[10:53:28] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[10:53:28] [DEV] [[32minfo[39m]: [32mTable 'Feel' synced![39m
+[10:53:28] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[10:53:28] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[10:53:28] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[10:53:28] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[10:54:30] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[10:54:30] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[10:54:31] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[10:54:32] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[10:54:32] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[10:54:32] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[10:54:32] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[10:54:32] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[10:54:32] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[10:54:32] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[10:54:32] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[10:54:32] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[10:54:33] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[10:54:33] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[10:54:33] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[10:54:33] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[10:54:33] [DEV] [[32minfo[39m]: [32mTable 'Feel' synced![39m
+[10:54:33] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[10:54:33] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[10:54:33] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[10:54:33] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[13:23:06] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[13:23:06] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[13:23:07] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[13:23:07] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[13:23:08] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[13:23:08] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[13:23:08] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[13:23:08] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[13:23:08] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[13:23:08] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[13:23:08] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[13:23:08] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[13:23:08] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[13:23:08] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[13:23:08] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[13:23:08] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[13:23:08] [DEV] [[32minfo[39m]: [32mTable 'Feel' synced![39m
+[13:23:08] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[13:23:08] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[13:23:08] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[13:23:08] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[13:24:33] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[13:24:33] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[13:24:33] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[13:24:33] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[13:24:33] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[13:24:33] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[13:24:33] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[13:24:33] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[13:24:33] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[13:24:33] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[13:24:33] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[13:24:34] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[13:24:34] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[13:24:34] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[13:24:34] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[13:24:34] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[13:24:34] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[13:27:00] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[13:27:00] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[13:27:00] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[13:27:01] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[13:27:01] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[13:27:01] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[13:27:01] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[13:27:01] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[13:27:01] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[13:27:01] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[13:27:01] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[13:27:01] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[13:27:01] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[13:27:01] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[13:27:01] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[13:27:01] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[13:27:45] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[13:27:45] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[13:27:45] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[13:27:45] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[13:27:45] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[13:27:45] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[13:27:46] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[13:27:46] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[13:27:46] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[13:27:46] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[13:27:46] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[13:27:46] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[13:27:46] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[13:27:46] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[13:27:46] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[13:27:46] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[13:27:46] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[13:28:07] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[13:28:07] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[13:28:07] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[13:28:07] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[13:28:07] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[13:28:07] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[13:28:07] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[13:28:07] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[13:28:07] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[13:28:08] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[13:28:08] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[13:28:08] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[13:28:08] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[13:28:08] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[13:28:08] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[13:28:08] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[13:28:08] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[13:36:25] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[13:36:26] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[13:36:26] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[13:36:26] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[13:36:26] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[13:36:26] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[13:36:26] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[13:36:26] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[13:36:26] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[13:36:26] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[13:36:26] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[13:36:26] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[13:36:26] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[13:36:26] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[13:36:26] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[13:36:26] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[13:36:27] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[13:36:44] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[13:36:45] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[13:36:45] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[13:36:45] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[13:36:45] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[13:36:45] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[13:36:45] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[13:36:45] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[13:36:45] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[13:36:45] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[13:36:45] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[13:36:45] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[13:36:45] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[13:36:45] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[13:36:45] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[13:36:45] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[13:36:46] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[13:44:55] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[13:44:55] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[13:44:55] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[13:44:55] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[13:44:55] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[13:44:55] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[13:44:55] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[13:44:56] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[13:44:56] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[13:44:56] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[13:44:56] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[13:44:56] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[13:44:56] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[13:44:56] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[13:44:56] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[13:44:56] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[13:45:10] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[13:45:10] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[13:45:11] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[13:45:11] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[13:45:12] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[13:45:12] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[13:45:12] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[13:45:12] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[13:45:12] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[13:45:12] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[13:45:12] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[13:45:12] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[13:45:12] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[13:45:12] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[13:45:12] [DEV] [[32minfo[39m]: [32mTable 'Feel' synced![39m
+[13:45:12] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[13:45:12] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[13:45:12] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[13:45:12] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[13:45:12] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[13:45:13] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[13:47:06] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[13:47:07] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[13:47:07] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[13:47:07] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[13:47:07] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[13:47:07] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[13:47:07] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[13:47:07] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[13:47:07] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[13:47:07] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[13:47:07] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[13:47:07] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[13:47:07] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[13:47:07] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[13:47:07] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[13:47:07] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[13:51:04] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[13:51:05] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[13:51:05] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[13:51:05] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[13:51:05] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[13:51:05] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[13:51:05] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[13:51:05] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[13:51:05] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[13:51:05] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[13:51:05] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[13:51:05] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[13:51:05] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[13:51:05] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[13:51:05] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[13:51:05] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[13:51:06] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[13:54:07] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[13:54:07] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[13:54:08] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[13:54:08] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[13:54:09] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[13:54:09] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[13:54:09] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[13:54:09] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[13:54:09] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[13:54:09] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[13:54:09] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[13:54:09] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[13:54:09] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[13:54:09] [DEV] [[32minfo[39m]: [32mTable 'Feel' synced![39m
+[13:54:09] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[13:54:09] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[13:54:09] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[13:54:09] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[13:54:09] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[13:54:09] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[13:54:09] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[14:00:00] [DEV] [[32minfo[39m]: [32m-----> Start cleaning up images & videos  <-----[39m
+[14:00:00] [DEV] [[32minfo[39m]: [32m-----> Finish cleaning up images & videos <-----[39m
+[32m[39m
+[14:00:45] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[14:00:45] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[14:00:46] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[14:00:46] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[14:00:47] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[14:00:47] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[14:00:47] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[14:00:47] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[14:00:47] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[14:00:47] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[14:00:47] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[14:00:47] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[14:00:47] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[14:00:47] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[14:00:47] [DEV] [[32minfo[39m]: [32mTable 'Feel' synced![39m
+[14:00:47] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[14:00:47] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[14:00:47] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[14:00:47] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[14:00:47] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[14:00:48] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[14:03:06] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[14:03:06] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[14:03:07] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[14:03:07] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[14:03:08] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[14:03:08] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[14:03:08] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[14:03:08] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[14:03:08] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[14:03:08] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[14:03:08] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[14:03:08] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[14:03:08] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[14:03:08] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[14:03:08] [DEV] [[32minfo[39m]: [32mTable 'Feel' synced![39m
+[14:03:08] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[14:03:08] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[14:03:08] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[14:03:08] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[14:03:08] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[14:03:08] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[14:03:24] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[14:03:25] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[14:03:25] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[14:03:25] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[14:03:26] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[14:03:26] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[14:03:26] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[14:03:26] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[14:03:26] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[14:03:26] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[14:03:26] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[14:03:26] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[14:03:26] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[14:03:26] [DEV] [[32minfo[39m]: [32mTable 'Feel' synced![39m
+[14:03:26] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[14:03:26] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[14:03:26] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[14:03:26] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[14:03:26] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[14:03:26] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[14:03:26] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[14:03:53] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[14:03:54] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[14:03:54] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[14:03:55] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[14:03:55] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[14:03:55] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[14:03:55] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[14:03:55] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[14:03:55] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[14:03:55] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[14:03:55] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[14:03:55] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[14:03:55] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[14:03:55] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[14:03:55] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[14:03:55] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[14:03:55] [DEV] [[32minfo[39m]: [32mTable 'Feel' synced![39m
+[14:03:55] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[14:03:55] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[14:03:56] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[14:03:56] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[14:04:14] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[14:04:15] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[14:04:16] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[14:04:16] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[14:04:17] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[14:04:17] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[14:04:17] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[14:04:17] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[14:04:17] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[14:04:17] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[14:04:17] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[14:04:17] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[14:04:17] [DEV] [[32minfo[39m]: [32mTable 'Feel' synced![39m
+[14:04:17] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[14:04:17] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[14:04:17] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[14:04:17] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[14:04:17] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[14:04:17] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[14:04:17] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[14:04:18] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[14:05:37] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[14:05:37] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[14:05:37] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[14:05:37] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[14:05:37] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[14:06:12] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[14:06:12] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[14:06:13] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[14:06:13] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[14:06:14] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[14:06:14] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[14:06:14] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[14:06:14] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[14:06:14] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[14:06:14] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[14:06:14] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[14:06:14] [DEV] [[32minfo[39m]: [32mTable 'Feel' synced![39m
+[14:06:14] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[14:06:14] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[14:06:14] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[14:06:14] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[14:06:14] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[14:06:14] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[14:06:14] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[14:06:14] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[14:06:15] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[14:10:59] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[14:10:59] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[14:11:00] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[14:11:00] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[14:11:01] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[14:11:01] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[14:11:01] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[14:11:01] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[14:11:01] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[14:11:01] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[14:11:01] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[14:11:01] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[14:11:01] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[14:11:01] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[14:11:01] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[14:11:01] [DEV] [[32minfo[39m]: [32mTable 'Feel' synced![39m
+[14:11:01] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[14:11:01] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[14:11:01] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[14:11:01] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[14:11:01] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[14:11:04] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[14:11:04] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[14:11:05] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[14:11:05] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[14:11:05] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[14:11:05] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[14:11:05] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[14:11:05] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[14:11:05] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[14:11:06] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[14:11:06] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[14:11:06] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[14:11:06] [DEV] [[32minfo[39m]: [32mTable 'Feel' synced![39m
+[14:11:06] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[14:11:06] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[14:11:06] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[14:11:06] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[14:11:06] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[14:11:06] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[14:11:06] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[14:11:06] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[14:11:11] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[14:11:11] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[14:11:11] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[14:11:11] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[14:11:11] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[14:11:11] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[14:11:11] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[14:11:11] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[14:11:11] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[14:11:11] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[14:11:11] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[14:11:11] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[14:11:11] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[14:11:11] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[14:11:11] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[14:11:12] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[14:11:12] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[14:11:23] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[14:11:24] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[14:11:24] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[14:11:24] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[14:11:25] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[14:11:25] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[14:11:25] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[14:11:25] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[14:11:25] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[14:11:25] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[14:11:25] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[14:11:25] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[14:11:25] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[14:11:25] [DEV] [[32minfo[39m]: [32mTable 'Feel' synced![39m
+[14:11:25] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[14:11:25] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[14:11:25] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[14:11:25] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[14:11:25] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[14:11:26] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[14:11:26] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[20:35:23] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[20:35:23] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[20:35:23] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[20:35:23] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[20:35:23] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[20:35:23] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[20:35:23] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[20:35:24] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[20:35:24] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[20:35:24] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[20:35:24] [DEV] [[32minfo[39m]: [32mTable 'Feel' synced![39m
+[20:35:24] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[20:35:24] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[20:35:24] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[20:35:24] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[20:35:24] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[20:35:24] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[20:35:24] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[20:37:02] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[20:37:02] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[20:37:03] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[20:37:03] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[20:37:03] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[20:37:03] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[20:37:03] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[20:37:03] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[20:37:03] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[20:37:03] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[20:37:03] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[20:37:03] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[20:37:03] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[20:37:03] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[20:37:04] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[20:37:04] [DEV] [[32minfo[39m]: [32mTable 'Feel' synced![39m
+[20:37:04] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[20:37:04] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[20:37:04] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[20:37:04] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[20:37:04] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[20:40:00] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[20:40:00] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[20:40:01] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[20:40:01] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[20:40:02] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[20:40:02] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[20:40:02] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[20:40:02] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[20:40:02] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[20:40:02] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[20:40:02] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[20:40:02] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[20:40:02] [DEV] [[32minfo[39m]: [32mTable 'Feel' synced![39m
+[20:40:04] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[20:40:04] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[20:40:05] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[20:40:05] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[20:40:08] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[20:40:08] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[20:40:09] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[20:40:09] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[20:40:09] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[20:40:09] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[20:40:09] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[20:40:09] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[20:40:09] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[20:40:09] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[20:40:09] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[20:40:09] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[20:40:09] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[20:40:09] [DEV] [[32minfo[39m]: [32mTable 'Feel' synced![39m
+[20:40:09] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[20:40:09] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[20:40:09] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[20:40:10] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[20:40:10] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[20:40:10] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[20:40:10] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[20:40:14] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[20:40:14] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[20:40:14] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[20:40:15] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[20:40:15] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[20:40:15] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[20:40:15] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[20:40:15] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[20:40:15] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[20:40:15] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[20:40:15] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[20:40:15] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[20:40:15] [DEV] [[32minfo[39m]: [32mTable 'Feel' synced![39m
+[20:40:15] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[20:40:15] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[20:40:15] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[20:40:15] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[20:40:18] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[20:40:18] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[20:40:19] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[20:40:19] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[20:40:19] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[20:40:19] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[20:40:19] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[20:40:19] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[20:40:19] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[20:40:19] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[20:40:19] [DEV] [[32minfo[39m]: [32mTable 'Feel' synced![39m
+[20:40:19] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[20:40:19] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[20:40:19] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[20:40:19] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[20:40:19] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[20:40:19] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[20:40:20] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[20:40:20] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[20:40:20] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[20:40:20] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[20:40:25] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[20:40:25] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[20:40:26] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[20:40:26] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[20:40:27] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[20:40:27] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[20:40:27] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[20:40:27] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[20:40:27] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[20:40:27] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[20:40:27] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[20:40:27] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[20:40:27] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[20:40:27] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[20:40:27] [DEV] [[32minfo[39m]: [32mTable 'Feel' synced![39m
+[20:40:27] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[20:40:27] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[20:40:27] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[20:40:27] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[20:40:28] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[20:40:28] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[20:40:34] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[20:40:34] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[20:40:35] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[20:40:36] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[20:40:36] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[20:40:36] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[20:40:36] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[20:40:36] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[20:40:36] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[20:40:36] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[20:40:36] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[20:40:36] [DEV] [[32minfo[39m]: [32mTable 'Feel' synced![39m
+[20:40:36] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[20:40:36] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[20:40:36] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[20:40:36] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[20:40:36] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[20:40:37] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[20:40:37] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[20:40:37] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[20:40:37] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[20:40:41] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[20:40:41] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[20:40:44] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[20:40:44] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[20:40:45] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[20:40:45] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[20:40:46] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[20:40:46] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[20:40:46] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[20:40:46] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[20:40:46] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[20:40:46] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[20:40:46] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[20:40:46] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[20:40:46] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[20:40:46] [DEV] [[32minfo[39m]: [32mTable 'Feel' synced![39m
+[20:40:46] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[20:40:46] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[20:40:46] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[20:40:46] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[20:40:46] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[20:40:46] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[20:40:47] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[20:43:26] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[20:43:26] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[20:43:27] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[20:43:27] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[20:43:28] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[20:43:28] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[20:43:28] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[20:43:28] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[20:43:28] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[20:43:28] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[20:43:28] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[20:43:28] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[20:43:28] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[20:43:28] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[20:43:28] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[20:43:28] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[20:43:28] [DEV] [[32minfo[39m]: [32mTable 'Feel' synced![39m
+[20:43:28] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[20:43:28] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[20:43:28] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[20:43:28] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[20:43:41] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[20:43:41] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[20:43:42] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[20:43:42] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[20:43:42] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[20:43:42] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[20:43:42] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[20:43:42] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[20:43:42] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[20:43:42] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[20:43:42] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[20:43:42] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[20:43:42] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[20:43:43] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[20:43:43] [DEV] [[32minfo[39m]: [32mTable 'Feel' synced![39m
+[20:43:43] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[20:43:43] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[20:43:43] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[20:43:43] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[20:43:43] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[20:43:43] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[20:45:27] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[20:45:28] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[20:45:28] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[20:45:28] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[20:45:29] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[20:45:29] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[20:45:29] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[20:45:29] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[20:45:29] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[20:45:29] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[20:45:29] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[20:45:29] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[20:45:29] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[20:45:29] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[20:45:29] [DEV] [[32minfo[39m]: [32mTable 'Feel' synced![39m
+[20:45:29] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[20:45:29] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[20:45:29] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[20:45:29] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[20:45:29] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[20:45:30] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[20:48:48] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[20:48:48] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[20:48:49] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[20:48:50] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[20:48:50] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[20:48:50] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[20:48:50] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[20:48:50] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[20:48:50] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[20:48:50] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[20:48:50] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[20:48:50] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[20:48:50] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[20:48:50] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[20:48:50] [DEV] [[32minfo[39m]: [32mTable 'Feel' synced![39m
+[20:48:50] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[20:48:51] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[20:48:51] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[20:48:51] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[20:48:51] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[20:48:51] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[20:49:26] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[20:49:26] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[20:49:27] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[20:49:27] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[20:49:28] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[20:49:28] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[20:49:28] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[20:49:28] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[20:49:28] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[20:49:28] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[20:49:28] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[20:49:28] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[20:49:28] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[20:49:28] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[20:49:28] [DEV] [[32minfo[39m]: [32mTable 'Feel' synced![39m
+[20:49:28] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[20:49:28] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[20:49:28] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[20:49:28] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[20:49:28] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[20:49:28] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[20:49:33] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[20:49:33] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[20:49:34] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[20:49:34] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[20:49:35] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[20:49:35] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[20:49:35] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[20:49:35] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[20:49:35] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[20:49:35] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[20:49:35] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[20:49:35] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[20:49:35] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[20:49:35] [DEV] [[32minfo[39m]: [32mTable 'Feel' synced![39m
+[20:49:35] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[20:49:35] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[20:49:35] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[20:49:35] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[20:49:35] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[20:49:35] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[20:49:36] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[20:51:16] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[20:51:17] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[20:51:17] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[20:51:17] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[20:51:18] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[20:51:18] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[20:51:18] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[20:51:18] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[20:51:18] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[20:51:18] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[20:51:18] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[20:51:18] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[20:51:18] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[20:51:18] [DEV] [[32minfo[39m]: [32mTable 'Feel' synced![39m
+[20:51:18] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[20:51:18] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[20:51:18] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[20:51:18] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[20:51:19] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[20:51:19] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[20:51:19] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[20:51:23] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[20:51:23] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[20:51:24] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[20:51:24] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[20:51:28] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[20:51:28] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[20:51:28] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[20:51:28] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[20:51:29] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[20:51:29] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[20:51:29] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[20:51:29] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[20:51:29] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[20:51:29] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[20:51:29] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[20:51:29] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[20:51:29] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[20:51:29] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[20:51:29] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[20:51:29] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[20:51:29] [DEV] [[32minfo[39m]: [32mTable 'Feel' synced![39m
+[20:51:32] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[20:51:32] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[20:51:32] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[20:51:33] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[20:51:33] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[20:51:33] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[20:51:33] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[20:51:33] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[20:51:33] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[20:51:33] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[20:51:33] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[20:51:33] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[20:51:33] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[20:51:33] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[20:51:33] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[20:51:33] [DEV] [[32minfo[39m]: [32mTable 'Feel' synced![39m
+[20:51:33] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[20:51:33] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[20:51:33] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[20:51:33] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[20:51:34] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[20:52:08] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[20:52:08] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[20:52:08] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[20:52:09] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[20:52:09] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[20:52:09] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[20:52:09] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[20:52:09] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[20:52:09] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[20:52:09] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[20:52:09] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[20:52:09] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[20:52:09] [DEV] [[32minfo[39m]: [32mTable 'Feel' synced![39m
+[20:52:09] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[20:52:09] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[20:52:09] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[20:52:09] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[20:52:10] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[20:52:10] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[20:52:10] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[20:52:10] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[20:52:32] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[20:52:32] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[20:52:33] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[20:52:33] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[20:52:33] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[20:52:33] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[20:52:33] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[20:52:33] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[20:52:33] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[20:52:33] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[20:52:33] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[20:52:33] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[20:52:33] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[20:52:33] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[20:52:33] [DEV] [[32minfo[39m]: [32mTable 'Feel' synced![39m
+[20:52:33] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[20:52:33] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[20:52:34] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[20:52:34] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[20:52:34] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[20:52:34] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[20:52:56] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[20:52:58] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[20:52:58] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[20:53:01] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[20:53:02] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[20:53:02] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[20:53:02] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[20:53:03] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[20:53:03] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[20:53:03] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[20:53:03] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[20:53:03] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[20:53:03] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[20:53:03] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[20:53:03] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[20:53:03] [DEV] [[32minfo[39m]: [32mTable 'Feel' synced![39m
+[20:53:03] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[20:53:03] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[20:53:03] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[20:53:03] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[20:53:03] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[20:53:03] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[20:53:03] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[20:53:04] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[20:53:18] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[20:53:18] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[20:53:19] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[20:53:19] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[20:53:19] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[20:53:19] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[20:53:19] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[20:53:19] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[20:53:19] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[20:53:19] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[20:53:19] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[20:53:19] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[20:53:19] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[20:53:19] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[20:53:19] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[20:53:20] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[20:53:20] [DEV] [[32minfo[39m]: [32mTable 'Feel' synced![39m
+[20:53:20] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[20:53:20] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[20:53:20] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[20:53:20] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[20:53:41] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[20:53:41] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[20:53:42] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[20:53:42] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[20:53:42] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[20:53:42] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[20:53:42] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[20:53:42] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[20:53:42] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[20:53:42] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[20:53:42] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[20:53:43] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[20:53:43] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[20:53:43] [DEV] [[32minfo[39m]: [32mTable 'Feel' synced![39m
+[20:53:43] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[20:53:43] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[20:53:43] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[20:53:43] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[20:53:43] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[20:53:43] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[20:53:43] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[20:54:08] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[20:54:08] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[20:54:08] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[20:54:08] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[20:54:08] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[20:54:08] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[20:54:08] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[20:54:08] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[20:54:08] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[20:54:08] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[20:54:08] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[20:54:08] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[20:54:08] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[20:54:08] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[20:54:09] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[20:54:09] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[20:54:09] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[20:54:34] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[20:54:34] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[20:54:34] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[20:54:34] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[20:54:34] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[20:54:34] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[20:54:34] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[20:54:34] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[20:54:34] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[20:54:35] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[20:54:35] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[20:54:35] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[20:54:35] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[20:54:35] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[20:54:35] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[20:54:35] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[20:54:35] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[20:59:46] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[20:59:47] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[20:59:47] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[20:59:48] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[20:59:48] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[20:59:48] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[20:59:48] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[20:59:48] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[20:59:48] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[20:59:48] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[20:59:48] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[20:59:48] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[20:59:48] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[20:59:48] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[20:59:48] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[20:59:48] [DEV] [[32minfo[39m]: [32mTable 'Feel' synced![39m
+[20:59:48] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[20:59:49] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[20:59:49] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[20:59:49] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[20:59:49] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[21:00:00] [DEV] [[32minfo[39m]: [32m-----> Start cleaning up images & videos  <-----[39m
+[21:00:00] [DEV] [[32minfo[39m]: [32m-----> Finish cleaning up images & videos <-----[39m
+[32m[39m
+[21:02:25] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[21:02:25] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[21:02:25] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[21:02:25] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[21:02:25] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[21:02:25] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[21:02:26] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[21:02:26] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[21:02:26] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[21:02:26] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[21:02:26] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[21:02:26] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[21:02:26] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[21:02:26] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[21:02:26] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[21:02:26] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[21:02:26] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[21:12:14] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[21:12:15] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[21:12:15] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[21:12:15] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[21:12:15] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[21:12:15] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[21:12:15] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[21:12:15] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[21:12:15] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[21:12:15] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[21:12:15] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[21:12:15] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[21:12:15] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[21:12:15] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[21:12:15] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[21:12:15] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[21:12:15] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[21:15:24] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[21:15:25] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[21:15:25] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[21:15:25] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[21:15:25] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[21:15:25] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[21:15:25] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[21:15:25] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[21:15:25] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[21:15:25] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[21:15:25] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[21:15:25] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[21:15:25] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[21:15:25] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[21:15:25] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[21:15:25] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[21:15:25] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[21:31:39] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[21:31:39] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[21:31:39] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[21:31:40] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[21:31:40] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[21:31:40] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[21:31:40] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[21:31:40] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[21:31:40] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[21:31:40] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[21:31:40] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[21:31:40] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[21:31:40] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[21:31:40] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[21:31:40] [DEV] [[32minfo[39m]: [32mTable 'Feel' synced![39m
+[21:31:40] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[21:31:40] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[21:31:41] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[21:31:41] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[21:31:41] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[21:31:41] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[21:49:40] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[21:49:41] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[21:49:42] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[21:49:42] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[21:49:42] [DEV] [[31merror[39m]: [31munhandledRejection: column "phone_number" of relation "Users" contains null values[39m
+[31mError[39m
+[31m    at Query.run (C:\Users\fptshop\Workspace\SNS-Deepfake\server\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)[39m
+[31m    at C:\Users\fptshop\Workspace\SNS-Deepfake\server\node_modules\sequelize\lib\sequelize.js:315:28[39m
+[31m    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+[31m    at async User.sync (C:\Users\fptshop\Workspace\SNS-Deepfake\server\node_modules\sequelize\lib\model.js:984:11)[39m
+[21:49:42] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[21:49:42] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[21:49:42] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[21:49:42] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[21:49:42] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[21:49:43] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[21:49:43] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[21:49:43] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[21:49:43] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[21:49:43] [DEV] [[32minfo[39m]: [32mTable 'Feel' synced![39m
+[21:49:43] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[21:49:43] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[21:49:43] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[21:49:43] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[21:49:43] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[21:49:43] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[21:50:42] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[21:50:42] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[21:50:43] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[21:50:43] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[21:50:44] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[21:50:44] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[21:50:44] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[21:50:44] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[21:50:44] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[21:50:44] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[21:50:44] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[21:50:44] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[21:50:44] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[21:50:44] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[21:50:44] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[21:50:44] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[21:50:44] [DEV] [[32minfo[39m]: [32mTable 'Feel' synced![39m
+[21:50:44] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[21:50:44] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[21:50:45] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[21:50:45] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[21:50:55] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[21:50:55] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[21:50:56] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[21:50:56] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[21:50:57] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[21:50:57] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[21:50:57] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[21:50:57] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[21:50:57] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[21:50:57] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[21:50:57] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[21:50:57] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[21:50:57] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[21:50:57] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[21:50:57] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[21:50:57] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[21:50:57] [DEV] [[32minfo[39m]: [32mTable 'Feel' synced![39m
+[21:50:57] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[21:50:57] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[21:50:57] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[21:50:58] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[21:51:15] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[21:51:15] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[21:51:16] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[21:51:16] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[21:51:16] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[21:51:16] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[21:51:17] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[21:51:17] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[21:51:17] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[21:51:17] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[21:51:17] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[21:51:17] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[21:51:17] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[21:51:17] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[21:51:17] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[21:51:17] [DEV] [[32minfo[39m]: [32mTable 'Feel' synced![39m
+[21:51:17] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[21:51:17] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[21:51:17] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[21:51:17] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[21:51:17] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m
+[21:51:33] [DEV] [[32minfo[39m]: [32mServer ⭐ Running at port 8888[39m
+[21:51:33] [DEV] [[32minfo[39m]: [32mRedis ⭐ Connected with 'apn1-guiding-walrus-34926.upstash.io:34926'[39m
+[21:51:34] [DEV] [[32minfo[39m]: [32mPostgreSQL ⭐ Connected with aws-0-ap-southeast-1.pooler.supabase.com:6543[39m
+[21:51:34] [DEV] [[32minfo[39m]: [32mTable 'ApiKeys' synced![39m
+[21:51:35] [DEV] [[32minfo[39m]: [32mTable 'Family' synced![39m
+[21:51:35] [DEV] [[32minfo[39m]: [32mTable 'Category' synced![39m
+[21:51:35] [DEV] [[32minfo[39m]: [32mTable 'Friend' synced![39m
+[21:51:35] [DEV] [[32minfo[39m]: [32mTable 'PostVideo' synced![39m
+[21:51:35] [DEV] [[32minfo[39m]: [32mTable 'PostHistory' synced![39m
+[21:51:35] [DEV] [[32minfo[39m]: [32mTable 'DevToken' synced![39m
+[21:51:35] [DEV] [[32minfo[39m]: [32mTable 'Block' synced![39m
+[21:51:35] [DEV] [[32minfo[39m]: [32mTable 'Report' synced![39m
+[21:51:35] [DEV] [[32minfo[39m]: [32mTable 'VerifyCode' synced![39m
+[21:51:35] [DEV] [[32minfo[39m]: [32mTable 'PostImage' synced![39m
+[21:51:35] [DEV] [[32minfo[39m]: [32mTable 'Mark' synced![39m
+[21:51:35] [DEV] [[32minfo[39m]: [32mTable 'Feel' synced![39m
+[21:51:35] [DEV] [[32minfo[39m]: [32mTable 'FriendRequest' synced![39m
+[21:51:35] [DEV] [[32minfo[39m]: [32mTable 'Post' synced![39m
+[21:51:35] [DEV] [[32minfo[39m]: [32mTable 'PostView' synced![39m
+[21:51:35] [DEV] [[32minfo[39m]: [32mTable 'User' synced![39m
+[21:51:35] [DEV] [[32minfo[39m]: [32mTable 'PushSetting' synced![39m

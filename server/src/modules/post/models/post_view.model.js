@@ -1,8 +1,5 @@
 import { DataTypes } from 'sequelize';
 
-import { User } from '../../user/user.model.js';
-import { Post } from '../post.model.js';
-
 import { postgre } from '#dbs';
 import { logger } from '#utils';
 
@@ -25,6 +22,7 @@ export const PostView = postgre.define('PostView', {
     type: DataTypes.STRING
   }
 });
+
 // Mô tả mối quan hệ với User và Post
 // PostView.belongsTo(User, { foreignKey: 'userId', onDelete: 'CASCADE' });
 // PostView.belongsTo(Post, { foreignKey: 'postId', onDelete: 'CASCADE' });

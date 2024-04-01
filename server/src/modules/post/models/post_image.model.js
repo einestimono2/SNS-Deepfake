@@ -24,6 +24,7 @@ export const PostImage = postgre.define('PostImage', {
     defaultValue: 0
   }
 });
+
 (() => {
   // Code here
   PostImage.sync({ alter: true }).then(() => logger.info("Table 'PostImage' synced!"));

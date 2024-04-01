@@ -6,10 +6,9 @@ import { Op } from 'sequelize';
 import { BadRequestError } from '../core/index.js';
 import { Family } from '../family/family.model.js';
 
-import { DevToken } from './dev_token/index.js';
-import { VerifyCode } from './verify_code/index.js';
-
-import { User } from './index.js';
+import { DevToken } from './models/device_token.model.js';
+import { VerifyCode } from './models/verify_code.model.js';
+import { User } from './user.model.js';
 
 import { accountStatus, Message } from '#constants';
 // const catchAsyncError = require("../middleware/catchAsyncErrors");

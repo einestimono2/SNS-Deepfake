@@ -1,0 +1,6 @@
+[21:49:42] [DEV] [[31merror[39m]: [31munhandledRejection: column "phone_number" of relation "Users" contains null values[39m
+[31mError[39m
+[31m    at Query.run (C:\Users\fptshop\Workspace\SNS-Deepfake\server\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)[39m
+[31m    at C:\Users\fptshop\Workspace\SNS-Deepfake\server\node_modules\sequelize\lib\sequelize.js:315:28[39m
+[31m    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+[31m    at async User.sync (C:\Users\fptshop\Workspace\SNS-Deepfake\server\node_modules\sequelize\lib\model.js:984:11)[39m

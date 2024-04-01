@@ -1,0 +1,78 @@
+[09:27:20] [DEV] [[35mhttp[39m]: [35m::1 GET /api/v1/post/get_post/42 500 - - 49.177 ms[39m
+[35m[39m
+[09:28:41] [DEV] [[35mhttp[39m]: [35m::1 POST /api/v1/user/login 200 567 - 1408.805 ms[39m
+[35m[39m
+[09:28:58] [DEV] [[35mhttp[39m]: [35m::1 GET /api/v1/post/get_post/42 500 71 - 570.074 ms[39m
+[35m[39m
+[09:49:53] [DEV] [[35mhttp[39m]: [35m::1 GET /api/v1/post/get_post/42 500 71 - 939.722 ms[39m
+[35m[39m
+[09:58:30] [DEV] [[35mhttp[39m]: [35m::1 GET /api/v1/post/get_post/42 500 71 - 601.663 ms[39m
+[35m[39m
+[09:58:55] [DEV] [[35mhttp[39m]: [35m::1 GET /api/v1/post/get_post/42 500 71 - 118.746 ms[39m
+[35m[39m
+[09:58:57] [DEV] [[35mhttp[39m]: [35m::1 GET /api/v1/post/get_post/42 500 71 - 86.581 ms[39m
+[35m[39m
+[09:59:20] [DEV] [[35mhttp[39m]: [35m::1 GET /api/v1/post/get_post/42 500 71 - 122.781 ms[39m
+[35m[39m
+[10:02:03] [DEV] [[35mhttp[39m]: [35m::1 GET /api/v1/post/get_post/42 500 71 - 92.199 ms[39m
+[35m[39m
+[10:42:45] [DEV] [[35mhttp[39m]: [35m::1 GET /api/v1/post/get_post/42 500 - - 105.428 ms[39m
+[35m[39m
+[10:43:06] [DEV] [[35mhttp[39m]: [35m::1 POST /api/v1/user/login 200 567 - 1080.472 ms[39m
+[35m[39m
+[10:43:23] [DEV] [[35mhttp[39m]: [35m::1 GET /api/v1/post/get_post/42 500 71 - 1061.886 ms[39m
+[35m[39m
+[10:54:56] [DEV] [[35mhttp[39m]: [35m::1 GET /api/v1/post/get_post/42 500 71 - 622.375 ms[39m
+[35m[39m
+[13:23:24] [DEV] [[35mhttp[39m]: [35m::1 POST /api/v1/user/login 200 567 - 745.693 ms[39m
+[35m[39m
+[13:23:50] [DEV] [[35mhttp[39m]: [35m::1 POST /api/v1/post/add_post 201 52 - 923.475 ms[39m
+[35m[39m
+[13:23:56] [DEV] [[35mhttp[39m]: [35m::1 GET /api/v1/post/get_post/42 500 71 - 79.206 ms[39m
+[35m[39m
+[13:56:09] [DEV] [[35mhttp[39m]: [35m::1 GET /api/v1/post/get_post/42 500 71 - 656.030 ms[39m
+[35m[39m
+[14:00:53] [DEV] [[35mhttp[39m]: [35m::1 GET /api/v1/post/get_post/42 500 71 - 113.415 ms[39m
+[35m[39m
+[14:03:10] [DEV] [[35mhttp[39m]: [35m::1 GET /api/v1/post/get_post/42 500 71 - 92.831 ms[39m
+[35m[39m
+[14:03:55] [DEV] [[35mhttp[39m]: [35m::1 GET /api/v1/post/get_post/42 500 78 - 570.281 ms[39m
+[35m[39m
+[14:04:16] [DEV] [[35mhttp[39m]: [35m::1 GET /api/v1/post/get_post/42 500 86 - 1422.277 ms[39m
+[35m[39m
+[20:37:29] [DEV] [[35mhttp[39m]: [35m::1 POST /api/v1/user/register 400 64 - 555.798 ms[39m
+[35m[39m
+[20:41:27] [DEV] [[35mhttp[39m]: [35m::1 POST /api/v1/user/register 400 99 - 43.770 ms[39m
+[35m[39m
+[20:41:31] [DEV] [[35mhttp[39m]: [35m::1 POST /api/v1/user/register 400 64 - 774.206 ms[39m
+[35m[39m
+[20:43:27] [DEV] [[35mhttp[39m]: [35m::1 POST /api/v1/user/register 400 72 - 482.976 ms[39m
+[35m[39m
+[20:43:42] [DEV] [[35mhttp[39m]: [35m::1 POST /api/v1/user/register 500 128 - 703.779 ms[39m
+[35m[39m
+[20:45:33] [DEV] [[35mhttp[39m]: [35m::1 POST /api/v1/user/register 201 83 - 594.830 ms[39m
+[35m[39m
+[20:46:57] [DEV] [[35mhttp[39m]: [35m::1 POST /api/v1/user/login 200 589 - 879.989 ms[39m
+[35m[39m
+[20:47:13] [DEV] [[35mhttp[39m]: [35m::1 GET /api/v1/post/get_post/42 500 62 - 555.051 ms[39m
+[35m[39m
+[20:48:50] [DEV] [[35mhttp[39m]: [35m::1 GET /api/v1/post/get_post/42 500 60 - 170.716 ms[39m
+[35m[39m
+[20:49:39] [DEV] [[35mhttp[39m]: [35m::1 GET /api/v1/post/get_post/42 500 72 - 280.455 ms[39m
+[35m[39m
+[20:51:36] [DEV] [[35mhttp[39m]: [35m::1 GET /api/v1/post/get_post/42 500 169 - 88.860 ms[39m
+[35m[39m
+[20:53:21] [DEV] [[35mhttp[39m]: [35m::1 GET /api/v1/post/get_post/42 500 71 - 96.274 ms[39m
+[35m[39m
+[20:53:42] [DEV] [[35mhttp[39m]: [35m::1 GET /api/v1/post/get_post/42 500 71 - 443.409 ms[39m
+[35m[39m
+[21:01:41] [DEV] [[35mhttp[39m]: [35m::1 GET /api/v1/post/get_post/42 500 71 - 2257.150 ms[39m
+[35m[39m
+[21:31:55] [DEV] [[35mhttp[39m]: [35m::1 GET /api/v1/post/get_post/42 500 196 - 469.885 ms[39m
+[35m[39m
+[21:49:42] [DEV] [[31merror[39m]: [31munhandledRejection: column "phone_number" of relation "Users" contains null values[39m
+[31mError[39m
+[31m    at Query.run (C:\Users\fptshop\Workspace\SNS-Deepfake\server\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)[39m
+[31m    at C:\Users\fptshop\Workspace\SNS-Deepfake\server\node_modules\sequelize\lib\sequelize.js:315:28[39m
+[31m    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+[31m    at async User.sync (C:\Users\fptshop\Workspace\SNS-Deepfake\server\node_modules\sequelize\lib\model.js:984:11)[39m

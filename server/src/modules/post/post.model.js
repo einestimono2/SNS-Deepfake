@@ -2,14 +2,14 @@ import { DataTypes } from 'sequelize';
 
 import { User } from '../user/user.model.js';
 
-import { Category } from './category/category.model.js';
-import { Feel } from './feel/feel.model.js';
-import { Mark } from './mark/mark.model.js';
-import { PostHistory } from './post_history/post.history.js';
-import { PostImage } from './post_image/post_image.model.js';
-import { PostVideo } from './post_video/post_video.model.js';
-import { PostView } from './post_view/post_view.model.js';
-import { Report } from './report/report.model.js';
+import { Category } from './models/category.model.js';
+import { Feel } from './models/feel.model.js';
+import { Mark } from './models/mark.model.js';
+import { PostHistory } from './models/post.history.js';
+import { PostImage } from './models/post_image.model.js';
+import { PostVideo } from './models/post_video.model.js';
+import { PostView } from './models/post_view.model.js';
+import { Report } from './models/report.model.js';
 
 import { postgre } from '#dbs';
 import { logger } from '#utils';
@@ -24,7 +24,7 @@ export const Post = postgre.define('Post', {
     type: DataTypes.INTEGER
   },
   description: {
-    type: DataTypes.TEXT,
+    type: DataTypes.STRING,
     allowNull: true
   },
   status: {
@@ -49,9 +49,15 @@ export const Post = postgre.define('Post', {
   // Code here
   Post.sync({ alter: true }).then(() => logger.info("Table 'Post' synced!"));
 })();
+
 // Định nghĩa các mối quan hệ
-Post.belongsTo(User, { foreignKey: 'authorId', onDelete: 'CASCADE' });
-Post.belongsTo(Category, { foreignKey: 'categoryId', onDelete: 'SET NULL' });
+// Trả về thông tin tác giả thông qua author
+Post.belongsTo(User, { as: 'author', foreignKey: 'authorId', onDelete: 'CASCADE' });
+Post.belongsTo(Category, {
+  as: 'category',
+  foreignKey: 'categoryId',
+  onDelete: 'SET NULL'
+});
 Post.hasMany(PostImage, { foreignKey: 'postId', as: 'images', onDelete: 'CASCADE' });
 Post.hasOne(PostVideo, { foreignKey: 'postId', as: 'video', onDelete: 'CASCADE' });
 Post.hasMany(Feel, { foreignKey: 'postId', as: 'feels', onDelete: 'CASCADE' });

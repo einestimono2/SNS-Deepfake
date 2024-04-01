@@ -2,8 +2,6 @@
 
 import { DataTypes } from 'sequelize';
 
-import { User } from '../user/index.js';
-
 import { postgre } from '#dbs';
 import { logger } from '#utils';
 
