@@ -31,13 +31,13 @@ export class PostControllers {
     });
   });
 
-  // static getListPosts = CatchAsyncError(async (req, res) => {});
+  static getListPosts = CatchAsyncError(async (req, res) => {});
 
-  // static editPost = CatchAsyncError(async (req, res) => {});
+  static editPost = CatchAsyncError(async (req, res) => {});
 
-  // static getListVideo = CatchAsyncError(async (req, res) => {});
+  static getListVideo = CatchAsyncError(async (req, res) => {});
 
-  // static deletePost = CatchAsyncError(async (req, res) => {});
+  static deletePost = CatchAsyncError(async (req, res) => {});
 
-  // static reportPost = CatchAsyncError(async (req, res) => {});
+  static reportPost = CatchAsyncError(async (req, res) => {});
 }

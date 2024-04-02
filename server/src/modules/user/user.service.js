@@ -7,6 +7,7 @@ import { BadRequestError } from '../core/index.js';
 import { Family } from '../family/family.model.js';
 
 import { DevToken } from './models/device_token.model.js';
+import { PasswordHistory } from './models/password_history.model.js';
 import { VerifyCode } from './models/verify_code.model.js';
 import { User } from './user.model.js';
 
@@ -48,7 +49,7 @@ export class userServices {
   }
 
   // 2--Tạo một tài khoản người dùng
-  static async signup(email, password) {
+  static async signup(phoneNumber, email, password, role, uuid) {
     // Kiểm tra email đã tồn tại chưa?
     if (await this.checkEmaiExit(email)) {
       throw new BadRequestError(Message.EMAIL_ALREADY_EXISTS);
@@ -60,7 +61,10 @@ export class userServices {
     // Tạo tài khoản người dùng
     await User.create({
       password: await this.hashPassword(password),
+      phone_number: phoneNumber,
       email,
+      role,
+      uuid,
       status: accountStatus.Inactive,
       coins: 50
     });
@@ -68,8 +72,8 @@ export class userServices {
     await this.getVerifyCode(email);
   }
 
-  static async comparePassword(user, password) {
-    const comparePassword = bcryptjs.compare(password, user.password);
+  static async comparePassword(password, hashedPassword) {
+    const comparePassword = bcryptjs.compare(password, hashedPassword);
     return comparePassword;
   }
 
@@ -79,7 +83,7 @@ export class userServices {
       where: { email },
       withDeleted: true
     });
-    if (!user || !(await this.comparePassword(user, password))) {
+    if (!user || !(await this.comparePassword(password, user.password))) {
       throw new BadRequestError(Message.USER_NOT_FOUND);
     }
     user.token = signToken(user.id, uuid);
@@ -150,85 +154,119 @@ export class userServices {
 
   // Profile
   // 6--Thay đổi thông tin sau khi đăng ký
-  //   static async changeProfileAfterSignup(user, username, avatar) {
-  //     if (!['pending', 'active'].includes(user.status)) {
-  //       throw new BadRequestError(Message.NO_CHANGE_PROFILE_AFTER_SIGNUP);
-  //     }
-  //     user.username = username;
-  //     if (avatar) {
-  //       user.avatar = 'Đã thay đổi avatar';
-  //     }
-  //     user.status = 'active';
-  //     await User.save(user);
-  //     // Xử lý việc pushsetting
-  //     return {
-  //       id: user.id,
-  //       username: user.username,
-  //       email: user.email,
-  //       avatar: user.avatar
-  //     };
-  //   }
+  static async changeProfileAfterSignup(userId, username, avatar, coverImage) {
+    const user = await User.findOne({ where: { id: userId } });
 
-  //   // 7--Lấy thông tin người dùng
-  //   static async getUserInfo(user, userId) {
-  //     userId ||= user.id;
-  //     // Kiểm tra User có bị block hay không
-  //     // Kiểm tra userId có trong bảng User hay không
-  //     const userInfo = await User.findOne({
-  //       where: {
-  //         id: userId
-  //       }
-  //     });
-  //     const FamilyInfo = await Family.findOne({
-  //       where: {
-  //         id: userInfo.family_id
-  //       }
-  //     });
-  //     if (!user) {
-  //       throw new BadRequestError(Message.USER_NOT_FOUND);
-  //     }
-  //     // Lấy số lượng bạn bè....
-  //     return {
-  //       id: user.id,
-  //       username: user.username,
-  //       avatar: user.avatar,
-  //       coverImage: user.coverImage,
-  //       adress: FamilyInfo.address,
-  //       name: FamilyInfo.name,
-  //       // Danh sách bạn bè
-  //       online: '1',
-  //       coins: user.coins
-  //     };
-  //   }
+    if (user.status === accountStatus.Pending || user.status === accountStatus.Active) {
+      throw new BadRequestError(Message.NO_CHANGE_PROFILE_AFTER_SIGNUP);
+    }
 
-  //   static async setUserInfo(user, body, avatar, coverImage) {
-  //     const userInfo = await User.findOne({
-  //       where: {
-  //         id: user.id
-  //       }
-  //     });
-  //     if (!userInfo) {
-  //       throw new BadRequestError(Message.USER_NOT_FOUND);
-  //     }
-  //     if (body.username) user.username = body.username;
-  //     if (body.phonenumber) user.description = body.phonenumber;
-  //     if (body.address) Family.address = body.address;
-  //     if (body.name) Family.name = body.name;
-  //     if (avatar) {
-  //       user.avatar = 'Đã thay đổi avatar';
-  //     }
-  //     if (coverImage) {
-  //       user.coverImage = 'Đã thay đổi coverImage';
-  //     }
-  //     await this.User.save(user);
-  //     await this.Family.save();
-  //     return {
-  //       avatar: user.avatar,
-  //       coverimage: user.coverImage,
-  //       address: Family.address,
-  //       name: Family.name,
-  //       phoneNumber: user.phoneNumber
-  //     };
-  //   }
-  //
+    user.username = username || '';
+    user.avatar = avatar || '';
+    user.coverImage = coverImage || '';
+    user.status = accountStatus.Active;
+    await user.save();
+
+    // Xử lý việc pushsetting
+    return {
+      id: user.id,
+      username: user.username,
+      email: user.email,
+      avatar: user.avatar
+    };
+  }
+
+  // // 7--Lấy thông tin người dùng
+  static async getUserInfo(userId) {
+    // Kiểm tra User có bị block hay không
+    // Kiểm tra userId có trong bảng User hay không
+    const userInfo = await User.findOne({ where: { id: userId } });
+    console.log(userInfo);
+    // const FamilyInfo = await Family.findOne({
+    //   where: {
+    //     id: userInfo.family_id
+    //   }
+    // });
+
+    // Lấy số lượng bạn bè....
+    return {
+      id: userInfo.id,
+      role: userInfo.role,
+      username: userInfo.username,
+      avatar: userInfo.avatar,
+      phoneNumber: userInfo.phone_number,
+      coverImage: userInfo.coverImage,
+      // adress: FamilyInfo.address,
+      // name: FamilyInfo.name,
+      // Danh sách bạn bè
+      online: '1',
+      coins: userInfo.coins
+    };
+  }
+
+  static async setUserInfo(userId, username, avatar, coverImage) {
+    const userInfo = await User.findOne({ where: { id: userId } });
+    // if (!userInfo) {
+    //   throw new BadRequestError(Message.USER_NOT_FOUND);
+    // }
+
+    userInfo.username = username || userInfo.username;
+    userInfo.avatar = avatar || userInfo.avatar;
+    // userInfo.phoneNumber = phoneNumber || userInfo.phoneNumber;
+    userInfo.coverImage = coverImage || userInfo.coverImage;
+    await userInfo.save();
+    // if (body.username) user.username = body.username;
+    // if (body.phonenumber) user.description = body.phonenumber;
+    // if (body.address) Family.address = body.address;
+    // if (body.name) Family.name = body.name;
+    // if (avatar) {
+    //   user.avatar = 'Đã thay đổi avatar';
+    // }
+    // if (coverImage) {
+    //   user.coverImage = 'Đã thay đổi coverImage';
+    // }
+    // await this.User.save(user);
+    // await this.Family.save();
+
+    return {
+      id: userId,
+      username,
+      // phoneNumber,I
+      avatar,
+      coverImage
+    };
+  }
+
+  static async checkOldPassword(user, password) {
+    if (await this.comparePassword(password, user.password)) {
+      throw new BadRequestError(Message.USED_PASSWORD);
+    }
+    const oldPasswords = await PasswordHistory.findAll({ where: { userId: user.id } });
+    for (const oldPassword of oldPasswords) {
+      if (await this.comparePassword(password, oldPassword.password)) {
+        throw new BadRequestError(Message.USED_PASSWORD);
+      }
+    }
+  }
+
+  static async changePassword(userId, newPassword) {
+    const user = await User.findOne({ where: { userId } });
+
+    await this.checkOldPassword(user, newPassword);
+
+    const oldPassword = user.password;
+    user.password = await this.hashPassword(newPassword);
+    user.token = signToken(user.id, generateVerifyCode(6));
+    await user.save();
+
+    await PasswordHistory.create({
+      userId: user.id,
+      password: oldPassword
+    });
+
+    console.log(user.token);
+    return {
+      token: user.token
+    };
+  }
 }

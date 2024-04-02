@@ -4,7 +4,7 @@ export const Message = {
     ec: 1000
   },
   BEARER_TOKEN_EMPTY: {
-    msg: '',
+    msg: 'Bearer token is empty!',
     ec: 1001
   },
   INSUFFICIENT_ACCESS_RIGHTS: {
@@ -72,5 +72,8 @@ export const Message = {
   },
   CODE_NOT_FOUND: {
     msg: 'Code not found!'
+  },
+  USED_PASSWORD: {
+    msg: 'Password has been used before'
   }
 };

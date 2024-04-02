@@ -41,15 +41,32 @@ export class UserControllers {
   });
 
   // 5--Thay đổi thông tin sau khi đăng ký
-  static changeProfileAfterSignup = CatchAsyncError(async (req) => {
-    await userServices.changeProfileAfterSignup({ ...req.body });
+  static changeProfileAfterSignup = CatchAsyncError(async (req, res) => {
+    const { userId } = req.userPayload;
+    const { username, avatar, coverImage } = req.body;
+    const newProfile = await userServices.changeProfileAfterSignup(userId, username, avatar, coverImage);
+    res.ok({ message: 'Profile updated!', data: newProfile });
   });
 
-  static getUserInfo = CatchAsyncError(async (req) => {
-    await userServices.getUserInfo({ ...req.body });
+  static getUserInfo = CatchAsyncError(async (req, res) => {
+    const { userId } = req.userPayload;
+    const userInfo = await userServices.getUserInfo(userId);
+    res.ok({ data: userInfo });
   });
 
-  static setUserInfo = CatchAsyncError(async (req) => {
-    await userServices.setUserInfo({ ...req.body });
+  static setUserInfo = CatchAsyncError(async (req, res) => {
+    const { userId } = req.userPayload;
+    const { username, avatar, coverImage } = req.body;
+    const newProfile = await userServices.setUserInfo(userId, username, avatar, coverImage);
+    console.log(newProfile);
+
+    res.ok({ message: 'Profile updated!', data: newProfile });
+  });
+
+  static changePassword = CatchAsyncError(async (req, res) => {
+    const { userId } = req.userPayload;
+    const { newPassword } = req.body;
+    const response = await userServices.changePassword(userId, newPassword);
+    res.ok({ message: 'Password changed!', data: response });
   });
 }
