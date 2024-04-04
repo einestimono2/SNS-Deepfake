@@ -79,3 +79,7 @@ User.hasMany(FriendRequest, { foreignKey: 'targetId', as: 'friendRequested' });
 User.hasMany(FriendRequest, { foreignKey: 'userId', as: 'friendRequesting' });
 User.hasMany(Friend, { foreignKey: 'userId', as: 'friends' });
 User.hasOne(PushSetting, { foreignKey: 'userId', as: 'pushSettings' });
+
+// Quan hệ giữa Block và User
+Block.belongsTo(User, { foreignKey: 'userId', as: 'user' });
+Block.belongsTo(User, { foreignKey: 'targetId', as: 'target' });

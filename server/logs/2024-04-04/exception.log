@@ -1,0 +1,105 @@
+[15:44:55] [DEV] [[31merror[39m]: [31muncaughtException: B is not defined[39m
+[31mReferenceError: B is not defined[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/index.js:25:44[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[15:44:55] [DEV] [[31merror[39m]: [31muncaughtException: B is not defined[39m
+[31mReferenceError: B is not defined[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/index.js:25:44[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[15:44:55] [DEV] [[31merror[39m]: [31muncaughtException: B is not defined[39m
+[31mReferenceError: B is not defined[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/index.js:25:44[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[15:44:55] [DEV] [[31merror[39m]: [31muncaughtException: B is not defined[39m
+[31mReferenceError: B is not defined[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/index.js:25:44[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[15:44:55] [DEV] [[31merror[39m]: [31muncaughtException: B is not defined[39m
+[31mReferenceError: B is not defined[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/index.js:25:44[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[15:44:57] [DEV] [[31merror[39m]: [31muncaughtException: b is not defined[39m
+[31mReferenceError: b is not defined[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/index.js:25:44[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[15:44:57] [DEV] [[31merror[39m]: [31muncaughtException: b is not defined[39m
+[31mReferenceError: b is not defined[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/index.js:25:44[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[15:44:57] [DEV] [[31merror[39m]: [31muncaughtException: b is not defined[39m
+[31mReferenceError: b is not defined[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/index.js:25:44[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[15:44:57] [DEV] [[31merror[39m]: [31muncaughtException: b is not defined[39m
+[31mReferenceError: b is not defined[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/index.js:25:44[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[15:44:57] [DEV] [[31merror[39m]: [31muncaughtException: b is not defined[39m
+[31mReferenceError: b is not defined[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/index.js:25:44[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[15:47:02] [DEV] [[31merror[39m]: [31muncaughtException: router.gett is not a function[39m
+[31mTypeError: router.gett is not a function[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/block/block.route.js:8:8[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[15:47:02] [DEV] [[31merror[39m]: [31muncaughtException: router.gett is not a function[39m
+[31mTypeError: router.gett is not a function[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/block/block.route.js:8:8[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[15:47:02] [DEV] [[31merror[39m]: [31muncaughtException: router.gett is not a function[39m
+[31mTypeError: router.gett is not a function[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/block/block.route.js:8:8[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[15:47:02] [DEV] [[31merror[39m]: [31muncaughtException: router.gett is not a function[39m
+[31mTypeError: router.gett is not a function[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/block/block.route.js:8:8[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m
+[15:47:02] [DEV] [[31merror[39m]: [31muncaughtException: router.gett is not a function[39m
+[31mTypeError: router.gett is not a function[39m
+[31m    at file:///C:/Users/fptshop/Workspace/SNS-Deepfake/server/src/modules/block/block.route.js:8:8[39m
+[31m    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)[39m
+[31m    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)[39m
+[31m    at async loadESM (node:internal/process/esm_loader:28:7)[39m
+[31m    at async handleMainPromise (node:internal/modules/run_main:113:12)[39m

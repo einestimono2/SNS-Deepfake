@@ -81,5 +81,8 @@ export const Message = {
   },
   NO_ENOUGH_INFORMATION: {
     msg: 'No enough information!'
+  },
+  CAN_NOT_BLOCK: {
+    msg: 'Can not block!'
   }
 };

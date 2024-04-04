@@ -105,3 +105,28 @@
 [14:04:55] [DEV] [[31merror[39m]: [31m[SequelizeDatabaseError]: missing FROM-clause entry for table "post"[39m
 [14:05:19] [DEV] [[31merror[39m]: [31m[SequelizeDatabaseError]: missing FROM-clause entry for table "post"[39m
 [14:11:41] [DEV] [[31merror[39m]: [31m[SequelizeDatabaseError]: missing FROM-clause entry for table "author->blocked"[39m
+[15:44:23] [DEV] [[31merror[39m]: [31m[Error]: Route Not Found[39m
+[15:44:33] [DEV] [[31merror[39m]: [31m[Error]: Route Not Found[39m
+[15:47:52] [DEV] [[31merror[39m]: [31m[Error]: [39m
+[15:47:58] [DEV] [[31merror[39m]: [31m[Error]: [39m
+[15:48:52] [DEV] [[31merror[39m]: [31m[Error]: [39m
+[15:49:51] [DEV] [[31merror[39m]: [31m[Error]: [39m
+[15:49:57] [DEV] [[31merror[39m]: [31m[Error]: [39m
+[15:50:09] [DEV] [[31merror[39m]: [31m[Error]: [39m
+[15:50:47] [DEV] [[31merror[39m]: [31m[Error]: [39m
+[15:51:04] [DEV] [[31merror[39m]: [31m[SequelizeEagerLoadingError]: User is not associated to Block![39m
+[15:56:35] [DEV] [[31merror[39m]: [31m[Error]: Route Not Found[39m
+[15:57:09] [DEV] [[31merror[39m]: [31m[SequelizeValidationError]: {"userId":"2"} is not a valid integer[39m
+[15:58:47] [DEV] [[31merror[39m]: [31m[SequelizeValidationError]: {"userId":"2"} is not a valid integer[39m
+[15:59:21] [DEV] [[31merror[39m]: [31m[Error]: WHERE parameter "id" has invalid "undefined" value[39m
+[16:01:53] [DEV] [[31merror[39m]: [31m[Error]: WHERE parameter "id" has invalid "undefined" value[39m
+[16:02:02] [DEV] [[31merror[39m]: [31m[Error]: WHERE parameter "id" has invalid "undefined" value[39m
+[16:03:46] [DEV] [[31merror[39m]: [31m[TypeError]: User.find is not a function[39m
+[16:05:08] [DEV] [[31merror[39m]: [31m[Error]: WHERE parameter "id" has invalid "undefined" value[39m
+[16:05:50] [DEV] [[31merror[39m]: [31m[SequelizeUniqueConstraintError]: Validation error[39m
+[16:06:01] [DEV] [[31merror[39m]: [31m[SequelizeUniqueConstraintError]: Validation error[39m
+[16:06:51] [DEV] [[31merror[39m]: [31m[SequelizeUniqueConstraintError]: Validation error[39m
+[16:07:56] [DEV] [[31merror[39m]: [31m[Error]: [39m
+[16:09:43] [DEV] [[31merror[39m]: [31m[Error]: Can not block![39m
+[16:09:52] [DEV] [[31merror[39m]: [31m[SequelizeUniqueConstraintError]: Validation error[39m
+[16:13:04] [DEV] [[31merror[39m]: [31m[Error]: WHERE parameter "userId" has invalid "undefined" value[39m

@@ -204,3 +204,69 @@
 [35m[39m
 [14:11:59] [DEV] [[35mhttp[39m]: [35m::1 GET /api/v1/post/get_list_videos 200 593 - 335.459 ms[39m
 [35m[39m
+[15:44:23] [DEV] [[35mhttp[39m]: [35m::1 GET /api/v1/post/get_list_blocks 404 55 - 150.774 ms[39m
+[35m[39m
+[15:44:33] [DEV] [[35mhttp[39m]: [35m::1 GET /api/v1/block/get_list_blocks 404 55 - 139.280 ms[39m
+[35m[39m
+[15:47:52] [DEV] [[35mhttp[39m]: [35m::1 GET /api/v1/block/get_list_blocks 404 41 - 25.927 ms[39m
+[35m[39m
+[15:47:58] [DEV] [[35mhttp[39m]: [35m::1 GET /api/v1/block/get_list_blocks 404 41 - 20.406 ms[39m
+[35m[39m
+[15:48:53] [DEV] [[35mhttp[39m]: [35m::1 GET /api/v1/block/get_list_blocks 404 41 - 26.562 ms[39m
+[35m[39m
+[15:49:51] [DEV] [[35mhttp[39m]: [35m::1 GET /api/v1/block/get_list_blocks 404 41 - 24.175 ms[39m
+[35m[39m
+[15:49:57] [DEV] [[35mhttp[39m]: [35m::1 GET /api/v1/block/get_list_blocks 404 41 - 17.060 ms[39m
+[35m[39m
+[15:50:09] [DEV] [[35mhttp[39m]: [35m::1 GET /api/v1/block/get_list_blocks 404 41 - 13.460 ms[39m
+[35m[39m
+[15:50:47] [DEV] [[35mhttp[39m]: [35m::1 GET /api/v1/block/get_list_blocks 404 41 - 26.589 ms[39m
+[35m[39m
+[15:51:04] [DEV] [[35mhttp[39m]: [35m::1 GET /api/v1/block/get_list_blocks 500 72 - 29.260 ms[39m
+[35m[39m
+[15:53:45] [DEV] [[35mhttp[39m]: [35m::1 GET /api/v1/block/get_list_blocks 200 64 - 96.102 ms[39m
+[35m[39m
+[15:55:05] [DEV] [[35mhttp[39m]: [35m::1 POST /api/v1/block/get_list_blocks 404 168 - 37.446 ms[39m
+[35m[39m
+[15:56:35] [DEV] [[35mhttp[39m]: [35m::1 GET /api/v1/block/set_block/2 404 55 - 177.792 ms[39m
+[35m[39m
+[15:57:09] [DEV] [[35mhttp[39m]: [35m::1 POST /api/v1/block/set_block/2 400 81 - 23.865 ms[39m
+[35m[39m
+[15:58:47] [DEV] [[35mhttp[39m]: [35m::1 POST /api/v1/block/set_block/2 400 81 - 40.692 ms[39m
+[35m[39m
+[15:59:21] [DEV] [[35mhttp[39m]: [35m::1 POST /api/v1/block/set_block/2 500 94 - 27.196 ms[39m
+[35m[39m
+[16:01:53] [DEV] [[35mhttp[39m]: [35m::1 POST /api/v1/block/set_block/2 500 94 - 21.162 ms[39m
+[35m[39m
+[16:02:02] [DEV] [[35mhttp[39m]: [35m::1 POST /api/v1/block/set_block/2 500 94 - 8.304 ms[39m
+[35m[39m
+[16:03:46] [DEV] [[35mhttp[39m]: [35m::1 POST /api/v1/block/set_block/2 500 67 - 26.878 ms[39m
+[35m[39m
+[16:05:08] [DEV] [[35mhttp[39m]: [35m::1 POST /api/v1/block/set_block/2 500 94 - 25.046 ms[39m
+[35m[39m
+[16:05:50] [DEV] [[35mhttp[39m]: [35m::1 POST /api/v1/block/set_block/2 500 56 - 354.090 ms[39m
+[35m[39m
+[16:06:01] [DEV] [[35mhttp[39m]: [35m::1 POST /api/v1/block/set_block/2 500 56 - 409.454 ms[39m
+[35m[39m
+[16:06:51] [DEV] [[35mhttp[39m]: [35m::1 POST /api/v1/block/set_block/2 500 56 - 796.157 ms[39m
+[35m[39m
+[16:07:56] [DEV] [[35mhttp[39m]: [35m::1 POST /api/v1/block/set_block/1 400 40 - 651.903 ms[39m
+[35m[39m
+[16:09:43] [DEV] [[35mhttp[39m]: [35m::1 POST /api/v1/block/set_block/1 400 54 - 835.842 ms[39m
+[35m[39m
+[16:09:52] [DEV] [[35mhttp[39m]: [35m::1 POST /api/v1/block/set_block/2 500 56 - 363.133 ms[39m
+[35m[39m
+[16:10:12] [DEV] [[35mhttp[39m]: [35m::1 POST /api/v1/block/set_block/2 200 148 - 1376.927 ms[39m
+[35m[39m
+[16:11:18] [DEV] [[35mhttp[39m]: [35m::1 POST /api/v1/block/unblock/2 404 162 - 2.042 ms[39m
+[35m[39m
+[16:12:21] [DEV] [[35mhttp[39m]: [35m::1 POST /api/v1/block/unblock/2 404 162 - 10.239 ms[39m
+[35m[39m
+[16:12:23] [DEV] [[35mhttp[39m]: [35m::1 POST /api/v1/block/unblock/2 404 162 - 1.552 ms[39m
+[35m[39m
+[16:12:28] [DEV] [[35mhttp[39m]: [35m::1 POST /api/v1/block/unblock/2 404 162 - 1.066 ms[39m
+[35m[39m
+[16:13:04] [DEV] [[35mhttp[39m]: [35m::1 POST /api/v1/block/unblock/2 500 98 - 33.995 ms[39m
+[35m[39m
+[16:13:39] [DEV] [[35mhttp[39m]: [35m::1 POST /api/v1/block/unblock/2 200 61 - 214.815 ms[39m
+[35m[39m

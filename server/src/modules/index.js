@@ -2,6 +2,7 @@ import express from 'express';
 
 import { adminRouter } from './admin/admin.route.js';
 import { apiKeyRouter } from './api_key/api_key.route.js';
+import { blockRouter } from './block/block.route.js';
 import { NotFoundError } from './core/index.js';
 import { postRouter } from './post/post.route.js';
 import { uploadRouter } from './upload/upload.route.js';
@@ -21,6 +22,8 @@ routers.use(`${Strings.API_PREFIX}/upload`, uploadRouter);
 routers.use(`${Strings.API_PREFIX}/user`, userRouter);
 // 4.Post
 routers.use(`${Strings.API_PREFIX}/post`, postRouter);
+// 5.Block
+routers.use(`${Strings.API_PREFIX}/block`, blockRouter);
 
 // 5.Admin
 routers.use(`${Strings.API_PREFIX}/admin`, adminRouter);
