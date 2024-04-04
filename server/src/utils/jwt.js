@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 
 export const signToken = (userId, deviceId) => {
   const token = jwt.sign({ userId, deviceId }, process.env.JWT_SECRET, {
-    expiresIn: '1h'
+    expiresIn: '30d'
   });
   return token;
 };

@@ -11,7 +11,7 @@ export function ErrorMiddleware(err, req, res, next) {
   err.ec = err.ec ?? err.statusCode;
   err.message = err.message ?? Message.INTERNAL_SERVER_ERROR;
   console.log(err);
-  // console.log(err);
+
   // SequelizeValidationError
   if (err.name === 'SequelizeValidationError') {
     // Only show first error

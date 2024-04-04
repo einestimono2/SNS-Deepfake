@@ -1,5 +1,6 @@
 import { DataTypes } from 'sequelize';
 
+import { Comment } from '../comment/comment.model.js';
 import { User } from '../user/user.model.js';
 
 import { Category } from './models/category.model.js';
@@ -65,3 +66,6 @@ Post.hasMany(Mark, { foreignKey: 'postId', as: 'marks', onDelete: 'CASCADE' });
 Post.hasMany(Report, { foreignKey: 'postId', as: 'reports', onDelete: 'CASCADE' });
 Post.hasMany(PostHistory, { foreignKey: 'postId', as: 'histories', onDelete: 'CASCADE' });
 Post.hasMany(PostView, { foreignKey: 'postId', as: 'views', onDelete: 'CASCADE' });
+Mark.belongsTo(Post, { onDelete: 'CASCADE', foreignKey: 'postId', as: 'post' });
+Feel.belongsTo(Post, { onDelete: 'CASCADE', foreignKey: 'postId', as: 'post' });
+Mark.hasMany(Comment, { onDelete: 'CASCADE', foreignKey: 'markId', as: 'comments' });

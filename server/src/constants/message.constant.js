@@ -72,5 +72,14 @@ export const Message = {
   },
   CODE_NOT_FOUND: {
     msg: 'Code not found!'
+  },
+  TOKEN_IS_INVALID_TRY_AGAIN: {
+    msg: 'Token khong hop le'
+  },
+  TOKEN_IS_EXPIRED_TRY_AGAIN: {
+    msg: 'Token het han!'
+  },
+  NO_ENOUGH_INFORMATION: {
+    msg: 'No enough information!'
   }
 };

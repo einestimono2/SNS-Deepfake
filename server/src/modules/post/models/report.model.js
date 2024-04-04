@@ -19,7 +19,7 @@ export const Report = postgre.define('Report', {
     allowNull: false
   },
   subject: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.STRING,
     allowNull: false
   },
   details: {

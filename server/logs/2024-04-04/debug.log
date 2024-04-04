@@ -1,0 +1,48 @@
+[00:05:02] [DEV] [[31merror[39m]: [31munhandledRejection: notNull Violation: PostImage.postId cannot be null[39m
+[31mSequelizeValidationError: notNull Violation: PostImage.postId cannot be null[39m
+[31m    at InstanceValidator._validate (C:\Users\fptshop\Workspace\SNS-Deepfake\server\node_modules\sequelize\lib\instance-validator.js:50:13)[39m
+[31m    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+[31m    at async InstanceValidator._validateAndRunHooks (C:\Users\fptshop\Workspace\SNS-Deepfake\server\node_modules\sequelize\lib\instance-validator.js:60:7)[39m
+[31m    at async InstanceValidator.validate (C:\Users\fptshop\Workspace\SNS-Deepfake\server\node_modules\sequelize\lib\instance-validator.js:54:12)[39m
+[31m    at async model.save (C:\Users\fptshop\Workspace\SNS-Deepfake\server\node_modules\sequelize\lib\model.js:2426:7)[39m
+[31m    at async PostImage.create (C:\Users\fptshop\Workspace\SNS-Deepfake\server\node_modules\sequelize\lib\model.js:1362:12)[39m
+[00:05:02] [DEV] [[31merror[39m]: [31munhandledRejection: notNull Violation: PostVideo.postId cannot be null[39m
+[31mSequelizeValidationError: notNull Violation: PostVideo.postId cannot be null[39m
+[31m    at InstanceValidator._validate (C:\Users\fptshop\Workspace\SNS-Deepfake\server\node_modules\sequelize\lib\instance-validator.js:50:13)[39m
+[31m    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+[31m    at async InstanceValidator._validateAndRunHooks (C:\Users\fptshop\Workspace\SNS-Deepfake\server\node_modules\sequelize\lib\instance-validator.js:60:7)[39m
+[31m    at async InstanceValidator.validate (C:\Users\fptshop\Workspace\SNS-Deepfake\server\node_modules\sequelize\lib\instance-validator.js:54:12)[39m
+[31m    at async model.save (C:\Users\fptshop\Workspace\SNS-Deepfake\server\node_modules\sequelize\lib\model.js:2426:7)[39m
+[31m    at async PostVideo.create (C:\Users\fptshop\Workspace\SNS-Deepfake\server\node_modules\sequelize\lib\model.js:1362:12)[39m
+[00:09:01] [DEV] [[31merror[39m]: [31munhandledRejection: notNull Violation: PostImage.postId cannot be null[39m
+[31mSequelizeValidationError: notNull Violation: PostImage.postId cannot be null[39m
+[31m    at InstanceValidator._validate (C:\Users\fptshop\Workspace\SNS-Deepfake\server\node_modules\sequelize\lib\instance-validator.js:50:13)[39m
+[31m    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+[31m    at async InstanceValidator._validateAndRunHooks (C:\Users\fptshop\Workspace\SNS-Deepfake\server\node_modules\sequelize\lib\instance-validator.js:60:7)[39m
+[31m    at async InstanceValidator.validate (C:\Users\fptshop\Workspace\SNS-Deepfake\server\node_modules\sequelize\lib\instance-validator.js:54:12)[39m
+[31m    at async model.save (C:\Users\fptshop\Workspace\SNS-Deepfake\server\node_modules\sequelize\lib\model.js:2426:7)[39m
+[31m    at async PostImage.create (C:\Users\fptshop\Workspace\SNS-Deepfake\server\node_modules\sequelize\lib\model.js:1362:12)[39m
+[00:09:01] [DEV] [[31merror[39m]: [31munhandledRejection: notNull Violation: PostVideo.postId cannot be null[39m
+[31mSequelizeValidationError: notNull Violation: PostVideo.postId cannot be null[39m
+[31m    at InstanceValidator._validate (C:\Users\fptshop\Workspace\SNS-Deepfake\server\node_modules\sequelize\lib\instance-validator.js:50:13)[39m
+[31m    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+[31m    at async InstanceValidator._validateAndRunHooks (C:\Users\fptshop\Workspace\SNS-Deepfake\server\node_modules\sequelize\lib\instance-validator.js:60:7)[39m
+[31m    at async InstanceValidator.validate (C:\Users\fptshop\Workspace\SNS-Deepfake\server\node_modules\sequelize\lib\instance-validator.js:54:12)[39m
+[31m    at async model.save (C:\Users\fptshop\Workspace\SNS-Deepfake\server\node_modules\sequelize\lib\model.js:2426:7)[39m
+[31m    at async PostVideo.create (C:\Users\fptshop\Workspace\SNS-Deepfake\server\node_modules\sequelize\lib\model.js:1362:12)[39m
+[00:12:23] [DEV] [[31merror[39m]: [31munhandledRejection: Validation error[39m
+[31mError[39m
+[31m    at Query.run (C:\Users\fptshop\Workspace\SNS-Deepfake\server\node_modules\sequelize\lib\dialects\postgres\query.js:50:25)[39m
+[31m    at C:\Users\fptshop\Workspace\SNS-Deepfake\server\node_modules\sequelize\lib\sequelize.js:315:28[39m
+[31m    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+[31m    at async PostgresQueryInterface.insert (C:\Users\fptshop\Workspace\SNS-Deepfake\server\node_modules\sequelize\lib\dialects\abstract\query-interface.js:308:21)[39m
+[31m    at async model.save (C:\Users\fptshop\Workspace\SNS-Deepfake\server\node_modules\sequelize\lib\model.js:2490:35)[39m
+[31m    at async Post.create (C:\Users\fptshop\Workspace\SNS-Deepfake\server\node_modules\sequelize\lib\model.js:1362:12)[39m
+[09:33:04] [DEV] [[31merror[39m]: [31munhandledRejection: notNull Violation: PostVideo.postId cannot be null[39m
+[31mSequelizeValidationError: notNull Violation: PostVideo.postId cannot be null[39m
+[31m    at InstanceValidator._validate (C:\Users\fptshop\Workspace\SNS-Deepfake\server\node_modules\sequelize\lib\instance-validator.js:50:13)[39m
+[31m    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+[31m    at async InstanceValidator._validateAndRunHooks (C:\Users\fptshop\Workspace\SNS-Deepfake\server\node_modules\sequelize\lib\instance-validator.js:60:7)[39m
+[31m    at async InstanceValidator.validate (C:\Users\fptshop\Workspace\SNS-Deepfake\server\node_modules\sequelize\lib\instance-validator.js:54:12)[39m
+[31m    at async model.save (C:\Users\fptshop\Workspace\SNS-Deepfake\server\node_modules\sequelize\lib\model.js:2426:7)[39m
+[31m    at async PostVideo.create (C:\Users\fptshop\Workspace\SNS-Deepfake\server\node_modules\sequelize\lib\model.js:1362:12)[39m

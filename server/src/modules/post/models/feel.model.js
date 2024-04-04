@@ -33,6 +33,3 @@ export const Feel = postgre.define('Feel', {
   // Code here
   Feel.sync({ alter: true }).then(() => logger.info("Table 'Feel' synced!"));
 })();
-
-// Feel.belongsTo(User, { foreignKey: 'userId', onDelete: 'CASCADE' });
-// Feel.belongsTo(Post, { foreignKey: 'postId', onDelete: 'CASCADE' });
