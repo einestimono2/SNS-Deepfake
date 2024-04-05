@@ -3,9 +3,10 @@ import fs from 'fs';
 import { NotFoundError } from '../core/index.js';
 
 import { Message } from '#constants';
+import { CatchAsyncError } from '#middlewares';
 import { getStandardPath } from '#utils';
 
-export class UploadControllers {
+export class MediaControllers {
   //
   static uploadImages = async (req, res, next) => {
     console.log(req);
@@ -96,4 +97,31 @@ export class UploadControllers {
   //     res.ok();
   //   });
   // };
+
+  static getVideo = CatchAsyncError(async (req, res) => {
+    const filePath = getStandardPath('../../uploads/videos/asdqwv-Wada pura kiya  #shorts #funny.mp4');
+    const { range } = req.headers;
+    if (!range) res.status(400).send('error');
+
+    const videoPath = filePath;
+    const videoSize = fs.statSync(videoPath).size;
+
+    const chunkSize = 10 ** 6;
+    const start = Number(range.replace(/\D/g, ''));
+    const end = Math.min(start + chunkSize, videoSize - 1);
+    const contentLength = end - start + 1;
+    const headers = {
+      'Content-Range': `bytes ${start}-${end}/${videoSize}`,
+      'Accept-Ranges': 'bytes',
+      'Content-Length': contentLength,
+      'Content-Type': 'video/mp4',
+      'Cross-Origin-Resource-Policy': 'cross-origin'
+    };
+
+    res.writeHead(206, headers);
+
+    const videoStream = fs.createReadStream(videoPath, { start, end });
+
+    videoStream.pipe(res);
+  });
 }
