@@ -8,6 +8,7 @@ import { postRouter } from './post/post.route.js';
 import { uploadRouter } from './upload/upload.route.js';
 import { userRouter } from './user/user.route.js';
 
+import { videoRouter } from '##/modules/video/video.route';
 import { Message, Strings } from '#constants';
 import { getStandardPath } from '#utils';
 
@@ -24,7 +25,8 @@ routers.use(`${Strings.API_PREFIX}/user`, userRouter);
 routers.use(`${Strings.API_PREFIX}/post`, postRouter);
 // 5.Block
 routers.use(`${Strings.API_PREFIX}/block`, blockRouter);
-
+// 6. Video
+routers.use(`${Strings.API_PREFIX}/video`, videoRouter);
 // 5.Admin
 routers.use(`${Strings.API_PREFIX}/admin`, adminRouter);
 // #. Check Health - test server

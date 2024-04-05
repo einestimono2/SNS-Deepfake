@@ -1,7 +1,5 @@
 import { DataTypes } from 'sequelize';
 
-import { User } from '../user.model.js';
-
 import { VerifyCodeStatus } from '#constants';
 import { postgre } from '#dbs';
 import { logger } from '#utils';

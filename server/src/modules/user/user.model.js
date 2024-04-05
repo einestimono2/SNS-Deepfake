@@ -23,6 +23,9 @@ export const User = postgre.define('User', {
   avatar: {
     type: DataTypes.STRING
   },
+  coverImage: {
+    type: DataTypes.STRING
+  },
   phone_number: {
     type: DataTypes.STRING
     // allowNull: false
