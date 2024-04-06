@@ -10,6 +10,7 @@ import { mediaRouter } from './media/media.route.js';
 import { postRouter } from './post/post.route.js';
 import { userRouter } from './user/user.route.js';
 
+import { searchRouter } from '##/modules/search/search.route';
 import { Message, Strings } from '#constants';
 import { getStandardPath } from '#utils';
 
@@ -31,6 +32,8 @@ routers.use(`${Strings.API_PREFIX}/block`, blockRouter);
 routers.use(`${Strings.API_PREFIX}/comment`, commentRouter);
 // 7.Friend
 routers.use(`${Strings.API_PREFIX}/friend`, friendRouter);
+// 8.Search
+routers.use(`${Strings.API_PREFIX}/search`, searchRouter);
 // 5.Admin
 routers.use(`${Strings.API_PREFIX}/admin`, adminRouter);
 // #. Check Health - test server

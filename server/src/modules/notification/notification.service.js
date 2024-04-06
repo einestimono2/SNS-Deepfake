@@ -2,6 +2,7 @@ import { Op } from 'sequelize';
 
 import { Block } from '../block/block.model.js';
 import { FriendRequest } from '../friend/components/friend_request.model.js';
+import { Friend } from '../friend/friend.model.js';
 import { Feel } from '../post/models/feel.model.js';
 import { Mark } from '../post/models/mark.model.js';
 import { PostVideo } from '../post/models/post_video.model.js';
@@ -10,7 +11,7 @@ import { User } from '../user/user.model.js';
 
 import { Notification } from './notification.model.js';
 
-import { CategoryType } from '#constants';
+import { CategoryType, NotificationType } from '#constants';
 
 export class NotificationServices {
   static async mapNotification(notification) {
@@ -201,6 +202,44 @@ export class NotificationServices {
     };
   }
 
-  // static async notifyAddPost() {
-  // }
+  // Thông báo liên quan tới việc thêm bài viết mới
+  static async notifyAddPost(postId, authorId) {
+    const post = await Post.findOne({ where: { id: postId } });
+    // Tìm kiếm trong bảng Friend và trả về danh sách bạn bè của tác giả
+    const friends = await Friend.findAll({
+      where: { userId: authorId },
+      include: [{ model: User, as: 'target' }]
+    });
+
+    for (const { target } of friends) {
+      const pushSettings = await this.settingService.getUserPushSettings(target);
+      const receiveNotification = pushSettings.fromFriends;
+      if (receiveNotification) {
+        await Notification.create({
+          type: post.video ? NotificationType.VideoAdded : NotificationType.PostAdded,
+          userId: target.id,
+          targetId: authorId,
+          postId: post.id
+        });
+      }
+    }
+  }
+
+  // Thông báo liên quan tới việc chỉ sửa bài viết
+  static async notifyEditPost(postId, authorId) {
+    const marks = await Mark.findAll({ where: { postId } });
+
+    for (const mark of marks) {
+      if (mark.userId === authorId) {
+        return;
+      }
+      await this.notificationModel.create({
+        type: NotificationType.PostUpdated,
+        userId: mark.userId,
+        targetId: authorId,
+        postId,
+        markId: mark.id
+      });
+    }
+  }
 }
