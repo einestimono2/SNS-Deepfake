@@ -1,5 +1,7 @@
 import { DataTypes } from 'sequelize';
 
+import { User } from '../../user/user.model.js';
+
 import { postgre } from '#dbs';
 import { logger } from '#utils';
 
@@ -18,7 +20,7 @@ export const Mark = postgre.define('Mark', {
     allowNull: false
   },
   type: {
-    type: DataTypes.SMALLINT,
+    type: DataTypes.INTEGER,
     allowNull: false
   },
   editable: {
@@ -32,6 +34,8 @@ export const Mark = postgre.define('Mark', {
 });
 
 (() => {
+  // Mối quan hệ giữa Mark và User
+  Mark.belongsTo(User, { onDelete: 'CASCADE', as: 'user' });
   // Code here
   Mark.sync({ alter: true }).then(() => logger.info("Table 'Mark' synced!"));
 })();

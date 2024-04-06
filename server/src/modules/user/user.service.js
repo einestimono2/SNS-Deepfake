@@ -103,7 +103,7 @@ export class userServices {
     const verifyCode = await VerifyCode.findOne({
       where: {
         status: accountStatus.Inactive,
-        userID: user.id,
+        userId: user.id,
         code,
         expiredAt: { [Op.gt]: dayjs() }
       }

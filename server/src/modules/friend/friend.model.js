@@ -1,5 +1,3 @@
-// models/reaction.model.js
-
 import { DataTypes } from 'sequelize';
 
 import { postgre } from '#dbs';

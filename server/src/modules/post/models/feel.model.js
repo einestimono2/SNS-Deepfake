@@ -2,6 +2,8 @@
 
 import { DataTypes } from 'sequelize';
 
+import { User } from '../../user/user.model.js';
+
 import { postgre } from '#dbs';
 import { logger } from '#utils';
 
@@ -16,7 +18,7 @@ export const Feel = postgre.define('Feel', {
     allowNull: false
   },
   type: {
-    type: DataTypes.SMALLINT,
+    type: DataTypes.INTEGER,
     allowNull: false
   },
   editable: {
@@ -30,6 +32,7 @@ export const Feel = postgre.define('Feel', {
 });
 
 (() => {
+  Feel.belongsTo(User, { onDelete: 'CASCADE', as: 'user' });
   // Code here
   Feel.sync({ alter: true }).then(() => logger.info("Table 'Feel' synced!"));
 })();

@@ -86,3 +86,12 @@ User.hasOne(PushSetting, { foreignKey: 'userId', as: 'pushSettings' });
 // Quan hệ giữa Block và User
 Block.belongsTo(User, { foreignKey: 'userId', as: 'user' });
 Block.belongsTo(User, { foreignKey: 'targetId', as: 'target' });
+
+// Quan hệ giữa Mark và User
+
+// Quan hệ giữa FriendRequest và User
+FriendRequest.belongsTo(User, { foreignKey: 'userId', as: 'user', onDelete: 'CASCADE' });
+
+// Quan hệ giữa Friend và User
+Friend.belongsTo(User, { foreignKey: 'targetId', onDelete: 'CASCADE', as: 'target' });
+Friend.belongsTo(User, { foreignKey: 'userId', onDelete: 'CASCADE', as: 'user' });

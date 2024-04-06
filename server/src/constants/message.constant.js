@@ -87,5 +87,14 @@ export const Message = {
   },
   USED_PASSWORD: {
     msg: 'Password has been used before'
+  },
+  MARK_IS_INVALID: {
+    msg: 'Mark is invalid!'
+  },
+  UNABLE_TO_SENT_FRIEND_REQUEST: {
+    msg: 'Unable to send friend request!'
+  },
+  FRIEND_REQUEST_NOT_FOUND: {
+    msg: 'Friend request not found!'
   }
 };

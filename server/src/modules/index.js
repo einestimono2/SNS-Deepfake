@@ -3,7 +3,9 @@ import express from 'express';
 import { adminRouter } from './admin/admin.route.js';
 import { apiKeyRouter } from './api_key/api_key.route.js';
 import { blockRouter } from './block/block.route.js';
+import { commentRouter } from './comment/comment.route.js';
 import { NotFoundError } from './core/index.js';
+import { friendRouter } from './friend/friend.route.js';
 import { mediaRouter } from './media/media.route.js';
 import { postRouter } from './post/post.route.js';
 import { userRouter } from './user/user.route.js';
@@ -25,6 +27,11 @@ routers.use(`${Strings.API_PREFIX}/post`, postRouter);
 // 5.Block
 routers.use(`${Strings.API_PREFIX}/block`, blockRouter);
 // 6.Admin
+// 6.Comment
+routers.use(`${Strings.API_PREFIX}/comment`, commentRouter);
+// 7.Friend
+routers.use(`${Strings.API_PREFIX}/friend`, friendRouter);
+// 5.Admin
 routers.use(`${Strings.API_PREFIX}/admin`, adminRouter);
 // #. Check Health - test server
 routers.use('/health', (_req, res) => {

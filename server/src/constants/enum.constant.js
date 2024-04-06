@@ -51,3 +51,10 @@ export const FeelType = {
   Kudos: 1,
   Disappointed: 0
 };
+export const CategoryType = {
+  Posts: 0,
+  Friends: 1,
+  Videos: 2,
+  Notifications: 3,
+  Settings: 4
+};
