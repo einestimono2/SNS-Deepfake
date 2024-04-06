@@ -5,7 +5,7 @@ import { DataTypes } from 'sequelize';
 import { postgre } from '#dbs';
 import { logger } from '#utils';
 
-export const PushSetting = postgre.define('PushSetting', {
+export const Setting = postgre.define('Setting', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -64,5 +64,5 @@ export const PushSetting = postgre.define('PushSetting', {
 // PushSetting.belongsTo(User, { foreignKey: 'userId', onDelete: 'CASCADE' });
 (() => {
   // Code here
-  PushSetting.sync({ alter: true }).then(() => logger.info("Table 'PushSetting' synced!"));
+  Setting.sync({ alter: true }).then(() => logger.info("Table 'Setting' synced!"));
 })();

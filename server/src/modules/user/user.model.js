@@ -3,7 +3,7 @@ import { DataTypes } from 'sequelize';
 import { Block } from '../block/block.model.js';
 import { FriendRequest } from '../friend/components/friend_request.model.js';
 import { Friend } from '../friend/friend.model.js';
-import { PushSetting } from '../push_setting/push_setting.model.js';
+import { Setting } from '../setting/setting.model.js';
 
 import { Roles, accountStatus } from '#constants';
 import { postgre } from '#dbs';
@@ -81,7 +81,7 @@ User.hasMany(FriendRequest, { foreignKey: 'targetId', as: 'friendRequested' });
 // friendRequesting :danh sách người dùng gửi yêu cầu kết bạn tới bạn
 User.hasMany(FriendRequest, { foreignKey: 'userId', as: 'friendRequesting' });
 User.hasMany(Friend, { foreignKey: 'userId', as: 'friends' });
-User.hasOne(PushSetting, { foreignKey: 'userId', as: 'pushSettings' });
+User.hasOne(Setting, { foreignKey: 'userId', as: 'pushSettings' });
 
 // Quan hệ giữa Block và User
 Block.belongsTo(User, { foreignKey: 'userId', as: 'user' });

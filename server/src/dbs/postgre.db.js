@@ -27,10 +27,8 @@ class PostgreDatabase {
   }
 
   initConnection() {
-    this.sequelize = new Sequelize({
-      database: postgreConfigs.database,
-      username: postgreConfigs.username,
-      password: postgreConfigs.password,
+    this.sequelize = new Sequelize(postgreConfigs.database, postgreConfigs.username, postgreConfigs.password, {
+      logging: false,
       host: postgreConfigs.host,
       port: postgreConfigs.port,
       dialect: postgreConfigs.dialect,

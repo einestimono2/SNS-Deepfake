@@ -8,6 +8,7 @@ import { NotFoundError } from './core/index.js';
 import { friendRouter } from './friend/friend.route.js';
 import { mediaRouter } from './media/media.route.js';
 import { postRouter } from './post/post.route.js';
+import { settingRouter } from './setting/setting.route.js';
 import { userRouter } from './user/user.route.js';
 
 import { searchRouter } from '##/modules/search/search.route';
@@ -34,6 +35,8 @@ routers.use(`${Strings.API_PREFIX}/comment`, commentRouter);
 routers.use(`${Strings.API_PREFIX}/friend`, friendRouter);
 // 8.Search
 routers.use(`${Strings.API_PREFIX}/search`, searchRouter);
+// 9.Setting
+routers.use(`${Strings.API_PREFIX}/setting`, settingRouter);
 // 5.Admin
 routers.use(`${Strings.API_PREFIX}/admin`, adminRouter);
 // #. Check Health - test server
