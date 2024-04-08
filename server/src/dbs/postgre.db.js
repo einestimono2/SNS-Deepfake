@@ -41,6 +41,25 @@ class PostgreDatabase {
       logQueryParameters: isDevelopment()
     });
   }
+  // initConnection() {
+  //   this.sequelize = new Sequelize({
+  //     database: postgreConfigs.database,
+  //     username: postgreConfigs.username,
+  //     password: postgreConfigs.password,
+  //     // this.sequelize = new Sequelize(postgreConfigs.database, postgreConfigs.username, postgreConfigs.password, {
+  //     //   logging: false,
+  //     host: postgreConfigs.host,
+  //     port: postgreConfigs.port,
+  //     dialect: postgreConfigs.dialect,
+  //     timezone: '+07:00',
+  //     // replication: ,
+  //     pool: {
+  //       max: 22
+  //     },
+  //     typeValidation: true,
+  //     logQueryParameters: isDevelopment()
+  //   });
+  // }
 
   testConnect() {
     this.sequelize

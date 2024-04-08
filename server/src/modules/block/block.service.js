@@ -83,7 +83,7 @@ export class BlockServices {
     return { block };
   }
 
-  // 3:Kiểm tra có được bị Block hay không
+  // 3:Kiểm tra 1 cặp người dùng có block lẫn nhau hay không hay không
   static async isBlock(userId, targetId) {
     const block = await Block.findOne({
       where: {

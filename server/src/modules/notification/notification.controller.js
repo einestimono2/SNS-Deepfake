@@ -1,13 +1,28 @@
-import { CommentServices } from './comment.service.js';
+import { NotificationServices } from './notification.service.js';
 
 import { CatchAsyncError } from '#middlewares';
 // 1--Đăng ký
-export class CommentControllers {
-  static getMarkComment = CatchAsyncError(async (req, res) => {
+export class NotificationControllers {
+  static createNotification = CatchAsyncError(async (req, res) => {
+    await NotificationServices.createNotification(req.body);
+    // res.created({
+    //   data
+    // });
+  });
+
+  static getListNotifications = CatchAsyncError(async (req, res) => {
     const { userId } = req.userPayload;
-    const { postId } = req.params;
-    const data = await CommentServices.getMarkComment(userId, postId, req.body);
-    res.created({
+    const data = await NotificationServices.getListNotifications(userId, req.body);
+    res.ok({
+      data
+    });
+  });
+
+  static checkNewItems = CatchAsyncError(async (req, res) => {
+    const { userId } = req.userPayload;
+    const { lastId, categoryId } = { ...req.body };
+    const data = await NotificationServices.checkNewItems(userId, lastId, categoryId);
+    res.ok({
       data
     });
   });

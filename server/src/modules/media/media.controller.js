@@ -97,7 +97,7 @@ export class MediaControllers {
   //     res.ok();
   //   });
   // };
-
+  // Được thiết kế để xử lý yêu cầu phát video từ một đường dẫn tới tập tin video trong ứng dụng(Streaming)
   static getVideo = CatchAsyncError(async (req, res) => {
     const filePath = getStandardPath('../../uploads/videos/asdqwv-Wada pura kiya  #shorts #funny.mp4');
     const { range } = req.headers;

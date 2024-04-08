@@ -27,7 +27,6 @@ export const Comment = postgre.define('Comment', {
 });
 
 (() => {
-  // Code here
   Comment.sync({ alter: true }).then(() => logger.info("Table 'Comment' synced!"));
 })();
 Comment.belongsTo(Mark, { foreignKey: 'markId', onDelete: 'CASCADE' });

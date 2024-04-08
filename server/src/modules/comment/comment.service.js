@@ -24,7 +24,6 @@ export class CommentServices {
       throw new BadRequestError(Message.CAN_NOT_BLOCK);
     }
     // Lấy danh sách các đánh dấu của bài viết tương ứng của những tác giả không bị mình block và không block mình
-    console.log('hi');
     const marks = await Mark.findAll({
       include: [
         {
@@ -32,12 +31,12 @@ export class CommentServices {
           as: 'user',
           required: true,
           include: [
-            { model: Block, as: 'blocked', where: { userId } },
-            { model: Block, as: 'blocking', where: { targetId: userId } }
+            { model: Block, as: 'blocked', where: { userId }, required: false },
+            { model: Block, as: 'blocking', where: { targetId: userId }, required: false }
           ]
         }
       ],
-      where: { postId, '$user.blocked.id$': null, '$user.blocking.id$': null },
+      where: { postId },
       order: [['id', 'DESC']],
       offset: index,
       limit: count
@@ -64,7 +63,7 @@ export class CommentServices {
           order: [['id', 'ASC']]
         });
         mark.comments = comments;
-        return mark;
+        // return mark;
       })
     );
     return markedComments.map((mark) => ({
@@ -89,14 +88,14 @@ export class CommentServices {
     }));
   }
 
+  // Thêm mới Mark và Comment
   static async setMarkComment(userId, postId, body) {
     const user = await User.findOne({
       where: { id: userId }
     });
-    // console.log(user);
     const { content, index, count, markId, type } = { ...body };
     if (markId) {
-      // Tìm kiếm mark và kèm thông tim bài post mà đánh giá này thuộc về
+      // Trả về  mark và thông tin bài post mà mark này thuộc về
       const mark = await Mark.findOne({
         where: { id: markId },
         include: [{ model: Post, as: 'post' }]
@@ -134,6 +133,7 @@ export class CommentServices {
       //   });
       // }
     } else {
+      // Tạo Mark
       const post = await Post.findOne({ where: { id: postId } });
       if (!post) {
         throw new BadRequestError(Message.POST_NOT_FOUND);
@@ -143,6 +143,7 @@ export class CommentServices {
         throw new BadRequestError(Message.CAN_NOT_BLOCK);
       }
       let checkReduceCoins = false;
+      // Check ng dùng đã có mark trên bài post này hay chưa
       let mark = await Mark.findOne({ where: { postId, userId } });
       console.log(mark);
       if (mark) {

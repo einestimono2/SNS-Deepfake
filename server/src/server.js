@@ -1,9 +1,19 @@
 import { createServer } from 'http';
 
+import { initializeApp, applicationDefault } from 'firebase-admin/app';
+
+// import { serviceAccount } from '../firebase.json';
+
 import { app } from '##/app';
 import { SocketServer } from '##/socket';
 import { app as appConfig } from '#configs';
 import { logger } from '#utils';
+
+//! Firebase cloud messaging
+initializeApp({
+  credential: applicationDefault(),
+  projectId: 'sns-deepfake'
+});
 
 const PORT = appConfig.port;
 const httpServer = createServer(app);

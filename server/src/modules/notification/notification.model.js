@@ -35,7 +35,7 @@ export const Notification = postgre.define('Notification', {
     allowNull: true
   },
   type: {
-    type: DataTypes.SMALLINT
+    type: DataTypes.INTEGER
   },
   read: {
     type: DataTypes.BOOLEAN,
@@ -50,12 +50,11 @@ export const Notification = postgre.define('Notification', {
   }
 });
 (() => {
-  // Code here
   // Định nghĩa mối quan hệ
-  Notification.belongsTo(User, { foreignKey: 'userId', onDelete: 'CASCADE' });
+  Notification.belongsTo(User, { foreignKey: 'userId', as: 'user', onDelete: 'CASCADE' });
   Notification.belongsTo(User, { foreignKey: 'targetId', as: 'target', onDelete: 'CASCADE' });
-  Notification.belongsTo(Post, { foreignKey: 'postId', onDelete: 'CASCADE' });
-  Notification.belongsTo(Mark, { foreignKey: 'markId', onDelete: 'CASCADE' });
-  Notification.belongsTo(Feel, { foreignKey: 'feelId', onDelete: 'CASCADE' });
+  Notification.belongsTo(Post, { foreignKey: 'postId', as: 'post', onDelete: 'CASCADE' });
+  Notification.belongsTo(Mark, { foreignKey: 'markId', as: 'mark', onDelete: 'CASCADE' });
+  Notification.belongsTo(Feel, { foreignKey: 'feelId', as: 'feel', onDelete: 'CASCADE' });
   Notification.sync({ alter: true }).then(() => logger.info("Table 'Notification' synced!"));
 })();

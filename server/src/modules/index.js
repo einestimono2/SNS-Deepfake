@@ -7,11 +7,12 @@ import { commentRouter } from './comment/comment.route.js';
 import { NotFoundError } from './core/index.js';
 import { friendRouter } from './friend/friend.route.js';
 import { mediaRouter } from './media/media.route.js';
+import { notificationRouter } from './notification/notification.router.js';
 import { postRouter } from './post/post.route.js';
+import { searchRouter } from './search/search.route.js';
 import { settingRouter } from './setting/setting.route.js';
 import { userRouter } from './user/user.route.js';
 
-import { searchRouter } from '##/modules/search/search.route';
 import { Message, Strings } from '#constants';
 import { getStandardPath } from '#utils';
 
@@ -37,6 +38,8 @@ routers.use(`${Strings.API_PREFIX}/friend`, friendRouter);
 routers.use(`${Strings.API_PREFIX}/search`, searchRouter);
 // 9.Setting
 routers.use(`${Strings.API_PREFIX}/setting`, settingRouter);
+// 10.Notification
+routers.use(`${Strings.API_PREFIX}/notification`, notificationRouter);
 // 5.Admin
 routers.use(`${Strings.API_PREFIX}/admin`, adminRouter);
 // #. Check Health - test server
