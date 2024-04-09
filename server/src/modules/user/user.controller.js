@@ -5,8 +5,8 @@ import { CatchAsyncError } from '#middlewares';
 // 1--Đăng ký
 export class UserControllers {
   static register = CatchAsyncError(async (req, res) => {
-    const { password, email } = req.body;
-    await userServices.signup(email, password);
+    const { phoneNumber, uuid, role, password, email } = req.body;
+    await userServices.signup(phoneNumber, email, password, role, uuid);
     res.created({
       message: 'Mã code đã được gửi về mail của bạn'
     });
@@ -24,7 +24,7 @@ export class UserControllers {
   static getVerifyCode = CatchAsyncError(async (req, res) => {
     const { email } = req.body;
     const verifyCode = await userServices.getVerifyCode(email);
-    res.ok({ message: 'Lấy mã thành công' }, { data: verifyCode });
+    res.ok({ message: 'Lấy mã thành công', data: verifyCode });
     console.log(res.data);
   });
 

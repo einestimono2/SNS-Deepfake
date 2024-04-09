@@ -20,9 +20,9 @@ export const EnvTypes = {
 };
 
 export const Roles = {
-  Parent: 'parent',
-  Children: 'children',
-  Admin: 'admin'
+  Parent: '1',
+  Children: '0',
+  Admin: '2'
 };
 export const accountStatus = {
   Banned: -3,

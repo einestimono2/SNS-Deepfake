@@ -11,7 +11,7 @@ import { PasswordHistory } from './models/password_history.model.js';
 import { VerifyCode } from './models/verify_code.model.js';
 import { User } from './user.model.js';
 
-import { accountStatus, Message } from '#constants';
+import { accountStatus, Message, Roles } from '#constants';
 // const catchAsyncError = require("../middleware/catchAsyncErrors");
 import { generateVerifyCode, signToken } from '#utils';
 
@@ -27,7 +27,7 @@ export class userServices {
     const code = generateVerifyCode(6);
     // Thêm dữ liệu vào bảng VerifyCode
     const verifyCode = await VerifyCode.create({
-      userID: user.id,
+      userid: user.id,
       code,
       expiredAt: dayjs().add(30, 'minutes').toDate()
     });
@@ -54,6 +54,11 @@ export class userServices {
     if (await this.checkEmaiExit(email)) {
       throw new BadRequestError(Message.EMAIL_ALREADY_EXISTS);
     }
+    // Kiểm tra sdt đã được đăng ký lần nào hay chưa?
+    const exitPhoneNumber = await User.findOne({ where: { phoneNumber } });
+    if (exitPhoneNumber) {
+      throw new BadRequestError(Message.PHONE_NUMBER_IS_INVALID);
+    }
     // Kiểm tra password có trùng email hay không?
     if (password.indexOf(email) !== -1) {
       throw new BadRequestError(Message.USER_IS_INVALID);
@@ -61,12 +66,12 @@ export class userServices {
     // Tạo tài khoản người dùng
     await User.create({
       password: await this.hashPassword(password),
-      phone_number: phoneNumber,
       email,
       role,
       uuid,
       status: accountStatus.Inactive,
-      coins: 50
+      deletedAt: new Date(),
+      coins: 100
     });
     // Thực hiện gửi mã xác thực về Email
     await this.getVerifyCode(email);
@@ -83,11 +88,14 @@ export class userServices {
       where: { email },
       withDeleted: true
     });
-    if (!user || !(await this.comparePassword(password, user.password))) {
+    const deviceToken = await DevToken.findOne({ where: { userId: user.id } });
+    if (!user || !(await this.comparePassword(password, user.password)) || !user.status === accountStatus.Active) {
       throw new BadRequestError(Message.USER_NOT_FOUND);
     }
     user.token = signToken(user.id, uuid);
+    deviceToken.token = user.toke;
     await user.save();
+    await deviceToken.save();
     return {
       user
     };
@@ -99,6 +107,9 @@ export class userServices {
         email
       }
     });
+    if (!user) {
+      throw new BadRequestError(Message.USER_NOT_FOUND);
+    }
     // Kiểm tra mã code với thời gian hết hạn phải sau thời gian hiện tại
     const verifyCode = await VerifyCode.findOne({
       where: {
@@ -112,7 +123,8 @@ export class userServices {
     if (!verifyCode) {
       throw new BadRequestError(Message.CODE_NOT_FOUND);
     }
-    verifyCode.status = accountStatus.Inactive;
+    // Đã xác thực xong thì set lại là Inactive
+    // verifyCode.status = accountStatus.Inactive;
     await verifyCode.save();
     return verifyCode;
   }
@@ -122,17 +134,21 @@ export class userServices {
     const verifyCode = await this.verifyCode(email, code);
     const user = await User.findOne({
       where: {
-        id: verifyCode.userID
+        id: verifyCode.userId
       }
     });
+    if (!user) {
+      throw new BadRequestError(Message.USER_NOT_FOUND);
+    }
     // Kiểm tra nếu role là bố mẹ thì tạo dữ liệu cho Bảng Family
-    if (user.role === 'parent') {
+    if (user.role === Roles.Parent) {
       const family = await Family.create();
       user.family_id = family.id;
       await user.save();
     }
+    // Pending là trạng thái tk cần thêm avatar
     if (user.status === accountStatus.Inactive) {
-      user.status = user.username ? accountStatus.Inactive : accountStatus.Pending;
+      user.status = user.username ? accountStatus.Active : accountStatus.Pending;
       await user.save();
     }
     return {

@@ -2,7 +2,7 @@ import { Router } from 'express';
 
 import { UserControllers } from './user.controller.js';
 
-import { isAuthenticated } from '##/middlewares/auth.middleware';
+import { isAuthenticated } from '#middlewares';
 
 const router = Router();
 router.post('/register', UserControllers.register);

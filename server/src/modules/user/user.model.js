@@ -17,7 +17,7 @@ export const User = postgre.define('User', {
     autoIncrement: true
   },
   role: {
-    type: DataTypes.STRING,
+    type: DataTypes.INTEGER,
     default: Roles.Parent
   },
   avatar: {
@@ -26,7 +26,7 @@ export const User = postgre.define('User', {
   coverImage: {
     type: DataTypes.STRING
   },
-  phone_number: {
+  phoneNumber: {
     type: DataTypes.STRING
     // allowNull: false
   },
@@ -50,9 +50,13 @@ export const User = postgre.define('User', {
     default: accountStatus.Pending
   },
   coins: {
-    type: DataTypes.STRING
+    type: DataTypes.INTEGER
   },
   lastActive: {
+    type: DataTypes.DATE,
+    allowNull: true
+  },
+  deletedAt: {
     type: DataTypes.DATE,
     allowNull: true
   }

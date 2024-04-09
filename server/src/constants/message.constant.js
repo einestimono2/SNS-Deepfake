@@ -46,6 +46,12 @@ export const Message = {
   PATH_EMPTY: {
     msg: "Param 'path' can not be empty!"
   },
+  PHONE_NUMBER_IS_INVALID: {
+    msg: 'Phone number is invalid!'
+  },
+  EMAIL_ALREADY_EXISTS: {
+    msg: ' Email already exist!'
+  },
   FILE_NOT_FOUND: {
     msg: 'File does not exist!'
   },
