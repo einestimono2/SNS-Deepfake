@@ -25,8 +25,6 @@ export const VerifyCode = postgre.define('VerifyCode', {
   }
 });
 
-// VerifyCode.belongsTo(User, { foreignKey: 'userId', onDelete: 'CASCADE' });
 (() => {
-  // Code here
   VerifyCode.sync({ alter: true }).then(() => logger.info("Table 'VerifyCode' synced!"));
 })();

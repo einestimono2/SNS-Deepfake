@@ -102,5 +102,20 @@ export const Message = {
   },
   FRIEND_REQUEST_NOT_FOUND: {
     msg: 'Friend request not found!'
+  },
+  CONVERSATION_MEMBERS_INVALID: {
+    msg: 'Conversation must have at least 2 members!'
+  },
+  CONVERSATION_NOT_FOUND: {
+    msg: 'Conversation not found!'
+  },
+  ID_EMPTY: {
+    msg: 'ID empty!'
+  },
+  PAGE_INVALID: {
+    msg: 'Invalid page! (must >= 1)'
+  },
+  PAGE_SIZE_INVALID: {
+    msg: 'Invalid size! (must >= 1)'
   }
 };

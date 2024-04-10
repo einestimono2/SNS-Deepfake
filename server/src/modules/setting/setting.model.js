@@ -1,5 +1,3 @@
-// models/reaction.model.js
-
 import { DataTypes } from 'sequelize';
 
 import { postgre } from '#dbs';
@@ -60,9 +58,6 @@ export const Setting = postgre.define('Setting', {
   }
 });
 
-// Định nghĩa các mối quan hệ
-// PushSetting.belongsTo(User, { foreignKey: 'userId', onDelete: 'CASCADE' });
 (() => {
-  // Code here
   Setting.sync({ alter: true }).then(() => logger.info("Table 'Setting' synced!"));
 })();

@@ -2,8 +2,7 @@ import bcryptjs from 'bcryptjs';
 import dayjs from 'dayjs';
 import { Op } from 'sequelize';
 
-// import { BadRequestError, Family } from '#modules';
-import { BadRequestError } from '../core/index.js';
+import { BadRequestError, NotFoundError } from '../core/index.js';
 import { Family } from '../family/family.model.js';
 
 import { DevToken } from './models/device_token.model.js';
@@ -12,7 +11,6 @@ import { VerifyCode } from './models/verify_code.model.js';
 import { User } from './user.model.js';
 
 import { accountStatus, Message, Roles } from '#constants';
-// const catchAsyncError = require("../middleware/catchAsyncErrors");
 import { generateVerifyCode, signToken } from '#utils';
 
 export class userServices {
@@ -27,7 +25,7 @@ export class userServices {
     const code = generateVerifyCode(6);
     // Thêm dữ liệu vào bảng VerifyCode
     const verifyCode = await VerifyCode.create({
-      userid: user.id,
+      userId: user.id,
       code,
       expiredAt: dayjs().add(30, 'minutes').toDate()
     });
@@ -96,6 +94,7 @@ export class userServices {
     deviceToken.token = user.toke;
     await user.save();
     await deviceToken.save();
+
     return {
       user
     };
@@ -108,8 +107,9 @@ export class userServices {
       }
     });
     if (!user) {
-      throw new BadRequestError(Message.USER_NOT_FOUND);
+      throw new NotFoundError(Message.USER_NOT_FOUND);
     }
+
     // Kiểm tra mã code với thời gian hết hạn phải sau thời gian hiện tại
     const verifyCode = await VerifyCode.findOne({
       where: {
@@ -119,38 +119,44 @@ export class userServices {
         expiredAt: { [Op.gt]: dayjs() }
       }
     });
-    // console.log(verifyCode);
+
     if (!verifyCode) {
       throw new BadRequestError(Message.CODE_NOT_FOUND);
     }
+
     // Đã xác thực xong thì set lại là Inactive
     // verifyCode.status = accountStatus.Inactive;
     await verifyCode.save();
+
     return verifyCode;
   }
 
   // 4--- Kiểm tra mã xác thực
   static async checkVerifyCode(code, email) {
     const verifyCode = await this.verifyCode(email, code);
+
     const user = await User.findOne({
       where: {
         id: verifyCode.userId
       }
     });
     if (!user) {
-      throw new BadRequestError(Message.USER_NOT_FOUND);
+      throw new NotFoundError(Message.USER_NOT_FOUND);
     }
+
     // Kiểm tra nếu role là bố mẹ thì tạo dữ liệu cho Bảng Family
     if (user.role === Roles.Parent) {
       const family = await Family.create();
       user.family_id = family.id;
       await user.save();
     }
+
     // Pending là trạng thái tk cần thêm avatar
     if (user.status === accountStatus.Inactive) {
       user.status = user.username ? accountStatus.Active : accountStatus.Pending;
       await user.save();
     }
+
     return {
       id: user.id,
       active: user.status
@@ -210,7 +216,7 @@ export class userServices {
       role: userInfo.role,
       username: userInfo.username,
       avatar: userInfo.avatar,
-      phoneNumber: userInfo.phone_number,
+      phoneNumber: userInfo.phoneNumber,
       coverImage: userInfo.coverImage,
       // adress: FamilyInfo.address,
       // name: FamilyInfo.name,

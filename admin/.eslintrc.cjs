@@ -9,11 +9,12 @@ module.exports = {
     'plugin:react-hooks/recommended',
     'plugin:jsx-a11y/recommended',
     'plugin:prettier/recommended',
+    'plugin:@tanstack/eslint-plugin-query/recommended',
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
   settings: { react: { version: '18.2' } },
-  plugins: ['react', 'react-refresh', 'react-hooks'],
+  plugins: ['react', 'react-refresh', 'react-hooks', '@tanstack/query'],
   rules: {
     'import/extensions': 'off',
     'import/export': 'off',
@@ -28,7 +29,6 @@ module.exports = {
       },
     ],
     'import/prefer-default-export': 'off',
-
     'no-console': 'off',
     'no-underscore-dangle': 'off',
     'prettier/prettier': [

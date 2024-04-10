@@ -1,6 +1,7 @@
 import { PostServices } from './post.service.js';
 
 import { CatchAsyncError } from '#middlewares';
+
 // 1--Đăng ký
 export class PostControllers {
   static addPost = CatchAsyncError(async (req, res) => {

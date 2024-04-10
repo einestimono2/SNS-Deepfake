@@ -5,6 +5,7 @@ import express from 'express';
 import helmet from 'helmet';
 import morgan from 'morgan';
 
+import { initializeFirebaseAdmin } from '#configs';
 import { postgreDb } from '#dbs';
 import { ErrorMiddleware } from '#middlewares';
 import { routers } from '#modules';
@@ -20,6 +21,7 @@ verifyEnvironmentVariables();
 uploadCleaningSchedule.start();
 
 //! Khởi tạo
+initializeFirebaseAdmin();
 const app = express();
 
 //! Middlewares

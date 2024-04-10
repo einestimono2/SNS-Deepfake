@@ -28,14 +28,17 @@ axiosClient.interceptors.response.use(
     if (response?.data) {
       return response.data;
     }
+
     return response;
   },
 
   async (error) => {
     // const originalRequest = error.config;
-    if (!error.response) {
-      toast.error(error.message);
-      console.error('Unknown error:', error.message);
+
+    const message = error.response?.data?.message || error.message;
+    if (message) {
+      toast.error(message);
+      console.error('Unknown error:', error);
     }
     // else if (error.response.status === 401) {
     //   try {
@@ -59,7 +62,7 @@ axiosClient.interceptors.response.use(
     //   }
     // }
 
-    return Promise.reject(error.response.data);
+    return Promise.reject(error);
   },
 );
 

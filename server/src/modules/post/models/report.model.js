@@ -36,6 +36,5 @@ export const Report = postgre.define('Report', {
 });
 
 (() => {
-  // Code here
   Report.sync({ alter: true }).then(() => logger.info("Table 'Report' synced!"));
 })();

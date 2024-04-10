@@ -18,6 +18,7 @@ export class CommentServices {
     if (!post) {
       throw new BadRequestError(Message.POST_NOT_FOUND);
     }
+
     // Kiểm tra bạn có bị chủ bài viết block hay không?
     const isUserBlocked = await BlockServices.isBlock(userId, post.authorId);
     if (isUserBlocked) {

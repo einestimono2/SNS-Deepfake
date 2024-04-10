@@ -36,6 +36,7 @@ export const Mark = postgre.define('Mark', {
 (() => {
   // Mối quan hệ giữa Mark và User
   Mark.belongsTo(User, { onDelete: 'CASCADE', as: 'user' });
-  // Code here
+
+  // Sync
   Mark.sync({ alter: true }).then(() => logger.info("Table 'Mark' synced!"));
 })();

@@ -20,6 +20,7 @@
     "production": "yarn build && node ./build/src/server.js",
     "dev": "nodemon --exec babel-node ./src/server.js",
     "start": "node build/src/server.js",
+    "seed": "node ./src/seeders/index.js",
     "prepare": "cd .. && husky"
   },
   "dependencies": {
@@ -52,6 +53,7 @@
     "@babel/node": "^7.23.9",
     "@babel/plugin-transform-runtime": "^7.24.3",
     "@babel/preset-env": "^7.24.3",
+    "@faker-js/faker": "^8.4.1",
     "babel-jest": "^29.7.0",
     "babel-plugin-module-resolver": "^5.0.0",
     "eslint": "^7.32.0 || ^8.2.0",

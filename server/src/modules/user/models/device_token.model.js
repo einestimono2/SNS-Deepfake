@@ -19,9 +19,7 @@ export const DevToken = postgre.define('DevToken', {
     type: DataTypes.STRING
   }
 });
+
 (() => {
-  // Code here
   DevToken.sync({ alter: true }).then(() => logger.info("Table 'DevToken' synced!"));
 })();
-// Định nghĩa mối quan hệ
-// DevToken.belongsTo(User, { foreignKey: 'userId', onDelete: 'CASCADE' });

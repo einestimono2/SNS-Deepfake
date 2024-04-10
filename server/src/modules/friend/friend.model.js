@@ -17,18 +17,6 @@ export const Friend = postgre.define('Friend', {
   }
 });
 
-// Định nghĩa các mối quan hệ
-// Friend.belongsTo(User, {
-//   foreignKey: 'targetId',
-//   as: 'target',
-//   onDelete: 'CASCADE'
-// });
-// Friend.belongsTo(User, {
-//   foreignKey: 'userId',
-//   as: 'user',
-//   onDelete: 'CASCADE'
-// });
 (() => {
-  // Code here
   Friend.sync({ alter: true }).then(() => logger.info("Table 'Friend' synced!"));
 })();

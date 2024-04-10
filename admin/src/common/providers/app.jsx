@@ -1,8 +1,9 @@
-import { Button } from 'antd';
+import { QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { Button, ConfigProvider } from 'antd';
 import React from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
-import { QueryClientProvider } from 'react-query';
-import { ReactQueryDevtools } from 'react-query/devtools';
+import { HelmetProvider } from 'react-helmet-async';
 import { BrowserRouter } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 
@@ -30,15 +31,28 @@ export function AppProvider({ children }) {
       }
     >
       <ErrorBoundary FallbackComponent={ErrorFallback}>
-        {/* <HelmetProvider> */}
-        <QueryClientProvider client={queryClient}>
-          {import.meta.env.NODE_ENV !== 'test' && <ReactQueryDevtools />}
-          {/* <AuthProvider> */}
-          <BrowserRouter>{children}</BrowserRouter>
-          {/* </AuthProvider> */}
-          <ToastContainer theme="colored" newestOnTop />
-        </QueryClientProvider>
-        {/* </HelmetProvider> */}
+        <HelmetProvider>
+          <QueryClientProvider client={queryClient}>
+            {/* Default: ReactQueryDevtools are only included in NODE_ENV = 'development' */}
+            <ReactQueryDevtools />
+
+            {/* Global configs for antd */}
+            <ConfigProvider
+              theme={{
+                token: {
+                  colorPrimary: '#1C7B34',
+                },
+              }}
+            >
+              {/* <AuthProvider> */}
+              <BrowserRouter>{children}</BrowserRouter>
+              {/* </AuthProvider> */}
+            </ConfigProvider>
+
+            {/* Toast for notification */}
+            <ToastContainer theme="colored" newestOnTop />
+          </QueryClientProvider>
+        </HelmetProvider>
       </ErrorBoundary>
     </React.Suspense>
   );

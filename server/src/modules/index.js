@@ -3,6 +3,8 @@ import express from 'express';
 import { adminRouter } from './admin/admin.route.js';
 import { apiKeyRouter } from './api_key/api_key.route.js';
 import { blockRouter } from './block/block.route.js';
+import { conversationRouter } from './chat/conversation/conversation.route.js';
+import { messageRouter } from './chat/message/message.route.js';
 import { commentRouter } from './comment/comment.route.js';
 import { NotFoundError } from './core/index.js';
 import { friendRouter } from './friend/friend.route.js';
@@ -19,29 +21,34 @@ import { getStandardPath } from '#utils';
 export const routers = express.Router();
 
 // ----- List routes -----
+
 // 1. API Key
 routers.use(`${Strings.API_PREFIX}/apikey`, apiKeyRouter);
 // 2. Manage images & videos
 routers.use(`${Strings.API_PREFIX}/media`, mediaRouter);
 // 3. User
 routers.use(`${Strings.API_PREFIX}/user`, userRouter);
-// 4.Post
+// 4. Post
 routers.use(`${Strings.API_PREFIX}/post`, postRouter);
-// 5.Block
+// 5. Block
 routers.use(`${Strings.API_PREFIX}/block`, blockRouter);
-// 6.Admin
-// 6.Comment
+// 6. Comment
 routers.use(`${Strings.API_PREFIX}/comment`, commentRouter);
-// 7.Friend
+// 7. Friend
 routers.use(`${Strings.API_PREFIX}/friend`, friendRouter);
-// 8.Search
+// 8. Search
 routers.use(`${Strings.API_PREFIX}/search`, searchRouter);
-// 9.Setting
+// 9. Setting
 routers.use(`${Strings.API_PREFIX}/setting`, settingRouter);
-// 10.Notification
+// 10. Notification
 routers.use(`${Strings.API_PREFIX}/notification`, notificationRouter);
-// 5.Admin
+
+// 11. Admin
 routers.use(`${Strings.API_PREFIX}/admin`, adminRouter);
+// 12. Chat
+routers.use(`${Strings.API_PREFIX}/conversation`, conversationRouter);
+routers.use(`${Strings.API_PREFIX}/message`, messageRouter);
+
 // #. Check Health - test server
 routers.use('/health', (_req, res) => {
   res.ok({
@@ -62,7 +69,6 @@ routers.use('/resources', express.static(getStandardPath('../../uploads')));
 
 //! Unknown route
 routers.get('*', (_req, _res, next) => {
-  console.log(_req);
   next(new NotFoundError(Message.ROUTE_NOT_FOUND.msg));
 });
 

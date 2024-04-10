@@ -71,7 +71,6 @@ export const User = postgre.define('User', {
 });
 
 (() => {
-  // Code here
   User.sync({ alter: true }).then(() => logger.info("Table 'User' synced!"));
 })();
 

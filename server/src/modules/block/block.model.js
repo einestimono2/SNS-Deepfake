@@ -18,17 +18,5 @@ export const Block = postgre.define('Block', {
 });
 
 (() => {
-  // Code here
   Block.sync({ alter: true }).then(() => logger.info("Table 'Block' synced!"));
 })();
-// Định nghĩa các mối quan hệ
-// Block.belongsTo(User, {
-//   foreignKey: 'targetId',
-//   as: 'target',
-//   onDelete: 'CASCADE'
-// });
-// Block.belongsTo(User, {
-//   foreignKey: 'userId',
-//   as: 'user',
-//   onDelete: 'CASCADE'
-// });

@@ -21,6 +21,5 @@ export const PostVideo = postgre.define('PostVideo', {
 });
 
 (() => {
-  // Code here
   PostVideo.sync({ alter: true }).then(() => logger.info("Table 'PostVideo' synced!"));
 })();

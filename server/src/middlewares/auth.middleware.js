@@ -33,7 +33,7 @@ export const isAuthenticated = CatchAsyncError(async (req, res, next) => {
   // payload.theater = (await ManagerModel.findById(payload.id))?.theater;
   // }
 
-  req.userPayload = payload;
+  req.userPayload = payload; // payload: { userId, deviceId }
   req.accessToken = accessToken;
 
   next();

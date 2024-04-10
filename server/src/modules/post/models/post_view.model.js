@@ -23,10 +23,6 @@ export const PostView = postgre.define('PostView', {
   }
 });
 
-// Mô tả mối quan hệ với User và Post
-// PostView.belongsTo(User, { foreignKey: 'userId', onDelete: 'CASCADE' });
-// PostView.belongsTo(Post, { foreignKey: 'postId', onDelete: 'CASCADE' });
 (() => {
-  // Code here
   PostView.sync({ alter: true }).then(() => logger.info("Table 'PostView' synced!"));
 })();

@@ -1,4 +1,3 @@
-// models/reaction.model.js
 import { DataTypes } from 'sequelize';
 
 import { postgre } from '#dbs';
@@ -27,7 +26,7 @@ export const Family = postgre.define('Family', {
     type: DataTypes.DATE
   }
 });
+
 (() => {
-  // Code here
   Family.sync({ alter: true }).then(() => logger.info("Table 'Family' synced!"));
 })();

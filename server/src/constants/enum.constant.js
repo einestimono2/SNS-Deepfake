@@ -24,6 +24,7 @@ export const Roles = {
   Children: '0',
   Admin: '2'
 };
+
 export const accountStatus = {
   Banned: -3,
   Deactivated: -2,
@@ -31,6 +32,7 @@ export const accountStatus = {
   Inactive: 0,
   Active: 1
 };
+
 export const costs = {
   createPost: 10,
   editPost: 10,
@@ -43,14 +45,17 @@ export const VerifyCodeStatus = {
   Inactive: 0,
   Active: 1
 };
+
 export const MarkType = {
   Trust: 1,
   Fake: 0
 };
+
 export const FeelType = {
   Kudos: 1,
   Disappointed: 0
 };
+
 export const CategoryType = {
   Posts: 0,
   Friends: 1,
@@ -58,6 +63,7 @@ export const CategoryType = {
   Notifications: 3,
   Settings: 4
 };
+
 export const NotificationType = {
   FriendRequest: 1,
   FriendAccepted: 2,
@@ -69,4 +75,17 @@ export const NotificationType = {
   VideoAdded: 8,
   PostCommented: 9,
   PlusCoins: 10
+};
+
+export const ConversationType = {
+  Single: 'single',
+  Group: 'group'
+};
+
+export const MessageType = {
+  System: 'system',
+  Text: 'text',
+  Media: 'media',
+  Document: 'document',
+  Link: 'link'
 };

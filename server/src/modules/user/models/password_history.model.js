@@ -18,6 +18,7 @@ export const PasswordHistory = postgre.define('PasswordHistory', {
     allowNull: false
   }
 });
+
 (() => {
   // Code here
   PasswordHistory.sync({ alter: true }).then(() => logger.info("Table 'PasswordHistory' synced!"));
