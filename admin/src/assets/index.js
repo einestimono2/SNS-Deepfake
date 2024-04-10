@@ -1,6 +1,6 @@
-const ERROR_IMAGE = './images/error.jpg';
-const NO_IMAGE = './images/noimage.jpg';
-const PLACEHOLDER_IMAGE = './images/placeholder.png';
+const ERROR_IMAGE = 'src/assets/images/error.jpg';
+const NO_IMAGE = 'src/assets/images/noimage.jpg';
+const PLACEHOLDER_IMAGE = 'src/assets/images/placeholder.png';
 
 const COLOR_NO_BACKGROUND_LOGO = 'src/assets/logos/color-no-background.png';
 
