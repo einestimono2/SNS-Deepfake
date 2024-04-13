@@ -3,6 +3,7 @@ import { DataTypes } from 'sequelize';
 import { Block } from '../block/block.model.js';
 import { FriendRequest } from '../friend/components/friend_request.model.js';
 import { Friend } from '../friend/friend.model.js';
+import { Group } from '../group/group/group.model.js';
 import { Setting } from '../setting/setting.model.js';
 
 import { Roles, accountStatus } from '#constants';
@@ -98,3 +99,7 @@ FriendRequest.belongsTo(User, { foreignKey: 'userId', as: 'user', onDelete: 'CAS
 // Quan hệ giữa Friend và User
 Friend.belongsTo(User, { foreignKey: 'targetId', onDelete: 'CASCADE', as: 'target' });
 Friend.belongsTo(User, { foreignKey: 'userId', onDelete: 'CASCADE', as: 'user' });
+
+// Quan hệ giữa User và Group
+// User.belongsTo(Group, { foreignKey: 'groupId', onDelete: 'CASCADE', as: 'group' });
+// Group.hasMany(User, { foreignKey: 'userId', onDelete: 'CASCADE', as: 'user' });

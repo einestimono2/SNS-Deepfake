@@ -41,11 +41,6 @@ export const costs = {
   createFeel: 1
 };
 
-export const VerifyCodeStatus = {
-  Inactive: 0,
-  Active: 1
-};
-
 export const MarkType = {
   Trust: 1,
   Fake: 0

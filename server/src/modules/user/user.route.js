@@ -10,7 +10,7 @@ router.post('/login', UserControllers.login);
 router.get('/get_verify_code', UserControllers.getVerifyCode);
 
 router.post('/check_verify_code', UserControllers.checkVerifyCode);
-router.post('/logout', UserControllers.logout);
+router.post('/logout', isAuthenticated, UserControllers.logout);
 
 router.put('/change_password', isAuthenticated, UserControllers.changePassword);
 router.get('/get_user_info', isAuthenticated, UserControllers.getUserInfo);

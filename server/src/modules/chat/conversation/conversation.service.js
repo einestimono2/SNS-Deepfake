@@ -72,7 +72,6 @@ export class ConversationService {
     if (!userId) {
       throw new UnauthorizedError(Message.USER_NOT_FOUND);
     }
-
     const result = await Conversation.findAndCountAll({
       order: [
         // order: [[Conversation, 'lastMessageAt', 'DESC']], // Nếu muốn order theo bảng được nối

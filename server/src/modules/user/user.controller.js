@@ -1,3 +1,4 @@
+import { User } from './user.model.js';
 import { userServices } from './user.service.js';
 
 import { CatchAsyncError } from '#middlewares';
@@ -32,13 +33,15 @@ export class UserControllers {
   static checkVerifyCode = CatchAsyncError(async (req, res) => {
     const { code, email } = req.body;
     const data = await userServices.checkVerifyCode(code, email);
-
-    res.ok({ data });
+    res.ok({ message: 'Mã hợp lệ', data });
   });
 
   // 4--Đăng xuất
   static logout = CatchAsyncError(async (req, res) => {
-    await userServices.logout({ ...req.body });
+    const { userId } = req.userPayload;
+    console.log(userId);
+    const user = await User.findOne({ where: { id: userId } });
+    await userServices.logout(user);
     res.ok({ message: 'Đăng xuất thành công' });
   });
 
@@ -52,7 +55,7 @@ export class UserControllers {
 
   static getUserInfo = CatchAsyncError(async (req, res) => {
     const { userId } = req.userPayload;
-    const userInfo = await userServices.getUserInfo(userId);
+    const userInfo = await userServices.getUserInfo(userId, req.body);
     res.ok({ data: userInfo });
   });
 

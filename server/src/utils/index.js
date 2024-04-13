@@ -6,4 +6,5 @@ export * from './logger.js';
 export * from './omit.js';
 export * from './pagination.js';
 export * from './path.js';
+export * from './sendMail.js';
 export * from './verify_env.js';

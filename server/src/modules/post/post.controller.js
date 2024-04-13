@@ -41,7 +41,7 @@ export class PostControllers {
     });
   });
 
-  static getListVideo = CatchAsyncError(async (req, res) => {});
+  // static getListVideo = CatchAsyncError(async (req, res) => {});
 
   static deletePost = CatchAsyncError(async (req, res) => {
     const { userId } = req.userPayload;

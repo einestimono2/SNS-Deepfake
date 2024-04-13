@@ -31,7 +31,7 @@
     "import/extensions": ["off", "always"],
     "import/no-unresolved": "off",
     "class-methods-use-this": "off",
-    "no-unused-vars": "warn",
+    "no-unused-vars": "off",
     "no-console": "off",
     "no-constructor-return": "off",
     "no-underscore-dangle": "off",
@@ -42,6 +42,7 @@
     "func-names": "off",
     "max-classes-per-file": "off",
     "import/no-cycle": "off",
-    "default-case": "off"
+    "default-case": "off",
+    "camelcase": "off"
   }
 }

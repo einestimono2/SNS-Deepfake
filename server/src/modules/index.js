@@ -8,6 +8,7 @@ import { messageRouter } from './chat/message/message.route.js';
 import { commentRouter } from './comment/comment.route.js';
 import { NotFoundError } from './core/index.js';
 import { friendRouter } from './friend/friend.route.js';
+import { groupRouter } from './group/group/group.route.js';
 import { mediaRouter } from './media/media.route.js';
 import { notificationRouter } from './notification/notification.router.js';
 import { postRouter } from './post/post.route.js';
@@ -48,7 +49,8 @@ routers.use(`${Strings.API_PREFIX}/admin`, adminRouter);
 // 12. Chat
 routers.use(`${Strings.API_PREFIX}/conversation`, conversationRouter);
 routers.use(`${Strings.API_PREFIX}/message`, messageRouter);
-
+// 13. Group
+routers.use(`${Strings.API_PREFIX}/group`, groupRouter);
 // #. Check Health - test server
 routers.use('/health', (_req, res) => {
   res.ok({

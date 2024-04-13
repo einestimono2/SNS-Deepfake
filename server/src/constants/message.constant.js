@@ -79,6 +79,9 @@ export const Message = {
   CODE_NOT_FOUND: {
     msg: 'Code not found!'
   },
+  CODE_IS_INVALID: {
+    msg: 'Code is invalid!'
+  },
   TOKEN_IS_INVALID_TRY_AGAIN: {
     msg: 'Token khong hop le'
   },
@@ -117,5 +120,14 @@ export const Message = {
   },
   PAGE_SIZE_INVALID: {
     msg: 'Invalid size! (must >= 1)'
+  },
+  NO_CHANGE_PROFILE_AFTER_SIGNUP: {
+    msg: 'No change profile after sigup!'
+  },
+  GROUP_NOT_FOUND: {
+    msg: 'Group not found!'
+  },
+  NOT_AllOWED: {
+    msg: 'Not allowed!'
   }
 };
