@@ -14,7 +14,6 @@ export class MediaControllers {
       next(new NotFoundError(Message.IMAGE_EMPTY));
       return;
     }
-
     const files = [];
     for (const file of req.files) {
       files.push({

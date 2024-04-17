@@ -40,6 +40,9 @@ export const Post = postgre.define('Post', {
     type: DataTypes.INTEGER,
     allowNull: true
   },
+  groupId: {
+    type: DataTypes.INTEGER
+  },
   rate: {
     type: DataTypes.INTEGER,
     allowNull: true
@@ -47,25 +50,29 @@ export const Post = postgre.define('Post', {
 });
 
 (() => {
-  // Code here
+  // Định nghĩa các mối quan hệ
+  // User ---sở hữu---*> Post(quan hệ 1-n)
+  Post.belongsTo(User, { foreignKey: 'authorId', as: 'author', onDelete: 'CASCADE' });
+  // User ---có loại---> Post(quan hệ 1 - 1)
+  Post.belongsTo(Category, { foreignKey: 'categoryId', as: 'category', onDelete: 'SET NULL' });
+  // Post ---có ---*> PostImage(quan hệ 1 - n)
+  Post.hasMany(PostImage, { foreignKey: 'postId', as: 'images', onDelete: 'CASCADE' });
+  // Post ---có ---> PostVideo(quan hệ 1 - 1)
+  Post.hasOne(PostVideo, { foreignKey: 'postId', as: 'video', onDelete: 'CASCADE' });
+  // Post ---có ---*> Feel(quan hệ 1 - n)
+  Post.hasMany(Feel, { foreignKey: 'postId', as: 'feels', onDelete: 'CASCADE' });
+  Feel.belongsTo(Post, { foreignKey: 'postId', as: 'post', onDelete: 'CASCADE' });
+  // Post ---có ---*> Mark(quan hệ 1 - n)
+  Post.hasMany(Mark, { foreignKey: 'postId', as: 'marks', onDelete: 'CASCADE' });
+  Mark.belongsTo(Post, { foreignKey: 'postId', as: 'post', onDelete: 'CASCADE' });
+  // Post ---có ---*> Report(quan hệ 1 - n)
+  Post.hasMany(Report, { foreignKey: 'postId', as: 'reports', onDelete: 'CASCADE' });
+  // Post ---có ---*> PostHistory(quan hệ 1 - n)
+  Post.hasMany(PostHistory, { foreignKey: 'postId', as: 'histories', onDelete: 'CASCADE' });
+  // Post ---có ---*> PostView(quan hệ 1 - n)
+  Post.hasMany(PostView, { foreignKey: 'postId', as: 'views', onDelete: 'CASCADE' });
+
+  Mark.hasMany(Comment, { onDelete: 'CASCADE', foreignKey: 'markId', as: 'comments' });
+
   Post.sync({ alter: true }).then(() => logger.info("Table 'Post' synced!"));
 })();
-
-// Định nghĩa các mối quan hệ
-// Trả về thông tin tác giả thông qua author
-Post.belongsTo(User, { as: 'author', foreignKey: 'authorId', onDelete: 'CASCADE' });
-Post.belongsTo(Category, {
-  as: 'category',
-  foreignKey: 'categoryId',
-  onDelete: 'SET NULL'
-});
-Post.hasMany(PostImage, { foreignKey: 'postId', as: 'images', onDelete: 'CASCADE' });
-Post.hasOne(PostVideo, { foreignKey: 'postId', as: 'video', onDelete: 'CASCADE' });
-Post.hasMany(Feel, { foreignKey: 'postId', as: 'feels', onDelete: 'CASCADE' });
-Post.hasMany(Mark, { foreignKey: 'postId', as: 'marks', onDelete: 'CASCADE' });
-Post.hasMany(Report, { foreignKey: 'postId', as: 'reports', onDelete: 'CASCADE' });
-Post.hasMany(PostHistory, { foreignKey: 'postId', as: 'histories', onDelete: 'CASCADE' });
-Post.hasMany(PostView, { foreignKey: 'postId', as: 'views', onDelete: 'CASCADE' });
-Mark.belongsTo(Post, { onDelete: 'CASCADE', foreignKey: 'postId', as: 'post' });
-Feel.belongsTo(Post, { onDelete: 'CASCADE', foreignKey: 'postId', as: 'post' });
-Mark.hasMany(Comment, { onDelete: 'CASCADE', foreignKey: 'markId', as: 'comments' });

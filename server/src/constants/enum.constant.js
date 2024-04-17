@@ -25,7 +25,7 @@ export const Roles = {
   Admin: '2'
 };
 
-export const accountStatus = {
+export const AccountStatus = {
   Banned: -3,
   Deactivated: -2,
   Pending: -1,

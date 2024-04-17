@@ -9,14 +9,15 @@ import { Message } from '#constants';
 export class GroupService {
   // Tạo nhóm gia đình
   static async createGroup(userId, body) {
-    const { name, memberIds, description } = { ...body };
+    const { name, memberIds, description, coverImage } = { ...body };
     if (!userId) throw new UnauthorizedError(Message.USER_IS_INVALID);
     // Danh sách các thành viên
     const members = [userId, ...memberIds];
     const newGroup = await Group.create({
       groupName: name,
       description,
-      creatorId: userId
+      creatorId: userId,
+      coverImage
     });
     for (const member of members) {
       await GroupUser.create({
@@ -82,6 +83,7 @@ export class GroupService {
     if (userId !== group.creatorId) throw new BadRequestError(Message.NOT_AllOWED);
     if (body.name) group.groupName = body.name;
     if (body.description) group.description = body.description;
+    if (body.coverImage) group.coverImage = body.coverImage;
     await group.save();
     return group;
   }

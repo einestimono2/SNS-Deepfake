@@ -8,7 +8,7 @@ import { User } from '../user/user.model.js';
 import { FriendRequest } from './components/friend_request.model.js';
 import { Friend } from './friend.model.js';
 
-import { accountStatus, Message } from '#constants';
+import { AccountStatus, Message } from '#constants';
 
 export class FriendServices {
   // 1:Lấy danh sách các yêu cầu kết bạn(Đã test)
@@ -181,7 +181,7 @@ export class FriendServices {
     const remainUsers = await User.findAll({
       where: {
         id: { [Op.not]: userId }, // Không bao gồm người dùng hiện tại
-        status: { [Op.not]: accountStatus.Inactive } // Không bao gồm tài khoản bị vô hiệu hóa
+        status: { [Op.not]: AccountStatus.Inactive } // Không bao gồm tài khoản bị vô hiệu hóa
       },
       include: [
         {

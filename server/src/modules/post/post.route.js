@@ -6,7 +6,7 @@ import { isAuthenticated } from '#middlewares';
 
 const router = Router();
 router.post('/add_post', isAuthenticated, PostControllers.addPost);
-router.get('/get_post/:postId', isAuthenticated, PostControllers.getPost);
+router.get('/details_post/:postId', isAuthenticated, PostControllers.detailsPost);
 router.get('/get_list_posts', isAuthenticated, PostControllers.getListPosts);
 router.put('/edit_post/:postId', isAuthenticated, PostControllers.editPost);
 router.delete('/delete_post/:postId', isAuthenticated, PostControllers.deletePost);

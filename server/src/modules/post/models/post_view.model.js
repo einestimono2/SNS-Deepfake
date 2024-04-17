@@ -12,14 +12,14 @@ export const PostView = postgre.define('PostView', {
   },
   userId: {
     type: DataTypes.INTEGER,
-    unique: true
+    allowNull: false
   },
   postId: {
     type: DataTypes.INTEGER,
-    unique: true
+    allowNull: false
   },
   count: {
-    type: DataTypes.STRING
+    type: DataTypes.INTEGER
   }
 });
 

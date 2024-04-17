@@ -30,7 +30,7 @@ export const Feel = postgre.define('Feel', {
 });
 
 (() => {
-  Feel.belongsTo(User, { onDelete: 'CASCADE', as: 'user' });
+  // Feel.belongsTo(User, { onDelete: 'CASCADE', as: 'user' });
 
   Feel.sync({ alter: true }).then(() => logger.info("Table 'Feel' synced!"));
 })();

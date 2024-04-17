@@ -10,7 +10,7 @@ import { DevToken } from './models/device_token.model.js';
 import { PasswordHistory } from './models/password_history.model.js';
 import { User } from './user.model.js';
 
-import { accountStatus, Message } from '#constants';
+import { AccountStatus, Message } from '#constants';
 import { redis } from '#dbs';
 // const catchAsyncError = require("../middleware/catchAsyncErrors");
 import { generateVerifyCode, SendMail, signToken } from '#utils';
@@ -65,7 +65,7 @@ export class userServices {
       email,
       role,
       uuid,
-      status: accountStatus.Inactive,
+      status: AccountStatus.Inactive,
       deletedAt: new Date(),
       coins: 100
     });
@@ -87,8 +87,8 @@ export class userServices {
     if (
       !user ||
       !(await this.comparePassword(password, user.password)) ||
-      !user.status === accountStatus.Active ||
-      !user.status === accountStatus.Pending
+      !user.status === AccountStatus.Active ||
+      !user.status === AccountStatus.Pending
     ) {
       throw new BadRequestError(Message.USER_NOT_FOUND);
     }
@@ -139,8 +139,8 @@ export class userServices {
     //   await user.save();
     // }
     // Pending là trạng thái tk cần thêm avatar
-    if (user.status === accountStatus.Inactive) {
-      user.status = user.username ? accountStatus.Active : accountStatus.Pending;
+    if (user.status === AccountStatus.Inactive) {
+      user.status = user.username ? AccountStatus.Active : AccountStatus.Pending;
       await user.save();
     }
     return {
@@ -161,13 +161,13 @@ export class userServices {
   // 6--Thay đổi thông tin sau khi đăng ký
   static async changeProfileAfterSignup(userId, username, avatar, coverImage) {
     const user = await User.findOne({ where: { id: userId } });
-    if (![accountStatus.Pending, accountStatus.Active].includes(user.status)) {
+    if (![AccountStatus.Pending, AccountStatus.Active].includes(user.status)) {
       throw new BadRequestError(Message.NO_CHANGE_PROFILE_AFTER_SIGNUP);
     }
     user.username = username || '';
     user.avatar = avatar || '';
     user.coverImage = coverImage || '';
-    user.status = accountStatus.Active;
+    user.status = AccountStatus.Active;
     user.deletedAt = null;
     await user.save();
     // Xử lý việc pushsetting

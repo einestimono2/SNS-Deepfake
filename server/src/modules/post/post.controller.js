@@ -6,18 +6,17 @@ import { CatchAsyncError } from '#middlewares';
 export class PostControllers {
   static addPost = CatchAsyncError(async (req, res) => {
     const { userId } = req.userPayload;
-    const post = await PostServices.addPost(userId, req.body);
+    const data = await PostServices.addPost(userId, req.body);
     res.created({
-      data: post
+      message: 'Thêm mới thành công',
+      data
     });
   });
 
-  static getPost = CatchAsyncError(async (req, res) => {
+  static detailsPost = CatchAsyncError(async (req, res) => {
     const { userId } = req.userPayload;
     const { postId } = req.params;
-    console.log(userId);
-    const post = await PostServices.getPost(userId, postId);
-
+    const post = await PostServices.detailsPost(userId, postId);
     res.ok({
       data: post
     });
@@ -25,7 +24,6 @@ export class PostControllers {
 
   static getListPosts = CatchAsyncError(async (req, res) => {
     const { userId } = req.userPayload;
-    console.log('hi');
     const posts = await PostServices.getListPosts(userId, req.body);
     res.ok({
       data: posts
