@@ -79,4 +79,4 @@ const handleCleaning = (targetDir) => {
   cleaning(targetDir);
 };
 
-export const uploadCleaningSchedule = cron.schedule(hourlyExpression, () => handleCleaning(UPLOADS_FOLDER));
+export const uploadCleaningSchedule = cron.schedule(midnightExpression, () => handleCleaning(UPLOADS_FOLDER));

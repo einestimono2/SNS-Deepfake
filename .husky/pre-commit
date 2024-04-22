@@ -11,10 +11,19 @@ then
 fi
 
 # Run husky hook in admin
-if git diff --name-only --cached | grep 'admin/';
+# if git diff --name-only --cached | grep 'admin/';
+# then
+#     cd admin
+#     yarn sync
+#     yarn lint-staged
+#     cd ..
+# fi
+
+# Run husky hook in mobile
+if git diff --name-only --cached | grep 'mobile/';
 then
-    cd admin
-    yarn sync
-    yarn lint-staged
+    cd mobile
+    flutter pub get
+    flutter analyze
     cd ..
 fi

@@ -2,15 +2,13 @@ import { Message, StatusCode } from '#constants';
 import { BadRequestError, NotFoundError, UnauthorizedError } from '#modules';
 import { logger } from '#utils';
 
-// eslint-disable-next-line no-unused-vars
 export function ErrorMiddleware(err, req, res, next) {
   logger.error(`[${err.name}]: ${err.message}`);
 
   // Inital values
   err.statusCode = err.statusCode ?? StatusCode.INTERNAL_SERVER_ERROR_500;
   err.ec = err.ec ?? err.statusCode;
-  err.message = err.message ?? Message.INTERNAL_SERVER_ERROR;
-  console.log(err);
+  err.message = err.message ?? Message.INTERNAL_SERVER_ERROR.msg;
 
   // SequelizeValidationError
   if (err.name === 'SequelizeValidationError') {

@@ -1,0 +1,22 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Development Mode",
+            "type": "dart",
+            "noDebug": true,
+            "flutterMode": "debug",
+            "request": "launch",
+            "program": "lib/main_development.dart",
+            "args": ["--flavor", "development"]
+        },
+        {
+            "name": "Production Mode",
+            "type": "dart",
+            "flutterMode": "debug",
+            "request": "launch",
+            "program": "lib/main_production.dart",
+            "args": ["--flavor", "production"]
+        }
+    ]
+}

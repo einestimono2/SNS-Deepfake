@@ -1,0 +1,82 @@
+{
+    "BACK_TEXT": "Quay lại",
+
+    "OK_TEXT": "OK",
+    "CANCEL_TEXT": "Hủy bỏ",
+    "SETTING_TEXT": "Cài đặt",
+    "PERMISSION_DENIED": "Không có quyền truy cập",
+    "PERMISSION_DENIED_DONT_SHOW_AGAIN": "Quyền bị từ chối và được đặt là không hiển thị lại. Bạn cần cho phép thủ công trong phần cài đặt ứng dụng",
+
+    "OFFLINE_FAILURE_TEXT": "Không có kết nối mạng!",
+    "UNAUTHENTICATED_FAILURE_TEXT": "Đăng nhập để thực hiện!",
+
+    "NO_INTERNET": "Không có kết nối mạng",
+    "EMAIL_TEXT": "Email",
+    "EMAIL_EMPTY": "Email không được trống!",
+    "EMAIL_INVALID": "Địa chỉ email không hợp lệ!",
+    "PASSWORD_TEXT": "Mật khẩu",
+    "PASSWORD_EMPTY": "Mật khẩu không được trống!",
+    "PASSWORD_TOO_SHORT": "Mật khẩu ít nhất 6 kí tự!",
+    "PASSWORD_WEAK": "Mật khẩu phải chứa ít nhất 1 chữ hoa, 1 số và 1 kí tự đặc biệt!",
+    "CONFIRM_PASSWORD_TEXT": "Nhập lại mật khẩu",
+    "CONFIRM_PASSWORD_EMPTY": "Mật khẩu không được trống!",
+    "CONFIRM_PASSWORD_NOT_MATCH": "Mật khẩu không khớp!",
+
+    "LOGIN_TEXT": "Đăng nhập",
+    "LOGIN_ERROR_TITLE_TEXT": "Đăng nhập thất bại",
+    "NO_ACCOUNT_TEXT": "Chưa có tài khoản?",
+    "VIA_SOCIAL_MEDIA_TEXT": "Hoặc thông qua mạng xã hội",
+    "UPCOMING_FEATURE_TEXT": "Tính năng đang được phát triển, hãy quay lại sau!",
+    "COMING_SOON_TEXT": "Sắp ra mắt",
+
+    "SIGN_UP_TEXT": "Đăng ký",
+    "SIGNUP_ERROR_TITLE_TEXT": "Đăng ký thất bại",
+    "ALREADY_HAVE_ACCOUNT_TEXT": "Đã có tài khoản?",
+    "GET_STARTED_TEXT": "Xin chào!",
+    "CREATE_NEW_ACCOUNT_TEXT": "Tạo tài khoản để sử dụng",
+    "YOU_ARE_TEXT": "Bạn là",
+    "CHILDREN_TEXT": "Con cái",
+    "PARENT_TEXT": "Bố mẹ",
+
+    "OTP_NOT_FILL_TEXT": "Mã OTP phải đủ 6 kí tự",
+    "OTP_VERIFICATION_TEXT": "Xác thực OTP",
+    "WE_SENT_OTP_TO_TEXT": "Chúng tôi đã gửi mã của bạn tới email",
+    "OTP_VALID_TIME_TEXT": "Mã OTP này có giá trị trong",
+    "TIME_MINUTES_ARGS": {
+        "one": "{} phút",
+        "other": "{} phút"
+    },
+    "RESEND_OTP_AFTER_TEXT": "Bạn có thể nhận lại mã OTP sau",
+    "RESEND_TEXT": "Gửi lại",
+    "RESEND_ERROR_TITLE_TEXT": "Gửi lại thất bại",
+    "VERIFY_TEXT": "Xác thực",
+    "VERIFY_ERROR_TITLE_TEXT": "Xác thực thất bại",
+
+    "UPLOAD_TEXT": "Tải lên",
+    "GALLERY_TEXT": "Thư viện",
+    "CAMERA_TEXT": "Máy ảnh",
+    "UPLOAD_ERROR_TITLE_TEXT": "Upload thất bại",
+
+    "COMPLETE_PROFILE_TEXT": "Hoàn thiện hồ sơ",
+    "COMPLETE_PROFILE_ERROR_TITLE_TEXT": "Cập nhật hồ sơ thất bại",
+    "FULL_NAME_TEXT": "Họ tên",
+    "PHONE_NUMBER_TEXT": "Số điện thoại",
+    "FINISH_TEXT": "Hoàn thành",
+    "PERSONAL_INFORMATION_TEXT": "Thông tin cá nhân",
+    "FULL_NAME_EMPTY": "Họ tên trống!",
+    "PHONE_NUMBER_EMPTY": "Số điện thoại trống!",
+    "PHONE_NUMBER_INVALID": "Số điện thoại không hợp lệ!",
+
+    "FORGOT_TEXT": "Quên mật khẩu?",
+
+    "HOME_TEXT": "Trang chủ",
+    "FRIENDS_TEXT": "Bạn bè",
+    "VIDEO_TEXT": "Video",
+    "MESSAGE_TEXT": "Tin nhắn",
+    "NOTIFICATION_TEXT": "Thông báo",
+    "PROFILE_TEXT": "Cá nhân",
+
+    "SEE_MORE_TEXT": "Xem thêm",
+
+    "": ""
+}

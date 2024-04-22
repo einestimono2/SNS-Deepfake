@@ -1,0 +1,22 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Mobile DevMode",
+            "type": "dart",
+            "noDebug": true,
+            "flutterMode": "debug",
+            "request": "launch",
+            "program": "mobile/lib/main_development.dart",
+            "args": ["--flavor", "development"]
+        },
+        {
+            "name": "Mobile ProdMode",
+            "type": "dart",
+            "flutterMode": "debug",
+            "request": "launch",
+            "program": "mobile/lib/main_production.dart",
+            "args": ["--flavor", "production"]
+        }
+    ]
+}

@@ -13,7 +13,7 @@ import { User } from './user.model.js';
 import { AccountStatus, Message } from '#constants';
 import { redis } from '#dbs';
 // const catchAsyncError = require("../middleware/catchAsyncErrors");
-import { generateVerifyCode, SendMail, signToken } from '#utils';
+import { generateVerifyCode, SendMail, setFileUsed, signToken } from '#utils';
 
 export class userServices {
   // 1--Lấy mã xác thực
@@ -44,23 +44,24 @@ export class userServices {
   }
 
   // 2--Tạo một tài khoản người dùng
-  static async signup(phoneNumber, email, password, role, uuid) {
+  static async signup(email, password, role, uuid) {
     // Kiểm tra email đã tồn tại chưa?
     if (await this.checkEmaiExit(email)) {
       throw new BadRequestError(Message.EMAIL_ALREADY_EXISTS);
     }
     // Kiểm tra sdt đã được đăng ký lần nào hay chưa?
-    const exitPhoneNumber = await User.findOne({ where: { phoneNumber } });
-    if (exitPhoneNumber) {
-      throw new BadRequestError(Message.PHONE_NUMBER_IS_INVALID);
-    }
+    // const exitPhoneNumber = await User.findOne({ where: { phoneNumber } });
+    // if (exitPhoneNumber) {
+    //   throw new BadRequestError(Message.PHONE_NUMBER_IS_INVALID);
+    // }
+
     // Kiểm tra password có trùng email hay không?
     if (password.indexOf(email) !== -1) {
       throw new BadRequestError(Message.USER_IS_INVALID);
     }
+
     // Tạo tài khoản người dùng
     await User.create({
-      phoneNumber,
       password: await this.hashPassword(password),
       email,
       role,
@@ -69,6 +70,7 @@ export class userServices {
       deletedAt: new Date(),
       coins: 100
     });
+
     // Thực hiện gửi mã xác thực về Email
     await this.getVerifyCode(email);
   }
@@ -82,25 +84,33 @@ export class userServices {
   static async login(email, password, uuid) {
     const user = await User.findOne({
       where: { email },
+      // attributes: { exclude: ['password'] },
       withDeleted: true
     });
-    if (
-      !user ||
-      !(await this.comparePassword(password, user.password)) ||
-      !user.status === AccountStatus.Active ||
-      !user.status === AccountStatus.Pending
-    ) {
-      throw new BadRequestError(Message.USER_NOT_FOUND);
+    if (!user) throw new NotFoundError(Message.EMAIL_NOT_EXISTS);
+
+    if (!(await this.comparePassword(password, user.password)) || !user.status === AccountStatus.Active) {
+      throw new BadRequestError(Message.WRONG_PASSWORD);
     }
-    user.token = signToken(user.id, uuid);
-    // Tạo dữ liệu cho bảng DeviceToken
-    await DevToken.create({
-      userId: user.id,
-      token: user.token
+
+    // TODO: Có thể lỗi logic về dấu !
+    if (!user.status === AccountStatus.Active) {
+      throw new BadRequestError(Message.ACCOUNT_NOT_ACTIVATED);
+    }
+
+    const [deviceToken] = await DevToken.findOrCreate({
+      where: { userId: user.id },
+      defaults: { userId: user.id }
     });
+
+    const token = signToken(user.id, uuid);
+    user.token = token;
+    deviceToken.token = token;
+
     await user.save();
     return {
-      user
+      user,
+      accessToken: token
     };
   }
 
@@ -119,19 +129,14 @@ export class userServices {
     if (redis.ttl(`${user.id}_${code}`) < 0) {
       throw new BadRequestError(Message.CODE_IS_INVALID);
     }
+
+    return user;
   }
 
   // 4--- Kiểm tra mã xác thực
   static async checkVerifyCode(code, email) {
-    await this.verifyCode(email, code);
-    const user = await User.findOne({
-      where: {
-        email
-      }
-    });
-    if (!user) {
-      throw new NotFoundError(Message.USER_NOT_FOUND);
-    }
+    const user = await this.verifyCode(email, code);
+
     // Kiểm tra nếu role là bố mẹ thì tạo dữ liệu cho Bảng Family
     // if (user.role === Roles.Parent) {
     //   const family = await Group.create();
@@ -143,9 +148,10 @@ export class userServices {
       user.status = user.username ? AccountStatus.Active : AccountStatus.Pending;
       await user.save();
     }
+
     return {
       id: user.id,
-      active: user.status
+      status: user.status
     };
   }
 
@@ -159,24 +165,39 @@ export class userServices {
 
   // Profile
   // 6--Thay đổi thông tin sau khi đăng ký
-  static async changeProfileAfterSignup(userId, username, avatar, coverImage) {
-    const user = await User.findOne({ where: { id: userId } });
+  static async changeProfileAfterSignup({ email, username, avatar, coverImage, phoneNumber }) {
+    const user = await User.findOne({ where: { email } });
+
+    if (!user) {
+      throw new NotFoundError(Message.USER_NOT_FOUND);
+    }
+
     if (![AccountStatus.Pending, AccountStatus.Active].includes(user.status)) {
       throw new BadRequestError(Message.NO_CHANGE_PROFILE_AFTER_SIGNUP);
     }
-    user.username = username || '';
-    user.avatar = avatar || '';
-    user.coverImage = coverImage || '';
+
+    let _avatar = null;
+    if (avatar) {
+      _avatar = setFileUsed(avatar);
+    }
+
+    let _coverImage = null;
+    if (coverImage) {
+      _coverImage = setFileUsed(coverImage);
+    }
+
+    user.username = username;
+    user.avatar = _avatar;
+    user.coverImage = _coverImage;
+    user.phoneNumber = phoneNumber;
     user.status = AccountStatus.Active;
     user.deletedAt = null;
+
     await user.save();
+
     // Xử lý việc pushsetting
-    return {
-      id: user.id,
-      username: user.username,
-      email: user.email,
-      avatar: user.avatar
-    };
+
+    return user;
   }
 
   // 7--Lấy thông tin người dùng
@@ -184,16 +205,13 @@ export class userServices {
     if (await BlockServices.isBlock(userId, user_id)) {
       throw new BadRequestError(Message.CAN_NOT_BLOCK);
     }
-    const user = await User.findOne({ where: { id: user_id } });
-    if (!user) {
-      throw new BadRequestError(Message.USER_NOT_FOUND);
-    }
+
     // Kiểm tra userId có trong bảng User hay không
     const userInfo = await User.findOne({ where: { id: userId } });
     if (!userInfo) {
       throw new BadRequestError(Message.USER_NOT_FOUND);
     }
-    console.log(userInfo);
+
     // Lấy số lượng bạn bè....
     const [totalFriends, friend, friendRequested, friendRequesting] = await Promise.all([
       Friend.count({ userId }),
@@ -201,6 +219,7 @@ export class userServices {
       FriendRequest.findOne({ userId, targetId: user_id }),
       FriendRequest.findOne({ userId: user_id, targetId: userId })
     ]);
+
     return {
       id: userInfo.id,
       role: userInfo.role,
@@ -282,5 +301,14 @@ export class userServices {
     return {
       token: user.token
     };
+  }
+
+  static async myProfile(userId) {
+    const user = await User.findByPk(userId);
+    if (!user) {
+      throw new NotFoundError(Message.USER_NOT_FOUND);
+    }
+
+    return user;
   }
 }

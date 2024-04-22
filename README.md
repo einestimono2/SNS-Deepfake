@@ -10,6 +10,9 @@
 ## Mobile
 
 -   Flutter
+-   Bloc
+-   Dio
+-   Clean Architecture
 
 ## Admin
 

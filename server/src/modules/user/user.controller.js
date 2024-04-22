@@ -4,10 +4,18 @@ import { userServices } from './user.service.js';
 import { CatchAsyncError } from '#middlewares';
 
 export class UserControllers {
+  // 0-- Kiểm tra hạn
+  static verifyToken = CatchAsyncError(async (req, res) => {
+    const me = await userServices.myProfile(req.userPayload.userId);
+    res.ok({
+      data: me
+    });
+  });
+
   // 1--Đăng ký
   static register = CatchAsyncError(async (req, res) => {
-    const { phoneNumber, uuid, role, password, email } = req.body;
-    await userServices.signup(phoneNumber, email, password, role, uuid);
+    const { uuid, role, password, email } = req.body;
+    await userServices.signup(email, password, role, uuid);
     res.created({
       message: 'Mã code đã được gửi về mail của bạn'
     });
@@ -47,10 +55,9 @@ export class UserControllers {
 
   // 5--Thay đổi thông tin sau khi đăng ký
   static changeProfileAfterSignup = CatchAsyncError(async (req, res) => {
-    const { userId } = req.userPayload;
-    const { username, avatar, coverImage } = req.body;
-    const newProfile = await userServices.changeProfileAfterSignup(userId, username, avatar, coverImage);
-    res.ok({ message: 'Profile updated!', data: newProfile });
+    const newProfile = await userServices.changeProfileAfterSignup(req.body);
+
+    res.created({ message: 'Profile updated!', data: newProfile });
   });
 
   static getUserInfo = CatchAsyncError(async (req, res) => {

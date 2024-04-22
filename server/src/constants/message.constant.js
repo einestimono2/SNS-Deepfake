@@ -7,9 +7,17 @@ export const Message = {
     msg: 'Bearer token is empty!',
     ec: 1001
   },
+  TOKEN_IS_INVALID_TRY_AGAIN: {
+    ec: 1002,
+    msg: 'Session has expired!'
+  },
+  TOKEN_IS_EXPIRED_TRY_AGAIN: {
+    ec: 1003,
+    msg: 'Token het han!'
+  },
   INSUFFICIENT_ACCESS_RIGHTS: {
     msg: 'Insufficient Access Rights!',
-    ec: 1002
+    ec: 1004
   },
   ROUTE_NOT_FOUND: {
     msg: 'Route Not Found'
@@ -50,7 +58,10 @@ export const Message = {
     msg: 'Phone number is invalid!'
   },
   EMAIL_ALREADY_EXISTS: {
-    msg: ' Email already exist!'
+    msg: 'Email already exist!'
+  },
+  EMAIL_NOT_EXISTS: {
+    msg: 'Email does not exist!'
   },
   FILE_NOT_FOUND: {
     msg: 'File does not exist!'
@@ -79,15 +90,6 @@ export const Message = {
   CODE_NOT_FOUND: {
     msg: 'Code not found!'
   },
-  CODE_IS_INVALID: {
-    msg: 'Code is invalid!'
-  },
-  TOKEN_IS_INVALID_TRY_AGAIN: {
-    msg: 'Token khong hop le'
-  },
-  TOKEN_IS_EXPIRED_TRY_AGAIN: {
-    msg: 'Token het han!'
-  },
   NO_ENOUGH_INFORMATION: {
     msg: 'No enough information!'
   },
@@ -96,6 +98,13 @@ export const Message = {
   },
   USED_PASSWORD: {
     msg: 'Password has been used before'
+  },
+  WRONG_PASSWORD: {
+    msg: 'Wrong password'
+    // msg: {
+    //   vi: 'Sai mật khẩu',
+    //   en: 'Wrong password'
+    // }
   },
   MARK_IS_INVALID: {
     msg: 'Mark is invalid!'
@@ -121,13 +130,7 @@ export const Message = {
   PAGE_SIZE_INVALID: {
     msg: 'Invalid size! (must >= 1)'
   },
-  NO_CHANGE_PROFILE_AFTER_SIGNUP: {
-    msg: 'No change profile after sigup!'
-  },
-  GROUP_NOT_FOUND: {
-    msg: 'Group not found!'
-  },
-  NOT_AllOWED: {
-    msg: 'Not allowed!'
+  ACCOUNT_NOT_ACTIVATED: {
+    msg: 'Account has not been activated'
   }
 };

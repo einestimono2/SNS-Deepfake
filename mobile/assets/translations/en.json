@@ -1,0 +1,82 @@
+{
+    "BACK_TEXT": "Back",
+
+    "OK_TEXT": "OK",
+    "CANCEL_TEXT": "Cancel",
+    "SETTING_TEXT": "Setting",
+    "PERMISSION_DENIED": "Permission Denied",
+    "PERMISSION_DENIED_DONT_SHOW_AGAIN": "Permission denied and set to not show again. You need to allow it manually in the app settings",
+
+    "OFFLINE_FAILURE_TEXT": "No internet connection!",
+    "UNAUTHENTICATED_FAILURE_TEXT": "Login to access!",
+
+    "NO_INTERNET": "No internet connection",
+    "EMAIL_TEXT": "Email",
+    "EMAIL_EMPTY": "Email is required!",
+    "EMAIL_INVALID": "Invalid email address!",
+    "PASSWORD_TEXT": "Password",
+    "PASSWORD_EMPTY": "Password is required!",
+    "PASSWORD_TOO_SHORT": "Password must be at least 6 characters long!",
+    "PASSWORD_WEAK": "Password must contain at least one uppercase letter, one number and one special character!",
+    "CONFIRM_PASSWORD_NOT_MATCH": "Password does not match!",
+    "CONFIRM_PASSWORD_TEXT": "Confirm password",
+    "CONFIRM_PASSWORD_EMPTY": "Confirm password is required!",
+
+    "LOGIN_TEXT": "Login",
+    "LOGIN_ERROR_TITLE_TEXT": "Login Failed",
+    "NO_ACCOUNT_TEXT": "Don't have an account?",
+    "VIA_SOCIAL_MEDIA_TEXT": "Or via social media",
+    "UPCOMING_FEATURE_TEXT": "Feature under development, please try again later!",
+    "COMING_SOON_TEXT": "Coming Soon",
+
+    "SIGN_UP_TEXT": "Sign up",
+    "SIGNUP_ERROR_TITLE_TEXT": "Sign Up Failed",
+    "ALREADY_HAVE_ACCOUNT_TEXT": "Already have an account?",
+    "GET_STARTED_TEXT": "Let's Get Started!",
+    "CREATE_NEW_ACCOUNT_TEXT": "Create an new account",
+    "YOU_ARE_TEXT": "You are",
+    "CHILDREN_TEXT": "Children",
+    "PARENT_TEXT": "Parent",
+
+    "OTP_NOT_FILL_TEXT": "Fill in the otp code completely",
+    "OTP_VERIFICATION_TEXT": "OTP Verification",
+    "WE_SENT_OTP_TO_TEXT": "We have sent your OTP code to email",
+    "OTP_VALID_TIME_TEXT": "This OTP code is valid for",
+    "TIME_MINUTES_ARGS": {
+        "one": "{} minute",
+        "other": "{} minutes"
+    },
+    "RESEND_OTP_AFTER_TEXT": "You can resend the OTP code after",
+    "RESEND_TEXT": "Resend",
+    "RESEND_ERROR_TITLE_TEXT": "Resend Failed",
+    "VERIFY_TEXT": "Verify",
+    "VERIFY_ERROR_TITLE_TEXT": "Verify Failed",
+
+    "UPLOAD_TEXT": "Upload",
+    "GALLERY_TEXT": "Gallery",
+    "CAMERA_TEXT": "Camera",
+    "UPLOAD_ERROR_TITLE_TEXT": "Upload Failed",
+
+    "COMPLETE_PROFILE_TEXT": "Complete Profile",
+    "COMPLETE_PROFILE_ERROR_TITLE_TEXT": "Update Profile Failed",
+    "FULL_NAME_TEXT": "Full name",
+    "PHONE_NUMBER_TEXT": "Phone number",
+    "FINISH_TEXT": "Finish",
+    "PERSONAL_INFORMATION_TEXT": "Personal information",
+    "FULL_NAME_EMPTY": "Full name is required!",
+    "PHONE_NUMBER_EMPTY": "Phone number is required!",
+    "PHONE_NUMBER_INVALID": "Phone number is invalid!",
+
+    "FORGOT_TEXT": "Forgot Password?",
+
+    "HOME_TEXT": "Home",
+    "FRIENDS_TEXT": "Friend",
+    "VIDEO_TEXT": "Video",
+    "MESSAGE_TEXT": "Message",
+    "NOTIFICATION_TEXT": "Notification",
+    "PROFILE_TEXT": "Profile",
+
+    "SEE_MORE_TEXT": "See more",
+
+    "": ""
+}

@@ -5,6 +5,9 @@ import { UserControllers } from './user.controller.js';
 import { isAuthenticated } from '#middlewares';
 
 const router = Router();
+
+router.get('/verify', isAuthenticated, UserControllers.verifyToken);
+
 router.post('/register', UserControllers.register);
 router.post('/login', UserControllers.login);
 router.get('/get_verify_code', UserControllers.getVerifyCode);
@@ -15,6 +18,6 @@ router.post('/logout', isAuthenticated, UserControllers.logout);
 router.put('/change_password', isAuthenticated, UserControllers.changePassword);
 router.get('/get_user_info', isAuthenticated, UserControllers.getUserInfo);
 router.put('/set_user_info', isAuthenticated, UserControllers.setUserInfo);
-router.put('/change_profile_after_signup', isAuthenticated, UserControllers.changeProfileAfterSignup);
+router.patch('/change_profile_after_signup', UserControllers.changeProfileAfterSignup);
 
 export const userRouter = router;

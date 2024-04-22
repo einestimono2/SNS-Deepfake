@@ -28,9 +28,9 @@ export const Roles = {
 export const AccountStatus = {
   Banned: -3,
   Deactivated: -2,
-  Pending: -1,
-  Inactive: 0,
-  Active: 1
+  Pending: -1, // Khi chưa hoàn thiện profile
+  Inactive: 0, // Khi chưa xác thực OTP
+  Active: 1 // Khi đã hoàn thiện profile
 };
 
 export const costs = {
