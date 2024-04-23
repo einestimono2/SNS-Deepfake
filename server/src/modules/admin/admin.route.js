@@ -10,7 +10,11 @@ const router = Router();
 router.post('/login', AdminControllers.login);
 
 // Lấy danh sách các bài post
-// router.get('/list', isAuthenticated, authorizeRoles(Roles.Admin), AdminControllers.getPosts);
+router.get('/get_all_post', AdminControllers.getAllPost);
+router.post('/rate_post', AdminControllers.ratePost);
+router.get('/get_all_user', AdminControllers.getAllUser);
+router.get('/get_all_group', AdminControllers.getAllGroup);
+
 // Lấy danh sách các người dùng
 // router.get('/list', isAuthenticated, authorizeRoles(Roles.Admin), AdminControllers.getUsers);
 
