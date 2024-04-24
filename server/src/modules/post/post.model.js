@@ -11,6 +11,7 @@ import { PostImage } from './models/post_image.model.js';
 import { PostVideo } from './models/post_video.model.js';
 import { PostView } from './models/post_view.model.js';
 import { Report } from './models/report.model.js';
+// import { Share } from './models/share.model.js';
 
 import { postgre } from '#dbs';
 import { logger } from '#utils';
@@ -73,6 +74,8 @@ export const Post = postgre.define('Post', {
   Post.hasMany(PostView, { foreignKey: 'postId', as: 'views', onDelete: 'CASCADE' });
 
   Mark.hasMany(Comment, { onDelete: 'CASCADE', foreignKey: 'markId', as: 'comments' });
-
+  Comment.belongsTo(Mark, { onDelete: 'CASCADE', foreignKey: 'markId', as: 'mark' });
+  // Post ---có ---*> Share(quan hệ 1 - n)
+  // Post.hasMany(Share, { foreignKey: 'postId', as: 'shares', onDelete: 'CASCADE' });
   Post.sync({ alter: true }).then(() => logger.info("Table 'Post' synced!"));
 })();

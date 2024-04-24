@@ -1,6 +1,7 @@
 import { SearchServices } from './search.service.js';
 
 import { CatchAsyncError } from '#middlewares';
+import { getPaginationAttributes, getPaginationSummary } from '#utils';
 
 export class SearchControllers {
   static searchPost = CatchAsyncError(async (req, res) => {
@@ -21,10 +22,13 @@ export class SearchControllers {
 
   static getSavedSearches = CatchAsyncError(async (req, res) => {
     const { userId } = req.userPayload;
-    const data = await SearchServices.getSavedSearches(userId, req.body);
-    res.ok({
-      data
-    });
+    const data = await SearchServices.getSavedSearches(userId, ...getPaginationAttributes(req.query));
+    res.ok(
+      getPaginationSummary({
+        ...req.query,
+        data
+      })
+    );
   });
 
   static deleteSavedSearch = CatchAsyncError(async (req, res) => {
@@ -33,5 +37,16 @@ export class SearchControllers {
     res.ok({
       message: 'Xóa lịch sử tìm kiếm thành công'
     });
+  });
+
+  static searchHashtag = CatchAsyncError(async (req, res) => {
+    const { userId } = req.userPayload;
+    const data = await SearchServices.searchHashtag(userId, ...getPaginationAttributes(req.query), req.body);
+    res.ok(
+      getPaginationSummary({
+        ...req.query,
+        data
+      })
+    );
   });
 }

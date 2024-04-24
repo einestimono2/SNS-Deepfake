@@ -99,7 +99,7 @@ export class MediaControllers {
 
   // Được thiết kế để xử lý yêu cầu phát video từ một đường dẫn tới tập tin video trong ứng dụng(Streaming)
   static getVideo = CatchAsyncError(async (req, res) => {
-    const filePath = getStandardPath('../../uploads/videos/asdqwv-Wada pura kiya  #shorts #funny.mp4');
+    const filePath = getStandardPath('../../uploads/videos/4ljkk7-Wada pura kiya  #shorts #funny.mp4');
     const { range } = req.headers;
     if (!range) res.status(400).send('error');
 

@@ -1,4 +1,5 @@
 import bcryptjs from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 
 import { BlockServices } from '../block/block.service.js';
 import { BadRequestError, NotFoundError } from '../core/index.js';
@@ -44,19 +45,19 @@ export class userServices {
   }
 
   // 2--Tạo một tài khoản người dùng
-  static async signup(email, password, role, uuid) {
+  static async signup(phoneNumber, email, password, role, uuid) {
     // Kiểm tra email đã tồn tại chưa?
     if (await this.checkEmaiExit(email)) {
       throw new BadRequestError(Message.EMAIL_ALREADY_EXISTS);
     }
     // Kiểm tra sdt đã được đăng ký lần nào hay chưa?
-    // const exitPhoneNumber = await User.findOne({ where: { phoneNumber } });
-    // if (exitPhoneNumber) {
-    //   throw new BadRequestError(Message.PHONE_NUMBER_IS_INVALID);
-    // }
-
+    const exitPhoneNumber = await User.findOne({ where: { phoneNumber } });
+    if (exitPhoneNumber) {
+      throw new BadRequestError(Message.PHONE_NUMBER_IS_INVALID);
+    }
     // Kiểm tra password có trùng email hay không?
     if (password.indexOf(email) !== -1) {
+      // Kiểm tra password có trùng email hay không?
       throw new BadRequestError(Message.USER_IS_INVALID);
     }
 
@@ -92,7 +93,6 @@ export class userServices {
     if (!(await this.comparePassword(password, user.password)) || !user.status === AccountStatus.Active) {
       throw new BadRequestError(Message.WRONG_PASSWORD);
     }
-
     // TODO: Có thể lỗi logic về dấu !
     if (!user.status === AccountStatus.Active) {
       throw new BadRequestError(Message.ACCOUNT_NOT_ACTIVATED);
@@ -301,14 +301,5 @@ export class userServices {
     return {
       token: user.token
     };
-  }
-
-  static async myProfile(userId) {
-    const user = await User.findByPk(userId);
-    if (!user) {
-      throw new NotFoundError(Message.USER_NOT_FOUND);
-    }
-
-    return user;
   }
 }

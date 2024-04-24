@@ -10,7 +10,9 @@ import { Block } from './block.model.js';
 import { Message } from '#constants';
 
 export class BlockServices {
-  // 1:Lấy danh sách các blocks của 1 user
+  // 1:Lấy danh sách các user mà bị block bởi người dùng hiện tại
+  // userId:người sở hữu block
+  // targetId:người bị user này block
   static async getListBlocks(userId, body) {
     const { index, count } = { ...body };
     const blocks = await Block.findAll({
@@ -25,7 +27,33 @@ export class BlockServices {
       offset: index,
       limit: count
     });
+    // blocks sẽ chứa thông tin bảng user và object target tương ứng(ví dụ)
+    //               {
+    //                   "id": 5,
+    //                   "targetId": 21,
+    //                   "userId": 25,
+    //                   "createdAt": "2024-04-15T08:03:34.000Z",
+    //                   "updatedAt": "2024-04-15T08:03:37.000Z",
+    //                   "target": {
+    //                       "id": 21,
+    //                       "role": null,
+    //                       "avatar": "https://cloudflare-ipfs.com/avatar/978.jpg",
+    //                       "coverImage": null,
+    //                       "phoneNumber": null,
+    //                       "email": "HoangViet90@gmail.com",
+    //                       "password": "$2a$10$HKgQ8SKcbNBPr7LcQExX8OetnuDkpXPxK89tArx3/5xHcE5jdcAra",
+    //                       "token": null,
+    //                       "username": "Dương Khánh Ngô",
+    //                       "status": 1,
+    //                       "coins": 83,
+    //                       "lastActive": null,
+    //                       "deletedAt": null,
+    //                       "createdAt": "2024-04-06T15:34:46.798Z",
+    //                       "updatedAt": "2024-04-06T15:34:46.798Z"
+    //                   }
+    //               },
     return blocks.map((block) => ({
+      blocks,
       id: String(block.target.id),
       name: block.target.username || '',
       avatar: block.target.avatar
@@ -35,9 +63,8 @@ export class BlockServices {
   // 2:Set Block 1 user
   static async setBlock(userId, targetId) {
     if (targetId === userId) {
-      throw new BadRequestError(Message.CAN_NOT_BLOCK_);
+      throw new BadRequestError(Message.CAN_NOT_BLOCK);
     }
-    // await this.authService.getUserById(targetId);
     const userTarget = await User.findOne({
       where: { id: targetId }
     });

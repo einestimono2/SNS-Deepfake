@@ -1,14 +1,21 @@
 import { FriendServices } from './friend.service.js';
 
 import { CatchAsyncError } from '#middlewares';
-// 1--Đăng ký
+import { getPaginationAttributes, getPaginationSummary } from '#utils';
+
 export class FriendControllers {
   static getRequestedFriends = CatchAsyncError(async (req, res) => {
     const { userId } = req.userPayload;
-    const listRequestedFriends = await FriendServices.getRequestedFriends(userId, req.body);
-    res.ok({
-      data: listRequestedFriends
-    });
+    const listRequestedFriends = await FriendServices.getRequestedFriends(
+      userId,
+      ...getPaginationAttributes(req.query)
+    );
+    res.ok(
+      getPaginationSummary({
+        ...req.query,
+        listRequestedFriends
+      })
+    );
   });
 
   static setRequestFriend = CatchAsyncError(async (req, res) => {
@@ -30,20 +37,25 @@ export class FriendControllers {
 
   static getUserFriends = CatchAsyncError(async (req, res) => {
     const { userId } = req.userPayload;
-    const { targetId } = req.params;
-    const data = await FriendServices.getUserFriends(userId, targetId);
-    res.ok({
-      data
-    });
+    const data = await FriendServices.getUserFriends(userId, ...getPaginationAttributes(req.query));
+    res.ok(
+      getPaginationSummary({
+        ...req.query,
+        data
+      })
+    );
   });
 
   static getSuggestedFriends = CatchAsyncError(async (req, res) => {
     const { userId } = req.userPayload;
     const { targetId } = req.params;
-    const remainUsers = await FriendServices.getSuggestedFriends(userId, targetId);
-    res.ok({
-      data: remainUsers
-    });
+    const remainUsers = await FriendServices.getSuggestedFriends(userId, ...getPaginationAttributes(req.query));
+    res.ok(
+      getPaginationSummary({
+        ...req.query,
+        remainUsers
+      })
+    );
   });
 
   static setUnfriend = CatchAsyncError(async (req, res) => {

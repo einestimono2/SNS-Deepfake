@@ -1,3 +1,5 @@
+import { Op } from 'sequelize';
+
 import { Block } from '../block/block.model.js';
 import { BlockServices } from '../block/block.service.js';
 import { BadRequestError } from '../core/error.response.js';
@@ -13,6 +15,15 @@ import { FeelType, Message, costs } from '#constants';
 export class CommentServices {
   static async getMarkComment(userId, postId, body) {
     const { index, count } = { ...body };
+    const usersIdBlocked = await Block.findAll({
+      where: { userId },
+      attributes: ['targetId']
+    });
+    // Danh sach các userId mà bị mình blocgettargetId
+    const usersIdBlocking = await Block.findAll({
+      where: { targetId: userId },
+      attributes: ['userId']
+    });
     // Tìm kiếm bài viết
     const post = await Post.findOne({ where: { id: postId } });
     if (!post) {
@@ -25,16 +36,22 @@ export class CommentServices {
       throw new BadRequestError(Message.CAN_NOT_BLOCK);
     }
     // Lấy danh sách các đánh dấu của bài viết tương ứng của những tác giả không bị mình block và không block mình
-    const marks = await Mark.findAll({
+    const marksTotal = await Mark.findAll({
       include: [
         {
           model: User,
           as: 'user',
           required: true,
-          include: [
-            { model: Block, as: 'blocked', where: { userId }, required: false },
-            { model: Block, as: 'blocking', where: { targetId: userId }, required: false }
-          ]
+          attributes: ['id', 'avatar', 'username', 'email', 'phoneNumber'],
+          where: {
+            id: {
+              // [Op.notIn]: usersIdBlocked.targetId
+              [Op.notIn]: [
+                ...usersIdBlocked.map((block) => block.targetId),
+                ...usersIdBlocking.map((block) => block.userId)
+              ]
+            }
+          }
         }
       ],
       where: { postId },
@@ -42,12 +59,17 @@ export class CommentServices {
       offset: index,
       limit: count
     });
-    console.log('hi2');
+    const marks = [];
+    for (const e of marksTotal) {
+      const mark = e.toJSON();
+      marks.push(mark);
+    }
+    // console.log(marks);
     const markedComments = await Promise.all(
       // Ứng với mỗi marks lấy danh sách các comment tương ứng
       marks.map(async (mark) => {
         const comments = await Comment.findAll({
-          where: { markId: mark.id, '$user.blocked.id$': null, '$author.blocking.id$': null },
+          where: { markId: mark.id },
           include: {
             model: User,
             as: 'user',
@@ -55,18 +77,24 @@ export class CommentServices {
             //   [Op.and]: [{ '$blocked.id$': null }, { '$blocking.id$': null }]
             // },
             required: false, // Đảm bảo rằng việc join không làm mất bất kỳ bản ghi nào nếu không có kết quả phù hợp
-            // attributes: ['id', 'username', 'avatar'],
-            include: [
-              { model: Block, as: 'blocked', where: { userId }, required: false },
-              { model: Block, as: 'blocking', where: { targetId: userId }, required: false }
-            ]
+            attributes: ['id', 'username', 'avatar'],
+            where: {
+              id: {
+                // [Op.notIn]: usersIdBlocked.targetId
+                [Op.notIn]: [
+                  ...usersIdBlocked.map((block) => block.targetId),
+                  ...usersIdBlocking.map((block) => block.userId)
+                ]
+              }
+            }
           },
           order: [['id', 'ASC']]
         });
         mark.comments = comments;
-        // return mark;
+        return mark;
       })
     );
+    console.log(markedComments);
     return markedComments.map((mark) => ({
       id: String(mark.id),
       mark_content: mark.content,
@@ -104,7 +132,7 @@ export class CommentServices {
       if (!mark) {
         throw new BadRequestError(Message.MARK_IS_INVALID);
       }
-      // Kiểm tra xem người dùng hiện tại có bị block bởi tác giả hay không
+      // Kiểm tra xem người dùng hiện tại có bị block bởi tác giả của mark hay là tác giả của bài viết hay không?
       if (
         (await BlockServices.isBlock(mark.post.authorId, userId)) ||
         (await BlockServices.isBlock(mark.userId, userId))
@@ -116,7 +144,7 @@ export class CommentServices {
         content,
         userId
       });
-      // this.notificationService.createNotification({
+      //   NotificationServices.createNotification({
       //   type: NotificationType.PostCommented,
       //   userId: mark.post.authorId,
       //   post: mark.post,
@@ -269,6 +297,15 @@ export class CommentServices {
   // Đã test
   static async getListFeels(userId, postId, body) {
     const { count, index } = { ...body };
+    const usersIdBlocked = await Block.findAll({
+      where: { userId },
+      attributes: ['targetId']
+    });
+    // Danh sach các userId mà bị mình blocgettargetId
+    const usersIdBlocking = await Block.findAll({
+      where: { targetId: userId },
+      attributes: ['userId']
+    });
     // Tìm bài đăng theo id
     const post = await Post.findOne({ where: { id: postId } });
     // Nếu không tìm thấy bài đăng, ném ra một ngoại lệ
@@ -281,8 +318,8 @@ export class CommentServices {
       throw new BadRequestError(Message.CAN_NOT_BLOCK);
     }
     // Lấy danh sách cảm xúc cho bài đăng và danh sách người dùng tương ứng với các feel
-    const feels = await Feel.findAll({
-      where: { postId, '$user.blocked.id$': null, '$user.blocking.id$': null },
+    const feelTotal = await Feel.findAll({
+      where: { postId },
       include: {
         model: User,
         as: 'user',
@@ -291,23 +328,33 @@ export class CommentServices {
         // },
         required: false, // Đảm bảo rằng việc join không làm mất bất kỳ bản ghi nào nếu không có kết quả phù hợp
         attributes: ['id', 'username', 'avatar'],
-        include: [
-          { model: Block, as: 'blocked', where: { userId }, required: false },
-          { model: Block, as: 'blocking', where: { targetId: userId }, required: false }
-        ]
+        where: {
+          id: {
+            // [Op.notIn]: usersIdBlocked.targetId
+            [Op.notIn]: [
+              ...usersIdBlocked.map((block) => block.targetId),
+              ...usersIdBlocking.map((block) => block.userId)
+            ]
+          }
+        }
       },
       order: [['id', 'DESC']],
       offset: index,
       limit: count
     });
-    console.log(feels[0].user);
+    const feels = [];
+    for (const e of feelTotal) {
+      const feel = e.toJSON();
+      feels.push(feel);
+    }
+    console.log(feels[0].user.id);
     return feels.map((feel) => ({
       id: String(feel.id),
       feel: {
         user: {
           id: String(feel.user.id),
           name: feel.user.username || '',
-          avatar: feel.user.avatar
+          avatar: feel.user.avatar || ''
         },
         type: String(feel.type)
       }

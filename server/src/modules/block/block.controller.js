@@ -1,14 +1,18 @@
 import { BlockServices } from './block.service.js';
 
 import { CatchAsyncError } from '#middlewares';
-// 1--Đăng ký
+import { getPaginationAttributes, getPaginationSummary } from '#utils';
+
 export class BlockControllers {
   static getListBlocks = CatchAsyncError(async (req, res) => {
     const { userId } = req.userPayload;
-    const listBlocks = await BlockServices.getListBlocks(userId, req.body);
-    res.ok({
-      data: listBlocks
-    });
+    const listBlocks = await BlockServices.getListBlocks(userId, ...getPaginationAttributes(req.query));
+    res.ok(
+      getPaginationSummary({
+        ...req.query,
+        listBlocks
+      })
+    );
   });
 
   static setBlock = CatchAsyncError(async (req, res) => {

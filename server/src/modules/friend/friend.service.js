@@ -21,30 +21,35 @@ export class FriendServices {
         {
           model: User,
           as: 'user',
-          required: true,
-          attributes: {
-            include: [
-              [
-                // Lấy ra số lượng bạn chung
-                sequelize.literal(
-                  `(SELECT COUNT(*) FROM "Friends" AS "same_friend"
-                                INNER JOIN "Friends" AS "target_friends" ON "same_friend"."targetId" = "target_friends"."userId"
-                                WHERE "user"."id" = "target_friends"."targetId" AND "target_friends"."userId" = ${userId})`
-                ),
-                'friendsCount'
-              ]
-            ]
-          }
+          required: true
+          // Xem xét lại để lấy ra số lượng bạn chung của 2 người
+          // attributes: {
+          //   include: [
+          //     [
+          //       // Lấy ra số lượng bạn chung
+          //       sequelize.literal(
+          //         `(SELECT COUNT(*) FROM "Friends" AS "same_friend"
+          //                       INNER JOIN "Friends" AS "target_friends" ON "same_friend"."targetId" = "target_friends"."userId"
+          //                       WHERE "user"."id" = "target_friends"."targetId" AND "target_friends"."userId" = "user"."id")`
+          //       ),
+          //       'friendsCount'
+          //     ]
+          //   ]
+          // }
         }
       ],
       order: [['id', 'DESC']],
       offset: index,
       limit: count
     });
+    const friend_requests = [];
     for (const friendRequest of requestedFriends) {
-      friendRequest.read = true;
-      await friendRequest.save();
+      const friend_request = friendRequest.toJSON();
+      friend_requests.push(friend_request);
+      // friendRequest.read = true;
+      // await friendRequest.save();
     }
+    console.log(friend_requests);
     return {
       requests: requestedFriends.map((requestedFriend) => ({
         id: String(requestedFriend.user.id),
@@ -69,10 +74,12 @@ export class FriendServices {
     }
     // Kiểm tra xem đã có yêu cầu kết bạn từ hai người dùng này chưa
     const existedRequest = await FriendRequest.findOne({
-      where: [
-        { userId, targetId },
-        { userId: targetId, targetId: userId }
-      ]
+      where: {
+        [Op.or]: [
+          { userId, targetId },
+          { userId: targetId, targetId: userId }
+        ]
+      }
     });
     if (existedRequest) {
       throw new BadRequestError(Message.UNABLE_TO_SENT_FRIEND_REQUEST);
@@ -116,10 +123,16 @@ export class FriendServices {
     // Nếu yêu cầu được chấp nhận
     if (isAccept === '1') {
       // Tạo mối quan hệ bạn mới và cùng lúc
-      await Friend.bulkCreate([
-        { targetId, userId },
-        { targetId: userId, userId: targetId }
-      ]);
+      const newFriends = [
+        await Friend.create({
+          targetId,
+          userId
+        }),
+        await Friend.create({
+          targetId: userId,
+          userId: targetId
+        })
+      ];
       await FriendRequest.destroy({ where: { id: request.id } });
       // Tạo thông báo cho người gửi yêu cầu
       // await this.notificationService.createNotification({
@@ -128,6 +141,8 @@ export class FriendServices {
       //   target: user
       // });
     }
+    // Nếu hủy
+    await FriendRequest.destroy({ where: { id: request.id } });
     return {};
     // Xóa yêu cầu kết bạn
   }
@@ -141,19 +156,20 @@ export class FriendServices {
       include: [
         {
           model: User,
-          as: 'target',
-          attributes: {
-            include: [
-              [
-                sequelize.literal(
-                  `(SELECT COUNT(*) FROM "Friends" AS "same_friend"
-                                INNER JOIN "Friends" AS "target_friends" ON "same_friend"."targetId" = "target_friends"."userId"
-                                WHERE "target"."id" = "target_friends"."targetId" AND "target_friends"."userId" = ${userId})`
-                ),
-                'friendsCount'
-              ]
-            ]
-          }
+          as: 'target'
+          // Xem lại để lấy được số lượng bạn chung của 2 người
+          // attributes: {
+          //   include: [
+          //     [
+          //       sequelize.literal(
+          //         `(SELECT COUNT(*) FROM "Friends" AS "same_friend"
+          //                       INNER JOIN "Friends" AS "target_friends" ON "same_friend"."targetId" = "target_friends"."userId"
+          //                       WHERE "target"."id" = "target_friends"."targetId" AND "target_friends"."userId" = ${userId})`
+          //       ),
+          //       'friendsCount'
+          //     ]
+          //   ]
+          // }
         }
       ],
       // order: [['id', 'DESC']],
@@ -234,6 +250,12 @@ export class FriendServices {
       offset: index,
       limit: count
     });
+    const posts = [];
+    for (const e of remainUsers) {
+      const post = e.toJSON();
+      posts.push(post);
+    }
+    console.log(posts);
     // Trả về danh sách người dùng còn lại đã được chọn
     return remainUsers.map((remainUser) => ({
       id: String(remainUser.id),

@@ -59,6 +59,7 @@ export class AdminServices {
       posts.push(post);
     }
     // console.log(posts);
+    console.log(posts);
     const total = await Post.count({ where: { status: { [sequelize.Op.ne]: null } } });
     console.log(total);
     return {
@@ -112,26 +113,12 @@ export class AdminServices {
       const coefficient = rate === MarkType.Fake ? 0 : 3;
       post.author.coins += coefficient * costs.createPost;
       await post.author.save();
-      // await this.notificationService.createNotification({
-      //   type: NotificationType.PlusCoins,
-      //   userId: user.id,
-      //   targetId: post.author.id,
-      //   postId: post.id,
-      //   coins: coefficient * costs.createPost
-      // });
     };
     const checkFeels = post.feels.map(async (feel) => {
       const { user: feelOfUser, type } = feel;
       const feelCoefficient = type === rate ? 3 : -1;
       feelOfUser.coins += feelCoefficient * costs.createFeel;
       await feelOfUser.save();
-      // await this.notificationService.createNotification({
-      //   type: NotificationType.PlusCoins,
-      //   userId: user.id,
-      //   targetId: feelOfUser.id,
-      //   postId: post.id,
-      //   coins: feelCoefficient * costs.createFeel
-      // });
     });
 
     const checkMarks = post.marks.map(async (mark) => {
@@ -196,6 +183,7 @@ export class AdminServices {
       const group = e.toJSON();
       groups.push(group);
     }
+    console.log(groups);
     const total = await Group.count({ where: { groupName: { [sequelize.Op.ne]: null } } });
     console.log(total);
     return {

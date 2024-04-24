@@ -63,6 +63,12 @@ export const Message = {
   EMAIL_NOT_EXISTS: {
     msg: 'Email does not exist!'
   },
+  HASHTAGE_IS_INVALID: {
+    msg: 'Hashtage is invalid!'
+  },
+  EMAIL_OR_PASSWORD_IS_INVALID: {
+    msg: 'Email or password is invalid!'
+  },
   FILE_NOT_FOUND: {
     msg: 'File does not exist!'
   },

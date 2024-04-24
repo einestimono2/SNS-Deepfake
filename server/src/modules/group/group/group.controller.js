@@ -1,7 +1,7 @@
 import { GroupService } from './group.service.js';
 
 import { CatchAsyncError } from '#middlewares';
-import { getPaginationSummary } from '#utils';
+import { getPaginationAttributes, getPaginationSummary } from '#utils';
 
 export class GroupController {
   static createGroup = CatchAsyncError(async (req, res) => {
@@ -14,7 +14,7 @@ export class GroupController {
 
   static getMyGroups = CatchAsyncError(async (req, res) => {
     const { userId } = req.userPayload;
-    const result = await GroupService.getMyGroups(userId, req.body);
+    const result = await GroupService.getMyGroups(userId, ...getPaginationAttributes(req.query));
     res.ok(
       getPaginationSummary({
         ...req.query,

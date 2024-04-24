@@ -38,7 +38,8 @@ export const costs = {
   editPost: 10,
   deletePost: 10,
   createMark: 2,
-  createFeel: 1
+  createFeel: 1,
+  sharePost: 5
 };
 
 export const MarkType = {

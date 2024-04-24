@@ -57,6 +57,7 @@ export const genFilename = (file, userKey) => {
  * Với video:   /resources/video/filename
  *  */
 export const setFileUsed = (filePath) => {
+  if (!filePath.includes(Strings.UNUSED_FILE_KEY)) return filePath;
   const fileParts = filePath.split('/');
   const newFilename = fileParts[3].substring(Strings.UNUSED_FILE_KEY.length + 3); // + 3 do ___ phân cách
 

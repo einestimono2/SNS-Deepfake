@@ -7,7 +7,7 @@ import { isAuthenticated } from '#middlewares';
 const router = Router();
 router.post('/add_post', isAuthenticated, PostControllers.addPost);
 router.get('/details_post/:postId', isAuthenticated, PostControllers.detailsPost);
-router.get('/get_list_posts', isAuthenticated, PostControllers.getListPosts);
+router.get('/get_list_posts/:groupId', isAuthenticated, PostControllers.getListPosts);
 router.put('/edit_post/:postId', isAuthenticated, PostControllers.editPost);
 router.delete('/delete_post/:postId', isAuthenticated, PostControllers.deletePost);
 router.post('/report_post/:postId', isAuthenticated, PostControllers.reportPost);

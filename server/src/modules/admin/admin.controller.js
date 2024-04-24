@@ -1,15 +1,15 @@
+import { BadRequestError } from '../core/error.response.js';
 import { User } from '../user/user.model.js';
 
 import { AdminServices } from './admin.service.js';
 
 import { Message } from '#constants';
 import { CatchAsyncError } from '#middlewares';
-import { BadRequestError } from '#modules';
-import { signToken } from '#utils';
+import { getPaginationAttributes, getPaginationSummary, signToken } from '#utils';
 
 export class AdminControllers {
   // 2--Đăng nhập
-  static login = CatchAsyncError(async (req, res) => {
+  static async login(req, res) {
     const { username, password } = req.body;
     if (!username && !password) {
       throw new BadRequestError(Message.USER_IS_INVALID);
@@ -27,31 +27,47 @@ export class AdminControllers {
     const token = signToken(username, password);
     console.log(token);
     res.ok({ message: 'Đăng nhập với admin thành công', data: token });
-  });
+  }
 
-  static getAllPost = CatchAsyncError(async (req, res) => {
-    const data = await AdminServices.getAllPosts(req.body);
-    res.ok({
-      data
-    });
+  static getAllPosts = CatchAsyncError(async (req, res) => {
+    const data = await AdminServices.getAllPosts(...getPaginationAttributes(req.query));
+    res.ok(
+      getPaginationSummary({
+        ...req.query,
+        data
+      })
+    );
   });
 
   static ratePost = CatchAsyncError(async (req, res) => {
     await AdminServices.ratePost(req.body);
     res.ok({
-      Message: 'Đánh giá thành công!'
+      Message: ' Đánh giá thành công'
     });
   });
 
   static getAllUser = CatchAsyncError(async (req, res) => {
-    const data = await AdminServices.getAllUser(req.body);
-    res.ok({
-      data
-    });
+    const data = await AdminServices.getAllUser(...getPaginationAttributes(req.query));
+    res.ok(
+      getPaginationSummary({
+        ...req.query,
+        data
+      })
+    );
   });
 
   static getAllGroup = CatchAsyncError(async (req, res) => {
-    const data = await AdminServices.getAllGroup(req.body);
+    const data = await AdminServices.getAllGroup(...getPaginationAttributes(req.query));
+    res.ok(
+      getPaginationSummary({
+        ...req.query,
+        data
+      })
+    );
+  });
+
+  static getAllPost = CatchAsyncError(async (req, res) => {
+    const data = await AdminServices.getAllPosts(req.body);
     res.ok({
       data
     });

@@ -1,6 +1,7 @@
 import { PostServices } from './post.service.js';
 
 import { CatchAsyncError } from '#middlewares';
+import { getPaginationAttributes, getPaginationSummary } from '#utils';
 
 // 1--Đăng ký
 export class PostControllers {
@@ -24,10 +25,13 @@ export class PostControllers {
 
   static getListPosts = CatchAsyncError(async (req, res) => {
     const { userId } = req.userPayload;
-    const posts = await PostServices.getListPosts(userId, req.body);
-    res.ok({
-      data: posts
-    });
+    const posts = await PostServices.getListPosts(userId, ...getPaginationAttributes(req.query), req.params);
+    res.ok(
+      getPaginationSummary({
+        ...req.query,
+        posts
+      })
+    );
   });
 
   static editPost = CatchAsyncError(async (req, res) => {
@@ -62,10 +66,13 @@ export class PostControllers {
 
   static getNewPosts = CatchAsyncError(async (req, res) => {
     const { userId } = req.userPayload;
-    const newPosts = await PostServices.getNewPosts(userId, req.body);
-    res.ok({
-      data: newPosts
-    });
+    const newPosts = await PostServices.getNewPosts(userId, ...getPaginationAttributes(req.query));
+    res.ok(
+      getPaginationSummary({
+        ...req.query,
+        newPosts
+      })
+    );
   });
 
   static setViewedPost = CatchAsyncError(async (req, res) => {
@@ -79,9 +86,12 @@ export class PostControllers {
 
   static getListVideos = CatchAsyncError(async (req, res) => {
     const { userId } = req.userPayload;
-    const data = await PostServices.getListVideos(userId, req.body);
-    res.ok({
-      data
-    });
+    const data = await PostServices.getListVideos(userId, ...getPaginationAttributes(req.query));
+    res.ok(
+      getPaginationSummary({
+        ...req.query,
+        data
+      })
+    );
   });
 }
