@@ -3,13 +3,12 @@ import 'dart:async';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:sns_deepfake/core/errors/failures.dart';
 
-import '../../../core/base/base.dart';
-import '../../../core/networks/networks.dart';
-import '../../../core/utils/utils.dart';
-import '../../authentication/authentication.dart';
+import '../../../../core/base/base.dart';
+import '../../../../core/networks/networks.dart';
+import '../../../../core/utils/utils.dart';
+import '../../../authentication/authentication.dart';
 
 part 'app_event.dart';
 part 'app_state.dart';
@@ -59,9 +58,6 @@ class AppBloc extends Bloc<AppEvent, AppState> {
       authStatus: authStatus,
       theme: ThemeMode.values.byName(themeModeStr),
     ));
-
-    // Xóa bỏ FlutterNativeSplash khi check xong
-    FlutterNativeSplash.remove();
   }
 
   FutureOr<void> _onChangeUser(ChangeUser event, Emitter<AppState> emit) {
@@ -73,10 +69,11 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     ));
   }
 
-  FutureOr<void> _onChangeTheme(ChangeTheme event, Emitter<AppState> emit) {
-    localCache
+  FutureOr<void> _onChangeTheme(
+      ChangeTheme event, Emitter<AppState> emit) async {
+    await localCache
         .putString(AppStrings.themeModeKey, event.theme.name)
-        .then((_) => emit(state.copyWith(theme: event.theme)));
+        .whenComplete(() => emit(state.copyWith(theme: event.theme)));
   }
 
   FutureOr<void> _onUpdateUserStatus(

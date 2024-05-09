@@ -87,6 +87,26 @@ class FileHelper {
 
     return imgs;
   }
+  
+  static Future<List<XFile>?> pickMultiMedia({
+    int? limit,
+    int quality = 100,
+  }) async {
+    if (await PermissionHelper.request(
+            await getPermissions(ImageSource.gallery)) ==
+        false) {
+      return null;
+    }
+
+    final _imagePicker = GetIt.instance<ImagePicker>();
+
+    final imgs = await _imagePicker.pickMultipleMedia(
+      limit: limit,
+      imageQuality: quality,
+    );
+
+    return imgs;
+  }
 
   static Future<XFile?> pickVideo({
     ImageSource source = ImageSource.gallery,

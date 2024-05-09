@@ -1,12 +1,14 @@
 import 'package:dio/dio.dart';
 
+import '../../base/base.dart';
+
 class ApiClient {
   final Dio _dio;
 
   ApiClient({required Dio dio}) : _dio = dio;
 
   // - Get Method
-  Future<Map<String, dynamic>> get(
+  Future<BaseResponse> get(
     String path, {
     data,
     Map<String, dynamic>? queryParameters,
@@ -25,7 +27,7 @@ class ApiClient {
       );
 
       if (response.statusCode == 200 || response.statusCode == 201) {
-        return response.data?['data'] ?? response.data;
+        return BaseResponse.fromMap(response.data);
       }
 
       throw "Something went wrong";
@@ -35,7 +37,7 @@ class ApiClient {
   }
 
   // - Post Method
-  Future<Map<String, dynamic>> post(
+  Future<BaseResponse> post(
     String path, {
     data,
     Map<String, dynamic>? queryParameters,
@@ -56,7 +58,7 @@ class ApiClient {
       );
 
       if (response.statusCode == 200 || response.statusCode == 201) {
-        return response.data?['data'] ?? response.data;
+        return BaseResponse.fromMap(response.data);
       }
 
       throw "Something went wrong";
@@ -66,7 +68,7 @@ class ApiClient {
   }
 
   // - Put Method
-  Future<Map<String, dynamic>> put(
+  Future<BaseResponse> put(
     String path, {
     data,
     Map<String, dynamic>? queryParameters,
@@ -87,7 +89,7 @@ class ApiClient {
       );
 
       if (response.statusCode == 200 || response.statusCode == 201) {
-        return response.data?['data'] ?? response.data;
+        return BaseResponse.fromMap(response.data);
       }
 
       throw "Something went wrong";
@@ -95,9 +97,9 @@ class ApiClient {
       rethrow;
     }
   }
-  
+
   // - Patch Method
-  Future<Map<String, dynamic>> patch(
+  Future<BaseResponse> patch(
     String path, {
     data,
     Map<String, dynamic>? queryParameters,
@@ -118,7 +120,7 @@ class ApiClient {
       );
 
       if (response.statusCode == 200 || response.statusCode == 201) {
-        return response.data?['data'] ?? response.data;
+        return BaseResponse.fromMap(response.data);
       }
 
       throw "Something went wrong";
@@ -128,7 +130,7 @@ class ApiClient {
   }
 
   // - Delete Method
-  Future<dynamic> delete(
+  Future<BaseResponse> delete(
     String path, {
     data,
     Map<String, dynamic>? queryParameters,
@@ -149,7 +151,7 @@ class ApiClient {
       if (response.statusCode == 200 ||
           response.statusCode == 201 ||
           response.statusCode == 204) {
-        return response.data?['data'] ?? response.data;
+        return BaseResponse.fromMap(response.data);
       }
 
       throw "Something went wrong";

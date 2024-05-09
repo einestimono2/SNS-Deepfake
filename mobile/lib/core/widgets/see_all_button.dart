@@ -28,7 +28,12 @@ class SeeAllButton extends StatelessWidget {
           ),
         ),
         onPressed: onClick,
-        child: Text(label ?? "See all"),
+        child: Text(
+          label ?? "See all",
+          style: TextStyle(
+            color: context.minTextColor(),
+          ),
+        ),
       ),
     );
   }

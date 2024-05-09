@@ -8,6 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../config/configs.dart';
 import '../../features/app/app.dart';
 import '../../features/authentication/authentication.dart';
+import '../../features/chat/chat.dart';
 import '../../features/upload/upload.dart';
 import '../networks/networks.dart';
 
@@ -23,8 +24,10 @@ Future<void> init() async {
 
   /* Features */
   _initAppFeature();
+  _initSocketFeature();
   _initAuthenticationFeature();
   _initUploadFeature();
+  _initChatFeature();
 
   /**
    * --> External
@@ -41,6 +44,44 @@ Future<void> init() async {
   sl.registerLazySingleton(() => LocalCache(sharedPreferences: sl()));
   sl.registerLazySingleton(() => ApiClient(dio: sl())); // ~ DioConfigs
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
+}
+
+void _initChatFeature() {
+  /* Bloc */
+  sl.registerLazySingleton(() => MyConversationsBloc(
+        myConversationUC: sl(),
+      ));
+  sl.registerLazySingleton(() => ConversationDetailsBloc(
+        myConversationsBloc: sl(),
+        appBloc: sl(),
+        getConversationDetailsUC: sl(),
+        seenConversationUC: sl(),
+        getConversationMessagesUC: sl(),
+      ));
+  sl.registerLazySingleton(() => MessageBloc(
+        sendMessageUC: sl(),
+        appBloc: sl(),
+      ));
+
+  /* Use Case */
+  sl.registerLazySingleton(() => MyConversationUC(repository: sl()));
+  sl.registerLazySingleton(() => GetConversationDetailsUC(repository: sl()));
+  sl.registerLazySingleton(() => GetConversationMessagesUC(repository: sl()));
+  sl.registerLazySingleton(() => SendMessageUC(repository: sl()));
+  sl.registerLazySingleton(() => SeenConversationUC(repository: sl()));
+
+  /* Repository */
+  sl.registerLazySingleton<ChatRepository>(
+    () => ChatRepositoryImpl(
+      network: sl(),
+      remote: sl(),
+    ),
+  );
+
+  /* Datasource */
+  sl.registerLazySingleton<ChatRemoteDataSource>(
+    () => ChatRemoteDataSourceImpl(apiClient: sl()),
+  );
 }
 
 /* =============================== FEATURES =============================== */
@@ -72,6 +113,7 @@ void _initAuthenticationFeature() {
   /* Bloc */
   sl.registerLazySingleton(() => UserBloc(
         loginUC: sl(),
+        logoutUC: sl(),
         signUpUC: sl(),
         appBloc: sl(),
         verifyOtpUC: sl(),
@@ -82,6 +124,7 @@ void _initAuthenticationFeature() {
   /* Use Case */
   sl.registerLazySingleton(() => GetUserUC(repository: sl()));
   sl.registerLazySingleton(() => LoginUC(repository: sl()));
+  sl.registerLazySingleton(() => LogoutUC(repository: sl()));
   sl.registerLazySingleton(() => SignUpUC(repository: sl()));
   sl.registerLazySingleton(() => VerifyOtpUC(repository: sl()));
   sl.registerLazySingleton(() => ResendOtpUC(repository: sl()));
@@ -98,7 +141,7 @@ void _initAuthenticationFeature() {
 
   /* Datasource */
   sl.registerLazySingleton<UserRemoteDataSource>(
-    () => UserRemoteDataSourceImpl(localCache: sl(), apiClient: sl()),
+    () => UserRemoteDataSourceImpl(apiClient: sl()),
   );
   sl.registerLazySingleton<UserLocalDataSource>(
     () => UserLocalDataSourceImpl(localCache: sl()),
@@ -110,5 +153,14 @@ void _initAppFeature() {
   sl.registerLazySingleton(() => AppBloc(
         getUserUC: sl(),
         localCache: sl(),
+      ));
+}
+
+void _initSocketFeature() {
+  /* Bloc */
+  sl.registerLazySingleton(() => SocketBloc(
+        myConversationsBloc: sl(),
+        conversationDetailsBloc: sl(),
+        messageBloc: sl(),
       ));
 }

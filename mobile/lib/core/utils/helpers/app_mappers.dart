@@ -13,4 +13,17 @@ class AppMappers {
         return "";
     }
   }
+  
+  static String getThemeName(String themeName) {
+    switch (themeName) {
+      case "system":
+        return "THEME_SYSTEM_TEXT".tr();
+      case "light":
+        return "THEME_LIGHT_TEXT".tr();
+      case "dark":
+        return "THEME_DARK_TEXT".tr();
+      default:
+        return themeName;
+    }
+  }
 }

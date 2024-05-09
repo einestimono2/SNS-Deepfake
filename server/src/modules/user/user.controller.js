@@ -47,7 +47,6 @@ export class UserControllers {
   // 4--Đăng xuất
   static logout = CatchAsyncError(async (req, res) => {
     const { userId } = req.userPayload;
-    console.log(userId);
     const user = await User.findOne({ where: { id: userId } });
     await userServices.logout(user);
     res.ok({ message: 'Đăng xuất thành công' });

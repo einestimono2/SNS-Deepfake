@@ -7,6 +7,7 @@ class AppColors {
   static const kSecondaryColor = Color(0xFFFE9901);
   static const kContentColorLightTheme = Color(0xFF1D1D35);
   static const kContentColorDarkTheme = Color(0xFFF5FCF9);
+  // static const kContentColorDarkTheme = Color(0xFFFFFFFF);
   static const kWarninngColor = Color(0xFFF3BB1C);
   static const kErrorColor = Color(0xFFF03738);
 
@@ -15,6 +16,18 @@ class AppColors {
   static const grad3Color = Color(0xff85c325);
   static const grad4Color = Color(0xff67ae2c);
   static const grad5Color = Color(0xff74bc2b);
+
+  static final shimmerGradient = LinearGradient(
+    colors: [
+      Colors.grey.shade200,
+      Colors.grey.shade400,
+    ],
+    stops: const [
+      0.5,
+      0.5,
+    ],
+    tileMode: TileMode.repeated,
+  );
 
   static const gradColors = [grad2Color, grad4Color];
   static final gradShadowColor = grad1Color.withOpacity(0.75);

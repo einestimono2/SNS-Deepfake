@@ -1,10 +1,14 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:sns_deepfake/core/utils/extensions/theme_mode.dart';
 
-class MainLayout extends StatelessWidget {
+import '../../../core/utils/utils.dart';
+import '../bloc/bloc.dart';
+
+class MainLayout extends StatefulWidget {
   final StatefulNavigationShell body;
 
   const MainLayout({
@@ -12,17 +16,54 @@ class MainLayout extends StatelessWidget {
     required this.body,
   });
 
+  @override
+  State<MainLayout> createState() => _MainLayoutState();
+}
+
+class _MainLayoutState extends State<MainLayout> {
+  late final int? userId;
+  SocketBloc? socketBloc;
+
+  @override
+  void initState() {
+    FlutterNativeSplash.remove();
+
+    userId = context.read<AppBloc>().state.user?.id;
+    if (userId == null) {
+      AppLogger.error("[main_layout] userId - null");
+    } else {
+      socketBloc = context.read<SocketBloc>();
+      socketBloc?.add(OpenConnection(userId: userId!));
+    }
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    socketBloc?.add(CloseConnection());
+    // socketBloc?.close();
+    super.dispose();
+  }
+
   void _handleChange(int idx) {
-    body.goBranch(idx, initialLocation: idx == body.currentIndex);
+    widget.body.goBranch(idx, initialLocation: idx == widget.body.currentIndex);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: body,
+    return BlocListener<SocketBloc, SocketState>(
+      listener: (context, state) {
+        if (state.error != null) {
+          context.showError(message: state.errorMsg ?? state.error.toString());
+        }
+      },
+      child: Scaffold(
+        body: SafeArea(
+          child: widget.body,
+        ),
+        bottomNavigationBar: _bottomNavBar(context),
       ),
-      bottomNavigationBar: _bottomNavBar(context),
     );
   }
 
@@ -42,7 +83,7 @@ class MainLayout extends StatelessWidget {
         child: NavigationBar(
           animationDuration: const Duration(milliseconds: 500),
           height: 0.1.sh,
-          selectedIndex: body.currentIndex,
+          selectedIndex: widget.body.currentIndex,
           onDestinationSelected: _handleChange,
           destinations: [
             NavigationDestination(

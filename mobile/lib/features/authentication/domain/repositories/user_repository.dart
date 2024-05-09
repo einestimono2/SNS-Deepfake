@@ -33,4 +33,6 @@ abstract class UserRepository {
   Future<Either<Failure, bool>> resendOtp({
     required String email,
   });
+  
+  Future<Either<Failure, bool>> logout();
 }

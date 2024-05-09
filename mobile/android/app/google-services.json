@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "220271858894",
+    "project_id": "deepfake-25d31",
+    "storage_bucket": "deepfake-25d31.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:220271858894:android:d276c2ee54789a49972c9f",
+        "android_client_info": {
+          "package_name": "com.hust.sns_deepfake"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3xuZXVGX8HEHaPLP5E4NEyn3a5nu6EAI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:220271858894:android:82b83f173d6e2da0972c9f",
+        "android_client_info": {
+          "package_name": "com.hust.sns_deepfake.development"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3xuZXVGX8HEHaPLP5E4NEyn3a5nu6EAI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

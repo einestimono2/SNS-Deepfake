@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:sns_deepfake/core/utils/extensions/text_theme.dart';
 import 'package:sns_deepfake/core/utils/extensions/theme_mode.dart';
+import 'package:sns_deepfake/features/friend/presentation/widgets/friend_search_button.dart';
 
 import '../../../../config/configs.dart';
 import '../../../../core/widgets/widgets.dart';
@@ -35,7 +35,13 @@ class _FriendPageState extends State<FriendPage> {
         physics: const BouncingScrollPhysics(),
         slivers: [
           /* AppBar */
-          _buildAppBar(context),
+          MainSliverAppBar(
+            title: 'Bạn bè',
+            actions: [
+              const FriendSearchButton(),
+              SizedBox(width: 8.w),
+            ],
+          ),
 
           /* Other Options */
           _buildFriendOptions(context),
@@ -43,16 +49,17 @@ class _FriendPageState extends State<FriendPage> {
           /* Title */
           SliverToBoxAdapter(
             child: SectionTitle(
+              margin: EdgeInsets.fromLTRB(16.w, 12.h, 16.w, 6.h),
               showTopSeparate: true,
               title: "Lời mời kết bạn",
               showMoreText: "Xem tất cả",
-              onShowMore: () {},
+              onShowMore: () => context.goNamed(Routes.requestedFriends.name),
             ),
           ),
 
-          /* Title */
+          /* List */
           SliverPadding(
-            padding: EdgeInsets.symmetric(horizontal: 16.w),
+            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 6),
             sliver: SliverList.separated(
               separatorBuilder: (context, index) => SizedBox(height: 22.h),
               itemCount: 3,
@@ -63,7 +70,7 @@ class _FriendPageState extends State<FriendPage> {
           /* See more button */
           SliverToBoxAdapter(
             child: SeeAllButton(
-              onClick: () {},
+              onClick: () => context.goNamed(Routes.requestedFriends.name),
               margin: EdgeInsets.all(16.w),
             ),
           ),
@@ -102,26 +109,6 @@ class _FriendPageState extends State<FriendPage> {
           ],
         ),
       ),
-    );
-  }
-
-  SliverAppBar _buildAppBar(BuildContext context) {
-    return SliverAppBar(
-      pinned: true,
-      title: Text(
-        'Bạn bè',
-        style: Theme.of(context).textTheme.headlineLarge.sectionStyle,
-      ),
-      actions: [
-        IconButton(
-          style: IconButton.styleFrom(
-            backgroundColor: context.minBackgroundColor(),
-          ),
-          onPressed: () => context.goNamed(Routes.searchFriend.name),
-          icon: Icon(Icons.search, size: 24.sp),
-        ),
-        SizedBox(width: 8.w),
-      ],
     );
   }
 }

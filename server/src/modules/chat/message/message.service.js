@@ -28,7 +28,8 @@ export class MessageService {
 
     // Cập nhật lastMessageTimestamp
     const conversation = await ConversationService.updateLastMessageTimestamp({
-      conversationId: body.conversationId
+      conversationId: body.conversationId,
+      messageTime: newMessage.createdAt
     });
 
     /**
@@ -41,8 +42,9 @@ export class MessageService {
       conversation.members.map((member) => member.id),
       SocketEvents.CONVERSATION_LASTEST,
       {
-        id: body.conversationId,
-        messages: [newMessage]
+        conversationId: body.conversationId,
+        lastMessageAt: conversation.lastMessageAt,
+        message: newMessage
       }
     );
 
@@ -64,12 +66,39 @@ export class MessageService {
     return newMessage;
   };
 
-  static getConversationMessages = async ({ conversationId, limit, offset }) => {
+  static seenLastestMessage = async ({ conversationId, targetId }) => {
+    const lastMessage = await Message.findOne({
+      where: { conversationId },
+      order: [['createdAt', 'DESC']],
+      limit: 1
+    });
+
+    if (lastMessage && !lastMessage.seenIds?.includes(targetId)) {
+      lastMessage.seenIds = [...lastMessage.seenIds, targetId];
+      await lastMessage.save();
+
+      // Trigger Event -> Conversation đã đọc tin đó
+      socket.triggerEvent(targetId, SocketEvents.CONVERSATION_LASTEST, {
+        conversationId,
+        message: lastMessage
+      });
+
+      // Trigger Event -> Message được cập nhật
+      socket.triggerEvent(targetId, SocketEvents.MESSAGE_UPDATE, {
+        conversationId,
+        message: lastMessage
+      });
+    }
+
+    return lastMessage;
+  };
+
+  static getConversationMessages = async ({ conversationId, limit, offset, sort }) => {
     if (!conversationId) throw new BadRequestError(MessageConst.ID_EMPTY);
 
     const result = await Message.findAndCountAll({
       where: { conversationId },
-      order: [[Sequelize.col('createdAt'), 'ASC']],
+      order: [[Sequelize.col('createdAt'), sort]],
       // include: [
       //   {
       //     association: 'sender',

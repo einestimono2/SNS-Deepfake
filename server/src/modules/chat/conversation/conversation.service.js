@@ -72,6 +72,7 @@ export class ConversationService {
     if (!userId) {
       throw new UnauthorizedError(Message.USER_NOT_FOUND);
     }
+
     const result = await Conversation.findAndCountAll({
       order: [
         // order: [[Conversation, 'lastMessageAt', 'DESC']], // Nếu muốn order theo bảng được nối
@@ -90,12 +91,14 @@ export class ConversationService {
         },
         {
           association: 'members',
-          attributes: ['id', 'avatar', 'username', 'email', 'phoneNumber'],
+          attributes: ['id', 'avatar', 'username', 'email', 'phoneNumber', 'lastActive'],
           through: { attributes: [] }
         },
         {
           association: 'messages',
-          attributes: ['senderId', 'seenIds', 'createdAt']
+          attributes: ['id', 'senderId', 'seenIds', 'createdAt', 'message', 'type', 'replyId'],
+          order: [['createdAt', 'DESC']],
+          limit: 10
         }
       ]
     });
@@ -124,40 +127,15 @@ export class ConversationService {
   static seenConversation = async ({ id, userId }) => {
     if (!id) throw new BadRequestError(Message.ID_EMPTY);
 
-    // Get last message of this conversation
-    const conversation = await Conversation.findByPk(id, {
-      include: {
-        association: 'messages',
-        order: [['createdAt', 'DESC']],
-        limit: 1
-      }
-    });
-    if (!conversation) throw new NotFoundError(Message.CONVERSATION_NOT_FOUND);
-
-    // Trigger Event -> Conversation có tin nhắn mới
-    socket.triggerEvent(userId, SocketEvents.CONVERSATION_LASTEST, {
+    const newMessage = await MessageService.seenLastestMessage({
       conversationId: id,
-      message: conversation.messages // Nếu có thì là mảng 1 phần tử
+      targetId: userId
     });
 
-    // Update seen of last messages
-    const lastMessage = conversation.messages[0];
-
-    if (lastMessage && !lastMessage.seenIds?.includes(userId)) {
-      await MessageService.updateMessage({
-        id: lastMessage.id,
-        seenIds: [...lastMessage.seenIds, userId]
-      });
-    }
-
-    // Trigger Event -> Message được cập nhật
-    socket.triggerEvent(id, SocketEvents.MESSAGE_UPDATE, {
-      messageId: lastMessage.id,
-      seenIds: [...lastMessage.seenIds, userId]
-    });
+    return newMessage;
   };
 
-  static updateLastMessageTimestamp = async ({ conversationId }) => {
+  static updateLastMessageTimestamp = async ({ conversationId, messageTime }) => {
     if (!conversationId) throw new BadRequestError(Message.ID_EMPTY);
 
     const conversation = await Conversation.findByPk(conversationId, {
@@ -168,7 +146,7 @@ export class ConversationService {
       }
     });
 
-    conversation.lastMessageAt = Date.now();
+    conversation.lastMessageAt = messageTime ?? Date.now();
 
     await conversation.save();
 

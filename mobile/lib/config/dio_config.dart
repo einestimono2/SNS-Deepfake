@@ -19,41 +19,32 @@ class DioConfigs {
     required this.connectivity,
   });
 
-  Map<String, Object> get headers {
-    final header = {
-      'accept': 'application/json',
-      'content-type': 'application/json'
-    };
-
-    final accessToken = localCache.getString(AppStrings.accessTokenKey);
-    if (accessToken?.isNotEmpty ?? false) {
-      header['Authorization'] = 'Bearer $accessToken';
-    }
-
-    return header;
-  }
-
   Dio init() {
+    /* Init */
     final dio = Dio(BaseOptions(
       baseUrl: FlavorConfig.instance.endpointUrl,
       connectTimeout: const Duration(seconds: 15),
       receiveTimeout: const Duration(seconds: 30),
       receiveDataWhenStatusError: true,
-      headers: headers,
+      headers: {
+        'accept': 'application/json',
+        'content-type': 'application/json'
+      },
       // maxRedirects: 2,
     ));
 
-    // - HTTPS certificate verification
+    /* HTTPS certificate verification */
     dio.httpClientAdapter = IOHttpClientAdapter(
       createHttpClient: () {
-        final HttpClient client =
-            HttpClient(context: SecurityContext(withTrustedRoots: false));
+        final HttpClient client = HttpClient(
+          context: SecurityContext(withTrustedRoots: false),
+        );
         client.badCertificateCallback = (cert, host, port) => true;
         return client;
       },
     );
 
-    // - Logger
+    /* Logger Interceptor */
     if (!kReleaseMode) {
       dio.interceptors.add(
         PrettyDioLogger(
@@ -68,7 +59,10 @@ class DioConfigs {
       );
     }
 
-    // Retry
+    /* Authentication Interceptor */
+    dio.interceptors.add(AuthInterceptor(localCache));
+
+    /* Retry Interceptor */
     dio.interceptors.add(
       RetryInterceptor(
         dio: dio,
@@ -89,71 +83,58 @@ class DioConfigs {
   }
 }
 
-// <== Custom ==>
-// class DioConnectivityRequestRetrier {
-//   DioConnectivityRequestRetrier({
-//     required this.dio,
-//     required this.connectivity,
-//   });
+class AuthInterceptor extends Interceptor {
+  final LocalCache localCache;
 
-//   final Dio dio;
-//   final Connectivity connectivity;
+  AuthInterceptor(this.localCache);
 
-//   Future<Response> scheduleRequestRetry(RequestOptions requestOptions) async {
-//     late StreamSubscription streamSubscription;
-//     final responseCompleter = Completer<Response>();
+  @override
+  Future<void> onRequest(
+    RequestOptions options,
+    RequestInterceptorHandler handler,
+  ) async {
+    final accessToken = localCache.getString(AppStrings.accessTokenKey);
+    if (accessToken?.isNotEmpty ?? false) {
+      options.headers.addAll({'Authorization': 'Bearer $accessToken'});
+    }
 
-//     streamSubscription =
-//         connectivity.onConnectivityChanged.listen((connectivityResult) {
-//       if (connectivityResult != ConnectivityResult.none) {
-//         streamSubscription.cancel();
-//         responseCompleter.complete(dio.request(
-//           requestOptions.path,
-//           cancelToken: requestOptions.cancelToken,
-//           data: requestOptions.data,
-//           onReceiveProgress: requestOptions.onReceiveProgress,
-//           onSendProgress: requestOptions.onSendProgress,
-//           queryParameters: requestOptions.queryParameters,
-//         ));
-//       }
-//     });
+    return handler.next(options);
+  }
 
-//     return responseCompleter.future;
-//   }
-// }
+  @override
+  void onResponse(
+    Response<dynamic> response,
+    ResponseInterceptorHandler handler,
+  ) {
+    return handler.next(response);
+  }
 
-// class RetryOnConnectionChangeInterceptor extends Interceptor {
-//   RetryOnConnectionChangeInterceptor({
-//     required this.requestRetrier,
-//   });
+  @override
+  void onError(DioException err, ErrorInterceptorHandler handler) {
+    /* Xử lý Refresh Token */
+    // if (err.response!.statusCode == 403 || err.response!.statusCode == 401) {
+    //   final options = err.requestOptions;
+    //   final accessToken = await _tokenService.refreshToken();
 
-//   final DioConnectivityRequestRetrier requestRetrier;
+    //   if (accessToken == null || accessToken.isEmpty) {
+    //     return handler.reject(err);
+    //   } else {
+    //     options.headers.addAll({'Authorization': accessToken});
 
-//   @override
-//   Future onError(
-//     DioException err,
-//     ErrorInterceptorHandler handler,
-//   ) async {
-//     if (_shouldRetry(err)) {
-//       try {
-//         return requestRetrier.scheduleRequestRetry(err.requestOptions);
-//       } catch (e) {
-//         return e;
-//       }
-//     }
+    //     try {
+    //       final _res = await _tokenService.fetch(options);
+    //       return handler.resolve(_res);
+    //     } on DioException catch (e) {
+    //      handler.next(e);
+    //      return;
+    //      }
+    // }
 
-//     return err;
-//   }
+    return handler.next(err);
+  }
+}
 
-//   bool _shouldRetry(DioException err) {
-//     return err.type == DioExceptionType.unknown &&
-//         err.error != null &&
-//         err.error is SocketException;
-//   }
-// }
-
-/*
-
+/* 
 class LoggerInterceptor extends Interceptor {
   Logger logger = Logger(
     // Customize the printer
@@ -186,5 +167,4 @@ class LoggerInterceptor extends Interceptor {
     return super.onResponse(response, handler);
   }
 }
-
 */

@@ -2,7 +2,8 @@ import 'dart:async';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sns_deepfake/features/app/bloc/app_bloc.dart';
+import 'package:sns_deepfake/core/base/base.dart';
+import 'package:sns_deepfake/features/app/bloc/app/app_bloc.dart';
 import 'package:sns_deepfake/features/authentication/authentication.dart';
 
 import '../../../app/app.dart';
@@ -12,6 +13,7 @@ part 'user_state.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
   final LoginUC loginUC;
+  final LogoutUC logoutUC;
   final SignUpUC signUpUC;
   final VerifyOtpUC verifyOtpUC;
   final ResendOtpUC resendOtpUC;
@@ -22,6 +24,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   UserBloc({
     required this.signUpUC,
     required this.loginUC,
+    required this.logoutUC,
     required this.appBloc,
     required this.verifyOtpUC,
     required this.resendOtpUC,
@@ -33,6 +36,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     on<VerifyOTPSubmit>(_onVerifyOTPSubmit);
     on<ResendOTPSubmit>(_onResendOTPSubmit);
     on<FinishProfileSubmit>(_onFinishProfileSubmit);
+    on<LogoutSubmit>(_onLogoutSubmit);
   }
 
   FutureOr<void> _onLoginSubmit(
@@ -175,5 +179,26 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         appBloc.add(ChangeUser(user: user));
       },
     );
+  }
+
+  FutureOr<void> _onLogoutSubmit(
+    LogoutSubmit event,
+    Emitter<UserState> emit,
+  ) async {
+    emit(InProgressState());
+
+    final result = await logoutUC(NoParams());
+
+    result.fold(
+      (failure) => emit(FailureState(
+        message: failure.toString(),
+        type: "LOGOUT",
+      )),
+      (user) {
+        emit(const SuccessfulState(type: "LOGOUT"));
+      },
+    );
+
+    appBloc.add(const ChangeUser(user: null));
   }
 }

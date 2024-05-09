@@ -1,4 +1,4 @@
-export 'bloc/app_bloc.dart';
+export 'bloc/bloc.dart';
 
 export 'page/sns_deepfake_app.dart';
 

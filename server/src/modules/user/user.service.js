@@ -17,6 +17,15 @@ import { redis } from '#dbs';
 import { generateVerifyCode, SendMail, setFileUsed, signToken } from '#utils';
 
 export class userServices {
+  static async myProfile(id) {
+    const user = await User.findByPk(id);
+    if (!user) {
+      throw new NotFoundError(Message.USER_NOT_FOUND);
+    }
+
+    return user;
+  }
+
   // 1--Lấy mã xác thực
   static async getVerifyCode(email) {
     const user = await User.findOne({

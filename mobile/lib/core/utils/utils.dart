@@ -5,6 +5,7 @@ export './constants/sizes.dart';
 export './constants/strings.dart';
 export './constants/texts.dart';
 export './constants/vars.dart';
+export './constants/socket.dart';
 
 export './device/device_utils.dart';
 
@@ -17,8 +18,10 @@ export './formatters/formatter.dart';
 
 export 'helpers/app_helpers.dart';
 export 'helpers/app_mappers.dart';
-export 'helpers/file_helper.dart';
+export 'helpers/pick_file_helper.dart';
 export 'helpers/permission_helper.dart';
+export 'helpers/video_helper.dart';
+export 'helpers/date_helper.dart';
 
 export './logger/logger.dart';
 

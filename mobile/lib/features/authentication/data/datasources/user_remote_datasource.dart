@@ -6,6 +6,7 @@ import '../models/user_model.dart';
 abstract class UserRemoteDataSource {
   Future<UserModel?> getUser();
   Future<Map<String, dynamic>> login(String email, String password);
+  Future<bool> logout();
   Future<UserModel> finishProfile({
     String? avatar,
     String? coverImage,
@@ -19,19 +20,15 @@ abstract class UserRemoteDataSource {
 }
 
 class UserRemoteDataSourceImpl extends UserRemoteDataSource {
-  final LocalCache localCache;
   final ApiClient apiClient;
 
-  UserRemoteDataSourceImpl({
-    required this.localCache,
-    required this.apiClient,
-  });
+  UserRemoteDataSourceImpl({required this.apiClient});
 
   @override
   Future<UserModel?> getUser() async {
     final response = await apiClient.get(Endpoints.verify);
 
-    return UserModel.fromMap(response);
+    return UserModel.fromMap(response.data);
   }
 
   @override
@@ -47,7 +44,7 @@ class UserRemoteDataSourceImpl extends UserRemoteDataSource {
       },
     );
 
-    return response;
+    return response.data;
   }
 
   @override
@@ -88,7 +85,7 @@ class UserRemoteDataSourceImpl extends UserRemoteDataSource {
       data: {"email": email, "code": otp},
     );
 
-    return response['status']; /* {status: x, id: x} */
+    return response.data['status']; /* {status: x, id: x} */
   }
 
   @override
@@ -110,6 +107,18 @@ class UserRemoteDataSourceImpl extends UserRemoteDataSource {
       },
     );
 
-    return UserModel.fromMap(response);
+    return UserModel.fromMap(response.data);
+  }
+
+  @override
+  Future<bool> logout() async {
+    await apiClient.post(Endpoints.logout);
+
+    // await Future.wait([
+    //   local.removeCacheToken(),
+    //   local.removeCacheUser(),
+    // ]);
+
+    return true;
   }
 }

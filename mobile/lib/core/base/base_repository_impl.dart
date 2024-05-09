@@ -28,13 +28,13 @@ class BaseRepositoryImpl implements BaseRepository {
       try {
         return await body();
       } on DioException catch (e) {
-        final errorMessage = HttpException.fromDioError(e).toString();
+        final _exception = HttpException.fromDioError(e);
 
         if (kDebugMode) {
-          AppLogger.error(errorMessage, e);
+          AppLogger.error(_exception.toString(), e);
         }
 
-        return Left(HttpFailure(errorMessage));
+        return Left(HttpFailure(_exception.toString(), _exception.ec));
       } on ServerException catch (error) {
         return Left(ServerFailure(error.message));
       } on UnauthenticatedException catch (_) {

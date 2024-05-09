@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:sns_deepfake/core/utils/extensions/text_theme.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sns_deepfake/core/widgets/widgets.dart';
+
+import '../widgets/friend_card.dart';
+import '../widgets/shimmer_friend_card.dart';
 
 class AllFriendPage extends StatefulWidget {
   const AllFriendPage({super.key});
@@ -18,15 +22,29 @@ class _AllFriendPageState extends State<AllFriendPage> {
       controller: _controller,
       physics: const BouncingScrollPhysics(),
       slivers: [
-        SliverAppBar(
-          excludeHeaderSemantics: true,
-          pinned: true,
-          centerTitle: true,
-          title: Text(
-            'Danh sách bạn bè',
-            style: Theme.of(context).textTheme.headlineSmall.sectionStyle,
+        /* AppBar */
+        const ChildSliverAppBar(title: 'Danh sách bạn'),
+
+        /* Title */
+        SliverToBoxAdapter(
+          child: SectionTitle(
+            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 6.h),
+            title: "309 bạn bè",
+            showMoreText: "Sắp xếp",
+            onShowMore: () {},
           ),
-        )
+        ),
+
+        /* List */
+        SliverPadding(
+          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 6.h),
+          sliver: SliverList.separated(
+            separatorBuilder: (context, index) => SizedBox(height: 8.h),
+            itemCount: 3,
+            itemBuilder: (_, i) =>
+                i % 2 == 0 ? const FriendCard() : const ShimmerFriendCard(),
+          ),
+        ),
       ],
     );
   }

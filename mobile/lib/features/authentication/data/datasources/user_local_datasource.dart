@@ -5,7 +5,9 @@ import '../models/user_model.dart';
 
 abstract class UserLocalDataSource {
   Future<void> cacheUser(UserModel user);
+  Future<bool> removeCacheUser();
   Future<void> cacheToken(String? token);
+  Future<bool> removeCacheToken();
   String? getToken();
 }
 
@@ -21,6 +23,7 @@ class UserLocalDataSourceImpl extends UserLocalDataSource {
 
   @override
   Future<void> cacheToken(String? token) async {
+    print("CacheToekn: $token");
     if (token == null) {
       return;
     }
@@ -31,5 +34,15 @@ class UserLocalDataSourceImpl extends UserLocalDataSource {
   @override
   String? getToken() {
     return localCache.getString(AppStrings.accessTokenKey);
+  }
+
+  @override
+  Future<bool> removeCacheToken() async {
+    return await localCache.clearKey(AppStrings.accessTokenKey);
+  }
+
+  @override
+  Future<bool> removeCacheUser() async {
+    return await localCache.clearKey(AppStrings.userKey);
   }
 }

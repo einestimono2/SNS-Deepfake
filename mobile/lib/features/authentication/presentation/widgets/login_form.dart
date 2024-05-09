@@ -26,8 +26,8 @@ class _LoginFormState extends State<LoginForm> {
   final _passwordFN = FocusNode();
 
   final _emailController =
-      TextEditingController(text: "einestimono2@gmail.com");
-  final _passwordController = TextEditingController(text: "123123");
+      TextEditingController(text: "user1@gmail.com");
+  final _passwordController = TextEditingController(text: "123123123");
 
   final btnController = AnimatedButtonController();
 
@@ -58,8 +58,6 @@ class _LoginFormState extends State<LoginForm> {
             title: "LOGIN_ERROR_TITLE_TEXT".tr(),
             message: state.message,
           );
-        } else if (state is SuccessfulState) {
-          btnController.reverse();
         }
       },
       child: Form(

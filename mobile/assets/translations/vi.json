@@ -78,5 +78,29 @@
 
     "SEE_MORE_TEXT": "Xem thêm",
 
+    "CHAT_PAGE_TITLE_TEXT": "Đoạn chat",
+    "YOU:_TEXT": "Bạn: ",
+    "TYPE_MESSAGE_TEXT": "Nhập tin nhắn ...",
+    "IS_ACTIVE_TEXT": "Đang hoạt động",
+    "SEEN_TEXT": {
+        "none": "Đã xem",
+        "names": "{} đã xem",
+        "other": "Seen x"
+    },
+    "SENT_TEXT": "Đã gửi",
+    "TYPING_WITH_DOTS_TEXT": {
+        "one": "đang nhập ...",
+        "other": "đang nhập ..."
+    },
+    "JUST_CREATED_CONVERSATION_TEXT": "Vừa tạo cuộc hội thoại!",
+
+    "CHANGE_APP_LANGUAGE_TEXT": "Thay đổi ngôn ngữ hệ thống",
+    "VI_TEXT": "Tiếng Việt",
+    "EN_TEXT": "Tiếng Anh",
+    "CHANGE_APP_THEME_TEXT": "Thay đổi giao diện thiết bị",
+    "THEME_SYSTEM_TEXT": "Giao diện thiết bị",
+    "THEME_LIGHT_TEXT": "Giao diện sáng",
+    "THEME_DARK_TEXT": "Giao diện tối",
+
     "": ""
 }

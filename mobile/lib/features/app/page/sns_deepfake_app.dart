@@ -4,16 +4,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../config/configs.dart';
 import '../../../core/theme/app_theme.dart';
-import '../bloc/app_bloc.dart';
+import '../bloc/app/app_bloc.dart';
 
-class SnsDeepfakeApp extends StatefulWidget {
+class SnsDeepfakeApp extends StatelessWidget {
   const SnsDeepfakeApp({super.key});
 
-  @override
-  State<SnsDeepfakeApp> createState() => _SnsDeepfakeAppState();
-}
-
-class _SnsDeepfakeAppState extends State<SnsDeepfakeApp> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AppBloc, AppState>(
@@ -25,7 +20,7 @@ class _SnsDeepfakeAppState extends State<SnsDeepfakeApp> {
         locale: context.locale,
         theme: AppTheme.lightTheme,
         darkTheme: AppTheme.darkTheme,
-        themeMode: ThemeMode.dark,
+        themeMode: state.theme,
         routerConfig: AppRouter().router,
       ),
     );

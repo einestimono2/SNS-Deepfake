@@ -19,8 +19,8 @@ class AppBlocObserver extends BlocObserver {
   @override
   void onTransition(Bloc bloc, Transition transition) {
     super.onTransition(bloc, transition);
-    log(
-      '[BLOC TRANSITION] ${transition.currentState} --> ${transition.nextState}',
-    );
+    // log(
+    //   '[BLOC TRANSITION] ${transition.currentState} --> ${transition.nextState}',
+    // );
   }
 }

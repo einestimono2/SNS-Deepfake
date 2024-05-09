@@ -29,7 +29,8 @@ export class MessageController {
   static getConversationMessages = CatchAsyncError(async (req, res) => {
     const result = await MessageService.getConversationMessages({
       conversationId: req.params.conversationId,
-      ...getPaginationAttributes(req.query)
+      ...getPaginationAttributes(req.query),
+      sort: req.query.sort ?? 'asc'
     });
 
     res.ok(

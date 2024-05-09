@@ -49,6 +49,9 @@ class _SplashPageState extends State<SplashPage> {
   @override
   dispose() {
     subscription.cancel();
+
+    print("CLOSE");
+
     super.dispose();
   }
 

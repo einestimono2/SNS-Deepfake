@@ -1,0 +1,29 @@
+{
+    "flutter": {
+        "platforms": {
+            "android": {
+                "default": {
+                    "projectId": "deepfake-25d31",
+                    "appId": "1:220271858894:android:d276c2ee54789a49972c9f",
+                    "fileOutput": "android/app/google-services.json"
+                }
+            },
+            "dart": {
+                "lib/firebase_options_development.dart": {
+                    "projectId": "deepfake-25d31",
+                    "configurations": {
+                        "android": "1:220271858894:android:82b83f173d6e2da0972c9f",
+                        "ios": "1:220271858894:ios:c2f34cfe8a0c683a972c9f"
+                    }
+                },
+                "lib/firebase_options_production.dart": {
+                    "projectId": "deepfake-25d31",
+                    "configurations": {
+                        "android": "1:220271858894:android:d276c2ee54789a49972c9f",
+                        "ios": "1:220271858894:ios:df0fa9cacdbf689f972c9f"
+                    }
+                }
+            }
+        }
+    }
+}

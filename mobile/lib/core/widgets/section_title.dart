@@ -23,7 +23,7 @@ class SectionTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: margin ?? EdgeInsets.fromLTRB(16.w, 12.h, 16.w, 6.h),
+      margin: margin,
       padding: padding ?? EdgeInsets.only(top: 8.h),
       decoration: BoxDecoration(
         border: Border(
@@ -39,7 +39,7 @@ class SectionTitle extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            "Lời mời kết bạn",
+            title,
             style: Theme.of(context).textTheme.titleLarge,
           ),
           if (onShowMore != null)

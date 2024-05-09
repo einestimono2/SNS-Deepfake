@@ -71,3 +71,5 @@ class FinishProfileSubmit extends UserEvent {
   @override
   List<Object?> get props => [email, username, phoneNumber, coverImage, avatar];
 }
+
+class LogoutSubmit extends UserEvent {}

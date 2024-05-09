@@ -43,13 +43,12 @@ class _FriendRequestCardState extends State<FriendRequestCard> {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        SizedBox.square(
-          dimension: 0.25.sw,
-          child: const AnimatedImage(
-            url:
-                "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/652.jpg",
-            isAvatar: true,
-          ),
+        AnimatedImage(
+          width: 0.225.sw,
+          height: 0.225.sw,
+          url:
+              "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/652.jpg",
+          isAvatar: true,
         ),
         SizedBox(width: 12.w),
         Expanded(
@@ -129,8 +128,16 @@ class _FriendRequestCardState extends State<FriendRequestCard> {
         onPressed: onClick,
         child: ValueListenableBuilder(
           valueListenable: listener,
-          builder: (context, value, child) =>
-              value ? AppIndicator(size: 18.sp) : Text(label),
+          builder: (context, value, child) => value
+              ? AppIndicator(size: 18.sp)
+              : Text(
+                  label,
+                  style: TextStyle(
+                    color: label == "Từ chối"
+                        ? context.minTextColor()
+                        : Colors.white,
+                  ),
+                ),
         ),
       ),
     );

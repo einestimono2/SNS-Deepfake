@@ -51,15 +51,16 @@ class SocketServer {
    * socket.broadcast.emit ==> Gửi event tới tất cả client (ngoại trừ client đó)
    */
   onConnection = (/** @type {Socket} */ socket) => {
-    const { userId } = socket.handshake.query;
+    const userId = Number(socket.handshake.query.userId);
     if (userId) this.addToMapper(userId, socket.id);
 
     logger.info(`User '${userId}' connected with socket '${socket.id}'!`);
+    logger.info([...this.mapper.entries()]);
 
     // Ngắt kết nối
     socket.on('disconnect', () => {
       this.removeFromMapper(userId, socket.id);
-      this.io.emit(SocketEvents.USER_ONLINE, this.mapper.keys());
+      this.io.emit(SocketEvents.USER_ONLINE, [...this.mapper.keys()]);
 
       logger.info(`User '${userId}' disconnected with socket '${socket.id}'!`);
     });
@@ -67,7 +68,7 @@ class SocketServer {
     // ==================== All Events ====================
 
     // 0. Online
-    this.io.emit(SocketEvents.USER_ONLINE, this.mapper.keys());
+    this.io.emit(SocketEvents.USER_ONLINE, [...this.mapper.keys()]);
 
     // 1. Join conversation
     socket.on(SocketEvents.CONVERSATION_JOIN, ({ conversationId }) => {
@@ -87,6 +88,12 @@ class SocketServer {
       this.triggerEvent(members, SocketEvents.TYPING_END, { conversationId, userId });
     });
 
+    socket.on('test', (data) => {
+      const arr = this.mapUserIdsToSocketIds([5, 7, 9]);
+
+      console.log(arr);
+    });
+
     // ==================== End Events ====================
   };
 
@@ -97,6 +104,8 @@ class SocketServer {
   }
 
   removeFromMapper(userId, socketId) {
+    if (!userId || !socketId) return;
+
     const values = this.mapper.get(userId);
 
     if (values.length === 1) this.mapper.delete(userId);
@@ -107,16 +116,26 @@ class SocketServer {
       );
   }
 
-  mapUserIdsToSocketIds(...userIds) {
-    return userIds.reduce((result, value) => result.concat(this.mapper.get(value) ?? value), []);
+  mapUserIdsToSocketIds(userIds) {
+    return userIds.reduce((result, value) => {
+      const values = this.mapper.get(value);
+
+      if (values) {
+        result = result.concat(values);
+      }
+
+      return result;
+    }, []);
   }
 
   triggerEvent(room, event, data) {
-    let _room = room;
+    let _room;
 
     // Truyền mảng users
     if (Array.isArray(room)) {
       _room = this.mapUserIdsToSocketIds(room);
+    } else {
+      _room = this.mapper.get(room) ?? room;
     }
 
     this.io.to(_room).emit(event, data);

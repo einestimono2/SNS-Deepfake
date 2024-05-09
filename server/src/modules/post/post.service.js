@@ -275,7 +275,8 @@ export class PostServices {
       group: ['Post.id', 'author.id']
     });
     if (!postTotal?.length) {
-      throw new BadRequestError(Message.POST_NOT_FOUND);
+      // throw new BadRequestError(Message.POST_NOT_FOUND);
+      return { post: [] };
     }
     const posts = [];
     for (const e of postTotal) {

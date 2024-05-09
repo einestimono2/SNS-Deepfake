@@ -7,6 +7,7 @@ class FlavorConfig {
   final Flavor flavor;
   final String name;
   final String endpointUrl;
+  final String socketUrl;
   final String baseUrl;
   final String basePrefix;
   final String appTitle;
@@ -19,6 +20,7 @@ class FlavorConfig {
     required String appTitle,
     required String baseUrl,
     required String basePrefix,
+    required String socketUrl,
   }) {
     _instance = FlavorConfig._internal(
       flavor: flavor,
@@ -27,6 +29,7 @@ class FlavorConfig {
       appTitle: appTitle,
       basePrefix: basePrefix,
       baseUrl: baseUrl,
+      socketUrl: socketUrl,
     );
 
     return _instance;
@@ -39,6 +42,7 @@ class FlavorConfig {
     required this.appTitle,
     required this.basePrefix,
     required this.baseUrl,
+    required this.socketUrl,
   });
 
   static FlavorConfig get instance => _instance;

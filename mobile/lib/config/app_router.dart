@@ -9,6 +9,7 @@ import '../core/utils/utils.dart';
 import '../core/widgets/widgets.dart';
 import '../features/app/app.dart';
 import '../features/authentication/authentication.dart';
+import '../features/chat/chat.dart';
 import '../features/friend/friend.dart';
 import '../features/news_feed/news_feed.dart';
 import '../features/notification/notification.dart';
@@ -143,17 +144,32 @@ class AppRouter {
             // navigatorKey: shellNavigatorKey,
             routes: <RouteBase>[
               GoRoute(
-                // parentNavigatorKey: shellNavigatorKey,
-                name: Routes.newsFeed.name,
-                path: Routes.newsFeed.path,
-                pageBuilder: (BuildContext context, GoRouterState state) {
-                  return fadeTransition(
-                    state: state,
-                    context: context,
-                    child: NewsFeedPage(key: state.pageKey),
-                  );
-                },
-              ),
+                  // parentNavigatorKey: shellNavigatorKey,
+                  name: Routes.newsFeed.name,
+                  path: Routes.newsFeed.path,
+                  pageBuilder: (BuildContext context, GoRouterState state) {
+                    return fadeTransition(
+                      state: state,
+                      context: context,
+                      child: NewsFeedPage(key: state.pageKey),
+                    );
+                  },
+                  routes: [
+                    /* Create Post */
+                    GoRoute(
+                      parentNavigatorKey: rootNavigatorKey,
+                      name: Routes.createPost.name,
+                      path: Routes.createPost.path,
+                      pageBuilder: (BuildContext context, GoRouterState state) {
+                        return slideTransition(
+                          type: SlideType.btt,
+                          state: state,
+                          context: context,
+                          child: CreatePostPage(key: state.pageKey),
+                        );
+                      },
+                    ),
+                  ]),
             ],
           ),
 
@@ -162,73 +178,60 @@ class AppRouter {
             // navigatorKey: shellNavigatorKey,
             routes: <RouteBase>[
               GoRoute(
-                  // parentNavigatorKey: shellNavigatorKey,
-                  name: Routes.friend.name,
-                  path: Routes.friend.path,
-                  pageBuilder: (BuildContext context, GoRouterState state) {
-                    return fadeTransition(
-                      state: state,
-                      context: context,
-                      child: FriendPage(key: state.pageKey),
-                    );
-                  },
-                  routes: [
-                    /* Suggested Friends */
-                    GoRoute(
-                      name: Routes.suggestedFriends.name,
-                      path: Routes.suggestedFriends.path,
-                      pageBuilder: (BuildContext context, GoRouterState state) {
-                        return slideTransition(
-                          fromRight: true,
-                          state: state,
-                          context: context,
-                          child: SuggestedFriendsPage(key: state.pageKey),
-                        );
-                      },
-                    ),
+                // parentNavigatorKey: shellNavigatorKey,
+                name: Routes.friend.name,
+                path: Routes.friend.path,
+                pageBuilder: (BuildContext context, GoRouterState state) {
+                  return fadeTransition(
+                    state: state,
+                    context: context,
+                    child: FriendPage(key: state.pageKey),
+                  );
+                },
+                routes: [
+                  /* Suggested Friends */
+                  GoRoute(
+                    name: Routes.suggestedFriends.name,
+                    path: Routes.suggestedFriends.path,
+                    pageBuilder: (BuildContext context, GoRouterState state) {
+                      return slideTransition(
+                        type: SlideType.rtl,
+                        state: state,
+                        context: context,
+                        child: SuggestedFriendsPage(key: state.pageKey),
+                      );
+                    },
+                  ),
 
-                    /* Requested Friends */
-                    GoRoute(
-                      name: Routes.requestedFriends.name,
-                      path: Routes.requestedFriends.path,
-                      pageBuilder: (BuildContext context, GoRouterState state) {
-                        return slideTransition(
-                          fromRight: true,
-                          state: state,
-                          context: context,
-                          child: RequestedFriendsPage(key: state.pageKey),
-                        );
-                      },
-                    ),
+                  /* Requested Friends */
+                  GoRoute(
+                    name: Routes.requestedFriends.name,
+                    path: Routes.requestedFriends.path,
+                    pageBuilder: (BuildContext context, GoRouterState state) {
+                      return slideTransition(
+                        type: SlideType.rtl,
+                        state: state,
+                        context: context,
+                        child: RequestedFriendsPage(key: state.pageKey),
+                      );
+                    },
+                  ),
 
-                    /* All Friends */
-                    GoRoute(
-                      name: Routes.allFriend.name,
-                      path: Routes.allFriend.path,
-                      pageBuilder: (BuildContext context, GoRouterState state) {
-                        return slideTransition(
-                          fromRight: true,
-                          state: state,
-                          context: context,
-                          child: AllFriendPage(key: state.pageKey),
-                        );
-                      },
-                    ),
-
-                    /* Search Friends */
-                    GoRoute(
-                      name: Routes.searchFriend.name,
-                      path: Routes.searchFriend.path,
-                      pageBuilder: (BuildContext context, GoRouterState state) {
-                        return slideTransition(
-                          fromRight: true,
-                          state: state,
-                          context: context,
-                          child: SearchFriendPage(key: state.pageKey),
-                        );
-                      },
-                    ),
-                  ]),
+                  /* All Friends */
+                  GoRoute(
+                    name: Routes.allFriend.name,
+                    path: Routes.allFriend.path,
+                    pageBuilder: (BuildContext context, GoRouterState state) {
+                      return slideTransition(
+                        type: SlideType.rtl,
+                        state: state,
+                        context: context,
+                        child: AllFriendPage(key: state.pageKey),
+                      );
+                    },
+                  ),
+                ],
+              ),
             ],
           ),
 
@@ -237,17 +240,34 @@ class AppRouter {
             // navigatorKey: shellNavigatorKey,
             routes: <RouteBase>[
               GoRoute(
-                // parentNavigatorKey: shellNavigatorKey,
-                name: Routes.chat.name,
-                path: Routes.chat.path,
-                pageBuilder: (BuildContext context, GoRouterState state) {
-                  return fadeTransition(
-                    state: state,
-                    context: context,
-                    child: NewsFeedPage(key: state.pageKey),
-                  );
-                },
-              ),
+                  // parentNavigatorKey: shellNavigatorKey,
+                  name: Routes.chat.name,
+                  path: Routes.chat.path,
+                  pageBuilder: (BuildContext context, GoRouterState state) {
+                    return fadeTransition(
+                      state: state,
+                      context: context,
+                      child: ChatPage(key: state.pageKey),
+                    );
+                  },
+                  routes: [
+                    GoRoute(
+                      parentNavigatorKey: rootNavigatorKey,
+                      name: Routes.conversation.name,
+                      path: Routes.conversation.path,
+                      pageBuilder: (BuildContext context, GoRouterState state) {
+                        return slideTransition(
+                          type: SlideType.rtl,
+                          state: state,
+                          context: context,
+                          child: ConversationPage(
+                            key: state.pageKey,
+                            id: int.parse(state.pathParameters['id']!),
+                          ),
+                        );
+                      },
+                    ),
+                  ]),
             ],
           ),
 
@@ -294,17 +314,31 @@ class AppRouter {
             // navigatorKey: shellNavigatorKey,
             routes: <RouteBase>[
               GoRoute(
-                // parentNavigatorKey: shellNavigatorKey,
-                name: Routes.profile.name,
-                path: Routes.profile.path,
-                pageBuilder: (BuildContext context, GoRouterState state) {
-                  return fadeTransition(
-                    state: state,
-                    context: context,
-                    child: ProfilePage(key: state.pageKey),
-                  );
-                },
-              ),
+                  // parentNavigatorKey: shellNavigatorKey,
+                  name: Routes.profile.name,
+                  path: Routes.profile.path,
+                  pageBuilder: (BuildContext context, GoRouterState state) {
+                    return fadeTransition(
+                      state: state,
+                      context: context,
+                      child: ProfilePage(key: state.pageKey),
+                    );
+                  },
+                  routes: [
+                    GoRoute(
+                      parentNavigatorKey: rootNavigatorKey,
+                      name: Routes.setting.name,
+                      path: Routes.setting.path,
+                      pageBuilder: (BuildContext context, GoRouterState state) {
+                        return slideTransition(
+                          type: SlideType.rtl,
+                          state: state,
+                          context: context,
+                          child: SettingPage(key: state.pageKey),
+                        );
+                      },
+                    ),
+                  ]),
             ],
           ),
         ],
@@ -314,11 +348,10 @@ class AppRouter {
       final userState = context.read<AppBloc>().state;
       print("[ROUTER] ${state.fullPath}");
 
-      final bool finishing = state.matchedLocation == Routes.finish.path;
-      final bool initializing = state.matchedLocation == Routes.splash.path;
-
       // unauthenticated + splash --> login
-      if (userState.authStatus == AuthStatus.unauthenticated && initializing) {
+      if (userState.authStatus == AuthStatus.unauthenticated &&
+          (state.matchedLocation == Routes.splash.path ||
+              state.matchedLocation == Routes.profile.path)) {
         return Routes.login.path;
       }
 
@@ -337,8 +370,13 @@ class AppRouter {
           case 0:
             return Routes.verify.path;
           case 1:
+            final bool finishing = state.matchedLocation == Routes.finish.path;
+            final bool initializing =
+                state.matchedLocation == Routes.splash.path;
+            final bool logging = state.matchedLocation == Routes.login.path;
+
             /* Trường hợp khởi động lại app + trường hợp complete profile xong */
-            if (finishing || initializing) {
+            if (finishing || initializing || logging) {
               return userState.user!.token != null
                   ? Routes.newsFeed.path
                   : Routes.login.path;
@@ -404,12 +442,34 @@ CustomTransitionPage fadeTransition<T>({
   );
 }
 
+enum SlideType { ltr, rtl, btt, ttb }
+
 CustomTransitionPage slideTransition<T>({
   required BuildContext context,
   required GoRouterState state,
   required Widget child,
-  bool fromRight = false,
+  SlideType type = SlideType.ltr,
 }) {
+  Offset begin = Offset.zero;
+  Offset end = Offset.zero;
+
+  switch (type) {
+    case SlideType.ltr:
+      begin = const Offset(-2.5, 0);
+      break;
+    case SlideType.rtl:
+      begin = const Offset(2.5, 0);
+      break;
+    case SlideType.btt:
+      begin = const Offset(0, 1);
+      break;
+    case SlideType.ttb:
+      begin = const Offset(0, -2.5);
+      break;
+    default:
+      break;
+  }
+
   return CustomTransitionPage<T>(
     key: state.pageKey,
     child: child,
@@ -417,11 +477,8 @@ CustomTransitionPage slideTransition<T>({
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
       return SlideTransition(
         position: animation.drive(
-          Tween(
-            begin: Offset(fromRight ? 2.5 : -2.5, 0),
-            end: Offset.zero,
-          ).chain(
-            CurveTween(curve: Curves.easeIn),
+          Tween(begin: begin, end: end).chain(
+            CurveTween(curve: Curves.ease),
           ),
         ),
         child: child,
@@ -435,7 +492,7 @@ CustomTransitionPage slideTransition<T>({
  * GoRoute(
  *    path: '/sample/:id1/:id2',
  *    name: 'sample',
- *    builder: () => Sample(id1: state.params['id1'], id2: state.params['id2']),
+ *    builder: () => Sample(id1: state.pathParameters['id1'], id2: state.pathParameters['id2']),
  * ), 
  * 
  *!- queryParams
@@ -447,7 +504,7 @@ CustomTransitionPage slideTransition<T>({
  * 
  * context.namedLocation(
  *    serviceDetailsRouter,
- *    params: <String, String>{'id': product.id},
+ *    pathParameters: <String, String>{'id': product.id},
  *    queryParams: <String, String>{'sort': 'desc', 'filter': '0'},
  * ),
  */

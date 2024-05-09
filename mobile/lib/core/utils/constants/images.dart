@@ -14,4 +14,8 @@ class AppImages {
   static const String checkInternet = "assets/lotties/check-internet.json";
 
   static const String appLogo = "assets/app/logo_color_transparent.png";
+
+  static const String viFlag = "assets/images/flag_vi.png";
+  static const String usFlag = "assets/images/flag_us.png";
+
 }

@@ -78,5 +78,29 @@
 
     "SEE_MORE_TEXT": "See more",
 
+    "CHAT_PAGE_TITLE_TEXT": "Chat",
+    "YOU:_TEXT": "You: ",
+    "TYPE_MESSAGE_TEXT": "Type message ...",
+    "IS_ACTIVE_TEXT": "Active",
+    "SEEN_TEXT": {
+        "none": "Seen",
+        "names": "{} has seen",
+        "other": "Seen x"
+    },
+    "SENT_TEXT": "Sent",
+    "TYPING_WITH_DOTS_TEXT": {
+        "one": "is typing ...",
+        "other": "are typing ..."
+    },
+    "JUST_CREATED_CONVERSATION_TEXT": "Just created a conversation!",
+
+    "CHANGE_APP_LANGUAGE_TEXT": "Change application language",
+    "VI_TEXT": "Vietnamese",
+    "EN_TEXT": "English",
+    "CHANGE_APP_THEME_TEXT": "Change application theme",
+    "THEME_SYSTEM_TEXT": "Use device theme",
+    "THEME_LIGHT_TEXT": "Light theme",
+    "THEME_DARK_TEXT": "Dark theme",
+
     "": ""
 }

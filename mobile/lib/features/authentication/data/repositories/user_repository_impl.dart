@@ -1,7 +1,9 @@
 import 'package:dartz/dartz.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../core/base/base.dart';
 import '../../../../core/errors/failures.dart';
+import '../../../../core/utils/utils.dart';
 import '../../domain/repositories/user_repository.dart';
 import '../datasources/user_local_datasource.dart';
 import '../datasources/user_remote_datasource.dart';
@@ -45,7 +47,9 @@ class UserRepositoryImpl extends BaseRepositoryImpl implements UserRepository {
         final user = UserModel.fromMap(data['user']);
 
         await local.cacheUser(user);
-        await local.cacheToken(data['accessToken']);
+        await local.cacheToken(user.token);
+        print(
+            "login: ${(await SharedPreferences.getInstance()).getString(AppStrings.accessTokenKey)}");
 
         return Right(user);
       },
@@ -118,6 +122,29 @@ class UserRepositoryImpl extends BaseRepositoryImpl implements UserRepository {
         await local.cacheUser(user);
 
         return Right(user);
+      },
+    );
+  }
+
+  @override
+  Future<Either<Failure, bool>> logout() async {
+    return await checkNetwork<bool>(
+      () async {
+        try {
+          await remote.logout();
+        } catch (e) {
+          AppLogger.error("Logout API error", e);
+        } finally {
+          await local.removeCacheToken();
+          await local.removeCacheUser();
+        }
+
+        // await Future.wait([
+        //   local.removeCacheToken(),
+        //   local.removeCacheUser(),
+        // ]);
+
+        return const Right(true);
       },
     );
   }

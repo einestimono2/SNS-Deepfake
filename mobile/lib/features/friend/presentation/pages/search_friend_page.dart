@@ -1,27 +1,24 @@
 import 'package:flutter/material.dart';
 
-class SearchFriendPage extends StatefulWidget {
-  const SearchFriendPage({super.key});
+class FriendSearch extends SearchDelegate {
+  @override
+  List<Widget>? buildActions(BuildContext context) => [
+        IconButton(
+          onPressed: () => query.isEmpty ? close(context, null) : query = '',
+          icon: const Icon(Icons.clear),
+        ),
+      ];
 
   @override
-  State<SearchFriendPage> createState() => _SearchFriendPageState();
-}
-
-class _SearchFriendPageState extends State<SearchFriendPage> {
-  final ScrollController _controller = ScrollController();
+  Widget? buildLeading(BuildContext context) => const BackButton();
 
   @override
-  Widget build(BuildContext context) {
-    return CustomScrollView(
-      shrinkWrap: true,
-      controller: _controller,
-      physics: const BouncingScrollPhysics(),
-      slivers: const [
-        SliverAppBar(
-          excludeHeaderSemantics: true,
-          pinned: true,
-        )
-      ],
-    );
+  Widget buildResults(BuildContext context) {
+    return Container();
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    return Container();
   }
 }

@@ -28,11 +28,12 @@ class ServerFailure extends Failure {
 
 class HttpFailure extends Failure {
   final dynamic message;
+  final int? ec;
 
-  HttpFailure(this.message);
+  HttpFailure(this.message, this.ec);
 
   @override
-  List<Object?> get props => [message];
+  List<Object?> get props => [message, ec];
 
   @override
   String toString() => message ?? 'HttpFailure - message - null';

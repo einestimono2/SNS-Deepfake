@@ -21,6 +21,7 @@ class UnauthenticatedException implements Exception {}
 
 class HttpException implements Exception {
   late String message;
+  int? ec;
 
   HttpException.fromDioError(DioException dioError) {
     switch (dioError.type) {
@@ -38,7 +39,9 @@ class HttpException implements Exception {
         break;
       case DioExceptionType.badResponse:
         try {
-          message = _handleBadResponse(dioError.response);
+          final data = _handleBadResponse(dioError.response);
+          message = data[0];
+          ec = data[1];
         } catch (e) {
           message = e.toString();
         }
@@ -59,45 +62,48 @@ class HttpException implements Exception {
     }
   }
 
-  String _handleBadResponse(Response<dynamic>? response) {
+  List<dynamic> _handleBadResponse(Response<dynamic>? response) {
     final ec = response?.data['ec'];
-    if (ec != null) {
-      switch (ec) {
-        /* Custom error code */
-        // Bearer Token Empty
-        case 1001:
-          return response?.data?['message'];
-
-        default:
-      }
-    }
+    String message;
 
     switch (response?.statusCode) {
       case 400:
-        return response?.data?['message'] ?? 'Bad request.';
+        message = response?.data?['message'] ?? 'Bad request.';
+        break;
       case 401:
-        return response?.data?['message'] ?? 'Authentication failed.';
+        message = response?.data?['message'] ?? 'Authentication failed.';
+        break;
       case 403:
-        return response?.data?['message'] ??
+        message = response?.data?['message'] ??
             'The authenticated user is not allowed to access the specified API endpoint.';
+        break;
       case 404:
-        return response?.data?['message'] ??
+        message = response?.data?['message'] ??
             'The requested resource does not exist.';
+        break;
       case 405:
-        return response?.data?['message'] ??
+        message = response?.data?['message'] ??
             'Method not allowed. Please check the Allow header for the allowed HTTP methods.';
+        break;
       case 415:
-        return response?.data?['message'] ??
+        message = response?.data?['message'] ??
             'Unsupported media type. The requested content type or version number is invalid.';
+        break;
       case 422:
-        return response?.data?['message'] ?? 'Data validation failed.';
+        message = response?.data?['message'] ?? 'Data validation failed.';
+        break;
       case 429:
-        return response?.data?['message'] ?? 'Too many requests.';
+        message = response?.data?['message'] ?? 'Too many requests.';
+        break;
       case 500:
-        return response?.data?['message'] ?? 'Internal server error.';
+        message = response?.data?['message'] ?? 'Internal server error.';
+        break;
       default:
-        return 'Oops something went wrong!';
+        message = 'Oops something went wrong!';
+        break;
     }
+
+    return [message, ec];
   }
 
   @override

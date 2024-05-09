@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:sns_deepfake/core/utils/extensions/text_theme.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../../core/widgets/widgets.dart';
+import '../widgets/friend_suggest_card.dart';
 
 class SuggestedFriendsPage extends StatefulWidget {
   const SuggestedFriendsPage({super.key});
@@ -18,14 +21,26 @@ class _SuggestedFriendsPageState extends State<SuggestedFriendsPage> {
       controller: _controller,
       physics: const BouncingScrollPhysics(),
       slivers: [
-        SliverAppBar(
-          pinned: true,
-          centerTitle: true,
-          title: Text(
-            'Gợi ý',
-            style: Theme.of(context).textTheme.headlineSmall.sectionStyle,
+        /* App Bar */
+        const ChildSliverAppBar(title: 'Gợi ý'),
+
+        /* Title */
+        SliverToBoxAdapter(
+          child: SectionTitle(
+            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 6.h),
+            title: "Những người có thể bạn biết",
           ),
-        )
+        ),
+
+        /* List */
+        SliverPadding(
+          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
+          sliver: SliverList.separated(
+            separatorBuilder: (context, index) => SizedBox(height: 22.h),
+            itemCount: 3,
+            itemBuilder: (_, i) => const FriendSuggestCard(),
+          ),
+        ),
       ],
     );
   }

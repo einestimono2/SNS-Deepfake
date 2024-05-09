@@ -23,7 +23,7 @@ class AppState extends Equatable {
   }) =>
       AppState._(
         authStatus: authStatus ?? this.authStatus,
-        user: user ?? this.user,
+        user: user,
         theme: theme ?? this.theme,
       );
 }

@@ -12,6 +12,10 @@ Future<dynamic> showAppAlertDialog({
   String? content,
   String? okText,
   VoidCallback? onOK,
+  String? cancelText,
+  VoidCallback? onCancel,
+  String? option3,
+  VoidCallback? onOption3,
 }) async {
   dynamic response;
 
@@ -24,9 +28,9 @@ Future<dynamic> showAppAlertDialog({
         content: content == null ? null : Text(content),
         actions: <CupertinoDialogAction>[
           CupertinoDialogAction(
-            onPressed: () => Navigator.of(context).pop(),
+            onPressed: onCancel ?? () => Navigator.of(context).pop(),
             child: Text(
-              "CANCEL_TEXT".tr(),
+              cancelText ?? "CANCEL_TEXT".tr(),
               textAlign: TextAlign.justify,
             ),
           ),
@@ -38,6 +42,15 @@ Future<dynamic> showAppAlertDialog({
               textAlign: TextAlign.justify,
             ),
           ),
+          if (option3 != null && onOption3 != null)
+            CupertinoDialogAction(
+              onPressed: onOption3,
+              isDefaultAction: true,
+              child: Text(
+                option3,
+                textAlign: TextAlign.justify,
+              ),
+            ),
         ],
       ),
     );
@@ -58,9 +71,9 @@ Future<dynamic> showAppAlertDialog({
                 borderRadius: BorderRadius.circular(6.r),
               ),
             ),
-            onPressed: () => Navigator.of(context).pop(),
+            onPressed: onCancel ?? () => Navigator.of(context).pop(),
             child: Text(
-              "CANCEL_TEXT".tr(),
+              cancelText ?? "CANCEL_TEXT".tr(),
               textAlign: TextAlign.justify,
             ),
           ),
@@ -79,6 +92,22 @@ Future<dynamic> showAppAlertDialog({
               textAlign: TextAlign.justify,
             ),
           ),
+          if (option3 != null && onOption3 != null)
+            TextButton(
+              style: TextButton.styleFrom(
+                padding: EdgeInsets.symmetric(vertical: 6.h, horizontal: 6.w),
+                minimumSize: Size.zero,
+                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(6.r),
+                ),
+              ),
+              onPressed: onOption3,
+              child: Text(
+                option3,
+                textAlign: TextAlign.justify,
+              ),
+            ),
         ],
       ),
     );

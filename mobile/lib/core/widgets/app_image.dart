@@ -17,7 +17,14 @@ Widget _defaultImage([
 
   if (isAvatar) {
     return ClipOval(
-      child: CircleAvatar(child: _image),
+      child: CircleAvatar(
+        backgroundColor: Colors.white,
+        radius: 100,
+        child: Image.asset(
+          AppImages.avatarPlaceholder,
+          fit: BoxFit.cover,
+        ),
+      ),
     );
   }
 
@@ -72,18 +79,21 @@ class AnimatedImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _mapImageType(isAvatar, radius, _buildFadeInImage());
+    return SizedBox(
+      width: width,
+      height: height,
+      child: _mapImageType(isAvatar, radius, _buildFadeInImage()),
+    );
   }
 
   CachedNetworkImage _buildFadeInImage() {
     return CachedNetworkImage(
-      placeholder: (context, url) => _defaultImage(AppImages.imagePlaceholder),
+      placeholder: (context, url) =>
+          _defaultImage(AppImages.imagePlaceholder, isAvatar, radius),
       imageUrl: url,
       fit: fit,
-      width: width,
-      height: height,
       errorWidget: (context, error, stackTrace) =>
-          _defaultImage(AppImages.errorImage),
+          _defaultImage(AppImages.errorImage, isAvatar, radius),
     );
   }
 }
@@ -108,7 +118,11 @@ class LocalImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _mapImageType(isAvatar, radius, _assetImage());
+    return SizedBox(
+      width: width,
+      height: height,
+      child: _mapImageType(isAvatar, radius, _assetImage()),
+    );
   }
 
   Widget _assetImage() {
@@ -117,8 +131,6 @@ class LocalImage extends StatelessWidget {
       fit: BoxFit.cover,
       errorBuilder: (context, error, stackTrace) =>
           _defaultImage(AppImages.errorImage, isAvatar, radius),
-      width: width,
-      height: height,
     );
   }
 }
@@ -143,7 +155,11 @@ class RemoteImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _mapImageType(isAvatar, radius, _networkImage());
+    return SizedBox(
+      width: width,
+      height: height,
+      child: _mapImageType(isAvatar, radius, _networkImage()),
+    );
   }
 
   Widget _networkImage() {

@@ -8,7 +8,7 @@
 PRODUCT_NAME = SNS Deepfake
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = com.hust.sns_deepfake
+PRODUCT_BUNDLE_IDENTIFIER = com.hust.sns-deepfake
 
 // The copyright displayed in application information
 PRODUCT_COPYRIGHT = Copyright © 2024 com.hust. All rights reserved.
