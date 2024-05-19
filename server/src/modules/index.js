@@ -24,7 +24,7 @@ export const routers = express.Router();
 
 // ----- List routes -----
 // ScheduleService.ScheduleTime();
-routers.use(`${Strings.API_PREFIX}`, (res) => {
+routers.use(`${Strings.API_PREFIX}`, (req, res, next) => {
   res.send('Deployed to production environment successfully');
 });
 // 1. API Key
