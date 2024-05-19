@@ -85,3 +85,9 @@ export const MessageType = {
   Document: 'document',
   Link: 'link'
 };
+
+export const SearchType = {
+  User: 'user',
+  Post: 'post',
+  Group: 'group'
+};

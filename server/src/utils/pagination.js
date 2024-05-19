@@ -14,7 +14,6 @@ export const getPaginationAttributes = ({ page, size }) => {
 
 export const getPaginationSummary = ({ result, page, size }) => {
   const { count: totalCount, rows: data } = result;
-
   return {
     data,
     extra: {

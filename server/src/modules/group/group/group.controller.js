@@ -13,8 +13,10 @@ export class GroupController {
   });
 
   static getMyGroups = CatchAsyncError(async (req, res) => {
-    const { userId } = req.userPayload;
-    const result = await GroupService.getMyGroups(userId, ...getPaginationAttributes(req.query));
+    const result = await GroupService.getMyGroups({
+      userId: req.userPayload.userId,
+      ...getPaginationAttributes(req.query)
+    });
     res.ok(
       getPaginationSummary({
         ...req.query,
@@ -39,7 +41,7 @@ export class GroupController {
 
   static deleteGroup = CatchAsyncError(async (req, res) => {
     await GroupService.deleteGroup(req.userPayload.userId, req.params.groupId);
-    res.ok({ message: 'Đã xóa thành viên khỏi nhóm!' });
+    res.ok({ message: 'Đã xóa nhóm thành công!' });
   });
 
   static addMembers = CatchAsyncError(async (req, res) => {

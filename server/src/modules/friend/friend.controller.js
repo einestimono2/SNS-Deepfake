@@ -5,15 +5,14 @@ import { getPaginationAttributes, getPaginationSummary } from '#utils';
 
 export class FriendControllers {
   static getRequestedFriends = CatchAsyncError(async (req, res) => {
-    const { userId } = req.userPayload;
-    const listRequestedFriends = await FriendServices.getRequestedFriends(
-      userId,
+    const result = await FriendServices.getRequestedFriends({
+      userId: req.userPayload.userId,
       ...getPaginationAttributes(req.query)
-    );
+    });
     res.ok(
       getPaginationSummary({
         ...req.query,
-        listRequestedFriends
+        result
       })
     );
   });
@@ -36,24 +35,31 @@ export class FriendControllers {
   });
 
   static getUserFriends = CatchAsyncError(async (req, res) => {
-    const { userId } = req.userPayload;
-    const data = await FriendServices.getUserFriends(userId, ...getPaginationAttributes(req.query));
+    const result = await FriendServices.getUserFriends({
+      userId: req.userPayload.userId,
+      ...getPaginationAttributes(req.query)
+    });
+    console.log(result);
     res.ok(
       getPaginationSummary({
         ...req.query,
-        data
+        result
       })
     );
   });
 
   static getSuggestedFriends = CatchAsyncError(async (req, res) => {
-    const { userId } = req.userPayload;
-    const { targetId } = req.params;
-    const remainUsers = await FriendServices.getSuggestedFriends(userId, ...getPaginationAttributes(req.query));
+    // const { limit, offset } = { ...getPaginationAttributes(req.query) };
+    // console.log(limit);
+    const result = await FriendServices.getSuggestedFriends({
+      userId: req.userPayload.userId,
+      ...getPaginationAttributes(req.query)
+    });
+    console.log(result);
     res.ok(
       getPaginationSummary({
         ...req.query,
-        remainUsers
+        result
       })
     );
   });
@@ -74,5 +80,21 @@ export class FriendControllers {
     res.ok({
       message: 'Đã xóa yêu cầu kết bạn thành công'
     });
+  });
+
+  static searchFriends = CatchAsyncError(async (req, res) => {
+    const result = await FriendServices.searchFriends(
+      {
+        userId: req.userPayload.userId,
+        ...getPaginationAttributes(req.query)
+      },
+      req.body
+    );
+    res.ok(
+      getPaginationSummary({
+        ...req.query,
+        result
+      })
+    );
   });
 }

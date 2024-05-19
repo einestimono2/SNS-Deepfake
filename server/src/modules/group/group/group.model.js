@@ -31,10 +31,25 @@ export const Group = postgre.define('Group', {
 });
 
 (() => {
-  // User ---sở hữu---*> Group
-  // User.hasMany(Group, { foreignKey: 'creatorId', as: 'own_group' });
-  // Group.belongsTo(User, { foreignKey: 'creatorId', as: 'group_owner' });
-  Group.hasMany(Post, { foreignKey: 'groupId', as: 'posts', onDelete: 'CASCADE' });
-  // Post.belongsTo(Group, { foreignKey: 'groupId', as: 'group' });
+  // Group ---sở hữu---*> Post
+
+  // Group.hasMany(Post, { foreignKey: 'groupId', as: 'posts', onDelete: 'CASCADE' });
+  // Post.belongsToMany(Group, {
+  //   through: PostGroup,
+  //   foreignKey: 'postId',
+  //   as: 'groups'
+  // });
+  // Group.belongsToMany(Post, {
+  //   through: PostGroup,
+  //   foreignKey: 'groupId',
+  //   as: 'posts'
+  // });
+
+  Group.hasMany(Post, { foreignKey: 'groupId', as: 'posts' });
+  Post.belongsTo(Group, { foreignKey: 'groupId', as: 'group' });
+
+  // Post.hasMany(PostGroup, { foreignKey: 'postId' });
+  // PostGroup.belongsTo(Post, { foreignKey: 'postId' });
+
   Group.sync({ alter: true }).then(() => logger.info("Table 'Group' synced!"));
 })();

@@ -2,6 +2,7 @@ import { DataTypes } from 'sequelize';
 
 import { User } from '../user/user.model.js';
 
+import { SearchType } from '#constants';
 import { postgre } from '#dbs';
 import { logger } from '#utils';
 
@@ -18,6 +19,11 @@ export const Search = postgre.define('Search', {
   keyword: {
     type: DataTypes.STRING,
     allowNull: false
+  },
+  type: {
+    type: DataTypes.ENUM,
+    values: Object.values(SearchType),
+    defaultValue: SearchType.User
   }
 });
 

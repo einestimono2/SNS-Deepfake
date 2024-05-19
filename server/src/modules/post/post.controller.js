@@ -24,12 +24,18 @@ export class PostControllers {
   });
 
   static getListPosts = CatchAsyncError(async (req, res) => {
-    const { userId } = req.userPayload;
-    const posts = await PostServices.getListPosts(userId, ...getPaginationAttributes(req.query), req.params);
+    const { groupId } = req.params;
+    const result = await PostServices.getListPosts(
+      {
+        userId: req.userPayload.userId,
+        ...getPaginationAttributes(req.query)
+      },
+      groupId
+    );
     res.ok(
       getPaginationSummary({
         ...req.query,
-        posts
+        result
       })
     );
   });
@@ -65,12 +71,14 @@ export class PostControllers {
   });
 
   static getNewPosts = CatchAsyncError(async (req, res) => {
-    const { userId } = req.userPayload;
-    const newPosts = await PostServices.getNewPosts(userId, ...getPaginationAttributes(req.query));
+    const result = await PostServices.getNewPosts({
+      userId: req.userPayload.userId,
+      ...getPaginationAttributes(req.query)
+    });
     res.ok(
       getPaginationSummary({
         ...req.query,
-        newPosts
+        result
       })
     );
   });
@@ -85,12 +93,19 @@ export class PostControllers {
   });
 
   static getListVideos = CatchAsyncError(async (req, res) => {
-    const { userId } = req.userPayload;
-    const data = await PostServices.getListVideos(userId, ...getPaginationAttributes(req.query));
+    const { groupId } = req.params;
+    const result = await PostServices.getListVideos(
+      {
+        userId: req.userPayload.userId,
+        ...getPaginationAttributes(req.query)
+      },
+      groupId
+    );
+    console.log(result);
     res.ok(
       getPaginationSummary({
         ...req.query,
-        data
+        result
       })
     );
   });

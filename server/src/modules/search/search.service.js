@@ -4,6 +4,7 @@ import { Block } from '../block/block.model.js';
 import { Comment } from '../comment/comment.model.js';
 import { BadRequestError } from '../core/error.response.js';
 import { Friend } from '../friend/friend.model.js';
+import { Group } from '../group/group/group.model.js';
 import { Feel } from '../post/models/feel.model.js';
 import { Mark } from '../post/models/mark.model.js';
 import { PostImage } from '../post/models/post_image.model.js';
@@ -13,11 +14,11 @@ import { User } from '../user/user.model.js';
 
 import { Search } from './search.model.js';
 
-import { Message } from '#constants';
+import { Message, SearchType } from '#constants';
 
 export class SearchServices {
   // Tìm kiếm bài viết
-  static async searchPost(userId, body) {
+  static async searchPost({ userId, limit, offset }, body) {
     const usersIdBlocked = await Block.findAll({
       where: { userId },
       attributes: ['targetId']
@@ -28,11 +29,11 @@ export class SearchServices {
       attributes: ['userId']
     });
     // Lưu thông tin tìm kiếm vào cơ sở dữ liệu
-    const { index, count } = { ...body };
     let { keyword } = { ...body };
     const search = await Search.create({
       keyword,
-      userId
+      userId,
+      type: SearchType.Post
     });
     // Tìm kiếm
     keyword = keyword.trim().replace(/\s+/g, '|');
@@ -87,8 +88,8 @@ export class SearchServices {
         ['rank', 'DESC'],
         ['id', 'DESC']
       ],
-      offset: index,
-      limit: count,
+      offset,
+      limit,
       subQuery: false
     });
     // Lấy số lượng bình luận cho mỗi bài viết
@@ -131,29 +132,39 @@ export class SearchServices {
   }
 
   // Tìm kiếm người dùng
-  static async searchUser(userId, body) {
-    const { index, count } = { ...body };
+  static async searchUser({ userId, limit, offset }, body) {
     let { keyword } = { ...body };
     // Lưu thông tin tìm kiếm vào cơ sở dữ liệu
     const search = await Search.create({
       keyword,
-      userId
+      userId,
+      type: SearchType.User
+    });
+    const usersIdBlocked = await Block.findAll({
+      where: { userId },
+      attributes: ['targetId']
+    });
+    // Danh sach các userId mà bị mình blocgettargetId
+    const usersIdBlocking = await Block.findAll({
+      where: { targetId: userId },
+      attributes: ['userId']
     });
     // Tìm kiếm
     keyword = keyword.trim().replace(/\s+/g, '|');
     const users = await User.findAll({
       include: [
         {
-          model: Block,
-          as: 'blocked',
-          where: { userId },
-          required: false
-        },
-        {
-          model: Block,
-          as: 'blocking',
-          where: { targetId: userId },
-          required: false
+          model: User,
+          as: 'author',
+          where: {
+            id: {
+              // [Op.notIn]: usersIdBlocked.targetId
+              [Op.notIn]: [
+                ...usersIdBlocked.map((block) => block.targetId),
+                ...usersIdBlocking.map((block) => block.userId)
+              ]
+            }
+          }
         },
         {
           model: Friend,
@@ -197,8 +208,8 @@ export class SearchServices {
         ['lastActive', 'DESC'],
         ['id', 'DESC']
       ],
-      offset: index,
-      limit: count,
+      offset,
+      limit,
       subQuery: false
     });
     console.log(users);
@@ -210,6 +221,49 @@ export class SearchServices {
       created: user.createdAt,
       same_friends: String(user.friends.length)
     }));
+  }
+
+  // 8. Tìm kiếm nhóm
+  static async searchGroup({ userId, limit, offset }, body) {
+    const { keyword } = { ...body };
+    // Lưu thông tin tìm kiếm vào cơ sở dữ liệu
+    const search = await Search.create({
+      keyword,
+      userId,
+      type: SearchType.User
+    });
+    const groups = await Group.findAll({
+      include: [
+        {
+          model: User,
+          as: 'target',
+          required: true,
+          attributes: ['id', 'avatar', 'email', 'username', 'phoneNumber']
+        }
+      ],
+      attributes: {
+        include: [
+          [
+            sequelize.literal(
+              `ts_rank_cd(to_tsvector('english', "Group"."groupName"), to_tsquery('english', '${keyword}'))`
+            ),
+            'rank'
+          ]
+        ]
+      },
+      where: sequelize.literal(
+        ' ts_rank_cd(to_tsvector(\'english\', "Group"."groupName"), to_tsquery(\'english\', :keyword)) > 0'
+      ),
+      replacements: { keyword },
+      order: [
+        ['rank', 'DESC'],
+        ['id', 'DESC']
+      ],
+      offset,
+      limit,
+      subQuery: false
+    });
+    return groups;
   }
 
   // Lấy danh sách các tìm kiếm(Đã test)

@@ -2,9 +2,11 @@ import fs from 'fs';
 
 import { NotFoundError } from '../core/index.js';
 
+import { MediaService } from './media.service.js';
+
 import { Message } from '#constants';
 import { CatchAsyncError } from '#middlewares';
-import { getStandardPath } from '#utils';
+import { getPaginationAttributes, getPaginationSummary, getStandardPath } from '#utils';
 
 export class MediaControllers {
   //
@@ -38,7 +40,6 @@ export class MediaControllers {
         next(new NotFoundError(Message.IMAGE_NOT_FOUND));
         return;
       }
-
       res.ok();
     });
   };
@@ -78,24 +79,39 @@ export class MediaControllers {
     });
   };
 
-  // static deleteFile = async (req, res, next) => {
-  //   if (!req.params.path) {
-  //     next(new NotFoundError(Message.PATH_EMPTY));
-  //     return;
-  //   }
+  // Cho phép uopload nhiều file
+  static uploadAudios = async (req, res, next) => {
+    console.log(req);
+    if (!req.files?.length) {
+      next(new NotFoundError(Message.AUDIO_EMPTY));
+      return;
+    }
+    const files = [];
+    for (const file of req.files) {
+      files.push({
+        path: `/resources/audios/${file.filename}`,
+        name: file.filename
+      });
+    }
+    res.created({
+      data: files.length === 1 ? files[0] : files
+    });
+  };
 
-  //   const _path = req.params.filename.split('/');
-  //   console.log(_path);
+  static deleteAudio = async (req, res, next) => {
+    if (!req.params.filename) {
+      next(new NotFoundError(Message.AUDIO_EMPTY));
+      return;
+    }
+    fs.unlink(getStandardPath(`../../uploads/audios/${req.params.filename}`), (err) => {
+      if (err !== null) {
+        next(new NotFoundError(Message.AUDIO_NOT_FOUND));
+        return;
+      }
 
-  //   fs.unlink(getStandardPath(`../../uploads/${_path}`), (err) => {
-  //     if (err !== null) {
-  //       next(new NotFoundError(Message.VIDEO_NOT_FOUND));
-  //       return;
-  //     }
-
-  //     res.ok();
-  //   });
-  // };
+      res.ok();
+    });
+  };
 
   // Được thiết kế để xử lý yêu cầu phát video từ một đường dẫn tới tập tin video trong ứng dụng(Streaming)
   static getVideo = CatchAsyncError(async (req, res) => {
@@ -123,5 +139,32 @@ export class MediaControllers {
     const videoStream = fs.createReadStream(videoPath, { start, end });
 
     videoStream.pipe(res);
+  });
+
+  static createMedia = CatchAsyncError(async (req, res) => {
+    const { userId } = req.userPayload;
+    const media = await MediaService.createMedia(userId, req.body);
+    res.created({
+      data: media
+    });
+  });
+
+  static getListMedia = CatchAsyncError(async (req, res) => {
+    const { userId } = req.userPayload;
+    const result = await MediaService.getListMedia(userId, ...getPaginationAttributes(req.query));
+    res.ok(
+      getPaginationSummary({
+        ...req.query,
+        result
+      })
+    );
+  });
+
+  static deleteMedia = CatchAsyncError(async (req, res) => {
+    const { userId } = req.userPayload;
+    await MediaService.deleteMedia(userId, req.body);
+    res.ok({
+      Message: 'Xóa thành công!'
+    });
   });
 }

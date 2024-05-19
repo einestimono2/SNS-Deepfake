@@ -13,5 +13,5 @@ router.delete('/delete_post/:postId', isAuthenticated, PostControllers.deletePos
 router.post('/report_post/:postId', isAuthenticated, PostControllers.reportPost);
 router.get('/get_new_posts', isAuthenticated, PostControllers.getNewPosts);
 router.post('/set_viewed_post/:postId', isAuthenticated, PostControllers.setViewedPost);
-router.get('/get_list_videos', isAuthenticated, PostControllers.getListVideos);
+router.get('/get_list_videos/:groupId', isAuthenticated, PostControllers.getListVideos);
 export const postRouter = router;

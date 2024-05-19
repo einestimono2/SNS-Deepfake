@@ -39,6 +39,9 @@ export const Message = {
   UNSUPPORTED_VIDEO_FORMAT: {
     msg: 'Video format is not supported! (mp4|mkv|mov|avi)'
   },
+  UNSUPPORTED_AUDIO_FORMAT: {
+    msg: 'Audio format is not supported! (mp3|wav|ogg)'
+  },
   IMAGE_TOO_LARGE: {
     msg: 'Image size exceeds allowed size! (5 mb)'
   },
@@ -50,6 +53,9 @@ export const Message = {
   },
   VIDEO_EMPTY: {
     msg: "Field 'videos' can not be empty!"
+  },
+  AUDIO_EMPTY: {
+    msg: "Field 'audios' can not be empty!"
   },
   PATH_EMPTY: {
     msg: "Param 'path' can not be empty!"
@@ -81,6 +87,9 @@ export const Message = {
   VIDEO_NOT_FOUND: {
     msg: 'Video does not exist!'
   },
+  AUDIO_NOT_FOUND: {
+    msg: 'Audio does not exist!'
+  },
   USER_IS_INVALID: {
     msg: 'User is invalid!'
   },
@@ -92,6 +101,9 @@ export const Message = {
   },
   POST_NOT_FOUND: {
     msg: 'Post not found!'
+  },
+  GROUP_NOT_FOUND: {
+    msg: 'Group not found!'
   },
   CODE_NOT_FOUND: {
     msg: 'Code not found!'

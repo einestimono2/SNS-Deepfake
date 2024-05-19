@@ -79,6 +79,7 @@ export const User = postgre.define('User', {
   // friendRequesting :danh sách người dùng gửi yêu cầu kết bạn tới bạn
   User.hasMany(FriendRequest, { foreignKey: 'userId', as: 'friendRequesting' });
   User.hasMany(Friend, { foreignKey: 'userId', as: 'friends' });
+  User.hasMany(Friend, { foreignKey: 'targetId', as: 'friends1' });
   User.hasOne(Setting, { foreignKey: 'userId', as: 'pushSettings' });
 
   // Quan hệ giữa Block và User

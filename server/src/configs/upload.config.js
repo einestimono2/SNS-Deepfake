@@ -7,3 +7,8 @@ export const videoAccepted = {
   fileTypes: ['video/mp4', 'video/mkv', 'image/mov', 'image/avi'],
   fileMaxSize: 30 * 1024 * 1024 // 30mb
 };
+
+export const audioAccepted = {
+  fileTypes: ['audio/mp3', 'audio/wav', 'audio/ogg'],
+  fileMaxSize: 30 * 1024 * 1024 // 30mb
+};

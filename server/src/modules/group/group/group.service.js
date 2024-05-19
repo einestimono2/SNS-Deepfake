@@ -9,7 +9,7 @@ import { Message } from '#constants';
 export class GroupService {
   // Tạo nhóm gia đình
   static async createGroup(userId, body) {
-    const { name, memberIds, description, coverImage } = { ...body };
+    const { name, memberIds, description, coverPhoto } = { ...body };
     if (!userId) throw new UnauthorizedError(Message.USER_IS_INVALID);
     // Danh sách các thành viên
     const members = [userId, ...memberIds];
@@ -17,7 +17,7 @@ export class GroupService {
       groupName: name,
       description,
       creatorId: userId,
-      coverImage
+      coverPhoto
     });
     for (const member of members) {
       await GroupUser.create({
@@ -29,31 +29,20 @@ export class GroupService {
   }
 
   // Danh sách các nhóm
-  static async getMyGroups(userId, body) {
-    const { limit, offset } = { ...body };
+  static async getMyGroups({ userId, limit, offset }) {
     if (!userId) {
       throw new UnauthorizedError(Message.USER_IS_INVALID);
     }
-    const result = await Group.findAndCountAll({
-      order: [['updatedAt', 'DESC']],
-      limit,
-      offset,
+    const result = await GroupUser.findAndCountAll({
+      where: { userId },
       include: [
-        // {
-        //   model: GroupUser,
-        //   as: 'userofgroup',
-        //   attributes: [],
-        //   where: {
-        //     userId
-        //   }
-        // },
         {
-          model: User,
-          as: 'members',
-          attributes: ['id', 'avatar', 'username', 'email', 'phoneNumber'],
-          through: { attributes: [] }
+          model: Group,
+          as: 'groupofuser'
         }
-      ]
+      ],
+      limit,
+      offset
     });
     return result;
   }

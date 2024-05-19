@@ -15,6 +15,7 @@ import { postRouter } from './post/post.route.js';
 import { searchRouter } from './search/search.route.js';
 import { settingRouter } from './setting/setting.route.js';
 import { userRouter } from './user/user.route.js';
+import { videoScheduleRouter } from './video_schedule/video_schedule.route.js';
 
 import { Message, Strings } from '#constants';
 import { getStandardPath } from '#utils';
@@ -22,7 +23,7 @@ import { getStandardPath } from '#utils';
 export const routers = express.Router();
 
 // ----- List routes -----
-
+// ScheduleService.ScheduleTime();
 // 1. API Key
 routers.use(`${Strings.API_PREFIX}/apikey`, apiKeyRouter);
 // 2. Manage images & videos
@@ -51,6 +52,10 @@ routers.use(`${Strings.API_PREFIX}/conversation`, conversationRouter);
 routers.use(`${Strings.API_PREFIX}/message`, messageRouter);
 // 13. Group
 routers.use(`${Strings.API_PREFIX}/group`, groupRouter);
+
+// 15.VideoSchedule
+routers.use(`${Strings.API_PREFIX}/video_schedule`, videoScheduleRouter);
+
 // #. Check Health - test server
 routers.use('/health', (_req, res) => {
   res.ok({
