@@ -26,4 +26,7 @@ router.post('/add_members/:groupId', isAuthenticated, GroupController.addMembers
 
 // - [DELETE] Delete members
 router.delete('/delete_members/:groupId', isAuthenticated, GroupController.deleteMembers);
+
+// - [GET] Get all groups
+router.get('/get_all_group', GroupController.getAllGroup);
 export const groupRouter = router;

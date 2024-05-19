@@ -53,4 +53,16 @@ export class GroupController {
     await GroupService.deleteMembers(req.userPayload.userId, req.body, req.params.groupId);
     res.ok({ message: 'Đã xóa thành viên khỏi nhóm!' });
   });
+
+  static getAllGroup = CatchAsyncError(async (req, res) => {
+    const result = await GroupService.getAllGroups({
+      ...getPaginationAttributes(req.query)
+    });
+    res.ok(
+      getPaginationSummary({
+        ...req.query,
+        result
+      })
+    );
+  });
 }
