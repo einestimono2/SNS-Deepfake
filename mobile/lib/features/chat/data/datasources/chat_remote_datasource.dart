@@ -18,7 +18,7 @@ abstract class ChatRemoteDataSource {
   Future<bool> seenConversation(int id);
 
   /*  */
-  Future<BaseResponse> getConversationMessages({
+  Future<PaginationResult<MessageModel>> getConversationMessages({
     required int id,
     int? page,
     int? size,
@@ -31,6 +31,16 @@ abstract class ChatRemoteDataSource {
     String? message,
     int? replyId,
     required List<String> attachments,
+  });
+
+  /*  */
+  Future<ConversationModel> createConversation({
+    required MessageType type,
+    String? message,
+    int? replyId,
+    required List<String> attachments,
+    required List<int> memberIds,
+    String? name,
   });
 }
 
@@ -77,7 +87,7 @@ class ChatRemoteDataSourceImpl extends ChatRemoteDataSource {
   }
 
   @override
-  Future<BaseResponse> getConversationMessages({
+  Future<PaginationResult<MessageModel>> getConversationMessages({
     required int id,
     int? page,
     int? size,
@@ -92,7 +102,10 @@ class ChatRemoteDataSourceImpl extends ChatRemoteDataSource {
       },
     );
 
-    return response;
+    return PaginationResult.fromBaseResponse(
+      baseResponse: response,
+      mapFunc: (e) => MessageModel.fromMap(e),
+    );
   }
 
   @override
@@ -112,5 +125,34 @@ class ChatRemoteDataSourceImpl extends ChatRemoteDataSource {
     });
 
     return MessageModel.fromMap(response.data);
+  }
+
+  @override
+  Future<ConversationModel> createConversation({
+    required MessageType type,
+    String? message,
+    int? replyId,
+    required List<String> attachments,
+    required List<int> memberIds,
+    String? name,
+  }) async {
+    final response = await apiClient.post(Endpoints.createConversation, data: {
+      "message": {
+        "type": type.name,
+        "message": message,
+        "replyId": replyId,
+        "attachments": attachments,
+      },
+      "name": name,
+      "memberIds": memberIds,
+    });
+
+    Map<String, dynamic> conversationMap = response.data['conversation'];
+    conversationMap.addAll({
+      "members": response.data['members'],
+      "messages": [response.data['message']],
+    });
+
+    return ConversationModel.fromMap(conversationMap);
   }
 }

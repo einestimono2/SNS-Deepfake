@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../core/base/base.dart';
 import '../../../../core/errors/failures.dart';
@@ -7,7 +6,6 @@ import '../../../../core/utils/utils.dart';
 import '../../domain/repositories/user_repository.dart';
 import '../datasources/user_local_datasource.dart';
 import '../datasources/user_remote_datasource.dart';
-import '../models/user_model.dart';
 
 class UserRepositoryImpl extends BaseRepositoryImpl implements UserRepository {
   final UserRemoteDataSource remote;
@@ -20,38 +18,30 @@ class UserRepositoryImpl extends BaseRepositoryImpl implements UserRepository {
   });
 
   @override
-  Future<Either<Failure, UserModel?>> getUser() async {
-    return await checkNetwork<UserModel?>(
+  Future<Either<Failure, Map<String, dynamic>>> getUser() async {
+    return await checkNetwork<Map<String, dynamic>>(
       () async {
-        final user = await remote.getUser();
+        final data = await remote.getUser();
 
-        if (user != null) {
-          await local.cacheUser(user);
+        if (data['user'] != null) {
+          await local.cacheUser(data['user']);
         }
 
-        return Right(user);
+        return Right(data);
       },
     );
   }
 
   @override
-  Future<Either<Failure, UserModel>> login({
+  Future<Either<Failure, Map<String, dynamic>>> login({
     required String email,
     required String password,
   }) async {
-    return await checkNetwork<UserModel>(
+    return await checkNetwork<Map<String, dynamic>>(
       () async {
         final data = await remote.login(email, password);
 
-        // data = { user: {}, accessToken: '' }
-        final user = UserModel.fromMap(data['user']);
-
-        await local.cacheUser(user);
-        await local.cacheToken(user.token);
-        print(
-            "login: ${(await SharedPreferences.getInstance()).getString(AppStrings.accessTokenKey)}");
-
-        return Right(user);
+        return Right(data);
       },
     );
   }
@@ -97,16 +87,16 @@ class UserRepositoryImpl extends BaseRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<Either<Failure, UserModel>> finishProfile({
+  Future<Either<Failure, Map<String, dynamic>>> finishProfile({
     String? avatar,
     String? coverImage,
     required String email,
     required String username,
     required String phoneNumber,
   }) async {
-    return await checkNetwork<UserModel>(
+    return await checkNetwork<Map<String, dynamic>>(
       () async {
-        UserModel user = await remote.finishProfile(
+        final data = await remote.finishProfile(
           avatar: avatar,
           coverImage: coverImage,
           email: email,
@@ -114,14 +104,21 @@ class UserRepositoryImpl extends BaseRepositoryImpl implements UserRepository {
           phoneNumber: phoneNumber,
         );
 
-        final _token = local.getToken();
-        if (_token != null) {
-          user = user.copyWith(token: _token);
-        }
+        // UserModel user = data['user'];
 
-        await local.cacheUser(user);
+        // final _token = local.getToken();
+        // if (_token != null) {
+        //   user = user.copyWith(token: _token);
+        // }
 
-        return Right(user);
+        // await local.cacheUser(user);
+
+        // return Right({
+        //   "user": user,
+        //   "groups": data['groups'],
+        // });
+
+        return Right(data);
       },
     );
   }
@@ -137,6 +134,7 @@ class UserRepositoryImpl extends BaseRepositoryImpl implements UserRepository {
         } finally {
           await local.removeCacheToken();
           await local.removeCacheUser();
+          await local.removeSelectedGroup();
         }
 
         // await Future.wait([

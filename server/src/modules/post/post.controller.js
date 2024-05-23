@@ -32,6 +32,7 @@ export class PostControllers {
       },
       groupId
     );
+
     res.ok(
       getPaginationSummary({
         ...req.query,
@@ -75,6 +76,7 @@ export class PostControllers {
       userId: req.userPayload.userId,
       ...getPaginationAttributes(req.query)
     });
+
     res.ok(
       getPaginationSummary({
         ...req.query,

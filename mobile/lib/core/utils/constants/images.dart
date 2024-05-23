@@ -10,6 +10,9 @@ class AppImages {
   static const String imagePlaceholder = "assets/images/image_placeholder.png";
 
   static const String errorImage = "assets/images/error_image.jpg";
+  static const String brokenImage = "assets/images/broken_image.png";
+  static const String reloadImage = "assets/images/reload_image.png";
+  static const String emptyDataImage = "assets/images/empty_data.png";
 
   static const String checkInternet = "assets/lotties/check-internet.json";
 
@@ -18,4 +21,11 @@ class AppImages {
   static const String viFlag = "assets/images/flag_vi.png";
   static const String usFlag = "assets/images/flag_us.png";
 
+  static const String angryReaction = "assets/images/reaction_angry.png";
+  static const String careReaction = "assets/images/reaction_care.png";
+  static const String hahaReaction = "assets/images/reaction_haha.png";
+  static const String likeReaction = "assets/images/reaction_like.png";
+  static const String loveReaction = "assets/images/reaction_love.png";
+  static const String sadReaction = "assets/images/reaction_sad.png";
+  static const String wowReaction = "assets/images/reaction_wow.png";
 }

@@ -4,11 +4,13 @@ import 'package:sns_deepfake/core/utils/utils.dart';
 class ColorSeparate extends StatelessWidget {
   final bool isSliverType;
   final double thickness;
+  final double paddingVertical;
 
   const ColorSeparate({
     super.key,
     this.isSliverType = true,
     this.thickness = 6,
+    this.paddingVertical = 6,
   });
 
   @override
@@ -20,9 +22,12 @@ class ColorSeparate extends StatelessWidget {
               color: context.minBackgroundColor(),
             ),
           )
-        : Divider(
-            thickness: thickness,
-            color: context.minBackgroundColor(),
+        : Padding(
+            padding: EdgeInsets.symmetric(vertical: paddingVertical),
+            child: Divider(
+              thickness: thickness,
+              color: context.minBackgroundColor(),
+            ),
           );
   }
 }

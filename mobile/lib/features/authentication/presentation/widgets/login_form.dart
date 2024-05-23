@@ -8,7 +8,9 @@ import 'package:go_router/go_router.dart';
 import '../../../../config/configs.dart';
 import '../../../../core/utils/utils.dart';
 import '../../../../core/widgets/widgets.dart';
+import '../../../group/group.dart';
 import '../bloc/user_bloc.dart';
+import '../../../../core/widgets/select_group_dialog.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({super.key});
@@ -25,39 +27,73 @@ class _LoginFormState extends State<LoginForm> {
   final _emailFN = FocusNode();
   final _passwordFN = FocusNode();
 
-  final _emailController =
-      TextEditingController(text: "user1@gmail.com");
+  final _emailController = TextEditingController(text: "user1@gmail.com");
   final _passwordController = TextEditingController(text: "123123123");
 
   final btnController = AnimatedButtonController();
+
+  String preEmail = "";
+  String prePassword = "";
 
   void _handleLogin() {
     // Trường hợp submit luôn mà chưa nhập gì thì chưa validate
     if (_formKey.currentState!.validate() &&
         _emailController.text.isNotEmpty &&
         _passwordController.text.isNotEmpty) {
-      btnController.play();
+      if (preEmail == _emailController.text &&
+          prePassword == _passwordController.text &&
+          context.read<UserBloc>().state is ChooseGroupState) {
+        final state = context.read<UserBloc>().state as ChooseGroupState;
 
-      context.read<UserBloc>().add(
-            LoginSubmit(
-              email: _emailController.text,
-              password: _passwordController.text,
-            ),
-          );
+        _handleSelectGroup(state.groups, state.user.id!);
+      } else {
+        btnController.play();
+
+        preEmail = _emailController.text;
+        prePassword = _passwordController.text;
+
+        context.read<UserBloc>().add(
+              LoginSubmit(
+                email: _emailController.text,
+                password: _passwordController.text,
+              ),
+            );
+      }
     }
+  }
+
+  void _handleSelectGroup(List<GroupModel> groups, int myId) async {
+    await showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (context) => SelectGroupCard(
+        groups: groups,
+        titleText: "SELECT_STARTING_GROUP_TEXT".tr(),
+        btnText: "CONTINUE_TEXT".tr(),
+        myId: myId,
+      ),
+    ).then(
+      (id) => id != null
+          ? context.read<UserBloc>().add(SelectGroupSubmit(id))
+          : btnController.reverse(),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocListener<UserBloc, UserState>(
       listener: (context, state) {
-        if (state is FailureState) {
+        if (state is FailureState && state.type == "LOGIN") {
           btnController.reverse();
 
           context.showError(
             title: "LOGIN_ERROR_TITLE_TEXT".tr(),
             message: state.message,
           );
+        }
+
+        if (state is ChooseGroupState) {
+          _handleSelectGroup(state.groups, state.user.id!);
         }
       },
       child: Form(

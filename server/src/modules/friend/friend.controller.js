@@ -9,6 +9,7 @@ export class FriendControllers {
       userId: req.userPayload.userId,
       ...getPaginationAttributes(req.query)
     });
+
     res.ok(
       getPaginationSummary({
         ...req.query,
@@ -21,6 +22,7 @@ export class FriendControllers {
     const { userId } = req.userPayload;
     const { targetId } = req.params;
     const requestedFriends = await FriendServices.setRequestFriend(userId, targetId);
+
     res.ok({
       data: requestedFriends
     });
@@ -39,7 +41,7 @@ export class FriendControllers {
       userId: req.userPayload.userId,
       ...getPaginationAttributes(req.query)
     });
-    console.log(result);
+
     res.ok(
       getPaginationSummary({
         ...req.query,
@@ -50,12 +52,11 @@ export class FriendControllers {
 
   static getSuggestedFriends = CatchAsyncError(async (req, res) => {
     // const { limit, offset } = { ...getPaginationAttributes(req.query) };
-    // console.log(limit);
     const result = await FriendServices.getSuggestedFriends({
       userId: req.userPayload.userId,
       ...getPaginationAttributes(req.query)
     });
-    console.log(result);
+
     res.ok(
       getPaginationSummary({
         ...req.query,

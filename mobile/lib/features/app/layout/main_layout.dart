@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/utils/utils.dart';
+import '../../chat/chat.dart';
 import '../bloc/bloc.dart';
 
 class MainLayout extends StatefulWidget {
@@ -34,6 +35,8 @@ class _MainLayoutState extends State<MainLayout> {
     } else {
       socketBloc = context.read<SocketBloc>();
       socketBloc?.add(OpenConnection(userId: userId!));
+
+      _earlyCallApis();
     }
 
     super.initState();
@@ -46,16 +49,27 @@ class _MainLayoutState extends State<MainLayout> {
     super.dispose();
   }
 
+  void _earlyCallApis() {
+    context.read<MyConversationsBloc>().add(const GetMyConversations(
+          page: 1,
+          size: AppStrings.conversationPageSize,
+        ));
+  }
+
   void _handleChange(int idx) {
+    // print("====> ${widget.body.route.branches[0].defaultRoute?.path}");
+    // print("====> ${widget.body.shellRouteContext.routerState.matchedLocation}");
+
     widget.body.goBranch(idx, initialLocation: idx == widget.body.currentIndex);
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocListener<SocketBloc, SocketState>(
+      listenWhen: (previous, current) => previous.errorMsg != current.errorMsg,
       listener: (context, state) {
-        if (state.error != null) {
-          context.showError(message: state.errorMsg ?? state.error.toString());
+        if (state.errorMsg != null) {
+          context.showError(message: state.errorMsg!);
         }
       },
       child: Scaffold(

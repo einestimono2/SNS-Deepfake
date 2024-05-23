@@ -20,6 +20,19 @@ final class SuccessfulState extends UserState {
   List<Object?> get props => [type];
 }
 
+final class ChooseGroupState extends UserState {
+  final List<GroupModel> groups;
+  final UserModel user;
+
+  const ChooseGroupState({
+    this.groups = const [],
+    required this.user,
+  });
+
+  @override
+  List<Object?> get props => [groups, user];
+}
+
 final class FailureState extends UserState {
   final String message;
   final String? type;

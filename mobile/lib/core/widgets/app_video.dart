@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:sns_deepfake/core/utils/utils.dart';
+import 'package:sns_deepfake/core/widgets/widgets.dart';
 import 'package:video_player/video_player.dart';
 
 class AppVideo extends StatefulWidget {
@@ -44,11 +45,13 @@ class _AppVideoState extends State<AppVideo> {
   void initState() {
     _controller = getType()
       ..initialize().then((_) {
+        if (widget.onlyShowThumbnail) return;
+
         chewieController = ChewieController(
           videoPlayerController: _controller,
           autoPlay: false,
           looping: false,
-          aspectRatio: 1.125,
+          aspectRatio: _controller.value.aspectRatio,
         );
 
         setState(() {}); // when your thumbnail will show.
@@ -67,12 +70,15 @@ class _AppVideoState extends State<AppVideo> {
 
   @override
   Widget build(BuildContext context) {
+    if (_controller.value.hasError) {
+      return const LocalImage(path: AppImages.errorImage);
+    }
+
     return _controller.value.isInitialized
         ? widget.onlyShowThumbnail
             ? VideoPlayer(_controller)
-            : Container(
-                color: context.minBackgroundColor(),
-                alignment: Alignment.center,
+            : AspectRatio(
+                aspectRatio: _controller.value.aspectRatio,
                 child: Chewie(controller: chewieController),
               )
         : const Center(child: CircularProgressIndicator());

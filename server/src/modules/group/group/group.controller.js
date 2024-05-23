@@ -13,16 +13,11 @@ export class GroupController {
   });
 
   static getMyGroups = CatchAsyncError(async (req, res) => {
-    const result = await GroupService.getMyGroups({
-      userId: req.userPayload.userId,
-      ...getPaginationAttributes(req.query)
+    const { userId } = req.userPayload;
+    const result = await GroupService.getMyGroups(userId);
+    res.ok({
+      data: result
     });
-    res.ok(
-      getPaginationSummary({
-        ...req.query,
-        result
-      })
-    );
   });
 
   static getGroupDetail = CatchAsyncError(async (req, res) => {

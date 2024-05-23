@@ -55,7 +55,7 @@ class _SignUpFormState extends State<SignUpForm> {
   Widget build(BuildContext context) {
     return BlocListener<UserBloc, UserState>(
       listener: (context, state) {
-        if (state is FailureState) {
+        if (state is FailureState && state.type == "SIGN_UP") {
           btnController.reverse();
 
           context.showError(

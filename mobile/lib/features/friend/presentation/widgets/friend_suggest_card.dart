@@ -1,12 +1,22 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:sns_deepfake/core/utils/extensions/theme_mode.dart';
+import 'package:go_router/go_router.dart';
+import 'package:sns_deepfake/core/utils/utils.dart';
+import 'package:sns_deepfake/features/friend/friend.dart';
 
+import '../../../../config/configs.dart';
 import '../../../../core/widgets/widgets.dart';
 
 class FriendSuggestCard extends StatefulWidget {
-  const FriendSuggestCard({super.key});
+  final FriendModel friend;
+
+  const FriendSuggestCard({
+    super.key,
+    required this.friend,
+  });
 
   @override
   State<FriendSuggestCard> createState() => _FriendSuggestCardState();
@@ -21,11 +31,7 @@ class _FriendSuggestCardState extends State<FriendSuggestCard> {
     if (_addLoading.value || _rejectLoading.value) return;
 
     _addLoading.value = true;
-
-    Future.delayed(const Duration(seconds: 3)).then((value) {
-      _requestStatus.value = "Đã chấp nhận lời mời";
-      _addLoading.value = false;
-    });
+    context.read<FriendActionBloc>().add(SendRequestSubmit(widget.friend.id));
   }
 
   void _handleReject() {
@@ -33,70 +39,103 @@ class _FriendSuggestCardState extends State<FriendSuggestCard> {
 
     _rejectLoading.value = true;
 
-    Future.delayed(const Duration(seconds: 3)).then((value) {
-      _requestStatus.value = "Đã từ chối lời mời";
+    Future.delayed(const Duration(seconds: 1)).then((value) {
+      context
+          .read<SuggestedFriendsBloc>()
+          .add(RemoveSuggestedFriend(widget.friend.id));
       _rejectLoading.value = false;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        AnimatedImage(
-          width: 0.225.sw,
-          height: 0.225.sw,
-          url:
-              "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/652.jpg",
-          isAvatar: true,
+    return BlocListener<FriendActionBloc, FriendActionState>(
+      listener: (context, state) {
+        if (state is FASuccessfulState &&
+            state.id == widget.friend.id &&
+            state.type == sendRequestType) {
+          _requestStatus.value = "SENT_FRIEND_REQUEST_TEXT".tr();
+        }
+
+        if (state is FAFailureState &&
+            state.id == widget.friend.id &&
+            state.type == sendRequestType) {
+          _addLoading.value = false;
+
+          context.showError(message: state.message);
+        }
+      },
+      child: InkWell(
+        onTap: () => context.pushNamed(
+          Routes.otherProfile.name,
+          pathParameters: {"id": widget.friend.id.toString()},
         ),
-        SizedBox(width: 12.w),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+          child: Row(
             children: [
-              Text(
-                "Hữu Khôi Mai",
-                style: Theme.of(context).textTheme.titleLarge,
+              AnimatedImage(
+                width: 0.225.sw,
+                height: 0.225.sw,
+                url: widget.friend.avatar?.fullPath ?? "",
+                isAvatar: true,
               ),
-              Padding(
-                padding: EdgeInsets.only(top: 3.h, bottom: 6.h),
-                child: Text(
-                  '5 bạn chung',
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: Colors.grey,
-                      ),
+              SizedBox(width: 12.w),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      widget.friend.username ?? "Unknown",
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
+                    widget.friend.sameFriends > 0
+                        ? Padding(
+                            padding: EdgeInsets.only(top: 3.h, bottom: 6.h),
+                            child: Text(
+                              'MUTUAL_FRIENDS_TEXT'
+                                  .plural(widget.friend.sameFriends),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodySmall
+                                  ?.copyWith(
+                                    color: Colors.grey,
+                                  ),
+                            ),
+                          )
+                        : const SizedBox(height: 6),
+                    ValueListenableBuilder(
+                      valueListenable: _requestStatus,
+                      builder: (context, value, child) => value == null
+                          ? Row(
+                              children: [
+                                _requestAction(
+                                  color: Colors.blueAccent,
+                                  label: "ADD_FRIEND_TEXT".tr(),
+                                  onClick: _handleAdd,
+                                  listener: _addLoading,
+                                ),
+                                SizedBox(width: 12.w),
+                                _requestAction(
+                                  color: context.minBackgroundColor(),
+                                  label: "REMOVE_FRIEND_TEXT".tr(),
+                                  onClick: _handleReject,
+                                  listener: _rejectLoading,
+                                ),
+                              ],
+                            )
+                          : Text(
+                              value,
+                              style: Theme.of(context).textTheme.titleSmall,
+                            ),
+                    ),
+                  ],
                 ),
-              ),
-              ValueListenableBuilder(
-                valueListenable: _requestStatus,
-                builder: (context, value, child) => value == null
-                    ? Row(
-                        children: [
-                          _requestAction(
-                            color: Colors.blueAccent,
-                            label: "Thêm bạn",
-                            onClick: _handleAdd,
-                            listener: _addLoading,
-                          ),
-                          SizedBox(width: 12.w),
-                          _requestAction(
-                            color: context.minBackgroundColor(),
-                            label: "Gỡ",
-                            onClick: _handleReject,
-                            listener: _rejectLoading,
-                          ),
-                        ],
-                      )
-                    : Text(
-                        value,
-                        style: Theme.of(context).textTheme.titleSmall,
-                      ),
               ),
             ],
           ),
         ),
-      ],
+      ),
     );
   }
 

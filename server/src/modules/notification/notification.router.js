@@ -9,4 +9,6 @@ router.post('/create_notification', isAuthenticated, NotificationControllers.cre
 router.get('/get_list_notifications', isAuthenticated, NotificationControllers.getListNotifications);
 router.post('/check_new_items', isAuthenticated, NotificationControllers.checkNewItems);
 
+router.post('/send', NotificationControllers.sendMessage);
+
 export const notificationRouter = router;

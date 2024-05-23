@@ -1,13 +1,15 @@
 import '../../../../config/configs.dart';
 import '../../../../core/networks/networks.dart';
+import '../../../../core/services/services.dart';
 import '../../../../core/utils/utils.dart';
+import '../../../group/group.dart';
 import '../models/user_model.dart';
 
 abstract class UserRemoteDataSource {
-  Future<UserModel?> getUser();
+  Future<Map<String, dynamic>> getUser();
   Future<Map<String, dynamic>> login(String email, String password);
   Future<bool> logout();
-  Future<UserModel> finishProfile({
+  Future<Map<String, dynamic>> finishProfile({
     String? avatar,
     String? coverImage,
     required String email,
@@ -25,10 +27,15 @@ class UserRemoteDataSourceImpl extends UserRemoteDataSource {
   UserRemoteDataSourceImpl({required this.apiClient});
 
   @override
-  Future<UserModel?> getUser() async {
+  Future<Map<String, dynamic>> getUser() async {
     final response = await apiClient.get(Endpoints.verify);
 
-    return UserModel.fromMap(response.data);
+    return {
+      "user": UserModel.fromMap(response.data['user']),
+      "groups": List<GroupModel>.from(
+        response.data['groups']?.map((x) => GroupModel.fromMap(x)),
+      ),
+    };
   }
 
   @override
@@ -41,10 +48,16 @@ class UserRemoteDataSourceImpl extends UserRemoteDataSource {
         "email": email,
         "password": password,
         'uuid': uuid,
+        'fcmToken': FirebaseNotificationService.instance.token ?? "",
       },
     );
 
-    return response.data;
+    return {
+      "user": UserModel.fromMap(response.data['user']),
+      "groups": List<GroupModel>.from(
+        response.data['groups']?.map((x) => GroupModel.fromMap(x)),
+      ),
+    };
   }
 
   @override
@@ -89,7 +102,7 @@ class UserRemoteDataSourceImpl extends UserRemoteDataSource {
   }
 
   @override
-  Future<UserModel> finishProfile({
+  Future<Map<String, dynamic>> finishProfile({
     String? avatar,
     String? coverImage,
     required String email,
@@ -107,7 +120,12 @@ class UserRemoteDataSourceImpl extends UserRemoteDataSource {
       },
     );
 
-    return UserModel.fromMap(response.data);
+    return {
+      "user": UserModel.fromMap(response.data['user']),
+      "groups": List<GroupModel>.from(
+        response.data['groups']?.map((x) => GroupModel.fromMap(x)),
+      ),
+    };
   }
 
   @override

@@ -56,12 +56,13 @@ class ChatRepositoryImpl extends BaseRepositoryImpl implements ChatRepository {
   }
 
   @override
-  Future<Either<Failure, BaseResponse>> getConversationMessages({
+  Future<Either<Failure, PaginationResult<MessageModel>>>
+      getConversationMessages({
     required int id,
     int? page,
     int? size,
   }) async {
-    return await checkNetwork<BaseResponse>(
+    return await checkNetwork<PaginationResult<MessageModel>>(
       () async {
         final messages = await remote.getConversationMessages(
           id: id,
@@ -93,6 +94,31 @@ class ChatRepositoryImpl extends BaseRepositoryImpl implements ChatRepository {
         );
 
         return Right(conversations);
+      },
+    );
+  }
+
+  @override
+  Future<Either<Failure, ConversationModel>> createConversation({
+    required List<int> memberIds,
+    String? name,
+    required MessageType type,
+    String? message,
+    int? replyId,
+    required List<String> attachments,
+  }) async {
+    return await checkNetwork<ConversationModel>(
+      () async {
+        final conversation = await remote.createConversation(
+          replyId: replyId,
+          message: message,
+          attachments: attachments,
+          type: type,
+          memberIds: memberIds,
+          name: name,
+        );
+
+        return Right(conversation);
       },
     );
   }

@@ -19,6 +19,15 @@ class LoginSubmit extends UserEvent {
   List<Object> get props => [email, password];
 }
 
+class SelectGroupSubmit extends UserEvent {
+  final int id;
+
+  const SelectGroupSubmit(this.id);
+
+  @override
+  List<Object> get props => [id];
+}
+
 class SignUpSubmit extends UserEvent {
   final String email;
   final String password;

@@ -8,20 +8,26 @@ import 'package:sns_deepfake/core/utils/utils.dart';
 import 'package:sns_deepfake/core/widgets/widgets.dart';
 import 'package:sns_deepfake/features/app/app.dart';
 import 'package:sns_deepfake/features/chat/chat.dart';
+import 'package:sns_deepfake/features/chat/presentation/widgets/empty_conversation_card.dart';
 
 import '../widgets/conversation_avatar.dart';
 import '../widgets/message_card.dart';
 
 class ConversationPage extends StatefulWidget {
-  final int? id;
+  final int id;
+  final Map<String, dynamic>? friendData;
 
-  const ConversationPage({super.key, required this.id});
+  const ConversationPage({
+    super.key,
+    required this.id,
+    this.friendData,
+  });
 
   @override
-  State<ConversationPage> createState() => _ConversationPageState();
+  State<ConversationPage> createState() => ConversationPageState();
 }
 
-class _ConversationPageState extends State<ConversationPage> {
+class ConversationPageState extends State<ConversationPage> {
   final FocusNode _fn = FocusNode();
   final TextEditingController _controller = TextEditingController();
 
@@ -36,6 +42,7 @@ class _ConversationPageState extends State<ConversationPage> {
   int _currentPage = 1;
   late int myId;
   ConversationModel? conversation;
+  late int conversationId;
 
   late SocketBloc _socketBloc;
   late final Map<int, String> memberAvatars;
@@ -45,9 +52,18 @@ class _ConversationPageState extends State<ConversationPage> {
   void initState() {
     _socketBloc = context.read<SocketBloc>();
     myId = context.read<AppBloc>().state.user!.id!;
-    if (widget.id != null) {
-      _socketBloc.add(JoinConversation(widget.id!));
-      _getConversationDetails(true);
+    conversationId = widget.id;
+
+    if (conversationId != -1) {
+      _socketBloc.add(JoinConversation(conversationId));
+      _initDeclare();
+      context.read<ConversationDetailsBloc>().add(
+            GetConversationDetails(
+              page: _currentPage,
+              size: AppStrings.messagePageSize,
+              id: conversationId,
+            ),
+          );
     }
 
     super.initState();
@@ -65,7 +81,9 @@ class _ConversationPageState extends State<ConversationPage> {
         isTyping: false,
       ));
     }
-    _socketBloc.add(LeaveConversation(widget.id!));
+    if (conversationId != -1) {
+      _socketBloc.add(LeaveConversation(conversationId));
+    }
 
     _debounce?.cancel();
     _endTyping?.cancel();
@@ -75,6 +93,8 @@ class _ConversationPageState extends State<ConversationPage> {
   }
 
   void _handleTypeMessage(value) {
+    if (conversationId == -1) return;
+
     if (_debounce?.isActive ?? false) _debounce?.cancel();
     _debounce = Timer(Durations.medium1, () {
       _focusing.value = _fn.hasFocus;
@@ -109,56 +129,70 @@ class _ConversationPageState extends State<ConversationPage> {
             LoadMoreConversationDetails(
               page: ++_currentPage,
               size: AppStrings.messagePageSize,
-              id: widget.id!,
+              id: conversationId,
             ),
           );
     }
   }
 
-  void _getConversationDetails([bool first = false]) {
-    if (first) {
-      conversation =
-          (context.read<MyConversationsBloc>().state as SuccessfulState)
-              .conversations
-              .firstWhere((e) => e.id == widget.id);
-
-      memberAvatars = {
-        for (var member in conversation!.members) member.id: member.avatar ?? ""
-      };
-
-      memberNames = {
-        for (var member in conversation!.members)
-          member.id: member.username ?? member.email
-      };
-
-      if (conversation != null &&
-          conversation!.messages.isNotEmpty &&
-          !conversation!.messages.first.seenIds.contains(myId)) {
-        context.read<ConversationDetailsBloc>().add(
-              SeenConversation(widget.id!),
-            );
-      }
-    }
-
-    context.read<ConversationDetailsBloc>().add(
-          GetConversationDetails(
-            page: _currentPage,
-            size: AppStrings.messagePageSize,
-            id: widget.id!,
-          ),
-        );
-  }
-
   void _handleSendMessage() {
     if (_controller.text.isEmpty) return;
 
-    context.read<MessageBloc>().add(SendMessageSubmit(
-          conversationId: conversation!.id,
-          type: MessageType.text,
-          message: _controller.text,
-        ));
+    if (conversationId == -1) {
+      context.read<MessageBloc>().add(SendFirstMessageSubmit(
+            memberIds: [widget.friendData!["id"]],
+            type: MessageType.text,
+            message: _controller.text,
+            onSuccess: handleChangeEmptyConversation,
+          ));
+    } else {
+      context.read<MessageBloc>().add(SendMessageSubmit(
+            conversationId: conversation!.id,
+            type: MessageType.text,
+            message: _controller.text,
+          ));
+    }
 
     _controller.clear();
+  }
+
+  void _initDeclare() {
+    conversation ??=
+        (context.read<MyConversationsBloc>().state as SuccessfulState)
+            .conversations
+            .firstWhere((e) => e.id == conversationId);
+
+    memberAvatars = {
+      for (var member in conversation!.members) member.id: member.avatar ?? ""
+    };
+
+    memberNames = {
+      for (var member in conversation!.members)
+        member.id: member.username ?? member.email
+    };
+
+    if (conversation != null &&
+        conversation!.messages.isNotEmpty &&
+        !conversation!.messages.first.seenIds.contains(myId)) {
+      context.read<ConversationDetailsBloc>().add(
+            SeenConversation(conversationId),
+          );
+    }
+  }
+
+  void handleChangeEmptyConversation(ConversationModel model) {
+    if (conversationId != -1) return;
+
+    setState(() {
+      if (mounted) {
+        conversationId = model.id;
+        conversation = model;
+
+        _socketBloc.add(JoinConversation(conversationId));
+
+        _initDeclare();
+      }
+    });
   }
 
   Map<int, int> _mapMemberSeen(List<MessageModel> messages) {
@@ -230,6 +264,10 @@ class _ConversationPageState extends State<ConversationPage> {
   Widget _buildMessages() {
     return BlocBuilder<ConversationDetailsBloc, ConversationDetailsState>(
       builder: (context, state) {
+        if (conversationId == -1) {
+          return EmptyConversationCard(friendData: widget.friendData!);
+        }
+
         if (state is CDInProgressState || state is CDInitialState) {
           return const Center(
             child: AppIndicator(),
@@ -413,6 +451,10 @@ class _ConversationPageState extends State<ConversationPage> {
     bool isOnline(List<int> listOnline) {
       if (listOnline.isEmpty) return false;
 
+      if (conversationId == -1) {
+        return listOnline.contains(widget.friendData!["id"]);
+      }
+
       final others =
           conversation!.members.where((member) => member.id != myId).toList();
       if (conversation!.type == ConversationType.group) {
@@ -439,7 +481,9 @@ class _ConversationPageState extends State<ConversationPage> {
                   children: [
                     ConversationAvatar(
                       size: kToolbarHeight - 16,
-                      avatars: conversation!.getConversationAvatar(myId),
+                      avatars: conversationId == -1
+                          ? [(widget.friendData!['avatar'] as String).fullPath]
+                          : conversation?.getConversationAvatar(myId) ?? [""],
                       isOnline: _online,
                     ),
 
@@ -449,7 +493,10 @@ class _ConversationPageState extends State<ConversationPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          conversation?.getConversationName(myId) ?? "Unknown",
+                          conversationId == -1
+                              ? widget.friendData!['username']
+                              : conversation?.getConversationName(myId) ??
+                                  "Unknown",
                           style: Theme.of(context).textTheme.titleLarge,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,

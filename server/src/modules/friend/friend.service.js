@@ -25,9 +25,10 @@ export class FriendServices {
           required: true,
           attributes: [
             'id',
-            'username',
             'avatar',
+            'username',
             'email',
+            'createdAt',
             // Lấy ra số lượng bạn chung của 2 người
             [
               sequelize.literal(
@@ -40,11 +41,16 @@ export class FriendServices {
             [
               // Lấy thông tin bạn chung của 2 người
               sequelize.literal(
-                `(SELECT "same_friend"."targetId" FROM "Friends" AS "same_friend"
-                                INNER JOIN "Friends" AS "target_friends" ON "same_friend"."targetId" = "target_friends"."targetId"
-                                WHERE "same_friend"."userId"=${userId}  AND "target_friends"."userId" ="user"."id")`
+                `(SELECT ARRAY_AGG("u"."avatar") FROM "Users" AS "u"
+                WHERE "u"."id" IN (
+                SELECT "same_friend"."targetId" FROM "Friends" AS "same_friend"
+                INNER JOIN "Friends" AS "target_friends" ON "same_friend"."targetId" = "target_friends"."targetId"
+                WHERE "same_friend"."userId" = ${userId} AND "target_friends"."userId" = "user"."id"
+                 )
+                LIMIT 5
+                 )`
               ),
-              'commonUserIds'
+              'commonUserAvatars'
             ]
           ]
         }
@@ -53,8 +59,18 @@ export class FriendServices {
       limit,
       offset
     });
-    console.log(requestedFriends.count);
-    return requestedFriends;
+
+    return {
+      rows: requestedFriends.rows.map((requestedFriend) => ({
+        id: requestedFriend.user.id,
+        username: requestedFriend.user.username || requestedFriend.user.email,
+        avatar: requestedFriend.user.avatar,
+        same_friends: requestedFriend.user.getDataValue('friendsCount') ?? 0,
+        commonUserAvatars: requestedFriend.user.getDataValue('commonUserAvatars'),
+        created: requestedFriend.createdAt
+      })),
+      count: requestedFriends.count
+    };
   }
 
   // 2:Gửi 1 lời mời(Đã test)
@@ -110,22 +126,24 @@ export class FriendServices {
         targetId: userId
       }
     });
-    console.log(request);
+
     // Nếu không tìm thấy yêu cầu
     if (!request) {
       throw new BadRequestError(Message.FRIEND_REQUEST_NOT_FOUND);
     }
+
     // Tạo mối quan hệ bạn mới và cùng lúc
-    const newFriends = [
-      await Friend.create({
+    await Promise.all([
+      Friend.create({
         targetId,
         userId
       }),
-      await Friend.create({
+      Friend.create({
         targetId: userId,
         userId: targetId
       })
-    ];
+    ]);
+
     await FriendRequest.destroy({ where: { id: request.id } });
     // Tạo thông báo cho người gửi yêu cầu
     // await this.notificationService.createNotification({
@@ -133,14 +151,12 @@ export class FriendServices {
     //   userId: request.userId,
     //   target: user
     // });
-    return {};
-    // Xóa yêu cầu kết bạn
   }
 
   // 4.Lấy danh sách bạn bè(Đã test nhưng vẫn cần xem lại)
   static async getUserFriends({ userId, limit, offset }) {
     // Tìm tất cả bạn của người dùng và số lượng
-    console.log(limit);
+
     const friends = await Friend.findAndCountAll({
       where: { userId },
       include: [
@@ -151,6 +167,8 @@ export class FriendServices {
             'id',
             'avatar',
             'username',
+            'email',
+            'createdAt',
             [
               sequelize.literal(
                 `(SELECT COUNT(*) FROM "Friends" AS "same_friend"
@@ -175,9 +193,19 @@ export class FriendServices {
       offset,
       limit
     });
-    console.log(friends);
+
     // Trả về danh sách bạn của người dùng và tổng số lượng bạn
-    return friends;
+    return {
+      rows: friends.rows.map((friend) => ({
+        id: friend.target.id,
+        username: friend.target.username || friend.target.email,
+        avatar: friend.target.avatar,
+        same_friends: friend.target.getDataValue('friendsCount') ?? 0,
+        commonUserIds: friend.target.getDataValue('commonUserIds'),
+        created: friend.target.createdAt
+      })),
+      count: friends.count
+    };
     // {
     //   friends: friends.map((friend) => ({
     //     id: String(friend.target.id),
@@ -192,7 +220,6 @@ export class FriendServices {
   // 5.Lấy danh sách gợi ý là bạn bè
   // Chỉ lọc ra danh sách những người có bạn chung với bạn
   static async getSuggestedFriends({ userId, limit, offset }) {
-    console.log(userId);
     const usersIdBlocked = await Block.findAll({
       where: { userId },
       attributes: ['targetId']
@@ -228,9 +255,10 @@ export class FriendServices {
       },
       attributes: [
         'id',
-        'username',
         'avatar',
+        'username',
         'email',
+        'createdAt',
         // Lấy ra số lượng bạn chung của 2 người
         [
           sequelize.literal(
@@ -239,16 +267,17 @@ export class FriendServices {
                                 WHERE "same_friend"."userId"=${userId}  AND "target_friends"."userId" = "User"."id")`
           ),
           'commondfriendsCount'
-        ],
-        [
-          // Lấy thông tin bạn chung của 2 người
-          sequelize.literal(
-            `(SELECT "same_friend"."targetId" FROM "Friends" AS "same_friend"
-                                INNER JOIN "Friends" AS "target_friends" ON "same_friend"."targetId" = "target_friends"."targetId"
-                                WHERE "same_friend"."userId"=${userId}  AND "target_friends"."userId" ="User"."id")`
-          ),
-          'commonUserIds'
         ]
+        // ,
+        // [
+        //   // Lấy thông tin bạn chung của 2 người
+        //   sequelize.literal(
+        //     `(SELECT "same_friend"."targetId" FROM "Friends" AS "same_friend"
+        //                         INNER JOIN "Friends" AS "target_friends" ON "same_friend"."targetId" = "target_friends"."targetId"
+        //                         WHERE "same_friend"."userId"=${userId}  AND "target_friends"."userId" ="User"."id")`
+        //   ),
+        //   'commonUserIds'
+        // ]
       ],
       include: [
         {
@@ -272,8 +301,18 @@ export class FriendServices {
       offset,
       limit
     });
-    console.log(remainUsers);
-    return remainUsers;
+
+    return {
+      rows: remainUsers.rows.map((friend) => ({
+        id: friend.id,
+        username: friend.username || friend.email,
+        avatar: friend.avatar,
+        created: friend.createdAt,
+        same_friends: friend.getDataValue('commondfriendsCount') ?? 0,
+        commonUserIds: friend.getDataValue('commonUserIds')
+      })),
+      count: remainUsers.count
+    };
     // remainUsers.map((remainUser) => ({
     //   id: String(remainUser.id),
     //   username: remainUser.username || '',
@@ -291,7 +330,6 @@ export class FriendServices {
     }
     await Friend.destroy({ where: { userId, targetId } });
     await Friend.destroy({ where: { userId: targetId, targetId: userId } });
-    return {};
   }
 
   // 7.Xóa 1 lời mời(Đã test)
@@ -301,7 +339,6 @@ export class FriendServices {
       throw new BadRequestError(Message.USER_IS_INVALID);
     }
     await FriendRequest.destroy({ where: { userId, targetId } });
-    return {};
   }
 
   // 8. Tìm kiếm bạn bè
@@ -324,7 +361,7 @@ export class FriendServices {
       offset,
       limit
     });
-    console.log(friends);
+
     return friends;
     // friends.map((friend) => ({
     //   id: friend.id,

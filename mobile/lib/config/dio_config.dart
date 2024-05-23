@@ -1,8 +1,8 @@
 import 'dart:io';
 
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
+import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 import 'package:dio_smart_retry/dio_smart_retry.dart';
 import 'package:flutter/foundation.dart';
 
@@ -11,15 +11,11 @@ import '../core/utils/utils.dart';
 import 'configs.dart';
 
 class DioConfigs {
-  final Connectivity connectivity;
   final LocalCache localCache;
 
-  DioConfigs({
-    required this.localCache,
-    required this.connectivity,
-  });
+  DioConfigs({required this.localCache});
 
-  Dio init() {
+  Dio init(CacheOptions cacheOptions) {
     /* Init */
     final dio = Dio(BaseOptions(
       baseUrl: FlavorConfig.instance.endpointUrl,
@@ -77,7 +73,8 @@ class DioConfigs {
       ),
     );
 
-    // dio_http_cache
+    /* Cache Interceptor */
+    dio.interceptors.add(DioCacheInterceptor(options: cacheOptions));
 
     return dio;
   }
@@ -93,7 +90,7 @@ class AuthInterceptor extends Interceptor {
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) async {
-    final accessToken = localCache.getString(AppStrings.accessTokenKey);
+    final accessToken = localCache.getValue<String>(AppStrings.accessTokenKey);
     if (accessToken?.isNotEmpty ?? false) {
       options.headers.addAll({'Authorization': 'Bearer $accessToken'});
     }

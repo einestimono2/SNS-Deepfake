@@ -131,7 +131,7 @@ class AppRouter {
 
       /* Main Layout */
       StatefulShellRoute.indexedStack(
-        // parentNavigatorKey: rootNavigatorKey,
+        parentNavigatorKey: rootNavigatorKey,
         pageBuilder: (context, state, navigationShell) => NoTransitionPage(
           child: MainLayout(
             key: state.pageKey,
@@ -263,6 +263,9 @@ class AppRouter {
                           child: ConversationPage(
                             key: state.pageKey,
                             id: int.parse(state.pathParameters['id']!),
+                            friendData: state.extra == null
+                                ? null
+                                : state.extra as Map<String, dynamic>,
                           ),
                         );
                       },
@@ -314,31 +317,50 @@ class AppRouter {
             // navigatorKey: shellNavigatorKey,
             routes: <RouteBase>[
               GoRoute(
-                  // parentNavigatorKey: shellNavigatorKey,
-                  name: Routes.profile.name,
-                  path: Routes.profile.path,
-                  pageBuilder: (BuildContext context, GoRouterState state) {
-                    return fadeTransition(
-                      state: state,
-                      context: context,
-                      child: ProfilePage(key: state.pageKey),
-                    );
-                  },
-                  routes: [
-                    GoRoute(
-                      parentNavigatorKey: rootNavigatorKey,
-                      name: Routes.setting.name,
-                      path: Routes.setting.path,
-                      pageBuilder: (BuildContext context, GoRouterState state) {
-                        return slideTransition(
-                          type: SlideType.rtl,
-                          state: state,
-                          context: context,
-                          child: SettingPage(key: state.pageKey),
-                        );
-                      },
+                // parentNavigatorKey: shellNavigatorKey,
+                name: Routes.profile.name,
+                path: Routes.profile.path,
+                pageBuilder: (BuildContext context, GoRouterState state) {
+                  return fadeTransition(
+                    state: state,
+                    context: context,
+                    child: ProfilePage(key: state.pageKey),
+                  );
+                },
+                routes: [
+                  GoRoute(
+                    parentNavigatorKey: rootNavigatorKey,
+                    name: Routes.setting.name,
+                    path: Routes.setting.path,
+                    pageBuilder: (BuildContext context, GoRouterState state) {
+                      return slideTransition(
+                        type: SlideType.rtl,
+                        state: state,
+                        context: context,
+                        child: SettingPage(key: state.pageKey),
+                      );
+                    },
+                  ),
+                ],
+              ),
+
+              /*  */
+              GoRoute(
+                // parentNavigatorKey: shellNavigatorKey,
+                name: Routes.otherProfile.name,
+                path: Routes.otherProfile.path,
+                pageBuilder: (BuildContext context, GoRouterState state) {
+                  return slideTransition(
+                    type: SlideType.rtl,
+                    state: state,
+                    context: context,
+                    child: OtherProfilePage(
+                      key: state.pageKey,
+                      id: int.parse(state.pathParameters['id']!),
                     ),
-                  ]),
+                  );
+                },
+              ),
             ],
           ),
         ],

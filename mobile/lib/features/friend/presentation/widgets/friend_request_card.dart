@@ -1,19 +1,29 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:sns_deepfake/core/utils/extensions/theme_mode.dart';
+import 'package:go_router/go_router.dart';
+import 'package:sns_deepfake/features/friend/friend.dart';
 
+import '../../../../config/configs.dart';
+import '../../../../core/utils/utils.dart';
 import '../../../../core/widgets/widgets.dart';
 
 class FriendRequestCard extends StatefulWidget {
-  const FriendRequestCard({super.key});
+  final FriendModel friend;
+
+  const FriendRequestCard({
+    super.key,
+    required this.friend,
+  });
 
   @override
   State<FriendRequestCard> createState() => _FriendRequestCardState();
 }
 
 class _FriendRequestCardState extends State<FriendRequestCard> {
-  final ValueNotifier<String?> _requestStatus = ValueNotifier(null);
+  final ValueNotifier<int> _requestStatus = ValueNotifier(-1);
   final ValueNotifier<bool> _acceptLoading = ValueNotifier(false);
   final ValueNotifier<bool> _rejectLoading = ValueNotifier(false);
 
@@ -21,91 +31,174 @@ class _FriendRequestCardState extends State<FriendRequestCard> {
     if (_acceptLoading.value || _rejectLoading.value) return;
 
     _acceptLoading.value = true;
-
-    Future.delayed(const Duration(seconds: 3)).then((value) {
-      _requestStatus.value = "Đã chấp nhận lời mời";
-      _acceptLoading.value = false;
-    });
+    context.read<FriendActionBloc>().add(AcceptRequestSubmit(widget.friend.id));
   }
 
   void _handleReject() {
     if (_rejectLoading.value || _acceptLoading.value) return;
 
     _rejectLoading.value = true;
-
-    Future.delayed(const Duration(seconds: 3)).then((value) {
-      _requestStatus.value = "Đã từ chối lời mời";
-      _rejectLoading.value = false;
-    });
+    context.read<FriendActionBloc>().add(RefuseRequestSubmit(widget.friend.id));
   }
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        AnimatedImage(
-          width: 0.225.sw,
-          height: 0.225.sw,
-          url:
-              "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/652.jpg",
-          isAvatar: true,
+    return BlocListener<FriendActionBloc, FriendActionState>(
+      listener: (context, state) {
+        if (state is FASuccessfulState && state.id == widget.friend.id) {
+          if (state.type == acceptRequestType) {
+            _requestStatus.value = 0;
+          } else if (state.type == refuseRequestType) {
+            _requestStatus.value = 1;
+          }
+        }
+
+        if (state is FAFailureState && state.id == widget.friend.id) {
+          if (state.type == acceptRequestType) {
+            _acceptLoading.value = false;
+          } else if (state.type == refuseRequestType) {
+            _rejectLoading.value = false;
+          }
+
+          context.showError(message: state.message);
+        }
+      },
+      child: InkWell(
+        onTap: () => context.pushNamed(
+          Routes.otherProfile.name,
+          pathParameters: {"id": widget.friend.id.toString()},
         ),
-        SizedBox(width: 12.w),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+        child: Container(
+          padding: EdgeInsets.fromLTRB(16.w, 8.h, 16.w, 8.h),
+          child: Row(
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Hữu Khôi Mai",
-                    style: Theme.of(context).textTheme.titleLarge,
-                  ),
-                  Text(
-                    "5 phút",
-                    style: Theme.of(context).textTheme.labelMedium,
-                  ),
-                ],
+              AnimatedImage(
+                width: 0.225.sw,
+                height: 0.225.sw,
+                url: widget.friend.avatar?.fullPath ?? "",
+                isAvatar: true,
               ),
-              Padding(
-                padding: EdgeInsets.only(top: 3.h, bottom: 6.h),
-                child: Text(
-                  '5 bạn chung',
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: Colors.grey,
-                      ),
+              SizedBox(width: 12.w),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          widget.friend.username ?? "Unknown",
+                          style: Theme.of(context).textTheme.titleLarge,
+                        ),
+                        Text(
+                          DateHelper.getTimeAgo(
+                            widget.friend.createdAt,
+                            context.locale.languageCode,
+                            showSuffixText: false,
+                          ),
+                          style: Theme.of(context).textTheme.labelMedium,
+                        ),
+                      ],
+                    ),
+                    widget.friend.sameFriends > 0
+                        ? Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 3.0),
+                            child: Row(
+                              children: [
+                                SizedBox(width: 14.sp / 2),
+                                ...widget.friend.sameFriendAvatars
+                                    .map((e) => Align(
+                                          widthFactor: 0.5,
+                                          child: AnimatedImage(
+                                            url: e,
+                                            isAvatar: true,
+                                            width: 14.sp,
+                                            height: 14.sp,
+                                          ),
+                                        )),
+                                const SizedBox(width: 8),
+                                Text(
+                                  'MUTUAL_FRIENDS_TEXT'
+                                      .plural(widget.friend.sameFriends),
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodySmall
+                                      ?.copyWith(
+                                        color: Colors.grey,
+                                      ),
+                                ),
+                              ],
+                            ),
+                          )
+                        : const SizedBox(height: 6),
+                    _buildActions(),
+                  ],
                 ),
-              ),
-              ValueListenableBuilder(
-                valueListenable: _requestStatus,
-                builder: (context, value, child) => value == null
-                    ? Row(
-                        children: [
-                          _requestAction(
-                            color: Colors.blueAccent,
-                            label: "Xác nhận",
-                            onClick: _handleAccept,
-                            listener: _acceptLoading,
-                          ),
-                          SizedBox(width: 12.w),
-                          _requestAction(
-                            color: context.minBackgroundColor(),
-                            label: "Từ chối",
-                            onClick: _handleReject,
-                            listener: _rejectLoading,
-                          ),
-                        ],
-                      )
-                    : Text(
-                        value,
-                        style: Theme.of(context).textTheme.titleSmall,
-                      ),
               ),
             ],
           ),
         ),
-      ],
+      ),
+    );
+  }
+
+  ValueListenableBuilder<int> _buildActions() {
+    return ValueListenableBuilder(
+      valueListenable: _requestStatus,
+      builder: (context, value, child) {
+        if (value == 0) {
+          return SizedBox(
+            width: double.infinity,
+            child: ElevatedButton.icon(
+              style: ElevatedButton.styleFrom(
+                side: BorderSide.none,
+                padding: const EdgeInsets.symmetric(vertical: 0),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(6.r),
+                ),
+              ),
+              onPressed: () => context.pushNamed(
+                Routes.conversation.name,
+                pathParameters: {"id": "-1"},
+                extra: {
+                  "id": widget.friend.id,
+                  "avatar": widget.friend.avatar,
+                  "username": widget.friend.username,
+                },
+              ),
+              icon: const Icon(Icons.waving_hand_rounded, size: 20),
+              label: Text(
+                "SEND_MESSAGE_TEXT".tr(),
+                style: Theme.of(context).textTheme.titleSmall,
+              ),
+            ),
+          );
+        } else if (value == 1) {
+          // Reject
+          return Text(
+            "REJECT_FRIEND_TEXT".tr(),
+            style: Theme.of(context).textTheme.titleSmall,
+          );
+        }
+
+        return Row(
+          children: [
+            _requestAction(
+              color: Colors.blueAccent,
+              label: "CONFIRM_TEXT".tr(),
+              onClick: _handleAccept,
+              listener: _acceptLoading,
+            ),
+            SizedBox(width: 12.w),
+            _requestAction(
+              color: context.minBackgroundColor(),
+              label: "DELETE_FRIEND_TEXT".tr(),
+              onClick: _handleReject,
+              listener: _rejectLoading,
+            ),
+          ],
+        );
+      },
     );
   }
 
@@ -133,7 +226,7 @@ class _FriendRequestCardState extends State<FriendRequestCard> {
               : Text(
                   label,
                   style: TextStyle(
-                    color: label == "Từ chối"
+                    color: label == "CANCEL_TEXT".tr()
                         ? context.minTextColor()
                         : Colors.white,
                   ),

@@ -30,4 +30,10 @@ export class NotificationControllers {
       data
     });
   });
+
+  static sendMessage = CatchAsyncError(async (req, res) => {
+    await NotificationServices.sendMessage(req.body);
+
+    res.ok();
+  });
 }

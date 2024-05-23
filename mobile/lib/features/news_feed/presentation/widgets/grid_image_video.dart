@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/utils/utils.dart';
 import '../../../../core/widgets/widgets.dart';
-import 'modal_list_upload.dart';
+import 'modal_list_image.dart';
 
 class GridImageVideo extends StatelessWidget {
   final List<String> files;
@@ -20,8 +20,6 @@ class GridImageVideo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (files.isEmpty) return const SizedBox.shrink();
-
-    print(files);
 
     if (files.length <= 1) {
       return SizedBox(
@@ -149,6 +147,205 @@ class GridImageVideo extends StatelessWidget {
         initScrollIdx: idx,
         files: files,
         onDelete: onDelete,
+      ),
+    );
+  }
+}
+
+class PostGridImage extends StatelessWidget {
+  final List<String> files;
+  final double separateSize;
+
+  const PostGridImage({
+    super.key,
+    required this.files,
+    this.separateSize = 2,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    if (files.isEmpty) return const SizedBox.shrink();
+
+    if (files.length <= 1) {
+      return AnimatedImage(
+        width: 1.sw,
+        // height: 0.35.sh,
+        url: files.first,
+        fit: BoxFit.cover,
+        errorImage: AppImages.brokenImage,
+      );
+    } else {
+      return _buildDynamicType(context, files.length);
+    }
+  }
+
+  Widget _buildDynamicType(BuildContext context, int len) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Row(
+          children: [
+            _image(context, len > 2 ? 0.3.sh : 0.5.sh, 0),
+            if (len == 2 || len >= 5) ...[
+              SizedBox(width: separateSize),
+              _image(context, len > 2 ? 0.3.sh : 0.5.sh, len == 2 ? 1 : 4),
+            ]
+          ],
+        ),
+        if (len > 2) ...[
+          SizedBox(height: separateSize),
+          Row(
+            children: [
+              _image(context, 0.25.sh, 1),
+              SizedBox(width: separateSize),
+              _image(context, 0.25.sh, 2),
+              if (len >= 4) ...[
+                SizedBox(width: separateSize),
+                _image(context, 0.25.sh, 3)
+              ],
+            ],
+          ),
+        ]
+      ],
+    );
+  }
+
+  Widget _image(BuildContext context, double height, int imageIdx) {
+    Widget _img = AnimatedImage(
+      height: height,
+      url: files[imageIdx],
+      errorImage: AppImages.brokenImage,
+    );
+
+    return Expanded(
+      child: InkWell(
+        onTap: () => _openBottomSheet(context, imageIdx),
+        child: (imageIdx == 3 && files.length > 5)
+            ? Stack(
+                children: [
+                  _img,
+                  Text(
+                    '+${files.length - 4}',
+                    style: TextStyle(
+                      fontSize: 26.sp,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  )
+                ],
+              )
+            : _img,
+      ),
+    );
+  }
+
+  void _openBottomSheet(BuildContext context, int idx) {
+    showModalBottomSheet(
+      context: context,
+      enableDrag: false,
+      isScrollControlled: true, // full screen
+      useSafeArea: true,
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+      builder: (context) => ModalPostListMedia(
+        files: files,
+        isVideo: false,
+      ),
+    );
+  }
+}
+
+class PostGridVideo extends StatelessWidget {
+  final List<String> files;
+  final double separateSize;
+
+  const PostGridVideo({
+    super.key,
+    required this.files,
+    this.separateSize = 2,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    if (files.isEmpty) return const SizedBox.shrink();
+
+    if (files.length <= 1) {
+      return AppVideo(
+        files.first,
+        isNetwork: true,
+      );
+    } else {
+      return _buildDynamicType(context, files.length);
+    }
+  }
+
+  Widget _buildDynamicType(BuildContext context, int len) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Row(
+          children: [
+            _image(context, len > 2 ? 0.3.sh : 0.5.sh, 0),
+            if (len == 2 || len >= 5) ...[
+              SizedBox(width: separateSize),
+              _image(context, len > 2 ? 0.3.sh : 0.5.sh, len == 2 ? 1 : 4),
+            ]
+          ],
+        ),
+        if (len > 2) ...[
+          SizedBox(height: separateSize),
+          Row(
+            children: [
+              _image(context, 0.25.sh, 1),
+              SizedBox(width: separateSize),
+              _image(context, 0.25.sh, 2),
+              if (len >= 4) ...[
+                SizedBox(width: separateSize),
+                _image(context, 0.25.sh, 3)
+              ],
+            ],
+          ),
+        ]
+      ],
+    );
+  }
+
+  Widget _image(BuildContext context, double height, int imageIdx) {
+    return Expanded(
+      child: InkWell(
+        onTap: () => _openBottomSheet(context, imageIdx),
+        child: (imageIdx == 3 && files.length > 5)
+            ? Stack(
+                children: [
+                  AnimatedImage(
+                    height: height,
+                    url: files[imageIdx],
+                  ),
+                  Text(
+                    '+${files.length - 4}',
+                    style: TextStyle(
+                      fontSize: 26.sp,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  )
+                ],
+              )
+            : AnimatedImage(
+                height: height,
+                url: files[imageIdx],
+              ),
+      ),
+    );
+  }
+
+  void _openBottomSheet(BuildContext context, int idx) {
+    showModalBottomSheet(
+      context: context,
+      enableDrag: false,
+      isScrollControlled: true, // full screen
+      useSafeArea: true,
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+      builder: (context) => ModalPostListMedia(
+        files: files,
+        isVideo: false,
       ),
     );
   }

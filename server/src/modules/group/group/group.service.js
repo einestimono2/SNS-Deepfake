@@ -29,21 +29,31 @@ export class GroupService {
   }
 
   // Danh sách các nhóm
-  static async getMyGroups({ userId, limit, offset }) {
+  static async getMyGroups(userId) {
     if (!userId) {
       throw new UnauthorizedError(Message.USER_IS_INVALID);
     }
-    const result = await GroupUser.findAndCountAll({
-      where: { userId },
+
+    const result = await Group.findAll({
+      order: [['updatedAt', 'DESC']],
       include: [
+        // {
+        //   model: GroupUser,
+        //   as: 'userofgroup',
+        //   attributes: [],
+        //   where: {
+        //     userId
+        //   }
+        // },
         {
-          model: Group,
-          as: 'groupofuser'
+          model: User,
+          as: 'members',
+          attributes: ['id', 'avatar', 'username', 'email', 'phoneNumber'],
+          through: { attributes: [] }
         }
-      ],
-      limit,
-      offset
+      ]
     });
+
     return result;
   }
 

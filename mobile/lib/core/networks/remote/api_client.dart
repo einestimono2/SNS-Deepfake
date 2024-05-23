@@ -1,11 +1,33 @@
 import 'package:dio/dio.dart';
+import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 
 import '../../base/base.dart';
 
+const List<int> acceptedStatusCode = [200, 201, 204, 304];
+
 class ApiClient {
   final Dio _dio;
+  final CacheOptions _cacheOptions;
 
-  ApiClient({required Dio dio}) : _dio = dio;
+  ApiClient({
+    required Dio dio,
+    required CacheOptions cacheOptions,
+  })  : _dio = dio,
+        _cacheOptions = cacheOptions;
+
+  Options? getRequestOptions(Options? options, CachePolicy? cacheOption) {
+    Options _options = options ?? Options();
+
+    if (cacheOption != null) {
+      _options.extra ??= {};
+
+      _options.extra!.addAll(
+        _cacheOptions.copyWith(policy: cacheOption).toExtra(),
+      );
+    }
+
+    return _options;
+  }
 
   // - Get Method
   Future<BaseResponse> get(
@@ -15,22 +37,23 @@ class ApiClient {
     Options? options,
     CancelToken? cancelToken,
     ProgressCallback? onReceiveProgress,
+    CachePolicy? cacheOption,
   }) async {
     try {
       final Response response = await _dio.get(
         path,
         data: data,
         queryParameters: queryParameters,
-        options: options,
+        options: getRequestOptions(options, cacheOption),
         cancelToken: cancelToken,
         onReceiveProgress: onReceiveProgress,
       );
 
-      if (response.statusCode == 200 || response.statusCode == 201) {
+      if (acceptedStatusCode.contains(response.statusCode)) {
         return BaseResponse.fromMap(response.data);
       }
 
-      throw "Something went wrong";
+      throw "[API Client] Something went wrong";
     } catch (e) {
       rethrow;
     }
@@ -45,23 +68,24 @@ class ApiClient {
     CancelToken? cancelToken,
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
+    CachePolicy? cacheOption,
   }) async {
     try {
       final Response response = await _dio.post(
         path,
         data: data,
         queryParameters: queryParameters,
-        options: options,
+        options: getRequestOptions(options, cacheOption),
         cancelToken: cancelToken,
         onSendProgress: onSendProgress,
         onReceiveProgress: onReceiveProgress,
       );
 
-      if (response.statusCode == 200 || response.statusCode == 201) {
+      if (acceptedStatusCode.contains(response.statusCode)) {
         return BaseResponse.fromMap(response.data);
       }
 
-      throw "Something went wrong";
+      throw "[API Client] Something went wrong";
     } catch (e) {
       rethrow;
     }
@@ -88,11 +112,11 @@ class ApiClient {
         onReceiveProgress: onReceiveProgress,
       );
 
-      if (response.statusCode == 200 || response.statusCode == 201) {
+      if (acceptedStatusCode.contains(response.statusCode)) {
         return BaseResponse.fromMap(response.data);
       }
 
-      throw "Something went wrong";
+      throw "[API Client] Something went wrong";
     } catch (e) {
       rethrow;
     }
@@ -119,11 +143,11 @@ class ApiClient {
         onReceiveProgress: onReceiveProgress,
       );
 
-      if (response.statusCode == 200 || response.statusCode == 201) {
+      if (acceptedStatusCode.contains(response.statusCode)) {
         return BaseResponse.fromMap(response.data);
       }
 
-      throw "Something went wrong";
+      throw "[API Client] Something went wrong";
     } catch (e) {
       rethrow;
     }
@@ -148,13 +172,11 @@ class ApiClient {
         cancelToken: cancelToken,
       );
 
-      if (response.statusCode == 200 ||
-          response.statusCode == 201 ||
-          response.statusCode == 204) {
+      if (acceptedStatusCode.contains(response.statusCode)) {
         return BaseResponse.fromMap(response.data);
       }
 
-      throw "Something went wrong";
+      throw "[API Client] Something went wrong";
     } catch (e) {
       rethrow;
     }

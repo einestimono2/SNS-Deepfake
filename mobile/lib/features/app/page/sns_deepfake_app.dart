@@ -1,13 +1,25 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 import '../../../config/configs.dart';
 import '../../../core/theme/app_theme.dart';
 import '../bloc/app/app_bloc.dart';
 
-class SnsDeepfakeApp extends StatelessWidget {
+class SnsDeepfakeApp extends StatefulWidget {
   const SnsDeepfakeApp({super.key});
+
+  @override
+  State<SnsDeepfakeApp> createState() => _SnsDeepfakeAppState();
+}
+
+class _SnsDeepfakeAppState extends State<SnsDeepfakeApp> {
+  @override
+  void dispose() {
+    Hive.close();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

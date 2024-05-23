@@ -19,15 +19,26 @@ abstract class ChatRepository {
   Future<Either<Failure, bool>> seenConversation(int id);
 
   /*  */
-  Future<Either<Failure, BaseResponse>> getConversationMessages({
+  Future<Either<Failure, PaginationResult<MessageModel>>>
+      getConversationMessages({
     required int id,
     int? page,
     int? size,
   });
-  
+
   /*  */
   Future<Either<Failure, MessageModel>> sendMessage({
     required int conversationId,
+    required MessageType type,
+    String? message,
+    int? replyId,
+    required List<String> attachments,
+  });
+
+  /*  */
+  Future<Either<Failure, ConversationModel>> createConversation({
+    required List<int> memberIds,
+    String? name,
     required MessageType type,
     String? message,
     int? replyId,

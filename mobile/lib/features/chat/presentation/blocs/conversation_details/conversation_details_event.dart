@@ -55,6 +55,15 @@ class NewMessageEvent extends ConversationDetailsEvent {
   List<Object?> get props => [newMessage];
 }
 
+class FirstMessageEvent extends ConversationDetailsEvent {
+  final MessageModel message;
+
+  const FirstMessageEvent(this.message);
+
+  @override
+  List<Object?> get props => [message];
+}
+
 class UpdateMessageEvent extends ConversationDetailsEvent {
   final dynamic updatedMessage;
 

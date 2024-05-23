@@ -25,3 +25,12 @@ class ConversationLastestEvent extends MyConversationsEvent {
   @override
   List<Object> get props => [data];
 }
+
+class ConversationNewEvent extends MyConversationsEvent {
+  final ConversationModel conversation;
+
+  const ConversationNewEvent(this.conversation);
+
+  @override
+  List<Object> get props => [conversation];
+}

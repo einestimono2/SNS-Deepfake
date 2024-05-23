@@ -43,7 +43,8 @@ export const Post = postgre.define('Post', {
     allowNull: true
   },
   groupId: {
-    type: DataTypes.INTEGER
+    type: DataTypes.INTEGER,
+    allowNull: true
   },
   rate: {
     type: DataTypes.INTEGER,
@@ -64,7 +65,7 @@ export const Post = postgre.define('Post', {
   // Post ---có ---*> PostImage(quan hệ 1 - n)
   Post.hasMany(PostImage, { foreignKey: 'postId', as: 'images', onDelete: 'CASCADE' });
   // Post ---có ---> PostVideo(quan hệ 1 - 1)
-  Post.hasOne(PostVideo, { foreignKey: 'postId', as: 'video', onDelete: 'CASCADE' });
+  Post.hasMany(PostVideo, { foreignKey: 'postId', as: 'videos', onDelete: 'CASCADE' });
   // Post ---có ---*> Feel(quan hệ 1 - n)
   Post.hasMany(Feel, { foreignKey: 'postId', as: 'feels', onDelete: 'CASCADE' });
   Feel.belongsTo(Post, { foreignKey: 'postId', as: 'post', onDelete: 'CASCADE' });

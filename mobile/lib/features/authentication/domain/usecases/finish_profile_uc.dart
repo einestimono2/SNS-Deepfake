@@ -2,16 +2,16 @@ import 'package:dartz/dartz.dart';
 
 import '../../../../core/base/base_usecase.dart';
 import '../../../../core/errors/failures.dart';
-import '../../data/data.dart';
 import '../repositories/user_repository.dart';
 
-class FinishProfileUC extends UseCase<UserModel, FinishProfileParams> {
+class FinishProfileUC
+    extends UseCase<Map<String, dynamic>, FinishProfileParams> {
   final UserRepository repository;
 
   FinishProfileUC({required this.repository});
 
   @override
-  Future<Either<Failure, UserModel>> call(params) async {
+  Future<Either<Failure, Map<String, dynamic>>> call(params) async {
     return await repository.finishProfile(
       email: params.email,
       username: params.username,

@@ -45,6 +45,10 @@ class Formatter {
     return NumberFormat.currency(locale: 'en_US', symbol: 'đ').format(amount);
   }
 
+  static String formatShortenNumber(double amount){
+    return NumberFormat.compact().format(amount);
+  }
+
   static String formatPhoneNumber(String phoneNumber) {
     return phoneNumber;
   }

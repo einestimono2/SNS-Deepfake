@@ -3,7 +3,6 @@ import 'dart:developer';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sns_deepfake/features/chat/presentation/blocs/bloc.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 
 import '../../../../config/configs.dart';
@@ -83,6 +82,23 @@ class SocketBloc extends Bloc<SocketEvent, SocketState> {
       SocketEvents.CONVERSATION_LASTEST,
       (data) => myConversationsBloc.add(ConversationLastestEvent(data)),
     );
+    _socket.on(
+      SocketEvents.CONVERSATION_NEW,
+      (data) {
+        Map<String, dynamic> conversationMap = data['conversation'];
+        conversationMap.addAll({
+          "members": data['members'],
+          "messages": [data['message']],
+        });
+
+        ConversationModel conversation =
+            ConversationModel.fromMap(conversationMap);
+
+        myConversationsBloc.add(ConversationNewEvent(conversation));
+        conversationDetailsBloc
+            .add(FirstMessageEvent(conversation.messages.first));
+      },
+    );
   }
 
   @override
@@ -111,18 +127,23 @@ class SocketBloc extends Bloc<SocketEvent, SocketState> {
     emit(SocketState.disconnected());
   }
 
-  FutureOr<void> _onSocketError(SocketError event, Emitter<SocketState> emit) {
-    if (event.error == state.error || event.type == state.errorMsg) return null;
+  FutureOr<void> _onSocketError(
+    SocketError event,
+    Emitter<SocketState> emit,
+  ) async {
+    String msg = event.error.message ?? event.error.toString();
+
+    if (event.type == state.errorMsg || msg == state.errorMsg) return;
 
     switch (event.type) {
       case "ConnectError":
-        emit(state.copyWith(error: event.error, errorMsg: "ConnectError"));
+        emit(state.copyWith(errorMsg: "ConnectError"));
         break;
       case "ConnectTimeout":
-        emit(state.copyWith(error: event.error, errorMsg: "ConnectTimeout"));
+        emit(state.copyWith(errorMsg: "ConnectTimeout"));
         break;
       default:
-        emit(state.copyWith(error: event.error));
+        emit(state.copyWith(errorMsg: msg));
     }
   }
 

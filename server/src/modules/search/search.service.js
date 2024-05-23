@@ -132,14 +132,17 @@ export class SearchServices {
   }
 
   // Tìm kiếm người dùng
-  static async searchUser({ userId, limit, offset }, body) {
-    let { keyword } = { ...body };
+  static async searchUser({ userId, limit, offset, keyword: _keyword }) {
     // Lưu thông tin tìm kiếm vào cơ sở dữ liệu
-    const search = await Search.create({
-      keyword,
-      userId,
-      type: SearchType.User
+    await Search.findOrCreate({
+      where: { keyword: _keyword, userId, type: SearchType.User },
+      default: {
+        keyword: _keyword,
+        userId,
+        type: SearchType.User
+      }
     });
+
     const usersIdBlocked = await Block.findAll({
       where: { userId },
       attributes: ['targetId']
@@ -149,8 +152,9 @@ export class SearchServices {
       where: { targetId: userId },
       attributes: ['userId']
     });
+
     // Tìm kiếm
-    keyword = keyword.trim().replace(/\s+/g, '|');
+    const keyword = _keyword.trim().replace(/\s+/g, '|');
     const users = await User.findAll({
       include: [
         {
@@ -212,15 +216,18 @@ export class SearchServices {
       limit,
       subQuery: false
     });
-    console.log(users);
+
     // Trả về kết quả được định dạng
-    return users.map((user) => ({
-      id: String(user.id),
-      username: user.username || '',
-      avatar: user.avatar,
-      created: user.createdAt,
-      same_friends: String(user.friends.length)
-    }));
+    return {
+      rows: users.rows.map((user) => ({
+        id: user.id,
+        username: user.username || '',
+        avatar: user.avatar,
+        created: user.createdAt,
+        same_friends: user.friends.length ?? 0
+      })),
+      count: users.count
+    };
   }
 
   // 8. Tìm kiếm nhóm
@@ -268,30 +275,36 @@ export class SearchServices {
 
   // Lấy danh sách các tìm kiếm(Đã test)
   static async getSavedSearches(userId, body) {
-    const { index, count } = { ...body };
-    const searches = await Search.findAll({
+    const { offset, limit } = body;
+
+    const searches = await Search.findAndCountAll({
       where: { userId },
-      order: [['id', 'DESC']],
-      offset: index,
-      limit: count
+      order: [['createdAt', 'DESC']],
+      offset,
+      limit
     });
-    return searches.map((search) => ({
-      id: String(search.id),
-      keyword: search.keyword,
-      created: search.createdAt
-    }));
+
+    return {
+      rows: searches.rows.map((search) => ({
+        id: search.id,
+        keyword: search.keyword,
+        type: search.type,
+        created: search.createdAt
+      })),
+      count: searches.count
+    };
   }
 
   // Xóa tìm kiếm(Đã test)
   static async deleteSavedSearch(userId, body) {
-    const { searchId, all } = { ...body };
+    const { keyword, all, type } = { ...body };
+
     // Nếu chọn xóa tất cả
     if (all) {
-      await Search.destroy({ where: { userId } });
+      await Search.destroy({ where: { userId, type } });
     } else {
-      await Search.destroy({ where: { userId, id: searchId } });
+      await Search.destroy({ where: { userId, keyword, type } });
     }
-    return {};
   }
 
   // Tìm kiếm theo hashtage(mặc đinh hashtag năm trong mô tả bài viết)

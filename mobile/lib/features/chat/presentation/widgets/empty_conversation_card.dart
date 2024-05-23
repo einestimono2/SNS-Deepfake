@@ -1,30 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sns_deepfake/core/utils/utils.dart';
 
 import '../../../../core/widgets/widgets.dart';
 
 class EmptyConversationCard extends StatelessWidget {
-  const EmptyConversationCard({super.key});
+  final Map<String, dynamic> friendData;
+
+  const EmptyConversationCard({
+    super.key,
+    required this.friendData,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(height: 0.05.sh),
+        SizedBox(height: 0.05.sh, width: double.infinity), // full width
 
         /* Avatar */
         AnimatedImage(
           width: 0.25.sw,
           height: 0.25.sw,
-          url:
-              "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/652.jpg",
+          url: (friendData['avatar'] as String).fullPath,
           isAvatar: true,
         ),
 
         /* Name */
         const SizedBox(height: 12),
         Text(
-          "Nguyễn Tuệ",
+          friendData['username'],
           style: Theme.of(context).textTheme.titleLarge,
         ),
 

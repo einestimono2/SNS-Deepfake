@@ -28,6 +28,7 @@ class ConversationDetailsBloc
   }) : super(CDInitialState()) {
     on<GetConversationDetails>(_onGetConversationDetails);
     on<NewMessageEvent>(_onNewMessageEvent);
+    on<FirstMessageEvent>(_onFirstMessageEvent);
     on<UpdateMessageEvent>(_onUpdateMessageEvent);
     on<SeenConversation>(_onSeenConversation);
     on<LoadMoreConversationDetails>(_onLoadMoreConversationDetails);
@@ -85,11 +86,8 @@ class ConversationDetailsBloc
       (failure) => emit(CDFailureState(failure.toString())),
       (response) => emit(
         CDSuccessfulState(
-          hasReachedMax:
-              response.extra!['pageIndex'] == response.extra!['totalPages'],
-          messages: List<MessageModel>.from(
-            response.data.map((_message) => MessageModel.fromMap(_message)),
-          ),
+          hasReachedMax: response.pageIndex == response.totalPages,
+          messages: response.data,
           conversationId: event.id,
           timestamp: DateTime.now().millisecondsSinceEpoch,
         ),
@@ -107,9 +105,8 @@ class ConversationDetailsBloc
       MessageModel msg = MessageModel.fromMap(event.newMessage);
       final oldState = (state as CDSuccessfulState);
 
-      emit(CDSuccessfulState(
+      emit(oldState.copyWith(
         messages: [msg, ...(oldState.messages)],
-        conversationId: oldState.conversationId,
         timestamp: DateTime.now().millisecondsSinceEpoch,
       ));
 
@@ -126,13 +123,15 @@ class ConversationDetailsBloc
     Emitter<ConversationDetailsState> emit,
   ) async {
     final result = await seenConversationUC(
-        SeenConversationParams(id: event.conversationId));
+      SeenConversationParams(id: event.conversationId),
+    );
 
-    result.fold((failure) {
-      AppLogger.error(
+    result.fold(
+      (failure) => AppLogger.error(
         "Seen Conversation '${event.conversationId}; Failure: ${failure.toString()}",
-      );
-    }, (success) {});
+      ),
+      (success) {},
+    );
   }
 
   FutureOr<void> _onUpdateMessageEvent(
@@ -150,9 +149,8 @@ class ConversationDetailsBloc
         _temp.add(e.id == msg.id ? msg : e);
       }
 
-      emit(CDSuccessfulState(
+      emit(oldState.copyWith(
         messages: _temp,
-        conversationId: oldState.conversationId,
         timestamp: DateTime.now().millisecondsSinceEpoch,
       ));
     }
@@ -178,20 +176,30 @@ class ConversationDetailsBloc
 
     result.fold(
       (failure) => emit(CDFailureState(failure.toString())),
-      (response) => response.extra!['pageIndex'] < response.extra!['totalPages']
-          ? emit(CDSuccessfulState(
-              messages: [
-                ...preLoaded.messages,
-                ...List<MessageModel>.from(
-                  response.data
-                      .map((_message) => MessageModel.fromMap(_message)),
-                )
-              ],
-              conversationId: event.id,
-              hasReachedMax: false,
-              timestamp: DateTime.now().millisecondsSinceEpoch,
-            ))
-          : emit(preLoaded.copyWith(hasReachedMax: true)),
+      (response) => emit(preLoaded.copyWith(
+        messages: [...preLoaded.messages, ...response.data],
+        conversationId: event.id,
+        hasReachedMax: response.pageIndex == response.totalPages,
+        timestamp: DateTime.now().millisecondsSinceEpoch,
+      )),
     );
+  }
+
+  FutureOr<void> _onFirstMessageEvent(
+    FirstMessageEvent event,
+    Emitter<ConversationDetailsState> emit,
+  ) async {
+    emit(CDSuccessfulState(
+      messages: [event.message],
+      conversationId: event.message.conversationId,
+      hasReachedMax: true,
+      timestamp: DateTime.now().millisecondsSinceEpoch,
+    ));
+
+    // Seen message đó luôn nếu  chưa có
+    // if (appBloc.state.user != null &&
+    //     !msg.seenIds.contains(appBloc.state.user!.id)) {
+    //   add(SeenConversation(msg.conversationId));
+    // }
   }
 }

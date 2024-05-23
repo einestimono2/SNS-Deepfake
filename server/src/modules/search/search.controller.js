@@ -14,19 +14,29 @@ export class SearchControllers {
 
   static searchUser = CatchAsyncError(async (req, res) => {
     const { userId } = req.userPayload;
-    const data = await SearchServices.searchUser(userId, req.body);
-    res.ok({
-      data
+    const data = await SearchServices.searchUser({
+      userId,
+      ...getPaginationAttributes(req.query),
+      keyword: req.query.keyword
     });
+
+    res.ok(
+      getPaginationSummary({
+        ...req.query,
+        result: data
+      })
+    );
   });
 
   static getSavedSearches = CatchAsyncError(async (req, res) => {
     const { userId } = req.userPayload;
-    const data = await SearchServices.getSavedSearches(userId, ...getPaginationAttributes(req.query));
+
+    const data = await SearchServices.getSavedSearches(userId, getPaginationAttributes(req.query));
+
     res.ok(
       getPaginationSummary({
         ...req.query,
-        data
+        result: data
       })
     );
   });

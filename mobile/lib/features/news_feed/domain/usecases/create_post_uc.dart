@@ -1,16 +1,16 @@
 import 'package:dartz/dartz.dart';
 
-import '../../../../core/base/base_usecase.dart';
+import '../../../../core/base/base.dart';
 import '../../../../core/errors/failures.dart';
 import '../repositories/post_repository.dart';
 
-class CreatePostUC extends UseCase<String, CreatePostParams> {
+class CreatePostUC extends UseCase<BaseResponse, CreatePostParams> {
   final PostRepository repository;
 
   CreatePostUC({required this.repository});
 
   @override
-  Future<Either<Failure, String>> call(params) async {
+  Future<Either<Failure, BaseResponse>> call(params) async {
     return await repository.createPost(
       groupId: params.groupId,
       description: params.description,
@@ -21,13 +21,13 @@ class CreatePostUC extends UseCase<String, CreatePostParams> {
 }
 
 class CreatePostParams {
-  final int? groupId;
+  final int groupId;
   final String? description;
   final String? status;
   final List<String> files;
 
   const CreatePostParams({
-    this.groupId,
+    required this.groupId,
     this.description,
     this.status,
     required this.files,

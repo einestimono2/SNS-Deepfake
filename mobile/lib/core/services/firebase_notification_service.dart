@@ -15,6 +15,8 @@ class FirebaseNotificationService {
   // initialising plugin
   final _firebaseMessaging = FirebaseMessaging.instance;
 
+  String? token;
+
   Future<void> _requestNotificationPermission() async {
     AuthorizationStatus status = (await _firebaseMessaging.requestPermission(
       alert: true,
@@ -52,9 +54,10 @@ class FirebaseNotificationService {
     _firebaseMessaging.onTokenRefresh.listen(
       (data) => AppLogger.warn('New FCM Token: ${data.toString()}'),
     );
-    _firebaseMessaging
-        .getToken()
-        .then((token) => AppLogger.info("FCM Token: $token"));
+    _firebaseMessaging.getToken().then((_token) {
+      token = _token;
+      AppLogger.info("FCM Token: $token");
+    });
 
     /* Init Firebase Message */
     await FirebaseMessaging.instance

@@ -1,7 +1,16 @@
 {
     "BACK_TEXT": "Back",
-
+    "SOMETHING_WENT_WRONG_TEXT": "Something went wrong!",
+    "TRY_AGAIN_TEXT": "Try again",
+    "CONFIRM_TEXT": "Confirm",
     "OK_TEXT": "OK",
+    "DONE_TEXT": "Done",
+    "CONTINUE_TEXT": "Continue",
+    "PUBLIC_TEXT": "Public",
+    "RECENT_TEXT": "Recent",
+    "DELETE_ALL_TEXT": "Delete all",
+    "NO_DATA_TEXT": "No data",
+    "SORT_TEXT": "Sort",
     "CANCEL_TEXT": "Cancel",
     "SETTING_TEXT": "Setting",
     "PERMISSION_DENIED": "Permission Denied",
@@ -28,6 +37,8 @@
     "VIA_SOCIAL_MEDIA_TEXT": "Or via social media",
     "UPCOMING_FEATURE_TEXT": "Feature under development, please try again later!",
     "COMING_SOON_TEXT": "Coming Soon",
+    "SELECT_STARTING_GROUP_TEXT": "Select the starting group",
+    "ALL_GROUP_TEXT": "All group",
 
     "SIGN_UP_TEXT": "Sign up",
     "SIGNUP_ERROR_TITLE_TEXT": "Sign Up Failed",
@@ -76,7 +87,80 @@
     "NOTIFICATION_TEXT": "Notification",
     "PROFILE_TEXT": "Profile",
 
+    "CREATE_POST_TITLE_TEXT": "Create post",
+    "POST_TEXT": "Post",
+    "WHATS_ON_YOUR_MIND_TEXT": "What's on your mind?",
+    "IMAGE_VIDEO_TEXT": "Photo/video",
+    "POST_AUDIENCE_TEXT": "Post audience",
+    "NO_POST_TITLE_TEXT": "No related posts!",
+    "NO_POST_DESCRIPTION_TEXT": "Post your post or join or change the group to see more.",
+    "LIKE_TEXT": {
+        "none": "Like",
+        "other": "{} likes"
+    },
+    "SHARE_TEXT": {
+        "none": "Share",
+        "other": "{} shares"
+    },
+    "COMMENT_TEXT": {
+        "none": "Comment",
+        "other": "{} comments"
+    },
+    "ACTION_EDIT_POST_TEXT": "Edit post",
+    "ACTION_DELETE_POST_TEXT": "Delete post",
+    "ACTION_REPORT_POST_TEXT": "Report post",
+
     "SEE_MORE_TEXT": "See more",
+    "SEE_ALL_TEXT": "See all",
+    "FRIEND_PAGE_TITLE_TEXT": "Friend",
+    "FRIEND_REQUESTS_TEXT": "Friend requests",
+    "SUGGESTIONS_TEXT": "Suggestions",
+    "YOUR_FRIENDS_TEXT": "Your friends",
+    "NO_NEW_REQUESTS_TEXT": "No new requests",
+    "NO_NEW_REQUESTS_DESCRIPTION_TEXT": "There are currently no friend requests for you, please come back later!",
+    "MUTUAL_FRIENDS_TEXT": {
+        "one": "{} mutual friend",
+        "other": "{} mutual friends"
+    },
+    "FRIEND_SUGGESTS_TEXT": "People you may know",
+    "ADD_FRIEND_TEXT": "Add friend",
+    "REMOVE_FRIEND_TEXT": "Remove",
+    "DELETE_FRIEND_TEXT": "Delete",
+    "NO_FRIEND_SUGGESTS_TEXT": "No suggestions",
+    "NO_FRIEND_SUGGESTS_DESCRIPTION_TEXT": "Try searching for a friend!",
+    "LIST_FRIEND_TEXT": {
+        "one": "{} friend",
+        "other": "{} friends"
+    },
+    "REJECT_FRIEND_TEXT": "Rejected friend request",
+    "SEND_MESSAGE_TEXT": "Send message",
+    "SENT_FRIEND_REQUEST_TEXT": "Sent a friend request",
+
+    "TIME_AGO_JUST_NOW": "Just now",
+    "TIME_AGO_MINUTE": {
+        "one": "{} minute ago",
+        "other": "{} minutes ago"
+    },
+    "TIME_AGO_HOUR": {
+        "one": "{} hour ago",
+        "other": "{} hours ago"
+    },
+    "TIME_AGO_DAY": {
+        "one": "{} day ago",
+        "other": "{} days ago"
+    },
+    "TIME_AGO_WEEK": {
+        "one": "{} week ago",
+        "other": "{} weeks ago"
+    },
+    "TIME_AGO_MONTH": {
+        "one": "{} month ago",
+        "other": "{} months ago"
+    },
+    "TIME_AGO_YEAR": {
+        "one": "{} year ago",
+        "other": "{} years ago"
+    },
 
     "CHAT_PAGE_TITLE_TEXT": "Chat",
     "YOU:_TEXT": "You: ",

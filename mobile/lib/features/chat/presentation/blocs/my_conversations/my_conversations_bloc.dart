@@ -15,6 +15,7 @@ class MyConversationsBloc
       : super(InitialState()) {
     on<GetMyConversations>(_onGetMyConversations);
     on<ConversationLastestEvent>(_onConversationLastestEvent);
+    on<ConversationNewEvent>(_onConversationNewEvent);
   }
 
   FutureOr<void> _onGetMyConversations(
@@ -66,6 +67,25 @@ class MyConversationsBloc
 
       emit(SuccessfulState(
         conversations: updatedConversations,
+        timestamp: DateTime.now().millisecondsSinceEpoch,
+      ));
+    }
+  }
+
+  FutureOr<void> _onConversationNewEvent(
+    ConversationNewEvent event,
+    Emitter<MyConversationsState> emit,
+  ) async {
+    if (state is SuccessfulState) {
+      final preState = state as SuccessfulState;
+
+      emit(SuccessfulState(
+        conversations: [event.conversation, ...preState.conversations],
+        timestamp: DateTime.now().millisecondsSinceEpoch,
+      ));
+    } else {
+      emit(SuccessfulState(
+        conversations: [event.conversation],
         timestamp: DateTime.now().millisecondsSinceEpoch,
       ));
     }

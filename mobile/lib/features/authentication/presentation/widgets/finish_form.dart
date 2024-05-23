@@ -8,6 +8,7 @@ import 'package:sns_deepfake/core/utils/utils.dart';
 import 'package:sns_deepfake/core/widgets/widgets.dart';
 import 'package:sns_deepfake/features/app/app.dart';
 
+import '../../../group/group.dart';
 import '../bloc/user_bloc.dart';
 
 class FinishForm extends StatefulWidget {
@@ -54,19 +55,42 @@ class FinishFormState extends State<FinishForm> {
     }
   }
 
+  void _handleSelectGroup(List<GroupModel> groups, int myId) async {
+    await showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (context) => SelectGroupCard(
+        groups: groups,
+        titleText: "SELECT_STARTING_GROUP_TEXT".tr(),
+        btnText: "CONTINUE_TEXT".tr(),
+        myId: myId,
+      ),
+    ).then(
+      (id) => id != null
+          ? context.read<UserBloc>().add(SelectGroupSubmit(id))
+          : btnController.reverse(),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocListener<UserBloc, UserState>(
       listener: (context, state) {
-        if (state is FailureState) {
+        if (state is FailureState && state.type == 'FINISH_PROFILE') {
           btnController.reverse();
 
           context.showError(
             title: "COMPLETE_PROFILE_ERROR_TITLE_TEXT".tr(),
             message: state.message,
           );
-        } else if (state is SuccessfulState) {
+        }
+
+        if (state is SuccessfulState) {
           btnController.reverse();
+        }
+
+        if (state is ChooseGroupState) {
+          _handleSelectGroup(state.groups, state.user.id!);
         }
       },
       child: Stack(

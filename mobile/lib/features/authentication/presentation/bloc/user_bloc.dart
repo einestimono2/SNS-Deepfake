@@ -7,6 +7,7 @@ import 'package:sns_deepfake/features/app/bloc/app/app_bloc.dart';
 import 'package:sns_deepfake/features/authentication/authentication.dart';
 
 import '../../../app/app.dart';
+import '../../../group/group.dart';
 
 part 'user_event.dart';
 part 'user_state.dart';
@@ -32,6 +33,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   }) : super(InitialState()) {
     on<ResetState>(_onResetState);
     on<LoginSubmit>(_onLoginSubmit);
+    on<SelectGroupSubmit>(_onSelectGroupSubmit);
     on<SignUpSubmit>(_onSignUpSubmit);
     on<VerifyOTPSubmit>(_onVerifyOTPSubmit);
     on<ResendOTPSubmit>(_onResendOTPSubmit);
@@ -55,11 +57,35 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         message: failure.toString(),
         type: "LOGIN",
       )),
-      (user) {
-        emit(const SuccessfulState(type: "LOGIN"));
-        appBloc.add(ChangeUser(user: user));
+      (data) {
+        UserModel user = data['user'];
+
+        // 1 --> hoàn thiện profile
+        if (user.status == 1) {
+          emit(ChooseGroupState(
+            user: user,
+            groups: data['groups'],
+          ));
+        } else if (user.status == -1) {
+          appBloc.add(ChangeUser(user: user));
+        } else {
+          emit(const SuccessfulState(type: "LOGIN"));
+        }
       },
     );
+  }
+
+  FutureOr<void> _onSelectGroupSubmit(
+    SelectGroupSubmit event,
+    Emitter<UserState> emit,
+  ) async {
+    final preState = state as ChooseGroupState;
+
+    appBloc.add(ChangeUser(
+      user: preState.user,
+      groups: preState.groups,
+      groupIdx: event.id,
+    ));
   }
 
   FutureOr<void> _onResetState(ResetState event, Emitter<UserState> emit) {
@@ -135,8 +161,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
     // Test
     if (event.email == "") {
-      await Future.delayed(const Duration(seconds: 3));
-      emit(const FailureState(message: "Email trống", type: "RESEND_OTP"));
+      // await Future.delayed(const Duration(seconds: 3));
+      // emit(const FailureState(message: "Email trống", type: "RESEND_OTP"));
       return;
     }
 
@@ -174,9 +200,13 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         message: failure.toString(),
         type: "FINISH_PROFILE",
       )),
-      (user) {
+      (data) {
         emit(const SuccessfulState(type: "FINISH_PROFILE"));
-        appBloc.add(ChangeUser(user: user));
+
+        emit(ChooseGroupState(
+          user: data['user'],
+          groups: data['groups'],
+        ));
       },
     );
   }

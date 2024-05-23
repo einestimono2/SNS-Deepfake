@@ -23,34 +23,47 @@ export class PostServices {
   // Tất cả đều chưa xử lý và notification
   // Thêm mới một bài viết vào 1 nhóm (Đã test)
   static async addPost(userId, body) {
-    const { groupId, description, status, images, video } = { ...body };
-    if (!userId) throw new BadRequestError(Message.ID_EMPTY);
-    const user = await User.findOne({ where: { id: userId } });
+    const { groupId, description, status, images, videos } = { ...body };
+    if (groupId === undefined || !userId) throw new BadRequestError(Message.ID_EMPTY);
+
+    const user = await User.findByPk(userId);
+
     // Kiểm tra số coins của user
     if (user.coins < costs.createPost) {
       throw new BadRequestError(Message.NO_ENOUGH_COINS);
     }
     // Kiểm tra các trường đầu vào
-    if (!description && !status && (!images || !images.length) && !video) {
-      throw new BadRequestError(Message.FILE_NOT_FOUND);
-    }
+    // if (!description && !status && (!images || !images.length) && !video) {
+    //   throw new BadRequestError(Message.FILE_NOT_FOUND);
+    // }
+
     // Goi truoc ham Post.create de tao model
     // setFileUsed();
     // Tạo dữ liệu cho bảng post
     const post = await Post.create({
       authorId: userId,
-      description: body.description,
-      status: body.status,
-      groupId
+      description,
+      status,
+      groupId: groupId === 0 ? null : groupId
     });
-    // console.log(post);
+
     // Lưu dữ liệu vào bảng postvideo và postimage
-    if (body.video) {
-      const fileVideoUsed = setFileUsed(body.video);
-      await PostVideo.create({ postId: post.id, url: fileVideoUsed });
+    let postVideos = [];
+    if (videos?.length) {
+      const videoPromises = videos.map((video, i) => {
+        const fileVideoUsed = setFileUsed(video);
+        return PostVideo.create({
+          postId: post.id,
+          url: fileVideoUsed,
+          order: i + 1
+        });
+      });
+
+      postVideos = await Promise.all(videoPromises);
     }
-    if (body.images?.length) {
-      // console.log(body.images);
+
+    let postImages = [];
+    if (images?.length) {
       const imagePromises = images.map((image, i) => {
         const fileImageUsed = setFileUsed(image);
         return PostImage.create({
@@ -59,8 +72,10 @@ export class PostServices {
           order: i + 1
         });
       });
-      await Promise.all(imagePromises);
+
+      postImages = await Promise.all(imagePromises);
     }
+
     // Cập nhật số coins
     user.coins -= costs.createPost;
     user.lastActive = new Date();
@@ -69,7 +84,12 @@ export class PostServices {
     // this.notificationService.notifyAddPost({ post, author: user });
     // Thong bao
     return {
-      id: String(post.id),
+      post: {
+        ...post.dataValues,
+        author: user,
+        videos: postVideos,
+        images: postImages
+      },
       coins: String(user.coins)
     };
   }
@@ -101,7 +121,7 @@ export class PostServices {
         },
         {
           model: PostVideo,
-          as: 'video'
+          as: 'videos'
         },
         {
           model: PostHistory,
@@ -148,7 +168,7 @@ export class PostServices {
           ]
         ]
       },
-      group: ['Post.id', 'author.id', 'images.id', 'video.id', 'feels.id', 'marks.id', 'histories.id']
+      group: ['Post.id', 'author.id', 'images.id', 'videos.id', 'feels.id', 'marks.id', 'histories.id']
     });
     if (!postTotal) {
       throw new BadRequestError(Message.POST_NOT_FOUND);
@@ -207,10 +227,8 @@ export class PostServices {
       where: { targetId: userId },
       attributes: ['userId']
     });
-    const postTotal = await Post.findAndCountAll({
-      where: {
-        groupId
-      },
+
+    const query = {
       include: [
         {
           model: User,
@@ -233,7 +251,7 @@ export class PostServices {
         },
         {
           model: PostVideo,
-          as: 'video'
+          as: 'videos'
         },
         {
           model: Group,
@@ -249,6 +267,7 @@ export class PostServices {
         'edited',
         'categoryId',
         'rate',
+        'createdAt',
         [
           sequelize.literal(
             '(SELECT COUNT(*) FROM "Feels" WHERE "Feels"."postId" = "Post"."id" AND "Feels"."type" = 0)'
@@ -277,7 +296,15 @@ export class PostServices {
       order: [['id', 'DESC']],
       offset,
       limit
-    });
+    };
+
+    if (Number(groupId) > 0) {
+      query.where = {
+        groupId
+      };
+    }
+
+    const postTotal = await Post.findAndCountAll(query);
     if (!postTotal?.count) {
       throw new BadRequestError(Message.POST_NOT_FOUND);
     }
@@ -320,7 +347,7 @@ export class PostServices {
         { model: Feel, as: 'feels' }
       ]
     });
-    // console.log(post);
+
     if (!post) {
       throw new BadRequestError(Message.POST_NOT_FOUND);
     }
@@ -352,7 +379,7 @@ export class PostServices {
       edited: post.edited,
       deletedAt: new Date()
     });
-    // console.log(oldPost);
+
     // Tạo dữ liệu cho bảng PostHistory
     await PostHistory.create({
       postId: post.id,
@@ -538,7 +565,7 @@ export class PostServices {
   static async setViewedPost(userId, postId) {
     // Tìm postView dựa trên postId và userId
     const postView = await PostView.findOne({ where: { postId, userId } });
-    console.log(postView.toJSON());
+
     // Nếu không tìm thấy, tạo mới một postView
     if (!postView) {
       await PostView.create({ postId, userId, count: 0 });
@@ -687,7 +714,7 @@ export class PostServices {
   static async setSharededPost(userId, postId) {
     // Tìm postView dựa trên postId
     const post = await Post.findOne({ where: { postId } });
-    console.log(post.toJSON());
+
     // Tăng giá trị lượt sharecount lên 1
     post.shareCount += 1;
     // Lưu hoặc cập nhật postView vào cơ sở dữ liệu
@@ -756,14 +783,13 @@ export class PostServices {
       groupId,
       postShareId: postId
     });
-    // console.log(post);
+
     // Lưu dữ liệu vào bảng postvideo và postimage
     if (postShare.video) {
       const fileVideoUsed = setFileUsed(postShare.video.url);
       await PostVideo.create({ postId: postCreate.id, url: fileVideoUsed });
     }
     // if (body.images?.length) {
-    //   // console.log(body.images);
     //   const imagePromises = images.map((image, i) => {
     //     const fileImageUsed = setFileUsed(image);
     //     return PostImage.create({

@@ -1,17 +1,16 @@
 import 'package:dartz/dartz.dart';
 
 import '../../../../core/errors/failures.dart';
-import '../../data/models/user_model.dart';
 
 abstract class UserRepository {
-  Future<Either<Failure, UserModel?>> getUser();
+  Future<Either<Failure, Map<String, dynamic>>> getUser();
 
-  Future<Either<Failure, UserModel>> login({
+  Future<Either<Failure, Map<String, dynamic>>> login({
     required String email,
     required String password,
   });
-  
-  Future<Either<Failure, UserModel>> finishProfile({
+
+  Future<Either<Failure, Map<String, dynamic>>> finishProfile({
     String? avatar,
     String? coverImage,
     required String email,
@@ -24,15 +23,15 @@ abstract class UserRepository {
     required String password,
     required int role,
   });
-  
+
   Future<Either<Failure, int>> verifyOtp({
     required String email,
     required String otp,
   });
-  
+
   Future<Either<Failure, bool>> resendOtp({
     required String email,
   });
-  
+
   Future<Either<Failure, bool>> logout();
 }

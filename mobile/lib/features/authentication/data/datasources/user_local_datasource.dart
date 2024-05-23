@@ -5,9 +5,10 @@ import '../models/user_model.dart';
 
 abstract class UserLocalDataSource {
   Future<void> cacheUser(UserModel user);
-  Future<bool> removeCacheUser();
+  Future<void> removeCacheUser();
   Future<void> cacheToken(String? token);
-  Future<bool> removeCacheToken();
+  Future<void> removeCacheToken();
+  Future<void> removeSelectedGroup();
   String? getToken();
 }
 
@@ -18,31 +19,35 @@ class UserLocalDataSourceImpl extends UserLocalDataSource {
 
   @override
   Future<void> cacheUser(UserModel user) async {
-    await localCache.putString(AppStrings.userKey, user.toJson());
+    await localCache.putValue<String>(AppStrings.userKey, user.toJson());
   }
 
   @override
   Future<void> cacheToken(String? token) async {
-    print("CacheToekn: $token");
     if (token == null) {
       return;
     }
 
-    await localCache.putString(AppStrings.accessTokenKey, token);
+    await localCache.putValue<String>(AppStrings.accessTokenKey, token);
   }
 
   @override
   String? getToken() {
-    return localCache.getString(AppStrings.accessTokenKey);
+    return localCache.getValue<String?>(AppStrings.accessTokenKey);
   }
 
   @override
-  Future<bool> removeCacheToken() async {
-    return await localCache.clearKey(AppStrings.accessTokenKey);
+  Future<void> removeCacheToken() async {
+    await localCache.clearKey(AppStrings.accessTokenKey);
   }
 
   @override
-  Future<bool> removeCacheUser() async {
-    return await localCache.clearKey(AppStrings.userKey);
+  Future<void> removeCacheUser() async {
+    await localCache.clearKey(AppStrings.userKey);
+  }
+  
+  @override
+  Future<void> removeSelectedGroup() async {
+    await localCache.clearKey(AppStrings.selectedGroupKey);
   }
 }

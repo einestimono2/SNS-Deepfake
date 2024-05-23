@@ -23,9 +23,8 @@ export class UserControllers {
 
   // 2--Đăng nhập
   static login = CatchAsyncError(async (req, res) => {
-    const { email, password, uuid } = req.body;
-    const user = await userServices.login(email, password, uuid);
-    console.log(user);
+    const user = await userServices.login(req.body);
+
     res.ok({ message: 'Đăng nhập thành công', data: user });
   });
 

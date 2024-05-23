@@ -1,3 +1,5 @@
+import 'package:firebase_core/firebase_core.dart';
+
 enum Flavor {
   development,
   production,
@@ -11,6 +13,7 @@ class FlavorConfig {
   final String baseUrl;
   final String basePrefix;
   final String appTitle;
+  final FirebaseOptions firebaseOptions;
 
   static late FlavorConfig _instance;
 
@@ -21,6 +24,7 @@ class FlavorConfig {
     required String baseUrl,
     required String basePrefix,
     required String socketUrl,
+    required FirebaseOptions firebaseOptions,
   }) {
     _instance = FlavorConfig._internal(
       flavor: flavor,
@@ -30,6 +34,7 @@ class FlavorConfig {
       basePrefix: basePrefix,
       baseUrl: baseUrl,
       socketUrl: socketUrl,
+      firebaseOptions: firebaseOptions,
     );
 
     return _instance;
@@ -43,6 +48,7 @@ class FlavorConfig {
     required this.basePrefix,
     required this.baseUrl,
     required this.socketUrl,
+    required this.firebaseOptions,
   });
 
   static FlavorConfig get instance => _instance;

@@ -16,6 +16,7 @@ class FriendSearchButton extends StatelessWidget {
       onPressed: () => showSearch(
         context: context,
         delegate: FriendSearch(),
+        useRootNavigator: true,
       ),
       icon: Icon(Icons.search, size: 24.sp),
     );

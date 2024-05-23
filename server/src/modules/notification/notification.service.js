@@ -268,4 +268,17 @@ export class NotificationServices {
       });
     }
   }
+
+  static async sendMessage({ fcmToken, message }) {
+    await messaging().send({
+      token: fcmToken,
+      // data: {
+      //   message
+      // },
+      notification: {
+        title: 'Deepfake notification',
+        body: 'You have a new notification'
+      }
+    });
+  }
 }

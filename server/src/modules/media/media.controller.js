@@ -11,11 +11,11 @@ import { getPaginationAttributes, getPaginationSummary, getStandardPath } from '
 export class MediaControllers {
   //
   static uploadImages = async (req, res, next) => {
-    console.log(req);
     if (!req.files?.length) {
       next(new NotFoundError(Message.IMAGE_EMPTY));
       return;
     }
+
     const files = [];
     for (const file of req.files) {
       files.push({
@@ -23,7 +23,7 @@ export class MediaControllers {
         name: file.filename
       });
     }
-    // console.log(files);
+
     res.created({
       data: files.length === 1 ? files[0] : files
     });

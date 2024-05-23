@@ -68,6 +68,7 @@ class AnimatedImage extends StatelessWidget {
     required this.url,
     this.isAvatar = false,
     this.radius,
+    this.errorImage = AppImages.errorImage,
   });
 
   final double? width;
@@ -76,6 +77,7 @@ class AnimatedImage extends StatelessWidget {
   final double? radius;
   final bool isAvatar;
   final BoxFit fit;
+  final String errorImage;
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +95,7 @@ class AnimatedImage extends StatelessWidget {
       imageUrl: url,
       fit: fit,
       errorWidget: (context, error, stackTrace) =>
-          _defaultImage(AppImages.errorImage, isAvatar, radius),
+          _defaultImage(errorImage, isAvatar, radius),
     );
   }
 }
@@ -128,7 +130,7 @@ class LocalImage extends StatelessWidget {
   Widget _assetImage() {
     return Image.asset(
       path,
-      fit: BoxFit.cover,
+      fit: fit,
       errorBuilder: (context, error, stackTrace) =>
           _defaultImage(AppImages.errorImage, isAvatar, radius),
     );
@@ -165,7 +167,7 @@ class RemoteImage extends StatelessWidget {
   Widget _networkImage() {
     return Image.network(
       url,
-      fit: BoxFit.cover,
+      fit: fit,
       errorBuilder: (context, error, stackTrace) =>
           _defaultImage(AppImages.errorImage, isAvatar, radius),
       loadingBuilder: (

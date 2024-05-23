@@ -24,7 +24,10 @@ class ChatPageState extends State<ChatPage> {
   @override
   void initState() {
     id = context.read<AppBloc>().state.user!.id!;
-    _getMyConversations();
+    if (context.read<MyConversationsBloc>().state is! SuccessfulState) {
+      _getMyConversations();
+    }
+
     super.initState();
   }
 

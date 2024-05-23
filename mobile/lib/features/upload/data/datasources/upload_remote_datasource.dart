@@ -60,9 +60,11 @@ class UploadRemoteDataSourceImpl extends UploadRemoteDataSource {
       data: _formData,
     );
 
-    return response.data["path"] is List
-        ? response.data["path"]
-        : [response.data["path"]];
+    if (response.data is List) {
+      return List<String>.from(response.data.map((e) => e["path"]));
+    } else {
+      return [response.data["path"]];
+    }
   }
 
   @override
@@ -74,7 +76,7 @@ class UploadRemoteDataSourceImpl extends UploadRemoteDataSource {
         MultipartFile.fromFileSync(
           path,
           filename: fileName,
-          contentType: MediaType("image", fileExt),
+          contentType: MediaType("video", fileExt),
         ),
       ],
     });
@@ -97,7 +99,7 @@ class UploadRemoteDataSourceImpl extends UploadRemoteDataSource {
         return MultipartFile.fromFileSync(
           path,
           filename: fileName,
-          contentType: MediaType("image", fileExt),
+          contentType: MediaType("video", fileExt),
         );
       }).toList()
     });
@@ -107,8 +109,10 @@ class UploadRemoteDataSourceImpl extends UploadRemoteDataSource {
       data: _formData,
     );
 
-    return response.data["path"] is List
-        ? response.data["path"]
-        : [response.data["path"]];
+    if (response.data is List) {
+      return List<String>.from(response.data.map((e) => e["path"]));
+    } else {
+      return [response.data["path"]];
+    }
   }
 }

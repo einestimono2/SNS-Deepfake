@@ -1,11 +1,10 @@
 import bcryptjs from 'bcryptjs';
-import jwt from 'jsonwebtoken';
 
 import { BlockServices } from '../block/block.service.js';
 import { BadRequestError, NotFoundError } from '../core/index.js';
 import { FriendRequest } from '../friend/components/friend_request.model.js';
 import { Friend } from '../friend/friend.model.js';
-// import { Group } from '../group/group/group.model.js';
+import { GroupService } from '../group/group/group.service.js';
 
 import { DevToken } from './models/device_token.model.js';
 import { PasswordHistory } from './models/password_history.model.js';
@@ -23,7 +22,9 @@ export class userServices {
       throw new NotFoundError(Message.USER_NOT_FOUND);
     }
 
-    return user;
+    const groups = await GroupService.getMyGroups(user.id);
+
+    return { user, groups };
   }
 
   // 1--Lấy mã xác thực
@@ -91,7 +92,7 @@ export class userServices {
   }
 
   // 3-- Đăng nhập tài khoản
-  static async login(email, password, uuid) {
+  static async login({ email, password, uuid, fcmToken }) {
     const user = await User.findOne({
       where: { email },
       // attributes: { exclude: ['password'] },
@@ -102,24 +103,34 @@ export class userServices {
     if (!(await this.comparePassword(password, user.password)) || !user.status === AccountStatus.Active) {
       throw new BadRequestError(Message.WRONG_PASSWORD);
     }
-    // TODO: Có thể lỗi logic về dấu !
-    if (!user.status === AccountStatus.Active) {
-      throw new BadRequestError(Message.ACCOUNT_NOT_ACTIVATED);
-    }
 
-    const [deviceToken] = await DevToken.findOrCreate({
+    // if (!user.status === AccountStatus.Active) {
+    //   throw new BadRequestError(Message.ACCOUNT_NOT_ACTIVATED);
+    // }
+
+    const [deviceToken, created] = await DevToken.findOrCreate({
       where: { userId: user.id },
-      defaults: { userId: user.id }
+      defaults: { userId: user.id, token: fcmToken }
     });
+
+    if (!created) {
+      await deviceToken.update({ token: fcmToken });
+    }
 
     const token = signToken(user.id, uuid);
     user.token = token;
-    deviceToken.token = token;
 
     await user.save();
+
+    let groups = [];
+    if (user.status === AccountStatus.Active) {
+      groups = await GroupService.getMyGroups(user.id);
+    }
+
     return {
       user,
-      accessToken: token
+      accessToken: token,
+      groups
     };
   }
 
@@ -206,7 +217,12 @@ export class userServices {
 
     // Xử lý việc pushsetting
 
-    return user;
+    const groups = await GroupService.getMyGroups(user.id);
+
+    return {
+      user,
+      groups
+    };
   }
 
   // 7--Lấy thông tin người dùng

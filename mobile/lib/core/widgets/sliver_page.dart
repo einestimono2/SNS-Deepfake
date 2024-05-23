@@ -61,6 +61,7 @@ class SliverPage extends StatelessWidget {
   final ScrollController? controller;
   final bool centerTitle;
   final bool borderBottom;
+  final bool floating;
 
   const SliverPage({
     super.key,
@@ -72,14 +73,17 @@ class SliverPage extends StatelessWidget {
     this.controller,
     this.centerTitle = false,
     this.borderBottom = false,
+    this.floating = false,
   });
 
   @override
   Widget build(BuildContext context) {
     Widget _content = CustomScrollView(
       controller: controller,
-      shrinkWrap: true,
-      physics: const BouncingScrollPhysics(),
+      // shrinkWrap: true,
+      physics: const AlwaysScrollableScrollPhysics(
+        parent: BouncingScrollPhysics(),
+      ),
       slivers: [
         /* App bar */
         SliverAppBar(
@@ -96,8 +100,8 @@ class SliverPage extends StatelessWidget {
           scrolledUnderElevation: 0,
           centerTitle: centerTitle,
           elevation: 8,
-          // pinned: true,
-          floating: true,
+          pinned: !floating,
+          floating: floating,
           title: title != null
               ? Text(
                   title!,

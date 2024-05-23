@@ -1,7 +1,16 @@
 {
     "BACK_TEXT": "Quay lại",
-
+    "SOMETHING_WENT_WRONG_TEXT": "Có lỗi xảy ra!",
+    "TRY_AGAIN_TEXT": "Thử lại",
+    "CONFIRM_TEXT": "Xác nhận",
     "OK_TEXT": "OK",
+    "DONE_TEXT": "Xong",
+    "CONTINUE_TEXT": "Tiếp tục",
+    "PUBLIC_TEXT": "Công khai",
+    "RECENT_TEXT": "Gần đây",
+    "DELETE_ALL_TEXT": "Xóa hết",
+    "NO_DATA_TEXT": "Không có dữ liệu",
+    "SORT_TEXT": "Sắp xếp",
     "CANCEL_TEXT": "Hủy bỏ",
     "SETTING_TEXT": "Cài đặt",
     "PERMISSION_DENIED": "Không có quyền truy cập",
@@ -28,6 +37,8 @@
     "VIA_SOCIAL_MEDIA_TEXT": "Hoặc thông qua mạng xã hội",
     "UPCOMING_FEATURE_TEXT": "Tính năng đang được phát triển, hãy quay lại sau!",
     "COMING_SOON_TEXT": "Sắp ra mắt",
+    "SELECT_STARTING_GROUP_TEXT": "Chọn nhóm khởi đầu",
+    "ALL_GROUP_TEXT": "Tất cả các nhóm",
 
     "SIGN_UP_TEXT": "Đăng ký",
     "SIGNUP_ERROR_TITLE_TEXT": "Đăng ký thất bại",
@@ -76,7 +87,80 @@
     "NOTIFICATION_TEXT": "Thông báo",
     "PROFILE_TEXT": "Cá nhân",
 
+    "CREATE_POST_TITLE_TEXT": "Tạo bài viết",
+    "POST_TEXT": "Đăng",
+    "WHATS_ON_YOUR_MIND_TEXT": "Bạn đang nghĩ gì?",
+    "IMAGE_VIDEO_TEXT": "Ảnh/video",
+    "POST_AUDIENCE_TEXT": "Phạm vi bài viết",
+    "NO_POST_TITLE_TEXT": "Không có bài viết liên quan!",
+    "NO_POST_DESCRIPTION_TEXT": "Đăng bài hoặc tham gia nhóm hoặc đổi nhóm để hiển thị thêm các bài viết.",
+    "LIKE_TEXT": {
+        "none": "Thích",
+        "other": "{} thích"
+    },
+    "SHARE_TEXT": {
+        "none": "Chia sẻ",
+        "other": "{} chia sẻ"
+    },
+    "COMMENT_TEXT": {
+        "none": "Bình luận",
+        "other": "{} bình luận"
+    },
+    "ACTION_EDIT_POST_TEXT": "Chỉnh sửa bài viết",
+    "ACTION_DELETE_POST_TEXT": "Xóa bài viết",
+    "ACTION_REPORT_POST_TEXT": "Báo cáo bài viết",
+
     "SEE_MORE_TEXT": "Xem thêm",
+    "SEE_ALL_TEXT": "Xem tất cả",
+    "FRIEND_PAGE_TITLE_TEXT": "Bạn bè",
+    "FRIEND_REQUESTS_TEXT": "Lời mời kết bạn",
+    "SUGGESTIONS_TEXT": "Gợi ý",
+    "YOUR_FRIENDS_TEXT": "Bạn bè",
+    "NO_NEW_REQUESTS_TEXT": "Không có yêu cầu mới",
+    "NO_NEW_REQUESTS_DESCRIPTION_TEXT": "Hiện tại chưa có lời mời kết bạn nào tới bạn, hãy quay lại sau!",
+    "MUTUAL_FRIENDS_TEXT": {
+        "one": "{} bạn chung",
+        "other": "{} bạn chung"
+    },
+    "FRIEND_SUGGESTS_TEXT": "Những người bạn có thể biết",
+    "ADD_FRIEND_TEXT": "Thêm bạn bè",
+    "REMOVE_FRIEND_TEXT": "Gỡ",
+    "DELETE_FRIEND_TEXT": "Xóa",
+    "NO_FRIEND_SUGGESTS_TEXT": "Không có gợi ý",
+    "NO_FRIEND_SUGGESTS_DESCRIPTION_TEXT": "Hãy thử thêm mới hoặc tìm kiếm bạn bè!",
+    "LIST_FRIEND_TEXT": {
+        "one": "{} bạn",
+        "other": "{} bạn"
+    },
+    "REJECT_FRIEND_TEXT": "Đã từ chối lời mời kết bạn",
+    "SEND_MESSAGE_TEXT": "Nhắn tin",
+    "SENT_FRIEND_REQUEST_TEXT": "Đã gửi lời mời kết bạn",
+
+    "TIME_AGO_JUST_NOW": "Vừa xong",
+    "TIME_AGO_MINUTE": {
+        "one": "{} phút trước",
+        "other": "{} phút trước"
+    },
+    "TIME_AGO_HOUR": {
+        "one": "{} giờ trước",
+        "other": "{} giờ trước"
+    },
+    "TIME_AGO_DAY": {
+        "one": "{} ngày trước",
+        "other": "{} ngày trước"
+    },
+    "TIME_AGO_WEEK": {
+        "one": "{} tuần trước",
+        "other": "{} tuần trước"
+    },
+    "TIME_AGO_MONTH": {
+        "one": "{} tháng trước",
+        "other": "{} tháng trước"
+    },
+    "TIME_AGO_YEAR": {
+        "one": "{} năm trước",
+        "other": "{} năm trước"
+    },
 
     "CHAT_PAGE_TITLE_TEXT": "Đoạn chat",
     "YOU:_TEXT": "Bạn: ",
