@@ -22,7 +22,7 @@ export const Group = postgre.define('Group', {
   },
   coverPhoto: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: true
   },
   creatorId: {
     type: DataTypes.INTEGER,

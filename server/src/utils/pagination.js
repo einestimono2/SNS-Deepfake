@@ -8,7 +8,6 @@ export const getPaginationAttributes = ({ page, size }) => {
 
   const limit = size || null;
   const offset = page ? (page - 1) * size : null;
-
   return { limit, offset };
 };
 

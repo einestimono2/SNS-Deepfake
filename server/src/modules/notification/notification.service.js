@@ -128,7 +128,7 @@ export class NotificationServices {
   static async createNotification(data) {
     const { type, userId, targetId, postId, markId, feelId, coins } = data;
     let { user, target, post, mark, feel } = data;
-    if (userId === targetId) {
+    if ((user?.id || userId) === (target?.id || targetId || -1)) {
       return;
     }
     // Nếu userId là null or underfined thì đc đc gán,ngược lại thì không được gán
@@ -174,40 +174,40 @@ export class NotificationServices {
   }
 
   // Lấy tất cả những thông báo
-  static async getListNotifications(userId, body) {
-    const { index, count } = { ...body };
-    const noti = await Notification.findAll({ where: { userId } });
-    console.log(noti);
+  static async getListNotifications({ userId, limit, offset }) {
+    const usersIdBlocked = await Block.findAll({
+      where: { userId },
+      attributes: ['targetId']
+    });
+    const usersIdBlocking = await Block.findAll({
+      where: { targetId: userId },
+      attributes: ['userId']
+    });
     // Lấy tất cả các thông báo liên quan,chứa cả thông tin người dùng,bài viết,cảm xúc liên quan
-    const { rows: notifications, count: total } = await Notification.findAndCountAll({
+    const notifications = await Notification.findAndCountAll({
       where: { userId },
       include: [
         {
           model: User,
           as: 'target',
           required: false,
-          include: [
-            {
-              model: Block,
-              as: 'blocked',
-              where: { userId },
-              required: false
-            },
-            {
-              model: Block,
-              as: 'blocking',
-              where: { targetId: userId },
-              required: false
+          where: {
+            id: {
+              // [Op.notIn]: usersIdBlocked.targetId
+              [Op.notIn]: [
+                ...usersIdBlocked.map((block) => block.targetId),
+                ...usersIdBlocking.map((block) => block.userId)
+              ]
             }
-          ]
+          }
         },
         { model: Post, as: 'post', required: false },
         { model: Mark, as: 'mark', required: false },
         { model: Feel, as: 'feel', required: false }
       ],
       order: [['id', 'DESC']],
-      limit: count,
-      offset: index,
+      limit,
+      offset,
       subQuery: false
     });
     setTimeout(() => {
@@ -217,52 +217,57 @@ export class NotificationServices {
       }
     }, 1);
     return {
-      // data: notifications.map(this.mapNotification),
-      data: notifications.map(this.mapNotification),
-      // data: '1',
-      last_update: new Date(),
-      // Số lượng thông báo chưa đọc
-      badge: String(total - notifications.length)
+      rows: {
+        // data: notifications.map(this.mapNotification),
+        data: notifications.map(this.mapNotification),
+        // data: '1',
+        last_update: new Date(),
+        // Số lượng thông báo chưa đọc
+        badge: String(notifications.count - notifications.rows.length)
+      },
+      count: notifications.count
     };
   }
 
   // Thông báo tới bạn bè khi có thêm mới một bài post
   static async notifyAddPost(postId, authorId) {
     const post = await Post.findOne({ where: { id: postId } });
+    const author = await User.findOne({ where: { id: authorId } });
     // Tìm kiếm trong bảng Friend và trả về danh sách bạn bè của tác giả
     const friends = await Friend.findAll({
       where: { userId: authorId },
       include: [{ model: User, as: 'target' }]
     });
 
-    for (const { target } of friends) {
+    for (const target of friends.target) {
       // Lấy push setting từ csdl
       const pushSettings = await SettingServices.getUserPushSettings(target);
       const receiveNotification = pushSettings.fromFriends;
       // Nếu bạn bè để setting nhận thông báo
       if (receiveNotification) {
-        await Notification.create({
+        await this.createNotification({
           type: post.video ? NotificationType.VideoAdded : NotificationType.PostAdded,
-          userId: target.id,
-          targetId: authorId,
-          postId: post.id
+          user: target,
+          targetId: author,
+          post
         });
       }
     }
   }
 
-  // Thông báo liên quan tới việc chỉnh sửa bài viết
+  // Thông báo liên quan tới việc chỉnh sửa bài viết tới các những người bình luận cấp 1 trừ(tác giả)
   static async notifyEditPost(postId, authorId) {
     const post = await Post.findOne({ where: { postId } });
+    const author = await User.findOne({ where: { id: authorId } });
     const marks = await Mark.findAll({ where: { postId } });
     for (const mark of marks) {
       if (mark.userId === authorId) {
         return;
       }
-      await Notification.create({
+      await this.createNotification({
         type: NotificationType.PostUpdated,
         userId: mark.userId,
-        targetId: authorId,
+        target: author,
         post,
         mark
       });

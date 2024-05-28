@@ -40,6 +40,12 @@ export class FriendServices {
             ],
             [
               // Lấy thông tin bạn chung của 2 người
+              // sequelize.literal(
+              //   `(SELECT ARRAY_AGG("same_friend"."targetId") FROM "Friends" AS "same_friend"
+              // INNER JOIN "Friends" AS "target_friends" ON "same_friend"."targetId" = "target_friends"."targetId"
+              // WHERE "same_friend"."userId" = ${userId} AND "target_friends"."userId" = "user"."id")`
+              // ),
+              // 'commonUserIds'
               sequelize.literal(
                 `(SELECT ARRAY_AGG("u"."avatar") FROM "Users" AS "u"
                 WHERE "u"."id" IN (

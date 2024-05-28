@@ -18,7 +18,7 @@ import { Message, SearchType } from '#constants';
 
 export class SearchServices {
   // Tìm kiếm bài viết
-  static async searchPost({ userId, limit, offset }, body) {
+  static async searchPost({ userId, limit, offset, keyword: _keyword }, body) {
     const usersIdBlocked = await Block.findAll({
       where: { userId },
       attributes: ['targetId']
@@ -29,15 +29,14 @@ export class SearchServices {
       attributes: ['userId']
     });
     // Lưu thông tin tìm kiếm vào cơ sở dữ liệu
-    let { keyword } = { ...body };
-    const search = await Search.create({
-      keyword,
-      userId,
-      type: SearchType.Post
-    });
+    // const search = await Search.create({
+    //   keyword,
+    //   userId,
+    //   type: SearchType.Post
+    // });
     // Tìm kiếm
-    keyword = keyword.trim().replace(/\s+/g, '|');
-    const posts = await Post.findAll({
+    const keyword = _keyword.trim().replace(/\s+/g, '|');
+    const posts = await Post.findAndCountAll({
       include: [
         {
           model: User,
@@ -58,12 +57,15 @@ export class SearchServices {
         },
         {
           model: PostVideo,
-          as: 'video'
+          as: 'videos'
+        },
+        {
+          model: Mark,
+          as: 'marks'
         },
         {
           model: Feel,
           as: 'feels',
-          // attributes: [],
           where: { userId },
           required: false
         }
@@ -76,8 +78,6 @@ export class SearchServices {
             ),
             'rank'
           ]
-          // [sequelize.literal('(SELECT COUNT(*) FROM Feels WHERE Feel.postId = Post.id)'), 'feelsCount'],
-          // [sequelize.literal('(SELECT COUNT(*) FROM Marks WHERE Mark.postId = Post.id)'), 'marksCount']
         ]
       },
       where: sequelize.literal(
@@ -93,42 +93,45 @@ export class SearchServices {
       subQuery: false
     });
     // Lấy số lượng bình luận cho mỗi bài viết
-    for (const post of posts) {
+    for (const post of posts.rows) {
       const commentsCount = await Comment.count({
         include: [
           {
             model: Mark,
+            as: 'mark',
             where: { postId: post.id }
           }
         ]
       });
       post.commentsCount = commentsCount;
-      // await post.save();
+      //   // await post.save();
     }
-    console.log(posts);
     // Trả về kết quả được định dạng
-    return posts.map((post) => ({
-      id: String(post.id),
-      name: '',
-      image: post.images
-        .sort((a, b) => a.order - b.order)
-        .map((e) => ({
-          id: String(e.order),
-          url: e.url
-        })),
-      video: post.video ? { url: post.video.url } : undefined,
-      described: post.description || '',
-      created: post.createdAt,
-      feel: String(post.feels.length),
-      // mark_comment: String(post.marks.length + post.commentsCount),
-      is_felt: post.feels.length > 0 ? '1' : '0',
-      state: post.status || '',
-      author: {
-        id: String(post.author.id),
-        name: post.author.username || '',
-        avatar: post.author.avatar
-      }
-    }));
+    return {
+      rows: posts.rows.map((post) => ({
+        id: String(post.id),
+        name: '',
+        image: post.images
+          .sort((a, b) => a.order - b.order)
+          .map((e) => ({
+            id: String(e.order),
+            url: e.url
+          })),
+        video: post.video ? { url: post.video.url } : undefined,
+        described: post.description || '',
+        created: post.createdAt,
+        feel: String(post.feels.length),
+        mark_comment: String(post.marks.length + post.commentsCount),
+        is_felt: post.feels.length > 0 ? '1' : '0',
+        state: post.status || '',
+        author: {
+          id: String(post.author.id),
+          name: post.author.username || '',
+          avatar: post.author.avatar
+        }
+      })),
+      count: posts.count
+    };
   }
 
   // Tìm kiếm người dùng
@@ -154,102 +157,102 @@ export class SearchServices {
     });
 
     // Tìm kiếm
-    const keyword = _keyword.trim().replace(/\s+/g, '|');
-    const users = await User.findAll({
-      include: [
-        {
-          model: User,
-          as: 'author',
-          where: {
-            id: {
-              // [Op.notIn]: usersIdBlocked.targetId
-              [Op.notIn]: [
-                ...usersIdBlocked.map((block) => block.targetId),
-                ...usersIdBlocking.map((block) => block.userId)
-              ]
-            }
-          }
+    // const keyword = _keyword.trim().replace(/\s+/g, '|');
+    const keyword = _keyword.trim();
+    const users = await User.findAndCountAll({
+      where: {
+        id: {
+          [Op.notIn]: [
+            ...usersIdBlocked.map((block) => block.targetId),
+            ...usersIdBlocking.map((block) => block.userId)
+          ]
         },
-        {
-          model: Friend,
-          as: 'friends',
-          // attributes: [],
-          required: false,
-          include: [
-            {
-              model: User,
-              // attributes: [],
-              as: 'target',
-              include: [
-                {
-                  model: Friend,
-                  as: 'friends',
-                  where: { targetId: userId },
-                  // attributes: []
-                  required: false
-                }
-              ]
-            }
-          ]
-        }
-      ],
-      attributes: {
-        include: [
-          [
-            sequelize.literal(
-              `ts_rank_cd(to_tsvector('english', "User"."username"), to_tsquery('english', '${keyword}'))`
-            ),
-            'rank'
-          ]
-        ]
+        [Op.and]: sequelize.literal(`ts_rank_cd(to_tsvector(username), to_tsquery('${keyword}'))>0`)
       },
-      where: sequelize.literal(
-        'ts_rank_cd(to_tsvector(\'english\', "User"."username"), to_tsquery(\'english\', :keyword)) > 0'
-      ),
-      replacements: { keyword },
-      order: [
-        // [sequelize.literal('rank'), 'DESC'],
-        ['lastActive', 'DESC'],
-        ['id', 'DESC']
+      attributes: [
+        'id',
+        'username',
+        'email',
+        [
+          sequelize.literal(
+            `(SELECT COUNT(*) FROM "Friends" AS "same_friend"
+                                INNER JOIN "Friends" AS "target_friends" ON "same_friend"."targetId" = "target_friends"."targetId"
+                                WHERE "same_friend"."userId"=${userId}  AND "target_friends"."userId" = "User"."id")`
+          ),
+          'commonfriendsCount'
+        ],
+        [
+          sequelize.literal(
+            `(SELECT ARRAY_AGG("u"."avatar") FROM "Users" AS "u"
+                WHERE "u"."id" IN (
+                SELECT "same_friend"."targetId" FROM "Friends" AS "same_friend"
+                INNER JOIN "Friends" AS "target_friends" ON "same_friend"."targetId" = "target_friends"."targetId"
+                WHERE "same_friend"."userId" = ${userId} AND "target_friends"."userId" = "User"."id"
+                 )
+                LIMIT 5
+                 )`
+          ),
+          'commonUserAvatars'
+        ]
       ],
+      replacements: { keyword },
+      order: [['id', 'DESC']],
       offset,
       limit,
       subQuery: false
     });
-
+    console.log(users.rows);
     // Trả về kết quả được định dạng
-    return {
-      rows: users.rows.map((user) => ({
-        id: user.id,
-        username: user.username || '',
-        avatar: user.avatar,
-        created: user.createdAt,
-        same_friends: user.friends.length ?? 0
-      })),
-      count: users.count
-    };
+    return users;
+    // {
+    //   rows: users.rows.map((user) => ({
+    //     id: String(user.id),
+    //     username: user.username || '',
+    //     avatar: user.avatar,
+    //     created: user.createdAt,
+    //     same_friends: String(user.friends.friendsCount)
+    //   })),
+    //   count: users.count
+    // };
   }
 
   // 8. Tìm kiếm nhóm
   static async searchGroup({ userId, limit, offset }, body) {
     const { keyword } = { ...body };
     // Lưu thông tin tìm kiếm vào cơ sở dữ liệu
-    const search = await Search.create({
-      keyword,
-      userId,
-      type: SearchType.User
-    });
-    const groups = await Group.findAll({
+    // const search = await Search.create({
+    //   keyword,
+    //   userId,
+    //   type: SearchType.User
+    // });
+    const groups = await Group.findAndCountAll({
       include: [
         {
           model: User,
-          as: 'target',
           required: true,
-          attributes: ['id', 'avatar', 'email', 'username', 'phoneNumber']
+          as: 'members',
+          include: [
+            {
+              model: Friend,
+              as: 'friends1',
+              where: { userId }
+              // include: [
+              //   {
+              //     model: User,
+              //     as: 'user',
+              //     where: { userId },
+              //     attributes: ['avatar']
+              //   }
+              // ]
+            }
+          ]
+          // attributes: [[sequelize.fn('COUNT', sequelize.col('members.id')), 'memberCount']]
         }
       ],
       attributes: {
         include: [
+          'id',
+          'groupName',
           [
             sequelize.literal(
               `ts_rank_cd(to_tsvector('english', "Group"."groupName"), to_tsquery('english', '${keyword}'))`
@@ -258,15 +261,16 @@ export class SearchServices {
           ]
         ]
       },
-      where: sequelize.literal(
-        ' ts_rank_cd(to_tsvector(\'english\', "Group"."groupName"), to_tsquery(\'english\', :keyword)) > 0'
-      ),
+      // where: sequelize.literal(
+      //   ' ts_rank_cd(to_tsvector(\'english\', "Group"."groupName"), to_tsquery(\'english\', :keyword)) > 0'
+      // ),
       replacements: { keyword },
       order: [
         ['rank', 'DESC'],
         ['id', 'DESC']
       ],
       offset,
+      // group: ['Group.id', 'members.id', 'members->GroupUser.id', 'members->friends1.id'],
       limit,
       subQuery: false
     });

@@ -79,7 +79,7 @@ export class MediaControllers {
     });
   };
 
-  // Cho phép uopload nhiều file
+  // Cho phép upload nhiều file
   static uploadAudios = async (req, res, next) => {
     console.log(req);
     if (!req.files?.length) {

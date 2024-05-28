@@ -1,0 +1,2 @@
+[17:43:50] [DEV] [[31merror[39m]: [31m[SequelizeEagerLoadingError]: PostVideo is associated to Post using an alias. You've included an alias (video), but it does not match the alias(es) defined in your association (videos).[39m
+[17:55:06] [DEV] [[31merror[39m]: [31m[TypeError]: Cannot read properties of undefined (reading 'trim')[39m

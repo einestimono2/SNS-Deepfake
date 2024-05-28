@@ -5,11 +5,17 @@ import { getPaginationAttributes, getPaginationSummary } from '#utils';
 
 export class SearchControllers {
   static searchPost = CatchAsyncError(async (req, res) => {
-    const { userId } = req.userPayload;
-    const data = await SearchServices.searchPost(userId, req.body);
-    res.ok({
-      data
+    const result = await SearchServices.searchPost({
+      userId: req.userPayload.userId,
+      ...getPaginationAttributes(req.query),
+      keyword: req.query.keyword
     });
+    res.ok(
+      getPaginationSummary({
+        ...req.query,
+        result
+      })
+    );
   });
 
   static searchUser = CatchAsyncError(async (req, res) => {

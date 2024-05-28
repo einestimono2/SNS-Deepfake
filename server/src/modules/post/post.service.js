@@ -222,6 +222,11 @@ export class PostServices {
       where: { userId },
       attributes: ['targetId']
     });
+    const postCount = await Post.findAndCountAll({
+      where: {
+        groupId
+      }
+    });
     // Danh sach các userId của người mà bị mình block
     const usersIdBlocking = await Block.findAll({
       where: { targetId: userId },
@@ -234,6 +239,7 @@ export class PostServices {
           model: User,
           as: 'author',
           attributes: ['id', 'avatar', 'username', 'email', 'phoneNumber'],
+          required: false,
           where: {
             id: {
               // [Op.notIn]: usersIdBlocked.targetId
@@ -247,7 +253,8 @@ export class PostServices {
         {
           model: PostImage,
           as: 'images',
-          order: [['order', 'ASC']]
+          order: [['order', 'ASC']],
+          required: false
         },
         {
           model: PostVideo,
@@ -256,7 +263,8 @@ export class PostServices {
         {
           model: Group,
           as: 'group',
-          attributes: ['id', 'groupName', 'description', 'coverPhoto']
+          attributes: ['id', 'groupName', 'description', 'coverPhoto'],
+          required: false
         }
       ],
       attributes: [
@@ -294,6 +302,8 @@ export class PostServices {
         ]
       ],
       order: [['id', 'DESC']],
+      distinct: true,
+      subQuery: false,
       offset,
       limit
     };
@@ -308,7 +318,6 @@ export class PostServices {
     if (!postTotal?.count) {
       throw new BadRequestError(Message.POST_NOT_FOUND);
     }
-
     //= =========Còn xử lý đoạn Mark===============
     // const posts = [];
     // for (const e of postTotal.rows) {
@@ -347,7 +356,6 @@ export class PostServices {
         { model: Feel, as: 'feels' }
       ]
     });
-
     if (!post) {
       throw new BadRequestError(Message.POST_NOT_FOUND);
     }
@@ -360,7 +368,7 @@ export class PostServices {
       await user.save();
     }
     // Tạo nhưng chưa insert dữ liệu
-    const oldPost = Post.build({
+    const oldPost = Post.create({
       id: post.id,
       authorId: post.authorId,
       description: post.description,
@@ -379,36 +387,32 @@ export class PostServices {
       edited: post.edited,
       deletedAt: new Date()
     });
-
     // Tạo dữ liệu cho bảng PostHistory
     await PostHistory.create({
       postId: post.id,
       oldPostId: oldPost.id
     });
-    // const imageModels = body.images.map((image) => ({
-    //   url: image
-    // }));
-    const updatedImages = await PostImage.findAll({ where: { postId: post.id } });
+    // Thêm ảnh
     body.images.forEach(async (image, index) => {
-      for (let i = 0; i < updatedImages.length; i++) {
-        await updatedImages[i].update({ url: image, order: index + 1 });
+      for (let i = 0; i < post.images.length; i++) {
+        await post.images[i].push({ url: image, order: index + 1 });
       }
     });
+    const mapImages = Object.fromEntries(post.images.map((e) => [e.order, e]));
     // Sắp xếp lại thứ tự ảnh nếu cần
     if (body.image_sort) {
       const newOrderImages = [];
       for (const order of body.image_sort) {
-        const foundImage = post.images.find((image) => image.order === order);
-        if (foundImage) {
-          newOrderImages.push(foundImage);
+        if (mapImages[order]) {
+          newOrderImages.push(mapImages[order]);
         }
       }
       post.images = newOrderImages;
     }
     // Xóa ảnh nếu cần
     if (body.image_del) {
-      const deletedOrders = body.image_del.map(Number);
-      post.images = post.images.filter((image) => !deletedOrders.includes(image.order));
+      const deleted = Object.fromEntries(body.image_del.map((e) => [e, true]));
+      post.images = post.images.filter((image) => !deleted[body.image_del.order]);
     }
     if (body.description !== undefined && body.description !== null) {
       post.description = body.description;
@@ -434,28 +438,30 @@ export class PostServices {
 
   // Xóa một bài viết(Đã test)
   static async deletePost(userId, postId, body) {
-    return Post.sequelize.transaction(async (t) => {
-      const user = await Post.findOne({
-        where: { id: userId, groupId: body.groupId }
-      });
-      const post = await Post.findOne({
-        where: { id: postId, authorId: userId },
-        include: ['histories']
-      });
-      if (!post) {
-        throw new BadRequestError(Message.POST_NOT_FOUND);
-      }
-      if (post.histories.length > 0) {
-        await Post.destroy({
-          where: { id: post.histories.map((history) => history.oldPostId) },
-          transaction: t
-        });
-      }
-      await post.destroy({ transaction: t });
-      user.coins -= costs.deletePost;
-      await user.save({ transaction: t });
-      return { coins: String(user.coins) };
+    const user = await Post.findOne({
+      where: { id: userId, groupId: body.groupId }
     });
+    const post = await Post.findOne({
+      where: { id: postId, authorId: userId },
+      include: [
+        {
+          model: PostHistory,
+          as: 'histories'
+        }
+      ]
+    });
+    if (!post) {
+      throw new BadRequestError(Message.POST_NOT_FOUND);
+    }
+    if (post.histories.length > 0) {
+      await Post.destroy({
+        where: { id: post.histories.map((history) => history.oldPostId) }
+      });
+    }
+    await post.destroy();
+    user.coins -= costs.deletePost;
+    await user.save();
+    return { coins: String(user.coins) };
   }
 
   // Report một bài viết(đã test)
@@ -518,6 +524,8 @@ export class PostServices {
         [sequelize.literal('(SELECT count FROM "PostViews" WHERE "PostViews"."postId" = "Post"."id")'), 'ASC'],
         ['id', 'DESC']
       ],
+      distinct: true,
+      subQuery: false,
       limit,
       offset
     });
@@ -531,27 +539,6 @@ export class PostServices {
     //   }
     // }
     return {
-      // post: posts.map((post) => ({
-      //   id: String(post.id),
-      //   name: '',
-      //   image: post.images.map((e) => ({ id: String(e.order), url: e.url })),
-      //   video: post.video ? { url: post.video.url } : undefined,
-      //   described: post.description || '',
-      //   created: post.createdAt,
-      //   feel: String(post.feels.length),
-      //   comment_mark: String(post.marks.length + post.commentsCount),
-      //   is_felt: post.feels.some((feel) => feel.userId === user.id) ? String(post.feelOfUser.type) : '-1',
-      //   is_blocked: '0',
-      //   // can_edit: getCanEdit(post, user),
-      //   // banned: getBanned(post),
-      //   state: post.status || '',
-      //   author: {
-      //     id: String(post.author.id),
-      //     name: post.author.username || '',
-      //     avatar: post.author.avatar
-      //   }
-      // }))
-
       rows: posts.rows.map((post) => ({
         post,
         can_edit: getCanEdit(post, user),
@@ -596,8 +583,7 @@ export class PostServices {
       where: { targetId: userId },
       attributes: ['userId']
     });
-    const postTotal = await Post.findAndCountAll({
-      where: { groupId },
+    const query = {
       include: [
         {
           model: User,
@@ -658,29 +644,22 @@ export class PostServices {
         ]
       ],
       order: [['id', 'DESC']],
+      distinct: true,
+      subQuery: false,
       offset,
       limit
-    });
-    // const posts = [];
-    // for (const e of postTotal) {
-    //   const post = e.toJSON();
-    //   posts.push(post);
-    // }
-    // Tính số lượng comment của 1 bài viết
-    // for (let i = 0; i < posts.length; i++) {
-    //   const post = posts[i];
-    //   if (post.marksCount > 0) {
-    //     const commentsCount = await Comment.count({
-    //       where: {
-    //         postId: post.id
-    //       }
-    //     });
-    //     post.commentsCount = commentsCount;
-    //   } else {
-    //     post.commentsCount = 0;
-    //   }
-    // }
-    // const lastId = posts.length > 0 ? posts[posts.length - 1].id : null;
+    };
+
+    if (Number(groupId) > 0) {
+      query.where = {
+        groupId
+      };
+    }
+
+    const postTotal = await Post.findAndCountAll(query);
+    if (!postTotal?.count) {
+      throw new BadRequestError(Message.POST_NOT_FOUND);
+    }
     return {
       rows: postTotal.rows.map((post) => ({
         post,
@@ -689,26 +668,6 @@ export class PostServices {
       })),
       count: postTotal.count
     };
-    // {
-    //   post: posts.map((post) => ({
-    //     id: String(post.id),
-    //     video: post.video ? { url: post.video.url } : undefined,
-    //     description: post.description || '',
-    //     created: post.createdAt,
-    //     feel: parseInt(post.kudosCount, 10) + parseInt(post.disappointedCount, 10),
-    //     comment_mark: parseInt(post.trustCount, 10) + parseInt(post.fakeCount, 10) + parseInt(post.commentsCount, 10),
-    //     is_felt: post.feelOfUser ? String(post.feelOfUser.type) : '-1',
-    //     // is_blocked: post.author.blocked.length > 0 ? '1' : '0',
-    //     can_edit: getCanEdit(post, user),
-    //     banned: getBanned(post),
-    //     status: post.status || '',
-    //     author: {
-    //       id: String(post.author.id),
-    //       name: post.author.username || '',
-    //       avatar: post.author.avatar
-    //     }
-    //   }))
-    // };
   }
 
   static async setSharededPost(userId, postId) {

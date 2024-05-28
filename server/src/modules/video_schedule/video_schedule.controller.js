@@ -14,7 +14,7 @@ export class ScheduleController {
 
   static getListSchedule = CatchAsyncError(async (req, res) => {
     const { userId } = req.userPayload;
-    const result = await ScheduleService.getListSchedule(userId, ...getPaginationAttributes(req.query));
+    const result = await ScheduleService.getListSchedule({ userId, ...getPaginationAttributes(req.query) });
     res.ok(
       getPaginationSummary({
         ...req.query,

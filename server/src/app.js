@@ -36,7 +36,14 @@ app.use(
 );
 app.use(helmet());
 app.use(compression()); // Nén dữ liệu - Giảm kích thước response trả về
-app.use(cors()); // Cors - Cross Origin Resource Sharing
+const corsOptions = {
+  origin: '*', // Thay thế bằng nguồn bạn muốn cho phép
+  methods: ['GET', 'PUT', 'POST', 'DELETE'],
+  credentials: true
+};
+
+app.use(cors(corsOptions));
+// app.use(cors()); // Cors - Cross Origin Resource Sharing
 app.use(express.json({ limit: '50mb' })); // Read JSON data
 app.use(express.urlencoded({ extended: true })); // Can Read another data
 

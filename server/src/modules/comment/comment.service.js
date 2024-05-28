@@ -13,8 +13,8 @@ import { Comment } from './comment.model.js';
 import { FeelType, Message, costs } from '#constants';
 
 export class CommentServices {
-  static async getMarkComment(userId, postId, body) {
-    const { index, count } = { ...body };
+  // Lấy ra những bình luận cấp 1 và cấp 2 tương ứng
+  static async getMarkComment({ userId, limit, offset }, postId) {
     const usersIdBlocked = await Block.findAll({
       where: { userId },
       attributes: ['targetId']
@@ -29,14 +29,13 @@ export class CommentServices {
     if (!post) {
       throw new BadRequestError(Message.POST_NOT_FOUND);
     }
-
     // Kiểm tra bạn có bị chủ bài viết block hay không?
     const isUserBlocked = await BlockServices.isBlock(userId, post.authorId);
     if (isUserBlocked) {
       throw new BadRequestError(Message.CAN_NOT_BLOCK);
     }
-    // Lấy danh sách các đánh dấu của bài viết tương ứng của những tác giả không bị mình block và không block mình
-    const marksTotal = await Mark.findAll({
+    // Lấy danh sách các bình luận cấp 1 của bài viết tương ứng của những tác giả không bị mình block và không block mình
+    const marksTotal = await Mark.findAndCountAll({
       include: [
         {
           model: User,
@@ -56,26 +55,18 @@ export class CommentServices {
       ],
       where: { postId },
       order: [['id', 'DESC']],
-      offset: index,
-      limit: count
+      offset,
+      limit
     });
-    const marks = [];
-    for (const e of marksTotal) {
-      const mark = e.toJSON();
-      marks.push(mark);
-    }
-    // console.log(marks);
+    // Lấy những comment cấp 2 tương ứng
     const markedComments = await Promise.all(
       // Ứng với mỗi marks lấy danh sách các comment tương ứng
-      marks.map(async (mark) => {
+      marksTotal.rows.map(async (mark) => {
         const comments = await Comment.findAll({
           where: { markId: mark.id },
           include: {
             model: User,
             as: 'user',
-            // where: {
-            //   [Op.and]: [{ '$blocked.id$': null }, { '$blocking.id$': null }]
-            // },
             required: false, // Đảm bảo rằng việc join không làm mất bất kỳ bản ghi nào nếu không có kết quả phù hợp
             attributes: ['id', 'username', 'avatar'],
             where: {
@@ -94,27 +85,29 @@ export class CommentServices {
         return mark;
       })
     );
-    console.log(markedComments);
-    return markedComments.map((mark) => ({
-      id: String(mark.id),
-      mark_content: mark.content,
-      type_of_mark: String(mark.type),
-      created: mark.createdAt,
-      poster: {
-        id: String(mark.user.id),
-        name: mark.user.username || '',
-        avatar: mark.user.avatar
-      },
-      comments: mark.comments.map((comment) => ({
-        content: comment.content,
-        created: comment.createdAt,
+    return {
+      rows: markedComments.map((mark) => ({
+        id: String(mark.id),
+        mark_content: mark.content,
+        type_of_mark: String(mark.type),
+        created: mark.createdAt,
         poster: {
-          id: String(comment.user.id),
-          name: comment.user.username || '',
-          avatar: comment.user.avatar
-        }
+          id: String(mark.user.id),
+          name: mark.user.username || '',
+          avatar: mark.user.avatar
+        },
+        comments: mark.comments.map((comment) => ({
+          content: comment.content,
+          created: comment.createdAt,
+          poster: {
+            id: String(comment.user.id),
+            name: comment.user.username || '',
+            avatar: comment.user.avatar
+          }
+        })),
+        count: marksTotal.count
       }))
-    }));
+    };
   }
 
   // Thêm mới Mark và Comment
@@ -123,7 +116,9 @@ export class CommentServices {
       where: { id: userId }
     });
     const { content, index, count, markId, type } = { ...body };
+    // Reply một Mark có sẵn
     if (markId) {
+      // Mark là bình luận cấp 1
       // Trả về  mark và thông tin bài post mà mark này thuộc về
       const mark = await Mark.findOne({
         where: { id: markId },
@@ -172,9 +167,8 @@ export class CommentServices {
         throw new BadRequestError(Message.CAN_NOT_BLOCK);
       }
       let checkReduceCoins = false;
-      // Check ng dùng đã có mark trên bài post này hay chưa
+      // Check ng dùng đã có bình luận cấp 1 trên bài post này hay chưa
       let mark = await Mark.findOne({ where: { postId, userId } });
-      console.log(mark);
       if (mark) {
         if (type && type !== mark.type) {
           if (user.coins < costs.createMark) {
@@ -226,7 +220,7 @@ export class CommentServices {
     };
   }
 
-  // Đã test
+  // Cảm xúc lên một bài viết
   static async feel(userId, postId, type) {
     // Tìm bài đăng theo id
     const user = await User.findOne({
@@ -295,8 +289,7 @@ export class CommentServices {
   }
 
   // Đã test
-  static async getListFeels(userId, postId, body) {
-    const { count, index } = { ...body };
+  static async getListFeels({ userId, limit, offset }, postId) {
     const usersIdBlocked = await Block.findAll({
       where: { userId },
       attributes: ['targetId']
@@ -318,19 +311,15 @@ export class CommentServices {
       throw new BadRequestError(Message.CAN_NOT_BLOCK);
     }
     // Lấy danh sách cảm xúc cho bài đăng và danh sách người dùng tương ứng với các feel
-    const feelTotal = await Feel.findAll({
+    const feelTotal = await Feel.findAndCountAll({
       where: { postId },
       include: {
         model: User,
         as: 'user',
-        // where: {
-        //   [Op.and]: [{ '$blocked.id$': null }, { '$blocking.id$': null }]
-        // },
         required: false, // Đảm bảo rằng việc join không làm mất bất kỳ bản ghi nào nếu không có kết quả phù hợp
         attributes: ['id', 'username', 'avatar'],
         where: {
           id: {
-            // [Op.notIn]: usersIdBlocked.targetId
             [Op.notIn]: [
               ...usersIdBlocked.map((block) => block.targetId),
               ...usersIdBlocking.map((block) => block.userId)
@@ -339,26 +328,22 @@ export class CommentServices {
         }
       },
       order: [['id', 'DESC']],
-      offset: index,
-      limit: count
+      offset,
+      limit
     });
-    const feels = [];
-    for (const e of feelTotal) {
-      const feel = e.toJSON();
-      feels.push(feel);
-    }
-    console.log(feels[0].user.id);
-    return feels.map((feel) => ({
-      id: String(feel.id),
-      feel: {
-        user: {
-          id: String(feel.user.id),
-          name: feel.user.username || '',
-          avatar: feel.user.avatar || ''
-        },
-        type: String(feel.type)
-      }
-    }));
+    console.log(feelTotal.rows);
+    return feelTotal;
+    // feelTotal.rows.map((feel) => ({
+    //   id: String(feel.id),
+    //   feel: {
+    //     user: {
+    //       id: String(feel.user.id),
+    //       name: feel.user.username || '',
+    //       avatar: feel.user.avatar || ''
+    //     },
+    //     type: String(feel.type)
+    //   }
+    // }));
   }
 
   // Đã test

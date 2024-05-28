@@ -1,6 +1,3 @@
-import cron from 'node-cron';
-import sequelize from 'sequelize';
-
 import { UnauthorizedError } from '../core/error.response.js';
 import { PostVideo } from '../post/models/post_video.model.js';
 import { User } from '../user/user.model.js';
@@ -26,8 +23,7 @@ export class ScheduleService {
   }
 
   // Lấy danh sách lịch phát video của một user
-  static async getListSchedule(userId, body) {
-    const { index, count } = { ...body };
+  static async getListSchedule({ userId, limit, offset }) {
     if (!userId) throw new UnauthorizedError(Message.USER_IS_INVALID);
     // Danh sách các thành viên
     const listSchedule = await VideoSchedule.findAll({
@@ -46,36 +42,32 @@ export class ScheduleService {
         { model: PostVideo, as: 'video' }
       ],
       order: [['id', 'DESC']],
-      offset: index,
-      limit: count
+      offset: limit
     });
-    const schedulers = [];
-    for (const e of listSchedule) {
-      const schedules = e.toJSON();
-      schedulers.push(schedules);
-    }
-    console.log(schedulers);
     return {
-      schedulers: schedulers.map((scheduler) => ({
-        id: String(scheduler.id),
-        sender: {
-          id: String(scheduler.sender.id),
-          name: scheduler.sender.username || '',
-          avatar: scheduler.sender.avatar
-        },
-        receiver: {
-          id: String(scheduler.receiver.id),
-          name: scheduler.receiver.username || '',
-          avatar: scheduler.receiver.avatar
-        },
-        video: {
-          id: String(scheduler.video.id),
-          url: scheduler.video.url || ''
-        },
-        startTime: scheduler.startTime,
-        endTime: scheduler.endTime,
-        status: scheduler.status || ''
-      }))
+      rows: {
+        schedulers: listSchedule.map((scheduler) => ({
+          id: String(scheduler.id),
+          sender: {
+            id: String(scheduler.sender.id),
+            name: scheduler.sender.username || '',
+            avatar: scheduler.sender.avatar
+          },
+          receiver: {
+            id: String(scheduler.receiver.id),
+            name: scheduler.receiver.username || '',
+            avatar: scheduler.receiver.avatar
+          },
+          video: {
+            id: String(scheduler.video.id),
+            url: scheduler.video.url || ''
+          },
+          startTime: scheduler.startTime,
+          endTime: scheduler.endTime,
+          status: scheduler.status || ''
+        }))
+      },
+      count: listSchedule.count
     };
   }
 
@@ -152,7 +144,7 @@ export class ScheduleService {
   // static async ScheduleTime() {
   //   const schedules = await VideoSchedule.findAll({
   //     where: {
-  //       startTime: { [sequelize.Op.gte]: new Date(), status: '1' }
+  //       startTime: { [Op.gte]: new Date(), status: '1' }
   //     },
   //     include: [
   //       { Model: User, as: 'sender' },

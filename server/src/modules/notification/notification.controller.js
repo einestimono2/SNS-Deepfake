@@ -12,12 +12,14 @@ export class NotificationControllers {
   });
 
   static getListNotifications = CatchAsyncError(async (req, res) => {
-    const { userId } = req.userPayload;
-    const data = await NotificationServices.getListNotifications(userId, ...getPaginationAttributes(req.query));
+    const result = await NotificationServices.getListNotifications({
+      userId: req.userPayload.userId,
+      ...getPaginationAttributes(req.query)
+    });
     res.ok(
       getPaginationSummary({
         ...req.query,
-        data
+        result
       })
     );
   });

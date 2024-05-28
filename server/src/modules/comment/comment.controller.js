@@ -5,13 +5,19 @@ import { getPaginationAttributes, getPaginationSummary } from '#utils';
 
 export class CommentControllers {
   static getMarkComment = CatchAsyncError(async (req, res) => {
-    const { userId } = req.userPayload;
     const { postId } = req.params;
-    const data = await CommentServices.getMarkComment(userId, postId, ...getPaginationAttributes(req.query));
+    console.log(req.query);
+    const result = await CommentServices.getMarkComment(
+      {
+        userId: req.userPayload.userId,
+        ...getPaginationAttributes(req.query)
+      },
+      postId
+    );
     res.ok(
       getPaginationSummary({
         ...req.query,
-        data
+        result
       })
     );
   });
@@ -36,13 +42,18 @@ export class CommentControllers {
   });
 
   static getListFeels = CatchAsyncError(async (req, res) => {
-    const { userId } = req.userPayload;
     const { postId } = req.params;
-    const data = await CommentServices.getListFeels(userId, postId, ...getPaginationAttributes(req.query));
+    const result = await CommentServices.getListFeels(
+      {
+        userId: req.userPayload.userId,
+        ...getPaginationAttributes(req.query)
+      },
+      postId
+    );
     res.ok(
       getPaginationSummary({
         ...req.query,
-        data
+        result
       })
     );
   });

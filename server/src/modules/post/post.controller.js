@@ -103,7 +103,6 @@ export class PostControllers {
       },
       groupId
     );
-    console.log(result);
     res.ok(
       getPaginationSummary({
         ...req.query,
