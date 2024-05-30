@@ -24,6 +24,7 @@ jobs:
       - name: Install Dependencies
         run: 
           yarn --frozen-lockfile
+          yarn dev
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
         with:
