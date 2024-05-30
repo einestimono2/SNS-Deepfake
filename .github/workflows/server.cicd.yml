@@ -12,10 +12,11 @@ env:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-
+    defaults:
+            run:
+                working-directory: server
     steps:
       - uses: actions/checkout@v4
-
       - name: Set up Node.js version
         uses: actions/setup-node@v3
         with:
