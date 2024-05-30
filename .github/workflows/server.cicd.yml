@@ -12,6 +12,9 @@ env:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    defaults:
+            run:
+                working-directory: server
     steps:
       - uses: actions/checkout@v4
       - name: Set up Node.js version
@@ -20,12 +23,13 @@ jobs:
           node-version: '20.x'
       - name: Install Yarn
         run: npm install -g yarn
-        working-directory: server
+       
       - name: Install Dependencies
         run: 
-          yarn --frozen-lockfile
-          yarn dev
-        working-directory: server
+            yarn --frozen-lockfile
+      - name: Build project
+        run: 
+            yarn dev 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
         with:
