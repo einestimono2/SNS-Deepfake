@@ -1,25 +1,41 @@
-# Admin - SNS Deepfake
+# sns-deepfake-admin
 
-## Requirements
+## Installation
 
-- node: v20.11.1
-- yarn: v1.22.19 (don't use npm)
-- vite (JavaScript + SWC)
-- TailwindCSS
-- Ant Design
-- Zustand (State Management)
+Install the application dependencies by running:
 
-- VSCode Extensions: ESLint, Prettier
+```sh
+yarn
+```
 
-## Initial setup
+## Development
 
-- Copy and update file `.env.example` to `.env`
-- Install required library packages from scrips
+Start the application in development mode by running:
 
-  ```
-  yarn sync
+```sh
+yarn dev
+```
 
-  OR
+## Production
 
-  yarn install --frozen-lockfile
-  ```
+Build the application in production mode by running:
+
+```sh
+yarn build
+```
+
+## DataProvider
+
+The included data provider use [ra-data-simple-rest](https://github.com/marmelab/react-admin/tree/master/packages/ra-data-simple-rest). It fits REST APIs using simple GET parameters for filters and sorting. This is the dialect used for instance in [FakeRest](https://github.com/marmelab/FakeRest).
+
+You'll find an `.env` file at the project root that includes a `VITE_JSON_SERVER_URL` variable. Set it to the URL of your backend.
+
+## Authentication
+
+The included auth provider should only be used for development and test purposes.
+You'll find a `users.json` file in the `src` directory that includes the users you can use.
+
+You can sign in to the application with the following usernames and password:
+- janedoe / password
+- johndoe / password
+

@@ -1,11 +1,11 @@
 import { BadRequestError } from '../core/error.response.js';
 import { User } from '../user/user.model.js';
 
-import { AdminServices } from './admin.service.js';
+import { adminService } from './admin.service.js';
 
 import { Message } from '#constants';
 import { CatchAsyncError } from '#middlewares';
-import { getPaginationAttributes, getPaginationSummary, signToken } from '#utils';
+import { signToken } from '#utils';
 
 export class AdminControllers {
   // 2--Đăng nhập
@@ -29,47 +29,51 @@ export class AdminControllers {
     res.ok({ message: 'Đăng nhập với admin thành công', data: token });
   }
 
-  static getAllPosts = CatchAsyncError(async (req, res) => {
-    const data = await AdminServices.getAllPosts(...getPaginationAttributes(req.query));
-    res.ok(
-      getPaginationSummary({
-        ...req.query,
-        data
-      })
-    );
+  static getOne = CatchAsyncError(async (req, res) => {
+    const { id } = req.params;
+    const model = adminService.getModel(req.params.modelName);
+    const record = await adminService.getOne(model, id);
+    res.json(record);
   });
 
-  static ratePost = CatchAsyncError(async (req, res) => {
-    await AdminServices.ratePost(req.body);
-    res.ok({
-      Message: ' Đánh giá thành công'
-    });
+  // static getMany = CatchAsyncError(async (req, res) => {
+
+  // });
+
+  static getList = CatchAsyncError(async (req, res) => {
+    const model = adminService.getModel(req.params.modelName);
+
+    const { limit, offset, filter, order } = adminService.parseQuery(req.query);
+    const { rows, count } = await adminService.getList(model, limit, offset, filter, order);
+
+    adminService.setGetListHeaders(res, offset, count, rows.length);
+    res.json(rows);
   });
 
-  static getAllUser = CatchAsyncError(async (req, res) => {
-    const data = await AdminServices.getAllUser(...getPaginationAttributes(req.query));
-    res.ok(
-      getPaginationSummary({
-        ...req.query,
-        data
-      })
-    );
+  // static getManyReference = CatchAsyncError(async (req, res) => {});
+  static create = CatchAsyncError(async (req, res) => {
+    const model = adminService.getModel(req.params.modelName);
+    const record = await adminService.create(model, req.body);
+    res.status(201).json(record);
   });
 
-  static getAllGroup = CatchAsyncError(async (req, res) => {
-    const data = await AdminServices.getAllGroup(...getPaginationAttributes(req.query));
-    res.ok(
-      getPaginationSummary({
-        ...req.query,
-        data
-      })
-    );
+  static update = CatchAsyncError(async (req, res) => {
+    const model = adminService.getModel(req.params.modelName);
+    const { id } = req.params;
+    const record = await adminService.getOne(model, id);
+
+    if (!record) res.status(404).json({ error: 'Record not found' });
+
+    const result = await adminService.update(model, id, req.body);
+    res.json(result);
   });
 
-  static getAllPost = CatchAsyncError(async (req, res) => {
-    const data = await AdminServices.getAllPosts(req.body);
-    res.ok({
-      data
-    });
+  // static updateMany = CatchAsyncError(async (req, res) => {});
+  static delete = CatchAsyncError(async (req, res) => {
+    const model = adminService.getModel(req.params.modelName);
+    const { id } = req.params;
+    await adminService.delete(id);
+    res.json({ id });
   });
+  // static deleteMany = CatchAsyncError(async (req, res) => {});
 }

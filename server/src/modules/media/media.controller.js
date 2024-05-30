@@ -19,7 +19,7 @@ export class MediaControllers {
     const files = [];
     for (const file of req.files) {
       files.push({
-        path: `/resources/images/${file.filename}`,
+        path: `/media/images/${file.filename}`,
         name: file.filename
       });
     }
@@ -53,7 +53,7 @@ export class MediaControllers {
     const files = [];
     for (const file of req.files) {
       files.push({
-        path: `/resources/videos/${file.filename}`,
+        path: `/media/videos/${file.filename}`,
         name: file.filename
       });
     }
@@ -89,7 +89,7 @@ export class MediaControllers {
     const files = [];
     for (const file of req.files) {
       files.push({
-        path: `/resources/audios/${file.filename}`,
+        path: `/media/audios/${file.filename}`,
         name: file.filename
       });
     }
@@ -115,7 +115,7 @@ export class MediaControllers {
 
   // Được thiết kế để xử lý yêu cầu phát video từ một đường dẫn tới tập tin video trong ứng dụng(Streaming)
   static getVideo = CatchAsyncError(async (req, res) => {
-    const filePath = getStandardPath('../../uploads/videos/4ljkk7-Wada pura kiya  #shorts #funny.mp4');
+    const filePath = getStandardPath('../../uploads/videos/test.mp4');
     const { range } = req.headers;
     if (!range) res.status(400).send('error');
 
@@ -166,5 +166,12 @@ export class MediaControllers {
     res.ok({
       Message: 'Xóa thành công!'
     });
+  });
+
+  static getImage = CatchAsyncError(async (req, res) => {
+    const filePath = getStandardPath(`../../uploads/images/${req.params.fileName}`);
+    res.header('Cross-Origin-Resource-Policy', 'cross-origin');
+
+    res.sendFile(filePath);
   });
 }

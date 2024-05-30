@@ -1118,6 +1118,11 @@
   resolved "https://registry.yarnpkg.com/@faker-js/faker/-/faker-8.4.1.tgz#5d5e8aee8fce48f5e189bf730ebd1f758f491451"
   integrity sha512-XQ3cU+Q8Uqmrbf2e0cIC/QN43sTBSC8KF12u29Mb47tWrt2hAgBXSgpZMj4Ao8Uk0iJcU99QsOCaIL8934obCg==
 
+"@faker-js/faker@^8.4.1":
+  version "8.4.1"
+  resolved "https://registry.yarnpkg.com/@faker-js/faker/-/faker-8.4.1.tgz#5d5e8aee8fce48f5e189bf730ebd1f758f491451"
+  integrity sha512-XQ3cU+Q8Uqmrbf2e0cIC/QN43sTBSC8KF12u29Mb47tWrt2hAgBXSgpZMj4Ao8Uk0iJcU99QsOCaIL8934obCg==
+
 "@fastify/busboy@^1.2.1":
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/@fastify/busboy/-/busboy-1.2.1.tgz#9c6db24a55f8b803b5222753b24fe3aea2ba9ca3"
@@ -3907,6 +3912,20 @@ expect@^29.7.0:
     jest-message-util "^29.7.0"
     jest-util "^29.7.0"
 
+express-crud-router-sequelize-v6-connector@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/express-crud-router-sequelize-v6-connector/-/express-crud-router-sequelize-v6-connector-2.0.0.tgz#161fe0e57cf5739bb6d6c38c31464cf1ff2f4f60"
+  integrity sha512-dN7YfJBYgLI0gQk2IJvlZ75yRJ0PtQl4mtgxlT5eWH7rClN6Co8BMiP1uGSHEgqKYdYLJ1E3XHifIXOpcMxC5Q==
+  dependencies:
+    lodash "^4.17.15"
+
+express-crud-router@^8.0.2:
+  version "8.0.2"
+  resolved "https://registry.yarnpkg.com/express-crud-router/-/express-crud-router-8.0.2.tgz#7f7b2d39825d1216b8d2e5a620b36ad2bdfe9df0"
+  integrity sha512-mfCqBRZ+EmvserATBDa8WBwyxM1Qvujn2XXDrrL5JhD0OgqWArXRAQ+kRmSqxQAForyB+D0VyK3tsSVUL1kIxQ==
+  dependencies:
+    body-parser "^1.19.0"
+
 express@^4.19.1:
   version "4.19.1"
   resolved "https://registry.yarnpkg.com/express/-/express-4.19.1.tgz#4700635795e911600a45596138cf5b0320e78256"
@@ -5675,7 +5694,7 @@ lodash.once@^4.0.0:
   resolved "https://registry.yarnpkg.com/lodash.once/-/lodash.once-4.1.1.tgz#0dd3971213c7c56df880977d504c88fb471a97ac"
   integrity sha512-Sb487aTOCr9drQVL8pIxOzVhafOjZN9UU54hiN8PU3uAiSV7lx1yYNpbNmex2PK6dSJoNTSJUUswT651yww3Mg==
 
-lodash@^4.17.21:
+lodash@^4.17.15, lodash@^4.17.21:
   version "4.17.21"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
   integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==

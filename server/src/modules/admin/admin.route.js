@@ -8,16 +8,12 @@ import { AdminControllers } from './admin.controller.js';
 const router = Router();
 // Đăng nhập với admin
 router.post('/login', AdminControllers.login);
-router.get('/get_all_post', AdminControllers.getAllPosts);
-router.post('/rate_post', AdminControllers.ratePost);
 
-router.get('/get_all_user', AdminControllers.getAllUser);
-router.get('/get_all_group', AdminControllers.getAllGroup);
-// Lấy danh sách các bài post
-router.get('/get_all_post', AdminControllers.getAllPost);
-router.post('/rate_post', AdminControllers.ratePost);
-router.get('/get_all_user', AdminControllers.getAllUser);
-router.get('/get_all_group', AdminControllers.getAllGroup);
+router.get('/:modelName/:id', AdminControllers.getOne);
+router.get('/:modelName', AdminControllers.getList);
+router.post('/:modelName', AdminControllers.create);
+router.put('/:modelName/:id', AdminControllers.update);
+router.delete('/:modelName/:id', AdminControllers.delete);
 
 // Lấy danh sách các người dùng
 // router.get('/list', isAuthenticated, authorizeRoles(Roles.Admin), AdminControllers.getUsers);

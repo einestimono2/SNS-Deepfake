@@ -19,6 +19,8 @@ router.post('/audios', uploadAudio.array('audios'), MediaControllers.uploadAudio
 router.delete('/audios/:filename', MediaControllers.deleteAudio);
 
 router.get('/videos', MediaControllers.getVideo);
+
+router.get('/images/:fileName', MediaControllers.getImage);
 // router.delete('/:path', UploadControllers.deleteFile);
 router.post('/create_media', isAuthenticated, MediaControllers.createMedia);
 
