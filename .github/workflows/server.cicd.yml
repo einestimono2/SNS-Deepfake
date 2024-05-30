@@ -25,6 +25,7 @@ jobs:
         run: 
           yarn --frozen-lockfile
           yarn dev
+        working-directory: server
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
         with:
