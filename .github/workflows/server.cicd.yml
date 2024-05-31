@@ -41,9 +41,7 @@ jobs:
     environment:
       name: 'production'
       url: deepfakesnsapi.azurewebsites.net
-    defaults:
-          run:
-              working-directory: server
+      
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v3
