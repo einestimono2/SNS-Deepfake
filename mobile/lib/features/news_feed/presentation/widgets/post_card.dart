@@ -3,8 +3,10 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:sns_deepfake/core/libs/libs.dart';
 
+import '../../../../config/configs.dart';
 import '../../../../core/utils/utils.dart';
 import '../../../../core/widgets/widgets.dart';
 import '../../data/data.dart';
@@ -16,8 +18,26 @@ final double defaultHorizontal = 16.w;
 
 class PostCard extends StatelessWidget {
   final PostModel post;
+  final bool showGroup;
+  final int adminId;
+  final int myId;
 
-  const PostCard({super.key, required this.post});
+  const PostCard({
+    super.key,
+    required this.post,
+    this.showGroup = true,
+    this.adminId = -1,
+    required this.myId,
+  });
+
+  void _handleNavigateProfile(BuildContext context) {
+    post.author.id == myId
+        ? context.pushNamed(Routes.myProfile.name)
+        : context.pushNamed(
+            Routes.otherProfile.name,
+            pathParameters: {"id": post.author.id.toString()},
+          );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +45,7 @@ class PostCard extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         /* Group Info */
-        if (post.group != null) _buildGroupInfo(context),
+        if (showGroup && post.group != null) _buildGroupInfo(context),
 
         /* Header */
         _buildHeader(context),
@@ -61,10 +81,14 @@ class PostCard extends StatelessWidget {
               text: post.group!.groupName,
               style: const TextStyle(fontWeight: FontWeight.bold),
               recognizer: TapGestureRecognizer()
-                ..onTap = () {
-                  print('Click to post ${post.id}');
-                  // TODO: Naivigate to group page
-                },
+                ..onTap = () => context.pushNamed(
+                      Routes.groupDetails.name,
+                      pathParameters: {"id": post.id.toString()},
+                      extra: {
+                        "coverPhoto": post.group!.coverPhoto,
+                        "groupName": post.group!.groupName,
+                      },
+                    ),
             ),
             const TextSpan(text: "'"),
           ],
@@ -80,9 +104,7 @@ class PostCard extends StatelessWidget {
         children: [
           /* Avatar */
           GestureDetector(
-            onTap: () {
-              // TODO: Navigate to author or my profile
-            },
+            onTap: () => _handleNavigateProfile(context),
             child: AnimatedImage(
               width: 0.1.sw,
               height: 0.1.sw,
@@ -98,10 +120,9 @@ class PostCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
+                  /*  */
                   InkWell(
-                    onTap: () {
-                      // TODO: Navigate to author or my profile
-                    },
+                    onTap: () => _handleNavigateProfile(context),
                     child: Text(
                       post.author.username ?? post.author.email,
                       style: Theme.of(context).textTheme.bodyLarge?.copyWith(
@@ -115,6 +136,24 @@ class PostCard extends StatelessWidget {
                   SizedBox(height: 3.h),
                   Row(
                     children: [
+                      if (adminId == post.author.id)
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(3),
+                            color: Colors.blueAccent.shade200,
+                          ),
+                          padding: const EdgeInsets.symmetric(horizontal: 3),
+                          margin: const EdgeInsets.only(right: 6),
+                          child: Text(
+                            "ADMIN_TEXT".tr(),
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelLarge
+                                ?.copyWith(color: Colors.white),
+                          ),
+                        ),
+
+                      /*  */
                       Text(
                         DateHelper.getTimeAgo(
                           post.createdAt,

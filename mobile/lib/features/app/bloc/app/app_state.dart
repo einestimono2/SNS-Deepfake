@@ -6,15 +6,17 @@ class AppState extends Equatable {
   final UserModel? user;
   final List<GroupModel> groups;
   final int? groupIdx;
+  final int? timestamp;
 
   @override
-  List<Object?> get props => [authStatus, user, theme, groups];
+  List<Object?> get props => [authStatus, user, theme, groups, timestamp];
 
   const AppState._({
     this.authStatus = AuthStatus.unknown,
     this.user,
     this.groups = const [],
     this.groupIdx,
+    this.timestamp,
     this.theme = ThemeMode.system,
   });
 
@@ -22,10 +24,11 @@ class AppState extends Equatable {
 
   AppState copyWith({
     AuthStatus? authStatus,
-    UserModel? user,
+    required UserModel? user,
     ThemeMode? theme,
     List<GroupModel>? groups,
     int? groupIdx,
+    int? timestamp,
   }) =>
       AppState._(
         authStatus: authStatus ?? this.authStatus,
@@ -33,5 +36,6 @@ class AppState extends Equatable {
         theme: theme ?? this.theme,
         groups: groups ?? this.groups,
         groupIdx: groupIdx ?? this.groupIdx,
+        timestamp: timestamp,
       );
 }

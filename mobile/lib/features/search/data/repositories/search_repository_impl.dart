@@ -22,6 +22,7 @@ class SearchRepositoryImpl extends BaseRepositoryImpl
     int? page,
     int? size,
     required String keyword,
+    required bool cache,
   }) async {
     return await checkNetwork<PaginationResult<FriendModel>>(
       () async {
@@ -29,6 +30,7 @@ class SearchRepositoryImpl extends BaseRepositoryImpl
           page: page,
           size: size,
           keyword: keyword,
+          cache: cache,
         );
 
         return Right(users);

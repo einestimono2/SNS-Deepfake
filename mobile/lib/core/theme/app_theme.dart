@@ -28,6 +28,7 @@ class AppTheme {
     outlinedButtonTheme: AppOutlinedButtonTheme.lightOutlinedButtonTheme,
     textTheme: AppTextTheme.lightTextTheme,
     inputDecorationTheme: AppTextFormFieldTheme.lightInputDecorationTheme,
+    searchBarTheme: AppSearchBarTheme.lightSearchBarTheme,
   );
 
   static ThemeData darkTheme = ThemeData(
@@ -50,5 +51,6 @@ class AppTheme {
     outlinedButtonTheme: AppOutlinedButtonTheme.darkOutlinedButtonTheme,
     textTheme: AppTextTheme.darkTextTheme,
     inputDecorationTheme: AppTextFormFieldTheme.darkInputDecorationTheme,
+    searchBarTheme: AppSearchBarTheme.darkSearchBarTheme,
   );
 }

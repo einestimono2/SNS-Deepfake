@@ -100,7 +100,9 @@ class AppBloc extends Bloc<AppEvent, AppState> {
       ChangeTheme event, Emitter<AppState> emit) async {
     await localCache
         .putValue<String>(AppStrings.themeModeKey, event.theme.name)
-        .whenComplete(() => emit(state.copyWith(theme: event.theme)));
+        .whenComplete(
+          () => emit(state.copyWith(user: state.user, theme: event.theme)),
+        );
   }
 
   FutureOr<void> _onUpdateUserStatus(
@@ -118,7 +120,9 @@ class AppBloc extends Bloc<AppEvent, AppState> {
   ) async {
     await localCache
         .putValue<int>(AppStrings.selectedGroupKey, event.idx)
-        .whenComplete(() => emit(state.copyWith(groupIdx: event.idx)));
+        .whenComplete(() => emit(
+              state.copyWith(user: state.user, groupIdx: event.idx),
+            ));
   }
 
   FutureOr<void> _onUpdateCoin(

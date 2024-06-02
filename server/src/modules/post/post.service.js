@@ -315,9 +315,10 @@ export class PostServices {
     }
 
     const postTotal = await Post.findAndCountAll(query);
-    if (!postTotal?.count) {
-      throw new BadRequestError(Message.POST_NOT_FOUND);
-    }
+    // if (!postTotal?.count) {
+    //   throw new BadRequestError(Message.POST_NOT_FOUND);
+    // }
+
     //= =========Còn xử lý đoạn Mark===============
     // const posts = [];
     // for (const e of postTotal.rows) {
@@ -583,6 +584,7 @@ export class PostServices {
       where: { targetId: userId },
       attributes: ['userId']
     });
+
     const query = {
       include: [
         {
@@ -600,7 +602,7 @@ export class PostServices {
         },
         {
           model: PostVideo,
-          as: 'video'
+          as: 'videos'
         },
         {
           model: Group,
@@ -657,9 +659,26 @@ export class PostServices {
     }
 
     const postTotal = await Post.findAndCountAll(query);
-    if (!postTotal?.count) {
-      throw new BadRequestError(Message.POST_NOT_FOUND);
-    }
+    // const posts = [];
+    // for (const e of postTotal) {
+    //   const post = e.toJSON();
+    //   posts.push(post);
+    // }
+    // Tính số lượng comment của 1 bài viết
+    // for (let i = 0; i < posts.length; i++) {
+    //   const post = posts[i];
+    //   if (post.marksCount > 0) {
+    //     const commentsCount = await Comment.count({
+    //       where: {
+    //         postId: post.id
+    //       }
+    //     });
+    //     post.commentsCount = commentsCount;
+    //   } else {
+    //     post.commentsCount = 0;
+    //   }
+    // }
+    // const lastId = posts.length > 0 ? posts[posts.length - 1].id : null;
     return {
       rows: postTotal.rows.map((post) => ({
         post,

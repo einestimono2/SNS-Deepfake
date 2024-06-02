@@ -40,4 +40,15 @@ class ShortGroupModel extends Equatable {
 
   factory ShortGroupModel.fromJson(String source) =>
       ShortGroupModel.fromMap(json.decode(source));
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'groupName': groupName,
+      'description': description,
+      'coverPhoto': coverPhoto,
+    };
+  }
+
+  String toJson() => json.encode(toMap());
 }

@@ -23,7 +23,8 @@ export class SearchControllers {
     const data = await SearchServices.searchUser({
       userId,
       ...getPaginationAttributes(req.query),
-      keyword: req.query.keyword
+      keyword: req.query.keyword,
+      cache: req.query.cache
     });
 
     res.ok(

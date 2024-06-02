@@ -11,6 +11,7 @@ import '../features/app/app.dart';
 import '../features/authentication/authentication.dart';
 import '../features/chat/chat.dart';
 import '../features/friend/friend.dart';
+import '../features/group/group.dart';
 import '../features/news_feed/news_feed.dart';
 import '../features/notification/notification.dart';
 import '../features/profile/profile.dart';
@@ -144,32 +145,138 @@ class AppRouter {
             // navigatorKey: shellNavigatorKey,
             routes: <RouteBase>[
               GoRoute(
-                  // parentNavigatorKey: shellNavigatorKey,
-                  name: Routes.newsFeed.name,
-                  path: Routes.newsFeed.path,
-                  pageBuilder: (BuildContext context, GoRouterState state) {
-                    return fadeTransition(
-                      state: state,
-                      context: context,
-                      child: NewsFeedPage(key: state.pageKey),
-                    );
-                  },
-                  routes: [
-                    /* Create Post */
-                    GoRoute(
-                      parentNavigatorKey: rootNavigatorKey,
-                      name: Routes.createPost.name,
-                      path: Routes.createPost.path,
+                // parentNavigatorKey: shellNavigatorKey,
+                name: Routes.newsFeed.name,
+                path: Routes.newsFeed.path,
+                pageBuilder: (BuildContext context, GoRouterState state) {
+                  return fadeTransition(
+                    state: state,
+                    context: context,
+                    child: NewsFeedPage(key: state.pageKey),
+                  );
+                },
+                routes: [
+                  /* Create Post */
+                  GoRoute(
+                    parentNavigatorKey: rootNavigatorKey,
+                    name: Routes.createPost.name,
+                    path: Routes.createPost.path,
+                    pageBuilder: (BuildContext context, GoRouterState state) {
+                      return slideTransition(
+                        type: SlideType.btt,
+                        state: state,
+                        context: context,
+                        child: CreatePostPage(key: state.pageKey),
+                      );
+                    },
+                  ),
+                ],
+              ),
+
+              /* Group */
+              GoRoute(
+                // parentNavigatorKey: shellNavigatorKey,
+                name: Routes.myGroup.name,
+                path: Routes.myGroup.path,
+                pageBuilder: (BuildContext context, GoRouterState state) {
+                  return slideTransition(
+                    type: SlideType.rtl,
+                    state: state,
+                    context: context,
+                    child: MyGroupPage(key: state.pageKey),
+                  );
+                },
+                routes: [
+                  /* Create Group */
+                  GoRoute(
+                    name: Routes.createGroup.name,
+                    path: Routes.createGroup.path,
+                    pageBuilder: (BuildContext context, GoRouterState state) {
+                      return slideTransition(
+                        type: SlideType.btt,
+                        state: state,
+                        context: context,
+                        child: CreateGroupPage(key: state.pageKey),
+                      );
+                    },
+                  ),
+
+                  /* Group Details */
+                  GoRoute(
+                      name: Routes.groupDetails.name,
+                      path: Routes.groupDetails.path,
                       pageBuilder: (BuildContext context, GoRouterState state) {
                         return slideTransition(
-                          type: SlideType.btt,
+                          type: SlideType.rtl,
                           state: state,
                           context: context,
-                          child: CreatePostPage(key: state.pageKey),
+                          child: GroupDetailsPage(
+                            key: state.pageKey,
+                            id: int.parse(state.pathParameters['id']!),
+                            baseInfo: state.extra as Map<String, dynamic>?,
+                          ),
                         );
                       },
-                    ),
-                  ]),
+                      routes: [
+                        /* Create Group */
+                        GoRoute(
+                          parentNavigatorKey: rootNavigatorKey,
+                          name: Routes.createGroupPost.name,
+                          path: Routes.createGroupPost.path,
+                          pageBuilder:
+                              (BuildContext context, GoRouterState state) {
+                            return slideTransition(
+                              type: SlideType.btt,
+                              state: state,
+                              context: context,
+                              child: CreateGroupPostPage(
+                                key: state.pageKey,
+                                groupId: int.parse(state.pathParameters['id']!),
+                              ),
+                            );
+                          },
+                        ),
+
+                        /* Manage Group */
+                        GoRoute(
+                          name: Routes.manageGroup.name,
+                          path: Routes.manageGroup.path,
+                          pageBuilder:
+                              (BuildContext context, GoRouterState state) {
+                            return slideTransition(
+                              type: SlideType.rtl,
+                              state: state,
+                              context: context,
+                              child: ManageGroupPage(
+                                key: state.pageKey,
+                                id: int.parse(state.pathParameters['id']!),
+                                isMyGroup: (state.extra
+                                    as Map<String, dynamic>)['isMyGroup']!,
+                              ),
+                            );
+                          },
+                        ),
+
+                        /* Invite Group */
+                        GoRoute(
+                          name: Routes.inviteMember.name,
+                          path: Routes.inviteMember.path,
+                          pageBuilder:
+                              (BuildContext context, GoRouterState state) {
+                            return slideTransition(
+                              type: SlideType.btt,
+                              state: state,
+                              context: context,
+                              child: InviteMemberPage(
+                                key: state.pageKey,
+                                id: int.parse(state.pathParameters['id']!),
+                              ),
+                            );
+                          },
+                        ),
+                      ]),
+                ],
+              ),
             ],
           ),
 
@@ -328,6 +435,7 @@ class AppRouter {
                   );
                 },
                 routes: [
+                  /* Setting */
                   GoRoute(
                     parentNavigatorKey: rootNavigatorKey,
                     name: Routes.setting.name,
@@ -338,6 +446,20 @@ class AppRouter {
                         state: state,
                         context: context,
                         child: SettingPage(key: state.pageKey),
+                      );
+                    },
+                  ),
+
+                  /* My Profile */
+                  GoRoute(
+                    name: Routes.myProfile.name,
+                    path: Routes.myProfile.path,
+                    pageBuilder: (BuildContext context, GoRouterState state) {
+                      return slideTransition(
+                        type: SlideType.rtl,
+                        state: state,
+                        context: context,
+                        child: MyProfilePage(key: state.pageKey),
                       );
                     },
                   ),

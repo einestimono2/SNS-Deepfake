@@ -13,6 +13,7 @@ import '../../features/upload/upload.dart';
 
 class UploadButton extends StatefulWidget {
   final IconData icon;
+  final String? label;
   final double size;
   final Function(String?, String? id) onCompleted;
 
@@ -33,6 +34,7 @@ class UploadButton extends StatefulWidget {
     required this.size,
     required this.onCompleted,
     this.id,
+    this.label,
     this.cropStyle,
     this.type = UploadType.image,
   });
@@ -101,54 +103,91 @@ class UploadButtonState extends State<UploadButton> {
           );
         }
       },
-      child: CircleAvatar(
-        radius: widget.size,
-        backgroundColor: Colors.grey.shade600,
-        child: OverlayPopup(
-          controller: _controller,
-          menu: IntrinsicWidth(
-            child: Ink(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(6.r),
-                color: const Color(0xFF4C4C4C),
+      child: widget.label != null
+          ? _overlay(
+              child: ElevatedButton.icon(
+                style: ElevatedButton.styleFrom(
+                  padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6),
+                  side: BorderSide.none,
+                  backgroundColor: Colors.black54,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(6),
+                  ),
+                ),
+                onPressed: () => _loading.value ? null : _controller.showMenu(),
+                icon: ValueListenableBuilder(
+                  valueListenable: _loading,
+                  builder: (context, value, child) => value
+                      ? SizedBox.square(
+                          dimension: widget.size,
+                          child: const CircularProgressIndicator(),
+                        )
+                      : Icon(widget.icon, size: widget.size),
+                ),
+                label: Text(
+                  widget.label!,
+                  style: Theme.of(context)
+                      .textTheme
+                      .labelLarge
+                      ?.copyWith(fontWeight: FontWeight.bold),
+                ),
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  menuItem(
-                    "GALLERY_TEXT".tr(),
-                    FontAwesomeIcons.images,
-                    _fromGallery,
+            )
+          : CircleAvatar(
+              radius: widget.size,
+              backgroundColor: Colors.grey.shade600,
+              child: _overlay(
+                child: IconButton(
+                  onPressed: () =>
+                      _loading.value ? null : _controller.showMenu(),
+                  splashColor: AppColors.kPrimaryColor,
+                  highlightColor: AppColors.kPrimaryColor,
+                  enableFeedback: true,
+                  tooltip: "UPLOAD_TEXT".tr(),
+                  icon: ValueListenableBuilder(
+                    valueListenable: _loading,
+                    builder: (context, value, child) => value
+                        ? const AppIndicator(strokeWidth: 3)
+                        : Icon(
+                            widget.icon,
+                            size: widget.size - 1.5.r,
+                            color: Colors.white,
+                          ),
                   ),
-                  menuItem(
-                    "CAMERA_TEXT".tr(),
-                    FontAwesomeIcons.camera,
-                    _fromCamera,
-                  ),
-                ],
+                ),
               ),
             ),
+    );
+  }
+
+  Widget _overlay({required Widget child}) {
+    return OverlayPopup(
+      controller: _controller,
+      menu: IntrinsicWidth(
+        child: Ink(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(6.r),
+            color: const Color(0xFF4C4C4C),
           ),
-          child: IconButton(
-            onPressed: () => _loading.value ? null : _controller.showMenu(),
-            splashColor: AppColors.kPrimaryColor,
-            highlightColor: AppColors.kPrimaryColor,
-            enableFeedback: true,
-            tooltip: "UPLOAD_TEXT".tr(),
-            icon: ValueListenableBuilder(
-              valueListenable: _loading,
-              builder: (context, value, child) => value
-                  ? const AppIndicator(strokeWidth: 3)
-                  : Icon(
-                      widget.icon,
-                      size: widget.size - 1.5.r,
-                      color: Colors.white,
-                    ),
-            ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              menuItem(
+                "GALLERY_TEXT".tr(),
+                FontAwesomeIcons.images,
+                _fromGallery,
+              ),
+              menuItem(
+                "CAMERA_TEXT".tr(),
+                FontAwesomeIcons.camera,
+                _fromCamera,
+              ),
+            ],
           ),
         ),
       ),
+      child: child,
     );
   }
 

@@ -19,6 +19,7 @@ import 'features/app/app.dart';
 import 'features/authentication/authentication.dart';
 import 'features/chat/chat.dart';
 import 'features/friend/friend.dart';
+import 'features/group/group.dart';
 import 'features/news_feed/news_feed.dart';
 import 'features/search/search.dart';
 import 'features/upload/upload.dart';
@@ -58,6 +59,9 @@ Future<void> entryPoint() async {
             BlocProvider(create: (_) => di.sl<SearchHistoryBloc>()),
             BlocProvider(create: (_) => di.sl<PostActionBloc>()),
             BlocProvider(create: (_) => di.sl<ListPostBloc>()),
+            BlocProvider(create: (_) => di.sl<GroupActionBloc>()),
+            BlocProvider(create: (_) => di.sl<ListGroupBloc>()),
+            BlocProvider(create: (_) => di.sl<GroupPostBloc>()),
           ],
           child: const SnsDeepfakeApp(),
         ),

@@ -24,3 +24,21 @@ const defaultBorderSide = BorderSide(
   color: AppColors.kPrimaryColor,
   width: 1,
 );
+
+final minimumButtonStyle = IconButton.styleFrom(
+  padding: EdgeInsets.zero,
+  minimumSize: Size.zero,
+  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+);
+
+final mediumButtonStyle = IconButton.styleFrom(
+  padding: const EdgeInsets.all(4),
+  minimumSize: Size.zero,
+  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+);
+
+customButtonStyle(double radius) => IconButton.styleFrom(
+      padding: EdgeInsets.all(radius),
+      minimumSize: Size.zero,
+      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+    );

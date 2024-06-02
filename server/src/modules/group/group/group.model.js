@@ -18,7 +18,7 @@ export const Group = postgre.define('Group', {
   },
   description: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: true
   },
   coverPhoto: {
     type: DataTypes.STRING,

@@ -66,3 +66,58 @@ class SectionTitle extends StatelessWidget {
     );
   }
 }
+
+class SectionTitleWithIcon extends StatelessWidget {
+  final String title;
+  final Icon icon;
+  final VoidCallback onClick;
+  final EdgeInsetsGeometry? margin;
+  final EdgeInsetsGeometry? padding;
+  final bool showTopSeparate;
+
+  const SectionTitleWithIcon({
+    super.key,
+    required this.title,
+    required this.icon,
+    required this.onClick,
+    this.margin,
+    this.padding,
+    this.showTopSeparate = false,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: margin,
+      padding: padding ?? EdgeInsets.only(top: 8.h),
+      decoration: BoxDecoration(
+        border: Border(
+          top: BorderSide(
+            width: showTopSeparate ? 0.1 : 0,
+            color: showTopSeparate
+                ? Theme.of(context).textTheme.titleLarge!.color!
+                : Colors.transparent,
+          ),
+        ),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            title,
+            style: Theme.of(context).textTheme.titleLarge,
+          ),
+          IconButton(
+            onPressed: onClick,
+            style: IconButton.styleFrom(
+              padding: const EdgeInsets.all(4),
+              minimumSize: Size.zero,
+              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            ),
+            icon: icon,
+          )
+        ],
+      ),
+    );
+  }
+}

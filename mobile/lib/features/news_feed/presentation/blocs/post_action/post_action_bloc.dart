@@ -67,7 +67,7 @@ class PostActionBloc extends Bloc<PostActionEvent, PostActionState> {
 
         Map<String, dynamic> _postData = {
           ...data.data['post'],
-          "group": group,
+          "group": group?.toMap(),
         };
 
         PostModel post = PostModel.fromMap({

@@ -15,6 +15,9 @@ router.get('/my_list_group', isAuthenticated, GroupController.getMyGroups);
 // - [GET] Details Group
 router.get('/detail_group/:groupId', isAuthenticated, GroupController.getGroupDetail);
 
+// - [GET] Leave Group
+router.get('/leave_group/:groupId', isAuthenticated, GroupController.leaveGroup);
+
 // - [UPDATE] Update Group
 router.put('/update_group/:groupId', isAuthenticated, GroupController.updateGroup);
 

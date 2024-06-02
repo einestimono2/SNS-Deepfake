@@ -98,6 +98,13 @@ class FriendSearch extends SearchDelegate {
                       isAvatar: true,
                       url: state.users[idx].avatar?.fullPath ?? "",
                     ),
+                    subtitle: state.users[idx].sameFriends > 0
+                        ? Text(
+                            "MUTUAL_FRIENDS_TEXT"
+                                .plural(state.users[idx].sameFriends),
+                            style: Theme.of(context).textTheme.labelMedium,
+                          )
+                        : null,
                     title: Text(
                       state.users[idx].username ?? "Unknown",
                       style: Theme.of(context).textTheme.bodyMedium,

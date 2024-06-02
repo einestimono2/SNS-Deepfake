@@ -28,9 +28,12 @@ class NewsFeedPageState extends State<NewsFeedPage> {
   late final ScrollController _scrollController = ScrollController();
   int _page = 1;
   bool _loadingMore = false;
+  late int myId;
 
   @override
   void initState() {
+    myId = context.read<AppBloc>().state.user!.id!;
+
     _getListPost();
     super.initState();
     _scrollController.addListener(_scrollListener);
@@ -75,7 +78,18 @@ class NewsFeedPageState extends State<NewsFeedPage> {
       title: 'Deepfake',
       actions: [
         // const FriendSearchButton(),
-        SizedBox(width: 8.w),
+        IconButton(
+          onPressed: () {},
+          icon: const Icon(Icons.search),
+          style: mediumButtonStyle,
+        ),
+        IconButton(
+          onPressed: () => context.pushNamed(Routes.myGroup.name),
+          tooltip: "MY_GROUP_TEXT".tr(),
+          icon: const Icon(Icons.group),
+          style: mediumButtonStyle,
+        ),
+        SizedBox(width: 6.w),
       ],
       slivers: [
         /* Create Post Section */
@@ -107,7 +121,10 @@ class NewsFeedPageState extends State<NewsFeedPage> {
                       ? state.posts.length
                       : state.posts.length + 1,
                   itemBuilder: (_, idx) => idx < state.posts.length
-                      ? PostCard(post: state.posts[idx])
+                      ? PostCard(
+                          post: state.posts[idx],
+                          myId: myId,
+                        )
                       : const Padding(
                           padding: EdgeInsets.only(top: 16.0),
                           child: Center(child: AppIndicator(size: 32)),
@@ -162,9 +179,7 @@ class NewsFeedPageState extends State<NewsFeedPage> {
           children: [
             /* Avatar - Bloc builder */
             GestureDetector(
-              onTap: () {
-                // TODO: Navigate to my profile
-              },
+              onTap: () => context.pushNamed(Routes.myProfile.name),
               child: BlocBuilder<AppBloc, AppState>(
                 builder: (context, state) {
                   return AnimatedImage(

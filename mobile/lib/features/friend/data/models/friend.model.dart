@@ -5,7 +5,9 @@ import 'package:equatable/equatable.dart';
 class FriendModel extends Equatable {
   final int id;
   final String? username;
+  final String email;
   final String? avatar;
+  final String? phoneNumber;
   final int sameFriends;
   final String createdAt;
   final List<String> sameFriendAvatars;
@@ -13,7 +15,9 @@ class FriendModel extends Equatable {
   const FriendModel({
     required this.id,
     this.username,
+    required this.email,
     this.avatar,
+    this.phoneNumber,
     this.sameFriends = 0,
     required this.createdAt,
     this.sameFriendAvatars = const [],
@@ -32,6 +36,8 @@ class FriendModel extends Equatable {
     return FriendModel(
       id: map['id'] ?? -1,
       username: map['username'],
+      email: map['email'] ?? "",
+      phoneNumber: map['phoneNumber'] ?? "",
       avatar: map['avatar'] ?? '',
       sameFriends: int.parse(map['same_friends']?.toString() ?? '0'),
       createdAt: map['created'] ?? '',

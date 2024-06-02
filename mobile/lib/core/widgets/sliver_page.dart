@@ -54,23 +54,31 @@ class ChildSliverAppBar extends StatelessWidget {
 
 class SliverPage extends StatelessWidget {
   final String? title;
+  final TextStyle? titleStyle;
+  final double? titleSpacing;
   final List<Widget>? actions;
   final Widget? leading;
   final Future<void> Function()? onRefresh;
   final List<Widget> slivers;
   final ScrollController? controller;
+  final ScrollPhysics? physic;
   final bool centerTitle;
   final bool borderBottom;
   final bool floating;
+  final Color? backgroundColor;
 
   const SliverPage({
     super.key,
     this.title,
+    this.titleStyle,
+    this.titleSpacing,
     this.actions,
     this.leading,
     this.onRefresh,
     required this.slivers,
     this.controller,
+    this.physic,
+    this.backgroundColor,
     this.centerTitle = false,
     this.borderBottom = false,
     this.floating = false,
@@ -81,9 +89,10 @@ class SliverPage extends StatelessWidget {
     Widget _content = CustomScrollView(
       controller: controller,
       // shrinkWrap: true,
-      physics: const AlwaysScrollableScrollPhysics(
-        parent: BouncingScrollPhysics(),
-      ),
+      physics: physic ??
+          const AlwaysScrollableScrollPhysics(
+            parent: BouncingScrollPhysics(),
+          ),
       slivers: [
         /* App bar */
         SliverAppBar(
@@ -97,17 +106,26 @@ class SliverPage extends StatelessWidget {
                   ),
                 )
               : null,
+          backgroundColor: backgroundColor,
           scrolledUnderElevation: 0,
           centerTitle: centerTitle,
           elevation: 8,
+          titleSpacing: titleSpacing,
           pinned: !floating,
           floating: floating,
           title: title != null
               ? Text(
                   title!,
-                  style: centerTitle
-                      ? Theme.of(context).textTheme.headlineSmall.sectionStyle
-                      : Theme.of(context).textTheme.headlineLarge.sectionStyle,
+                  style: titleStyle ??
+                      (centerTitle
+                          ? Theme.of(context)
+                              .textTheme
+                              .headlineSmall
+                              .sectionStyle
+                          : Theme.of(context)
+                              .textTheme
+                              .headlineLarge
+                              .sectionStyle),
                 )
               : null,
           leading: leading,

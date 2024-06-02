@@ -51,6 +51,14 @@ class AppValidations {
     return null;
   }
   
+  static String? validateGroupName(String? value) {
+    if (value == null || value.isEmpty) {
+      return "GROUP_NAME_EMPTY".tr();
+    }
+
+    return null;
+  }
+  
   static String? validatePhoneNumber(String? value) {
     if (value == null || value.isEmpty) {
       return "PHONE_NUMBER_EMPTY".tr();

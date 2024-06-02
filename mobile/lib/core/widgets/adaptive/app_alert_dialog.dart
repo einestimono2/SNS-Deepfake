@@ -55,7 +55,7 @@ Future<dynamic> showAppAlertDialog({
       ),
     );
   } else {
-    response = showDialog(
+    response = await showDialog(
       context: context,
       barrierDismissible: barrierDismissible,
       builder: (context) => AlertDialog(

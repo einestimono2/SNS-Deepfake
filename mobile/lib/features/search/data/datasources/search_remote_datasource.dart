@@ -12,6 +12,7 @@ abstract class SearchRemoteDataSource {
     int? page,
     int? size,
     required String keyword,
+    required bool cache,
   });
 
   Future<PaginationResult<SearchModel>> getHistory({
@@ -36,14 +37,15 @@ class SearchRemoteDataSourceImpl extends SearchRemoteDataSource {
     int? page,
     int? size,
     required String keyword,
+    required bool cache,
   }) async {
     final response = await apiClient.get(
       Endpoints.searchUser,
-      cacheOption: CachePolicy.refreshForceCache,
       queryParameters: {
         "page": page,
         "size": size,
         "keyword": keyword,
+        "cache": cache,
       },
     );
 

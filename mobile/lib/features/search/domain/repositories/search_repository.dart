@@ -11,6 +11,7 @@ abstract class SearchRepository {
     int? page,
     int? size,
     required String keyword,
+    required bool cache,
   });
 
   Future<Either<Failure, PaginationResult<SearchModel>>> getHistory({

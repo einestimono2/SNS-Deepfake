@@ -49,6 +49,11 @@ export class GroupController {
     res.ok({ message: 'Đã xóa thành viên khỏi nhóm!' });
   });
 
+  static leaveGroup = CatchAsyncError(async (req, res) => {
+    await GroupService.leaveGroup(req.userPayload.userId, req.params.groupId);
+    res.ok({ message: 'Đã rời khỏi nhóm!' });
+  });
+
   static getAllGroup = CatchAsyncError(async (req, res) => {
     const result = await GroupService.getAllGroups({
       ...getPaginationAttributes(req.query)

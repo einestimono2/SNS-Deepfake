@@ -28,4 +28,9 @@ class AppImages {
   static const String loveReaction = "assets/images/reaction_love.png";
   static const String sadReaction = "assets/images/reaction_sad.png";
   static const String wowReaction = "assets/images/reaction_wow.png";
+
+  static const String defaultGroupCoverPhoto =
+      "assets/images/group_cover_photo.png";
+  static const String defaultGroupCoverPhotoNetwork =
+      "https://www.facebook.com/images/groups/groups-default-cover-photo-2x.png";
 }

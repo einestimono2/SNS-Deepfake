@@ -12,6 +12,15 @@ class NoParams extends Equatable {
   List<Object> get props => [];
 }
 
+class IdParams extends Equatable {
+  final int id;
+
+  const IdParams(this.id);
+
+  @override
+  List<Object> get props => [id];
+}
+
 class PaginationParams extends Equatable {
   final int? page;
   final int? size;

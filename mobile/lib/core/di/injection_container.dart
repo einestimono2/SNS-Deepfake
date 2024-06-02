@@ -12,6 +12,7 @@ import '../../features/app/app.dart';
 import '../../features/authentication/authentication.dart';
 import '../../features/chat/chat.dart';
 import '../../features/friend/friend.dart';
+import '../../features/group/group.dart';
 import '../../features/news_feed/news_feed.dart';
 import '../../features/search/search.dart';
 import '../../features/upload/upload.dart';
@@ -53,6 +54,7 @@ Future<void> init() async {
   _initNewsFeedFeature();
   _initFriendFeature();
   _initSearchFeature();
+  _initGroupFeature();
 
   /**
    * --> External
@@ -73,6 +75,53 @@ Future<void> init() async {
         cacheOptions: sl(),
       ));
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
+}
+
+void _initGroupFeature() {
+  /* Bloc */
+  sl.registerLazySingleton(() => GroupActionBloc(
+        createGroupUC: sl(),
+        updateGroupUC: sl(),
+        getGroupDetailsUC: sl(),
+        inviteMemberUC: sl(),
+        deleteMemberUC: sl(),
+        deleteGroupUC: sl(),
+        leaveGroupUC: sl(),
+        appBloc: sl(),
+        groupPostBloc: sl(),
+      ));
+  sl.registerLazySingleton(() => ListGroupBloc(
+        myGroupsUC: sl(),
+        appBloc: sl(),
+      ));
+  sl.registerLazySingleton(() => GroupPostBloc(
+        getListPostUC: sl(),
+        createPostUC: sl(),
+        appBloc: sl(),
+        listPostBloc: sl(),
+      ));
+
+  /* Use Case */
+  sl.registerLazySingleton(() => CreateGroupUC(repository: sl()));
+  sl.registerLazySingleton(() => UpdateGroupUC(repository: sl()));
+  sl.registerLazySingleton(() => MyGroupsUC(repository: sl()));
+  sl.registerLazySingleton(() => GetGroupDetailsUC(repository: sl()));
+  sl.registerLazySingleton(() => InviteMemberUC(repository: sl()));
+  sl.registerLazySingleton(() => DeleteMemberUC(repository: sl()));
+  sl.registerLazySingleton(() => DeleteGroupUC(repository: sl()));
+  sl.registerLazySingleton(() => LeaveGroupUC(repository: sl()));
+
+  /* Repository */
+  sl.registerLazySingleton<GroupRepository>(
+    () => GroupRepositoryImpl(network: sl(), remote: sl()),
+  );
+
+  /* Datasource */
+  sl.registerLazySingleton<GroupRemoteDataSource>(
+    () => GroupRemoteDataSourceImpl(
+      apiClient: sl(),
+    ),
+  );
 }
 
 void _initNewsFeedFeature() {

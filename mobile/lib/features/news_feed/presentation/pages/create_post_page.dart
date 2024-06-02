@@ -54,10 +54,10 @@ class _CreatePostPageState extends State<CreatePostPage>
     showAppAlertDialog(
       barrierDismissible: false,
       context: context,
-      title: "Hủy bỏ bài viết?",
-      content: "Nếu bỏ bây giờ, bài viết sẽ bị mất",
-      okText: "Tiếp tục",
-      cancelText: "Hủy bài viết",
+      title: "CANCEL_POST_DIALOG_TITLE_TEXT".tr(),
+      content: "CANCEL_POST_DIALOG_CONTENT_TEXT".tr(),
+      okText: "CONTINUE_TEXT".tr(),
+      cancelText: "CANCEL_POST_DIALOG_TITLE_TEXT".tr(),
       onCancel: () => context
         ..pop()
         ..pop(),
@@ -262,7 +262,8 @@ class _CreatePostPageState extends State<CreatePostPage>
                                                   "",
                                           style: Theme.of(context)
                                               .textTheme
-                                              .bodyMedium,
+                                              .bodyMedium
+                                              ?.copyWith(color: Colors.white),
                                         ),
                                         const SizedBox(width: 6),
                                         const Icon(

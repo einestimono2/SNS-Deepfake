@@ -28,6 +28,7 @@ export class FriendServices {
             'avatar',
             'username',
             'email',
+            'phoneNumber',
             'createdAt',
             // Lấy ra số lượng bạn chung của 2 người
             [
@@ -70,7 +71,9 @@ export class FriendServices {
       rows: requestedFriends.rows.map((requestedFriend) => ({
         id: requestedFriend.user.id,
         username: requestedFriend.user.username || requestedFriend.user.email,
+        email: requestedFriend.user.email,
         avatar: requestedFriend.user.avatar,
+        phoneNumber: requestedFriend.user.phoneNumber,
         same_friends: requestedFriend.user.getDataValue('friendsCount') ?? 0,
         commonUserAvatars: requestedFriend.user.getDataValue('commonUserAvatars'),
         created: requestedFriend.createdAt
@@ -174,6 +177,7 @@ export class FriendServices {
             'avatar',
             'username',
             'email',
+            'phoneNumber',
             'createdAt',
             [
               sequelize.literal(
@@ -205,6 +209,8 @@ export class FriendServices {
       rows: friends.rows.map((friend) => ({
         id: friend.target.id,
         username: friend.target.username || friend.target.email,
+        email: friend.target.email,
+        phoneNumber: friend.target.phoneNumber,
         avatar: friend.target.avatar,
         same_friends: friend.target.getDataValue('friendsCount') ?? 0,
         commonUserIds: friend.target.getDataValue('commonUserIds'),
@@ -264,6 +270,7 @@ export class FriendServices {
         'avatar',
         'username',
         'email',
+        'phoneNumber',
         'createdAt',
         // Lấy ra số lượng bạn chung của 2 người
         [
@@ -312,6 +319,8 @@ export class FriendServices {
       rows: remainUsers.rows.map((friend) => ({
         id: friend.id,
         username: friend.username || friend.email,
+        email: friend.email,
+        phoneNumber: friend.phoneNumber,
         avatar: friend.avatar,
         created: friend.createdAt,
         same_friends: friend.getDataValue('commondfriendsCount') ?? 0,

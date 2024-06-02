@@ -27,6 +27,15 @@ class Endpoints {
   static const String reportPost = '/post/report_post/:postId'; // POST
   static const String viewedPost = '/post/set_viewed_post/:postId'; // POST
 
+  static const String createGroup = '/group/create_group'; // POST
+  static const String myGroups = '/group/my_list_group'; // GET
+  static const String groupDetails = '/group/detail_group/:groupId'; // GET
+  static const String updateGroup = '/group/update_group/:groupId'; // PUT
+  static const String addMember = '/group/add_members/:groupId'; // POST
+  static const String deleteMember = '/group/delete_members/:groupId'; // DELETE
+  static const String deleteGroup = '/group/delete_group/:groupId'; // DELETE
+  static const String leaveGroup = '/group/leave_group/:groupId'; // DELETE
+
   static const String uploadImages = '/media/images';
   static const String uploadVideos = '/media/videos';
 
@@ -71,6 +80,16 @@ class Routes {
   static final newsFeed = Route(name: "news_feed", path: "/news_feed");
   static final createPost = Route(name: "create_post", path: "create");
 
+  static final myGroup = Route(name: 'my_group', path: '/my_group');
+  static final createGroup = Route(name: 'create_group', path: 'create_group');
+  static final createGroupPost =
+      Route(name: 'create_group_post', path: 'create_group_post');
+  static final groupDetails =
+      Route(name: 'group_details', path: 'group_details/:id');
+  static final manageGroup = Route(name: 'manage_group', path: 'manage_group');
+  static final inviteMember =
+      Route(name: 'invite_member', path: 'invite_member');
+
   static final chat = Route(name: "chat", path: "/chat");
   static final conversation =
       Route(name: "conversation", path: "conversation/:id");
@@ -79,9 +98,11 @@ class Routes {
 
   static final profile = Route(name: "profile", path: "/profile");
   static final setting = Route(name: "setting", path: "setting");
-
-  static final otherProfile =
-      Route(name: "otherProfile", path: "/other_profile/:id");
+  static final myProfile = Route(name: "myProfile", path: "myProfile");
+  static final otherProfile = Route(
+    name: "otherProfile",
+    path: "/other_profile/:id",
+  );
 
   static final notification = Route(
     name: "notification",

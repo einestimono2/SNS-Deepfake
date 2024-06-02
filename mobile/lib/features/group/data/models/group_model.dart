@@ -42,9 +42,33 @@ class GroupModel extends Equatable {
       coverPhoto: map['coverPhoto'],
       creatorId: map['creatorId']?.toInt() ?? 0,
       createdAt: map['createdAt'] ?? '',
-      members: List<MemberModel>.from(map['members']?.map((x) => MemberModel.fromMap(x))),
+      members: map['members'] == null
+          ? []
+          : List<MemberModel>.from(
+              map['members']?.map((x) => MemberModel.fromMap(x))),
     );
   }
 
-  factory GroupModel.fromJson(String source) => GroupModel.fromMap(json.decode(source));
+  factory GroupModel.fromJson(String source) =>
+      GroupModel.fromMap(json.decode(source));
+
+  GroupModel copyWith({
+    int? id,
+    String? groupName,
+    String? description,
+    String? coverPhoto,
+    int? creatorId,
+    String? createdAt,
+    List<MemberModel>? members,
+  }) {
+    return GroupModel(
+      id: id ?? this.id,
+      groupName: groupName ?? this.groupName,
+      description: description ?? this.description,
+      coverPhoto: coverPhoto ?? this.coverPhoto,
+      creatorId: creatorId ?? this.creatorId,
+      createdAt: createdAt ?? this.createdAt,
+      members: members ?? this.members,
+    );
+  }
 }

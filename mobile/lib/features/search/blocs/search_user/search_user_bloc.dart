@@ -19,13 +19,17 @@ class SearchUserBloc extends Bloc<SearchUserEvent, SearchUserState> {
     required this.searchHistoryBloc,
   }) : super(SUInitialState()) {
     on<SearchUserSubmit>(_onSearchUserSubmit);
+    on<ResetState>(_onResetState);
   }
 
   FutureOr<void> _onSearchUserSubmit(
     SearchUserSubmit event,
     Emitter<SearchUserState> emit,
   ) async {
-    if (event.keyword.isEmpty) return;
+    if (event.keyword.isEmpty) {
+      emit(SUInitialState());
+      return;
+    }
 
     emit(SUInProgressState());
 
@@ -33,6 +37,7 @@ class SearchUserBloc extends Bloc<SearchUserEvent, SearchUserState> {
       page: event.page,
       size: event.size,
       keyword: event.keyword,
+      cache: event.saveHistory,
     ));
 
     result.fold(
@@ -45,11 +50,20 @@ class SearchUserBloc extends Bloc<SearchUserEvent, SearchUserState> {
           timestamp: DateTime.now().millisecondsSinceEpoch,
         ));
 
-        searchHistoryBloc.add(AddSearchHistory(
-          keyword: event.keyword,
-          type: SearchHistoryType.user,
-        ));
+        if (event.saveHistory) {
+          searchHistoryBloc.add(AddSearchHistory(
+            keyword: event.keyword,
+            type: SearchHistoryType.user,
+          ));
+        }
       },
     );
+  }
+
+  FutureOr<void> _onResetState(
+    ResetState event,
+    Emitter<SearchUserState> emit,
+  ) async {
+    emit(SUInitialState());
   }
 }

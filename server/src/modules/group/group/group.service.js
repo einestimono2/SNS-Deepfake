@@ -5,26 +5,35 @@ import { GroupUser } from '../groupuser.model.js';
 import { Group } from './group.model.js';
 
 import { Message } from '#constants';
+import { deleteFile, setFileUsed } from '#utils';
 
 export class GroupService {
   // Tạo nhóm gia đình
   static async createGroup(userId, body) {
     const { name, memberIds, description, coverPhoto } = { ...body };
     if (!userId) throw new UnauthorizedError(Message.USER_IS_INVALID);
+
     // Danh sách các thành viên
     const members = [userId, ...memberIds];
+    let photo = null;
+    if (coverPhoto) {
+      photo = setFileUsed(coverPhoto);
+    }
+
     const newGroup = await Group.create({
       groupName: name,
       description,
       creatorId: userId,
-      coverPhoto
+      coverPhoto: photo
     });
+
     for (const member of members) {
       await GroupUser.create({
         groupId: newGroup.id,
         userId: member
       });
     }
+
     return newGroup;
   }
 
@@ -76,38 +85,50 @@ export class GroupService {
 
   // Chỉnh sửa thông tin nhóm(chỉ chủ nhóm)
   static async updateGroup(userId, groupId, body) {
-    console.log(groupId);
     if (!groupId) throw new BadRequestError(Message.ID_EMPTY);
+
     const group = await Group.findByPk(groupId);
     if (userId !== group.creatorId) throw new BadRequestError(Message.NOT_AllOWED);
+
     if (body.name) group.groupName = body.name;
     if (body.description) group.description = body.description;
-    if (body.coverImage) group.coverImage = body.coverImage;
+    if (body.coverImage) {
+      const oldPhoto = group.coverImage;
+      group.coverPhoto = setFileUsed(body.coverImage);
+
+      deleteFile(oldPhoto);
+    }
+
     await group.save();
+
     return group;
   }
 
   // Xóa nhóm (chỉ chủ nhóm)
   static async deleteGroup(userId, groupId) {
     if (!groupId) throw new BadRequestError(Message.ID_EMPTY);
-    const group = await Group.findByPk({ where: { id: groupId } });
+
+    const group = await Group.findByPk(groupId);
     if (userId !== group.creatorId) throw new BadRequestError(Message.NOT_AllOWED);
-    await Group.destroy({ where: { id: groupId } });
+
+    await group.destroy();
     await GroupUser.destroy({ where: { groupId } });
+
+    deleteFile(group.coverPhoto);
     return {};
   }
 
   // Thêm thành viên vào nhóm
-  static async addMember(userId, memberIds, groupId) {
+  static async addMember(userId, { memberIds }, groupId) {
     if (!groupId) throw new BadRequestError(Message.ID_EMPTY);
-    console.log(memberIds);
+
     for (const targetId of memberIds) {
       if (userId === targetId) throw new BadRequestError(Message.USER_IS_INVALID);
       // User đã tồn tại trong nhóm
       const existingMembership = await GroupUser.findOne({
         where: { userId: targetId, groupId }
       });
-      console.log(existingMembership);
+
       if (existingMembership) throw new BadRequestError(Message.USER_IS_INVALID);
       await GroupUser.create({
         groupId,
@@ -117,11 +138,12 @@ export class GroupService {
   }
 
   // Xóa thành viên khỏi nhóm
-  static async deleteMembers(userId, membersId, groupId) {
+  static async deleteMembers(userId, { memberIds }, groupId) {
     if (!groupId) throw new BadRequestError(Message.ID_EMPTY);
     const group = await Group.findByPk(groupId);
-    for (const targetId of membersId) {
-      if (userId !== group.creatorId) throw new BadRequestError(Message.USER_IS_INVALID);
+    if (userId !== group.creatorId) throw new BadRequestError(Message.USER_IS_INVALID);
+
+    for (const targetId of memberIds) {
       await GroupUser.destroy({
         where: {
           groupId,
@@ -130,6 +152,18 @@ export class GroupService {
       });
     }
     return {};
+  }
+
+  // Rời khỏi nhóm
+  static async leaveGroup(userId, groupId) {
+    if (!groupId) throw new BadRequestError(Message.ID_EMPTY);
+
+    await GroupUser.destroy({
+      where: {
+        groupId,
+        userId
+      }
+    });
   }
 
   // Lấy ra tất cả nhóm trên hệ thống

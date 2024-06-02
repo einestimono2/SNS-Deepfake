@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
 
+import '../../../friend/data/data.dart';
+
 class MemberModel extends Equatable {
   final int id;
   final String? avatar;
@@ -30,6 +32,17 @@ class MemberModel extends Equatable {
       email: map['email'] ?? '',
       phoneNumber: map['phoneNumber'],
       lastActive: map['lastActive'],
+    );
+  }
+
+  factory MemberModel.fromFriendModel(FriendModel friend) {
+    return MemberModel(
+      id: friend.id,
+      avatar: friend.avatar,
+      username: friend.username,
+      email: friend.email,
+      phoneNumber: friend.phoneNumber,
+      lastActive: null,
     );
   }
 

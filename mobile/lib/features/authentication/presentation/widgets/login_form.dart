@@ -10,7 +10,6 @@ import '../../../../core/utils/utils.dart';
 import '../../../../core/widgets/widgets.dart';
 import '../../../group/group.dart';
 import '../bloc/user_bloc.dart';
-import '../../../../core/widgets/select_group_dialog.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({super.key});

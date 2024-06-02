@@ -135,16 +135,18 @@ export class SearchServices {
   }
 
   // Tìm kiếm người dùng
-  static async searchUser({ userId, limit, offset, keyword: _keyword }) {
-    // Lưu thông tin tìm kiếm vào cơ sở dữ liệu
-    await Search.findOrCreate({
-      where: { keyword: _keyword, userId, type: SearchType.User },
-      default: {
-        keyword: _keyword,
-        userId,
-        type: SearchType.User
-      }
-    });
+  static async searchUser({ userId, limit, offset, keyword: _keyword, cache = true }) {
+    if (cache === true) {
+      // Lưu thông tin tìm kiếm vào cơ sở dữ liệu
+      await Search.findOrCreate({
+        where: { keyword: _keyword, userId, type: SearchType.User },
+        default: {
+          keyword: _keyword,
+          userId,
+          type: SearchType.User
+        }
+      });
+    }
 
     const usersIdBlocked = await Block.findAll({
       where: { userId },
@@ -180,20 +182,21 @@ export class SearchServices {
                                 WHERE "same_friend"."userId"=${userId}  AND "target_friends"."userId" = "User"."id")`
           ),
           'commonfriendsCount'
-        ],
-        [
-          sequelize.literal(
-            `(SELECT ARRAY_AGG("u"."avatar") FROM "Users" AS "u"
-                WHERE "u"."id" IN (
-                SELECT "same_friend"."targetId" FROM "Friends" AS "same_friend"
-                INNER JOIN "Friends" AS "target_friends" ON "same_friend"."targetId" = "target_friends"."targetId"
-                WHERE "same_friend"."userId" = ${userId} AND "target_friends"."userId" = "User"."id"
-                 )
-                LIMIT 5
-                 )`
-          ),
-          'commonUserAvatars'
         ]
+        // ,
+        // [
+        //   sequelize.literal(
+        //     `(SELECT ARRAY_AGG("u"."avatar") FROM "Users" AS "u"
+        //         WHERE "u"."id" IN (
+        //         SELECT "same_friend"."targetId" FROM "Friends" AS "same_friend"
+        //         INNER JOIN "Friends" AS "target_friends" ON "same_friend"."targetId" = "target_friends"."targetId"
+        //         WHERE "same_friend"."userId" = ${userId} AND "target_friends"."userId" = "User"."id"
+        //          )
+        //         LIMIT 5
+        //          )`
+        //   ),
+        //   'commonUserAvatars'
+        // ]
       ],
       replacements: { keyword },
       order: [['id', 'DESC']],
@@ -201,19 +204,19 @@ export class SearchServices {
       limit,
       subQuery: false
     });
-    console.log(users.rows);
+
     // Trả về kết quả được định dạng
-    return users;
-    // {
-    //   rows: users.rows.map((user) => ({
-    //     id: String(user.id),
-    //     username: user.username || '',
-    //     avatar: user.avatar,
-    //     created: user.createdAt,
-    //     same_friends: String(user.friends.friendsCount)
-    //   })),
-    //   count: users.count
-    // };
+    return {
+      rows: users.rows.map((user) => ({
+        id: user.id,
+        username: user.username ?? user.email,
+        email: user.email,
+        avatar: user.avatar,
+        created: user.createdAt,
+        same_friends: user.getDataValue('commonfriendsCount')
+      })),
+      count: users.count
+    };
   }
 
   // 8. Tìm kiếm nhóm

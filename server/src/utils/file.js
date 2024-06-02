@@ -93,3 +93,9 @@ export const setFileUnused = (filePath) => {
   //      / resources / images / filename
   return `/${fileParts[1]}/${fileParts[2]}/${newFilename}`;
 };
+
+export const deleteFile = (filePath) => {
+  if (filePath && fs.existsSync(filePath)) {
+    fs.unlinkSync(filePath);
+  }
+};

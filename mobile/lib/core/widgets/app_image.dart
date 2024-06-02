@@ -7,12 +7,13 @@ Widget _defaultImage([
   String path = AppImages.errorImage,
   bool isAvatar = false,
   double? radius,
+  BoxFit? fit,
 ]) {
   final _image = Image.asset(
     path,
-    fit: BoxFit.cover,
+    fit: fit,
     errorBuilder: (context, error, stackTrace) =>
-        _defaultImage(AppImages.errorImage, isAvatar, radius),
+        _defaultImage(AppImages.errorImage, isAvatar, radius, fit),
   );
 
   if (isAvatar) {
@@ -22,7 +23,7 @@ Widget _defaultImage([
         radius: 100,
         child: Image.asset(
           AppImages.avatarPlaceholder,
-          fit: BoxFit.cover,
+          fit: fit,
         ),
       ),
     );
@@ -91,11 +92,11 @@ class AnimatedImage extends StatelessWidget {
   CachedNetworkImage _buildFadeInImage() {
     return CachedNetworkImage(
       placeholder: (context, url) =>
-          _defaultImage(AppImages.imagePlaceholder, isAvatar, radius),
+          _defaultImage(AppImages.imagePlaceholder, isAvatar, radius, fit),
       imageUrl: url,
       fit: fit,
       errorWidget: (context, error, stackTrace) =>
-          _defaultImage(errorImage, isAvatar, radius),
+          _defaultImage(errorImage, isAvatar, radius, fit),
     );
   }
 }
@@ -132,7 +133,7 @@ class LocalImage extends StatelessWidget {
       path,
       fit: fit,
       errorBuilder: (context, error, stackTrace) =>
-          _defaultImage(AppImages.errorImage, isAvatar, radius),
+          _defaultImage(AppImages.errorImage, isAvatar, radius, fit),
     );
   }
 }
@@ -169,7 +170,7 @@ class RemoteImage extends StatelessWidget {
       url,
       fit: fit,
       errorBuilder: (context, error, stackTrace) =>
-          _defaultImage(AppImages.errorImage, isAvatar, radius),
+          _defaultImage(AppImages.errorImage, isAvatar, radius, fit),
       loadingBuilder: (
         BuildContext context,
         Widget child,
