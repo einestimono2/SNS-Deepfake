@@ -186,11 +186,12 @@ class GroupActionBloc extends Bloc<GroupActionEvent, GroupActionState> {
         event.onSuccess();
 
         appBloc.emit(appBloc.state.copyWith(
-            user: appBloc.state.user,
-            groups: appBloc.state.groups
-                .map((e) =>
-                    e.id == event.groupId ? e.copyWith(members: _members) : e)
-                .toList()));
+          user: appBloc.state.user,
+          groups: appBloc.state.groups
+              .map((e) =>
+                  e.id == event.groupId ? e.copyWith(members: _members) : e)
+              .toList(),
+        ));
       },
     );
   }

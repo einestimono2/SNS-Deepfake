@@ -18,8 +18,10 @@ class AppIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return size != null
-        ? SizedBox.square(
-            dimension: size,
+        ? Container(
+            width: size,
+            height: size,
+            padding: const EdgeInsets.all(3),
             child: _indicator(),
           )
         : _indicator();

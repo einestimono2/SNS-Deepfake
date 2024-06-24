@@ -25,6 +25,7 @@ class AppImages {
   static const String careReaction = "assets/images/reaction_care.png";
   static const String hahaReaction = "assets/images/reaction_haha.png";
   static const String likeReaction = "assets/images/reaction_like.png";
+  static const String dislikeReaction = "assets/images/reaction_dislike.png";
   static const String loveReaction = "assets/images/reaction_love.png";
   static const String sadReaction = "assets/images/reaction_sad.png";
   static const String wowReaction = "assets/images/reaction_wow.png";

@@ -33,6 +33,26 @@ class AppValidations {
     return null;
   }
 
+  static String? validateOldPassword(String? value) {
+    if (value == null || value.isEmpty) {
+      return "PASSWORD_EMPTY".tr();
+    }
+
+    return null;
+  }
+  
+  static String? validateNewPassword(String? value, String? oldPassword) {
+    if (value == null || value.isEmpty) {
+      return "PASSWORD_EMPTY".tr();
+    }
+
+    if(value == oldPassword) {
+      return "NEW_PASSWORD_MATCH_OLD".tr();
+    }
+
+    return null;
+  }
+
   static String? validateConfirmPassword(String? value, String? password) {
     if (value == null || value.isEmpty) {
       return "CONFIRM_PASSWORD_EMPTY".tr();
@@ -42,7 +62,7 @@ class AppValidations {
 
     return null;
   }
-  
+
   static String? validateFullName(String? value) {
     if (value == null || value.isEmpty) {
       return "FULL_NAME_EMPTY".tr();
@@ -50,7 +70,7 @@ class AppValidations {
 
     return null;
   }
-  
+
   static String? validateGroupName(String? value) {
     if (value == null || value.isEmpty) {
       return "GROUP_NAME_EMPTY".tr();
@@ -58,13 +78,13 @@ class AppValidations {
 
     return null;
   }
-  
+
   static String? validatePhoneNumber(String? value) {
     if (value == null || value.isEmpty) {
       return "PHONE_NUMBER_EMPTY".tr();
     }
 
-    if(!RegExp(r'(^(?:[+0]9)?[0-9]{10,12}$)').hasMatch(value)){
+    if (!RegExp(r'(^(?:[+0]9)?[0-9]{10,12}$)').hasMatch(value)) {
       return "PHONE_NUMBER_INVALID".tr();
     }
 

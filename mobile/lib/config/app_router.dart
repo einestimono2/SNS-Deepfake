@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -166,7 +167,32 @@ class AppRouter {
                         type: SlideType.btt,
                         state: state,
                         context: context,
-                        child: CreatePostPage(key: state.pageKey),
+                        child: CreatePostPage(
+                          key: state.pageKey,
+                          fromMyProfile: (state.extra
+                                  as Map<String, dynamic>?)?['fromMyProfile'] ??
+                              false,
+                        ),
+                      );
+                    },
+                  ),
+
+                  /* Post Details */
+                  GoRoute(
+                    parentNavigatorKey: rootNavigatorKey,
+                    name: Routes.postDetails.name,
+                    path: Routes.postDetails.path,
+                    pageBuilder: (BuildContext context, GoRouterState state) {
+                      return slideTransition(
+                        type: SlideType.rtl,
+                        state: state,
+                        context: context,
+                        child: PostDetailsPage(
+                          key: state.pageKey,
+                          id: int.parse(state.pathParameters['id']!),
+                          focus:
+                              (state.extra as Map<String, dynamic>?)?['focus']!,
+                        ),
                       );
                     },
                   ),
@@ -358,6 +384,7 @@ class AppRouter {
                     );
                   },
                   routes: [
+                    /* Conversation - Chat details */
                     GoRoute(
                       parentNavigatorKey: rootNavigatorKey,
                       name: Routes.conversation.name,
@@ -450,6 +477,63 @@ class AppRouter {
                     },
                   ),
 
+                  /* Update Password */
+                  GoRoute(
+                    name: Routes.updatePassword.name,
+                    path: Routes.updatePassword.path,
+                    pageBuilder: (BuildContext context, GoRouterState state) {
+                      return slideTransition(
+                        type: SlideType.rtl,
+                        state: state,
+                        context: context,
+                        child: ChangePasswordPage(key: state.pageKey),
+                      );
+                    },
+                  ),
+
+                  /* Buy Coins */
+                  GoRoute(
+                    name: Routes.buyCoins.name,
+                    path: Routes.buyCoins.path,
+                    pageBuilder: (BuildContext context, GoRouterState state) {
+                      return slideTransition(
+                        type: SlideType.rtl,
+                        state: state,
+                        context: context,
+                        child: BuyCoinPage(key: state.pageKey),
+                      );
+                    },
+                  ),
+
+                  /* Video Deepfake */
+                  GoRoute(
+                      name: Routes.videoDF.name,
+                      path: Routes.videoDF.path,
+                      pageBuilder: (BuildContext context, GoRouterState state) {
+                        return slideTransition(
+                          type: SlideType.rtl,
+                          state: state,
+                          context: context,
+                          child: VideoDeepfakePage(key: state.pageKey),
+                        );
+                      },
+                      routes: [
+                        GoRoute(
+                          name: Routes.createVideoDF.name,
+                          path: Routes.createVideoDF.path,
+                          pageBuilder:
+                              (BuildContext context, GoRouterState state) {
+                            return slideTransition(
+                              type: SlideType.rtl,
+                              state: state,
+                              context: context,
+                              child:
+                                  CreateVideoDeepfakePage(key: state.pageKey),
+                            );
+                          },
+                        ),
+                      ]),
+
                   /* My Profile */
                   GoRoute(
                     name: Routes.myProfile.name,
@@ -462,11 +546,27 @@ class AppRouter {
                         child: MyProfilePage(key: state.pageKey),
                       );
                     },
+                    routes: [
+                      /* Update Profile */
+                      GoRoute(
+                        name: Routes.updateProfile.name,
+                        path: Routes.updateProfile.path,
+                        pageBuilder:
+                            (BuildContext context, GoRouterState state) {
+                          return slideTransition(
+                            type: SlideType.rtl,
+                            state: state,
+                            context: context,
+                            child: UpdateProfilePage(key: state.pageKey),
+                          );
+                        },
+                      ),
+                    ],
                   ),
                 ],
               ),
 
-              /*  */
+              /* Other Profile */
               GoRoute(
                 // parentNavigatorKey: shellNavigatorKey,
                 name: Routes.otherProfile.name,
@@ -479,9 +579,33 @@ class AppRouter {
                     child: OtherProfilePage(
                       key: state.pageKey,
                       id: int.parse(state.pathParameters['id']!),
+                      username:
+                          (state.extra as Map<String, dynamic>?)?['username'] ??
+                              "",
                     ),
                   );
                 },
+                routes: [
+                  /* All Friends */
+                  GoRoute(
+                    name: Routes.otherFriends.name,
+                    path: Routes.otherFriends.path,
+                    pageBuilder: (BuildContext context, GoRouterState state) {
+                      return slideTransition(
+                        type: SlideType.rtl,
+                        state: state,
+                        context: context,
+                        child: OtherAllFriendPage(
+                          key: state.pageKey,
+                          id: int.parse(state.pathParameters['id']!),
+                          username: (state.extra
+                                  as Map<String, dynamic>?)?['username'] ??
+                              "",
+                        ),
+                      );
+                    },
+                  ),
+                ],
               ),
             ],
           ),
@@ -490,7 +614,7 @@ class AppRouter {
     ],
     redirect: (context, state) {
       final userState = context.read<AppBloc>().state;
-      print("[ROUTER] ${state.fullPath}");
+      log("[ROUTER] ${state.fullPath}");
 
       // unauthenticated + splash --> login
       if (userState.authStatus == AuthStatus.unauthenticated &&
@@ -552,13 +676,17 @@ class AppRouter {
 // }
 
 class GoRouterStream extends ChangeNotifier {
-  late final StreamSubscription<dynamic> _subscription;
+  late final StreamSubscription<AppState> _subscription;
 
-  GoRouterStream(Stream<dynamic> stream) {
+  GoRouterStream(Stream<AppState> stream) {
     notifyListeners();
     _subscription = stream.asBroadcastStream().listen(
-          (_) => notifyListeners(),
-        );
+      (data) {
+        if (data.triggerRedirect) {
+          notifyListeners();
+        }
+      },
+    );
   }
 
   @override

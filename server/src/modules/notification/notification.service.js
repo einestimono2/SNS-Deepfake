@@ -186,6 +186,7 @@ export class NotificationServices {
     // Lấy tất cả các thông báo liên quan,chứa cả thông tin người dùng,bài viết,cảm xúc liên quan
     const notifications = await Notification.findAndCountAll({
       where: { userId },
+      distinct: true,
       include: [
         {
           model: User,

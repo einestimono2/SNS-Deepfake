@@ -55,6 +55,9 @@ class _AppVideoState extends State<AppVideo> {
         );
 
         setState(() {}); // when your thumbnail will show.
+      }).onError((error, stackTrace) {
+        AppLogger.error(error.toString(), error);
+        setState(() {});
       });
 
     super.initState();

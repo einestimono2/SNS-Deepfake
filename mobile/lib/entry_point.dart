@@ -21,8 +21,10 @@ import 'features/chat/chat.dart';
 import 'features/friend/friend.dart';
 import 'features/group/group.dart';
 import 'features/news_feed/news_feed.dart';
+import 'features/profile/profile.dart';
 import 'features/search/search.dart';
 import 'features/upload/upload.dart';
+import 'features/video/video.dart';
 
 Future<void> entryPoint() async {
   await _ensureInitialized();
@@ -48,6 +50,7 @@ Future<void> entryPoint() async {
             BlocProvider(create: (_) => di.sl<SocketBloc>()),
             BlocProvider(create: (_) => di.sl<UserBloc>()),
             BlocProvider(create: (_) => di.sl<UploadBloc>()),
+            BlocProvider(create: (_) => di.sl<DownloadBloc>()),
             BlocProvider(create: (_) => di.sl<MyConversationsBloc>()),
             BlocProvider(create: (_) => di.sl<ConversationDetailsBloc>()),
             BlocProvider(create: (_) => di.sl<MessageBloc>()),
@@ -62,6 +65,12 @@ Future<void> entryPoint() async {
             BlocProvider(create: (_) => di.sl<GroupActionBloc>()),
             BlocProvider(create: (_) => di.sl<ListGroupBloc>()),
             BlocProvider(create: (_) => di.sl<GroupPostBloc>()),
+            BlocProvider(create: (_) => di.sl<ProfileActionBloc>()),
+            BlocProvider(create: (_) => di.sl<MyPostsBloc>()),
+            BlocProvider(create: (_) => di.sl<UserPostsBloc>()),
+            BlocProvider(create: (_) => di.sl<UserFriendsBloc>()),
+            BlocProvider(create: (_) => di.sl<ListVideoBloc>()),
+            BlocProvider(create: (_) => di.sl<ListCommentBloc>()),
           ],
           child: const SnsDeepfakeApp(),
         ),

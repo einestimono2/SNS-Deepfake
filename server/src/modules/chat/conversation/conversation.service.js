@@ -81,6 +81,7 @@ export class ConversationService {
       ],
       limit,
       offset,
+      distinct: true,
       include: [
         {
           model: ConversationParticipants,

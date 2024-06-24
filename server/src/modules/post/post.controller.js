@@ -30,7 +30,8 @@ export class PostControllers {
         userId: req.userPayload.userId,
         ...getPaginationAttributes(req.query)
       },
-      groupId
+      groupId,
+      req.body.user_id
     );
 
     res.ok(
@@ -103,6 +104,20 @@ export class PostControllers {
       },
       groupId
     );
+
+    res.ok(
+      getPaginationSummary({
+        ...req.query,
+        result
+      })
+    );
+  });
+
+  static getMyPosts = CatchAsyncError(async (req, res) => {
+    const result = await PostServices.getMyPosts({
+      userId: req.userPayload.userId,
+      ...getPaginationAttributes(req.query)
+    });
 
     res.ok(
       getPaginationSummary({

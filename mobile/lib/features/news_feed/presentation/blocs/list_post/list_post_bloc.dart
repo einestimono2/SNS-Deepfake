@@ -19,6 +19,8 @@ class ListPostBloc extends Bloc<ListPostEvent, ListPostState> {
     on<LoadMoreListPost>(_onLoadMoreListPost);
     on<AddPost>(_onAddPost);
     on<DeletePost>(_onDeletePost);
+    on<UpdateCommentSummary>(_onUpdateCommentSummary);
+    on<UpdateFeelSummary>(_onUpdateFeelSummary);
   }
 
   FutureOr<void> _onGetListPost(
@@ -108,6 +110,63 @@ class ListPostBloc extends Bloc<ListPostEvent, ListPostState> {
     emit(ListPostSuccessfulState(
       posts: preLoaded.posts,
       totalCount: preLoaded.totalCount - 1,
+      timestamp: DateTime.now().millisecondsSinceEpoch,
+    ));
+  }
+
+  FutureOr<void> _onUpdateCommentSummary(
+    UpdateCommentSummary event,
+    Emitter<ListPostState> emit,
+  ) async {
+    if (state is! ListPostSuccessfulState) return;
+
+    // Previous value
+    ListPostSuccessfulState preLoaded = state as ListPostSuccessfulState;
+
+    int idx = preLoaded.posts.indexWhere((e) => e.id == event.postId);
+    if (idx == -1 ||
+        (preLoaded.posts[idx].fakeCount == event.fakeCounts &&
+            preLoaded.posts[idx].trustCount == event.trustCounts)) return;
+
+    emit(preLoaded.copyWith(
+      posts: preLoaded.posts.map((e) {
+        if (e.id == event.postId) {
+          return e.copyWith(
+            fakeCount: event.fakeCounts,
+            trustCount: event.trustCounts,
+          );
+        } else {
+          return e;
+        }
+      }).toList(),
+      timestamp: DateTime.now().millisecondsSinceEpoch,
+    ));
+  }
+
+  FutureOr<void> _onUpdateFeelSummary(
+    UpdateFeelSummary event,
+    Emitter<ListPostState> emit,
+  ) async {
+    if (state is! ListPostSuccessfulState) return;
+
+    // Previous value
+    ListPostSuccessfulState preLoaded = state as ListPostSuccessfulState;
+
+    int idx = preLoaded.posts.indexWhere((e) => e.id == event.postId);
+    if (idx == -1) return;
+
+    emit(preLoaded.copyWith(
+      posts: preLoaded.posts.map((e) {
+        if (e.id == event.postId) {
+          return e.copyWith(
+            kudosCount: event.kudosCount,
+            disappointedCount: event.disappointedCount,
+            myFeel: event.type,
+          );
+        } else {
+          return e;
+        }
+      }).toList(),
       timestamp: DateTime.now().millisecondsSinceEpoch,
     ));
   }

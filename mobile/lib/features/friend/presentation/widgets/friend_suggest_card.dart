@@ -31,14 +31,22 @@ class _FriendSuggestCardState extends State<FriendSuggestCard> {
     if (_addLoading.value || _rejectLoading.value) return;
 
     _addLoading.value = true;
-    context.read<FriendActionBloc>().add(SendRequestSubmit(widget.friend.id));
+    context.read<FriendActionBloc>().add(SendRequestSubmit(
+          targetId: widget.friend.id,
+          onSuccess: () =>
+              _requestStatus.value = "SENT_FRIEND_REQUEST_TEXT".tr(),
+          onError: (msg) {
+            _addLoading.value = false;
+
+            context.showError(message: msg);
+          },
+        ));
   }
 
   void _handleReject() {
     if (_rejectLoading.value || _addLoading.value) return;
 
     _rejectLoading.value = true;
-
     Future.delayed(const Duration(seconds: 1)).then((value) {
       context
           .read<SuggestedFriendsBloc>()
@@ -49,91 +57,73 @@ class _FriendSuggestCardState extends State<FriendSuggestCard> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<FriendActionBloc, FriendActionState>(
-      listener: (context, state) {
-        if (state is FASuccessfulState &&
-            state.id == widget.friend.id &&
-            state.type == sendRequestType) {
-          _requestStatus.value = "SENT_FRIEND_REQUEST_TEXT".tr();
-        }
-
-        if (state is FAFailureState &&
-            state.id == widget.friend.id &&
-            state.type == sendRequestType) {
-          _addLoading.value = false;
-
-          context.showError(message: state.message);
-        }
-      },
-      child: InkWell(
-        onTap: () => context.pushNamed(
-          Routes.otherProfile.name,
-          pathParameters: {"id": widget.friend.id.toString()},
-        ),
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
-          child: Row(
-            children: [
-              AnimatedImage(
-                width: 0.225.sw,
-                height: 0.225.sw,
-                url: widget.friend.avatar?.fullPath ?? "",
-                isAvatar: true,
-              ),
-              SizedBox(width: 12.w),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      widget.friend.username ?? "Unknown",
-                      style: Theme.of(context).textTheme.titleLarge,
-                    ),
-                    widget.friend.sameFriends > 0
-                        ? Padding(
-                            padding: EdgeInsets.only(top: 3.h, bottom: 6.h),
-                            child: Text(
-                              'MUTUAL_FRIENDS_TEXT'
-                                  .plural(widget.friend.sameFriends),
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodySmall
-                                  ?.copyWith(
-                                    color: Colors.grey,
-                                  ),
-                            ),
+    return InkWell(
+      onTap: () => context.pushNamed(
+        Routes.otherProfile.name,
+        pathParameters: {"id": widget.friend.id.toString()},
+        extra: {'username': widget.friend.username},
+      ),
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+        child: Row(
+          children: [
+            AnimatedImage(
+              width: 0.225.sw,
+              height: 0.225.sw,
+              url: widget.friend.avatar?.fullPath ?? "",
+              isAvatar: true,
+            ),
+            SizedBox(width: 12.w),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    widget.friend.username ?? "Unknown",
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
+                  widget.friend.sameFriends > 0
+                      ? Padding(
+                          padding: EdgeInsets.only(top: 3.h, bottom: 6.h),
+                          child: Text(
+                            'MUTUAL_FRIENDS_TEXT'
+                                .plural(widget.friend.sameFriends),
+                            style:
+                                Theme.of(context).textTheme.bodySmall?.copyWith(
+                                      color: Colors.grey,
+                                    ),
+                          ),
+                        )
+                      : const SizedBox(height: 6),
+                  ValueListenableBuilder(
+                    valueListenable: _requestStatus,
+                    builder: (context, value, child) => value == null
+                        ? Row(
+                            children: [
+                              _requestAction(
+                                color: Colors.blueAccent,
+                                label: "ADD_FRIEND_TEXT".tr(),
+                                onClick: _handleAdd,
+                                listener: _addLoading,
+                              ),
+                              SizedBox(width: 12.w),
+                              _requestAction(
+                                color: context.minBackgroundColor(),
+                                label: "REMOVE_FRIEND_TEXT".tr(),
+                                onClick: _handleReject,
+                                listener: _rejectLoading,
+                              ),
+                            ],
                           )
-                        : const SizedBox(height: 6),
-                    ValueListenableBuilder(
-                      valueListenable: _requestStatus,
-                      builder: (context, value, child) => value == null
-                          ? Row(
-                              children: [
-                                _requestAction(
-                                  color: Colors.blueAccent,
-                                  label: "ADD_FRIEND_TEXT".tr(),
-                                  onClick: _handleAdd,
-                                  listener: _addLoading,
-                                ),
-                                SizedBox(width: 12.w),
-                                _requestAction(
-                                  color: context.minBackgroundColor(),
-                                  label: "REMOVE_FRIEND_TEXT".tr(),
-                                  onClick: _handleReject,
-                                  listener: _rejectLoading,
-                                ),
-                              ],
-                            )
-                          : Text(
-                              value,
-                              style: Theme.of(context).textTheme.titleSmall,
-                            ),
-                    ),
-                  ],
-                ),
+                        : Text(
+                            value,
+                            style: Theme.of(context).textTheme.titleSmall,
+                          ),
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

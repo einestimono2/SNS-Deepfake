@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:sns_deepfake/features/news_feed/data/models/comment_model.dart';
 import 'package:sns_deepfake/features/news_feed/data/models/post_model.dart';
 
 import '../../../../core/base/base.dart';
@@ -93,6 +94,78 @@ class PostRepositoryImpl extends BaseRepositoryImpl implements PostRepository {
         );
 
         return Right(data);
+      },
+    );
+  }
+
+  @override
+  Future<Either<Failure, PaginationResult<CommentModel>>> getListComment({
+    required int postId,
+    int? page,
+    int? size,
+  }) async {
+    return await checkNetwork<PaginationResult<CommentModel>>(
+      () async {
+        final result = await remote.getListComment(
+          postId: postId,
+          page: page,
+          size: size,
+        );
+
+        return Right(result);
+      },
+    );
+  }
+
+  @override
+  Future<Either<Failure, Map<String, dynamic>>> createComment({
+    required int postId,
+    int? markId,
+    int? page,
+    int? size,
+    required String content,
+    required int type,
+  }) async {
+    return await checkNetwork<Map<String, dynamic>>(
+      () async {
+        final result = await remote.createComment(
+          postId: postId,
+          content: content,
+          markId: markId,
+          type: type,
+          size: size,
+          page: page,
+        );
+
+        return Right(result);
+      },
+    );
+  }
+
+  @override
+  Future<Either<Failure, Map<String, int>>> feelPost({
+    required int postId,
+    required int type,
+  }) async {
+    return await checkNetwork<Map<String, int>>(
+      () async {
+        final result = await remote.feelPost(
+          postId: postId,
+          type: type,
+        );
+
+        return Right(result);
+      },
+    );
+  }
+
+  @override
+  Future<Either<Failure, Map<String, int>>> unfeelPost(postId) async {
+    return await checkNetwork<Map<String, int>>(
+      () async {
+        final result = await remote.unfeelPost(postId);
+
+        return Right(result);
       },
     );
   }

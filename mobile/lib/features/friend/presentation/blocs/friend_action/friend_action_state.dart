@@ -11,30 +11,13 @@ final class FAInitialState extends FriendActionState {}
 
 final class FAInProgressState extends FriendActionState {}
 
-class FASuccessfulState extends FriendActionState {
-  final int id;
-  final String type;
-
-  const FASuccessfulState({
-    required this.id,
-    required this.type,
-  });
-
-  @override
-  List<Object?> get props => [id, type];
-}
+class FASuccessfulState extends FriendActionState {}
 
 final class FAFailureState extends FriendActionState {
   final String message;
-  final int id;
-  final String type;
 
-  const FAFailureState({
-    required this.message,
-    required this.id,
-    required this.type,
-  });
+  const FAFailureState(this.message);
 
   @override
-  List<Object> get props => [message, id, type];
+  List<Object> get props => [message];
 }

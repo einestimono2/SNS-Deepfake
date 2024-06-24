@@ -31,112 +31,106 @@ class _FriendRequestCardState extends State<FriendRequestCard> {
     if (_acceptLoading.value || _rejectLoading.value) return;
 
     _acceptLoading.value = true;
-    context.read<FriendActionBloc>().add(AcceptRequestSubmit(widget.friend.id));
+    context.read<FriendActionBloc>().add(AcceptRequestSubmit(
+          targetId: widget.friend.id,
+          onSuccess: () => _requestStatus.value = 0,
+          onError: (msg) {
+            _acceptLoading.value = false;
+            context.showError(message: msg);
+          },
+        ));
   }
 
   void _handleReject() {
     if (_rejectLoading.value || _acceptLoading.value) return;
 
     _rejectLoading.value = true;
-    context.read<FriendActionBloc>().add(RefuseRequestSubmit(widget.friend.id));
+    context.read<FriendActionBloc>().add(RefuseRequestSubmit(
+          targetId: widget.friend.id,
+          onSuccess: () => _requestStatus.value = 1,
+          onError: (msg) {
+            _rejectLoading.value = false;
+            context.showError(message: msg);
+          },
+        ));
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<FriendActionBloc, FriendActionState>(
-      listener: (context, state) {
-        if (state is FASuccessfulState && state.id == widget.friend.id) {
-          if (state.type == acceptRequestType) {
-            _requestStatus.value = 0;
-          } else if (state.type == refuseRequestType) {
-            _requestStatus.value = 1;
-          }
-        }
-
-        if (state is FAFailureState && state.id == widget.friend.id) {
-          if (state.type == acceptRequestType) {
-            _acceptLoading.value = false;
-          } else if (state.type == refuseRequestType) {
-            _rejectLoading.value = false;
-          }
-
-          context.showError(message: state.message);
-        }
-      },
-      child: InkWell(
-        onTap: () => context.pushNamed(
-          Routes.otherProfile.name,
-          pathParameters: {"id": widget.friend.id.toString()},
-        ),
-        child: Container(
-          padding: EdgeInsets.fromLTRB(16.w, 8.h, 16.w, 8.h),
-          child: Row(
-            children: [
-              AnimatedImage(
-                width: 0.225.sw,
-                height: 0.225.sw,
-                url: widget.friend.avatar?.fullPath ?? "",
-                isAvatar: true,
-              ),
-              SizedBox(width: 12.w),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          widget.friend.username ?? "Unknown",
-                          style: Theme.of(context).textTheme.titleLarge,
+    return InkWell(
+      onTap: () => context.pushNamed(
+        Routes.otherProfile.name,
+        pathParameters: {"id": widget.friend.id.toString()},
+        extra: {'username': widget.friend.username},
+      ),
+      child: Container(
+        padding: EdgeInsets.fromLTRB(16.w, 8.h, 16.w, 8.h),
+        child: Row(
+          children: [
+            AnimatedImage(
+              width: 0.225.sw,
+              height: 0.225.sw,
+              url: widget.friend.avatar?.fullPath ?? "",
+              isAvatar: true,
+            ),
+            SizedBox(width: 12.w),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        widget.friend.username ?? "Unknown",
+                        style: Theme.of(context).textTheme.titleLarge,
+                      ),
+                      Text(
+                        DateHelper.getTimeAgo(
+                          widget.friend.createdAt,
+                          context.locale.languageCode,
+                          showSuffixText: false,
                         ),
-                        Text(
-                          DateHelper.getTimeAgo(
-                            widget.friend.createdAt,
-                            context.locale.languageCode,
-                            showSuffixText: false,
+                        style: Theme.of(context).textTheme.labelMedium,
+                      ),
+                    ],
+                  ),
+                  widget.friend.sameFriends > 0
+                      ? Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 3.0),
+                          child: Row(
+                            children: [
+                              SizedBox(width: 14.sp / 2),
+                              ...widget.friend.sameFriendAvatars
+                                  .map((e) => Align(
+                                        widthFactor: 0.5,
+                                        child: AnimatedImage(
+                                          url: e,
+                                          isAvatar: true,
+                                          width: 14.sp,
+                                          height: 14.sp,
+                                        ),
+                                      )),
+                              const SizedBox(width: 8),
+                              Text(
+                                'MUTUAL_FRIENDS_TEXT'
+                                    .plural(widget.friend.sameFriends),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodySmall
+                                    ?.copyWith(
+                                      color: Colors.grey,
+                                    ),
+                              ),
+                            ],
                           ),
-                          style: Theme.of(context).textTheme.labelMedium,
-                        ),
-                      ],
-                    ),
-                    widget.friend.sameFriends > 0
-                        ? Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 3.0),
-                            child: Row(
-                              children: [
-                                SizedBox(width: 14.sp / 2),
-                                ...widget.friend.sameFriendAvatars
-                                    .map((e) => Align(
-                                          widthFactor: 0.5,
-                                          child: AnimatedImage(
-                                            url: e,
-                                            isAvatar: true,
-                                            width: 14.sp,
-                                            height: 14.sp,
-                                          ),
-                                        )),
-                                const SizedBox(width: 8),
-                                Text(
-                                  'MUTUAL_FRIENDS_TEXT'
-                                      .plural(widget.friend.sameFriends),
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodySmall
-                                      ?.copyWith(
-                                        color: Colors.grey,
-                                      ),
-                                ),
-                              ],
-                            ),
-                          )
-                        : const SizedBox(height: 6),
-                    _buildActions(),
-                  ],
-                ),
+                        )
+                      : const SizedBox(height: 6),
+                  _buildActions(),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

@@ -99,6 +99,7 @@ export class MessageService {
     const result = await Message.findAndCountAll({
       where: { conversationId },
       order: [[Sequelize.col('createdAt'), sort]],
+      distinct: true,
       // include: [
       //   {
       //     association: 'sender',

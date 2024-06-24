@@ -16,6 +16,7 @@ class UploadButton extends StatefulWidget {
   final String? label;
   final double size;
   final Function(String?, String? id) onCompleted;
+  final ValueNotifier<bool>? loading;
 
   /// determine the type of upload
   final UploadType type;
@@ -36,6 +37,7 @@ class UploadButton extends StatefulWidget {
     this.id,
     this.label,
     this.cropStyle,
+    this.loading,
     this.type = UploadType.image,
   });
 
@@ -49,7 +51,13 @@ class UploadButtonState extends State<UploadButton> {
   String? _fromID;
 
   final _controller = OverlayPopupController();
-  final ValueNotifier<bool> _loading = ValueNotifier(false);
+  late final ValueNotifier<bool> _loading;
+
+  @override
+  void initState() {
+    _loading = widget.loading ?? ValueNotifier(false);
+    super.initState();
+  }
 
   void _handleUpload(int type) async {
     _controller.hideMenu();
@@ -87,12 +95,16 @@ class UploadButtonState extends State<UploadButton> {
     return BlocListener<UploadBloc, UploadState>(
       listener: (context, state) {
         if (state is SuccessfulState) {
-          _loading.value = false;
+          if (widget.loading == null) {
+            _loading.value = false;
+          }
           widget.onCompleted(state.url, _fromID);
           _fromID =
               null; // Reset lại null để check upload thuộc phần nào ở những lần tiếp
         } else if (state is FailureState) {
-          _loading.value = false;
+          if (widget.loading == null) {
+            _loading.value = false;
+          }
           widget.onCompleted(null, _fromID);
           _fromID =
               null; // Reset lại null để check upload thuộc phần nào ở những lần tiếp

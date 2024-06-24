@@ -19,6 +19,7 @@ class RequestedFriendsPage extends StatefulWidget {
 class _RequestedFriendsPageState extends State<RequestedFriendsPage> {
   late final ScrollController _scrollController = ScrollController();
   bool _loadingMore = false;
+  bool _hasReachedMax = false;
   int _currentPage = 1;
 
   @override
@@ -36,7 +37,8 @@ class _RequestedFriendsPageState extends State<RequestedFriendsPage> {
   void _scrollListener() {
     if (_scrollController.position.pixels ==
             _scrollController.position.maxScrollExtent &&
-        !_loadingMore) {
+        !_loadingMore &&
+        !_hasReachedMax) {
       _loadingMore = true;
 
       context.read<RequestedFriendsBloc>().add(LoadMoreRequestedFriends(
@@ -85,6 +87,7 @@ class _RequestedFriendsPageState extends State<RequestedFriendsPage> {
                 );
               } else if (state is RFSuccessfulState) {
                 _loadingMore = false;
+                _hasReachedMax = state.hasReachedMax;
 
                 return state.friends.isEmpty
                     ? _buildEmptyData()

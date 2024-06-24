@@ -54,3 +54,29 @@ class LoadMoreListPost extends ListPostEvent {
   @override
   List<Object?> get props => [page, size, groupId];
 }
+
+class UpdateCommentSummary extends ListPostEvent {
+  final int postId;
+  final int fakeCounts;
+  final int trustCounts;
+
+  const UpdateCommentSummary({
+    required this.postId,
+    required this.fakeCounts,
+    required this.trustCounts,
+  });
+}
+
+class UpdateFeelSummary extends ListPostEvent {
+  final int postId;
+  final int kudosCount;
+  final int disappointedCount;
+  final int type;
+
+  const UpdateFeelSummary({
+    required this.postId,
+    required this.kudosCount,
+    required this.disappointedCount,
+    required this.type,
+  });
+}

@@ -88,6 +88,7 @@ export class SearchServices {
         ['rank', 'DESC'],
         ['id', 'DESC']
       ],
+      distinct: true,
       offset,
       limit,
       subQuery: false
@@ -198,6 +199,7 @@ export class SearchServices {
         //   'commonUserAvatars'
         // ]
       ],
+      distinct: true,
       replacements: { keyword },
       order: [['id', 'DESC']],
       offset,
@@ -252,6 +254,7 @@ export class SearchServices {
           // attributes: [[sequelize.fn('COUNT', sequelize.col('members.id')), 'memberCount']]
         }
       ],
+      distinct: true,
       attributes: {
         include: [
           'id',
@@ -286,6 +289,7 @@ export class SearchServices {
 
     const searches = await Search.findAndCountAll({
       where: { userId },
+      distinct: true,
       order: [['createdAt', 'DESC']],
       offset,
       limit

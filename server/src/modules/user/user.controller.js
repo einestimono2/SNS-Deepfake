@@ -60,23 +60,21 @@ export class UserControllers {
 
   static getUserInfo = CatchAsyncError(async (req, res) => {
     const { userId } = req.userPayload;
-    const userInfo = await userServices.getUserInfo(userId, req.body);
+    const userInfo = await userServices.getUserInfo(userId, req.params.userId);
     res.ok({ data: userInfo });
   });
 
   static setUserInfo = CatchAsyncError(async (req, res) => {
     const { userId } = req.userPayload;
-    const { username, avatar, coverImage } = req.body;
-    const newProfile = await userServices.setUserInfo(userId, username, avatar, coverImage);
-    console.log(newProfile);
+    const newProfile = await userServices.setUserInfo({ userId, ...req.body });
 
     res.ok({ message: 'Profile updated!', data: newProfile });
   });
 
   static changePassword = CatchAsyncError(async (req, res) => {
     const { userId } = req.userPayload;
-    const { newPassword } = req.body;
-    const response = await userServices.changePassword(userId, newPassword);
+    const { newPassword, oldPassword } = req.body;
+    const response = await userServices.changePassword(userId, oldPassword, newPassword);
     res.ok({ message: 'Password changed!', data: response });
   });
 }

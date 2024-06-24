@@ -7,6 +7,7 @@ class AppState extends Equatable {
   final List<GroupModel> groups;
   final int? groupIdx;
   final int? timestamp;
+  final bool triggerRedirect;
 
   @override
   List<Object?> get props => [authStatus, user, theme, groups, timestamp];
@@ -18,6 +19,7 @@ class AppState extends Equatable {
     this.groupIdx,
     this.timestamp,
     this.theme = ThemeMode.system,
+    this.triggerRedirect = true,
   });
 
   factory AppState() => const AppState._();
@@ -29,6 +31,7 @@ class AppState extends Equatable {
     List<GroupModel>? groups,
     int? groupIdx,
     int? timestamp,
+    bool? triggerRedirect,
   }) =>
       AppState._(
         authStatus: authStatus ?? this.authStatus,
@@ -37,5 +40,6 @@ class AppState extends Equatable {
         groups: groups ?? this.groups,
         groupIdx: groupIdx ?? this.groupIdx,
         timestamp: timestamp,
+        triggerRedirect: triggerRedirect ?? true,
       );
 }

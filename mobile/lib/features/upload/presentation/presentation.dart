@@ -1,1 +1,1 @@
-export 'bloc/upload_bloc.dart';
+export 'blocs/blocs.dart';

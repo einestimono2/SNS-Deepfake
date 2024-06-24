@@ -17,9 +17,12 @@ class ColorSeparate extends StatelessWidget {
   Widget build(BuildContext context) {
     return isSliverType
         ? SliverToBoxAdapter(
-            child: Divider(
-              thickness: thickness,
-              color: context.minBackgroundColor(),
+            child: Padding(
+              padding: EdgeInsets.symmetric(vertical: paddingVertical),
+              child: Divider(
+                thickness: thickness,
+                color: context.minBackgroundColor(),
+              ),
             ),
           )
         : Padding(

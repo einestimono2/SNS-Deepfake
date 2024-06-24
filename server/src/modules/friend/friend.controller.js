@@ -30,17 +30,20 @@ export class FriendControllers {
 
   static setAcceptFriend = CatchAsyncError(async (req, res) => {
     const { userId } = req.userPayload;
-    await FriendServices.setAcceptFriend(userId, req.body);
+    await FriendServices.setAcceptFriend(userId, req.params.targetId);
     res.ok({
       message: 'Đã chấp nhận là bạn bè'
     });
   });
 
   static getUserFriends = CatchAsyncError(async (req, res) => {
-    const result = await FriendServices.getUserFriends({
-      userId: req.userPayload.userId,
-      ...getPaginationAttributes(req.query)
-    });
+    const result = await FriendServices.getUserFriends(
+      {
+        userId: req.userPayload.userId,
+        ...getPaginationAttributes(req.query)
+      },
+      req.body.user_id
+    );
 
     res.ok(
       getPaginationSummary({
@@ -80,6 +83,15 @@ export class FriendControllers {
     await FriendServices.delRequestFriend(userId, targetId);
     res.ok({
       message: 'Đã xóa yêu cầu kết bạn thành công'
+    });
+  });
+
+  static unRequestFriend = CatchAsyncError(async (req, res) => {
+    const { userId } = req.userPayload;
+    const { targetId } = req.params;
+    await FriendServices.unRequestFriend(userId, targetId);
+    res.ok({
+      message: 'Đã hủy yêu cầu kết bạn tới đối phương'
     });
   });
 

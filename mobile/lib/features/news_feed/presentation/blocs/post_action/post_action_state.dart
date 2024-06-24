@@ -12,20 +12,20 @@ final class PAInitialState extends PostActionState {}
 final class PAInProgressState extends PostActionState {}
 
 class PASuccessfulState extends PostActionState {
-  final String type;
+  final PostModel post;
+  final int? timestamp;
 
-  const PASuccessfulState({this.type = ""});
+  const PASuccessfulState({required this.post, this.timestamp});
 
   @override
-  List<Object?> get props => [type];
+  List<Object?> get props => [post, timestamp];
 }
 
 final class PAFailureState extends PostActionState {
   final String message;
-  final String type;
 
-  const PAFailureState({required this.message, this.type = ""});
+  const PAFailureState(this.message);
 
   @override
-  List<Object> get props => [message, type];
+  List<Object> get props => [message];
 }

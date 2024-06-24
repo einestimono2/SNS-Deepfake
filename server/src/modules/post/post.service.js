@@ -17,7 +17,7 @@ import { Report } from './models/report.model.js';
 import { Post } from './post.model.js';
 
 import { Message, costs } from '#constants';
-import { getBanned, getCanEdit, getCanMark, getCanRate, getCategory, setFileUsed } from '#utils';
+import { getBanned, getCanEdit, getCanMark, getCanRate, setFileUsed } from '#utils';
 
 export class PostServices {
   // Tất cả đều chưa xử lý và notification
@@ -175,34 +175,35 @@ export class PostServices {
     }
     const post = postTotal.toJSON();
     return {
-      id: String(post.id),
-      created: post.createdAt,
-      description: post.description || '',
-      status: post.status || '',
-      modified: String(post.edited),
-      feel: parseInt(post.kudosCount, 10) + parseInt(post.disappointedCount, 10),
-      mark: parseInt(post.trustCount, 10) + parseInt(post.fakeCount, 10),
-      is_felt: post.feels.length ? String(post.feels[0].type) : '-1',
-      is_marked: post.marks.length ? '1' : '0',
-      your_mark: post.marks.length
-        ? {
-            mark_content: post.marks[0].content,
-            type_of_mark: String(post.marks[0].type)
-          }
-        : undefined,
-      image: post.images.map((e) => ({
-        id: String(e.order),
-        url: e.url
-      })),
-      video: post.video ? { url: post.video.url } : undefined,
-      author: {
-        id: String(post.author.id),
-        name: post.author.username || '',
-        avatar: post.author.avatar,
-        coins: String(post.author.coins)
-        // listing: post.histories.map((e) => String(e.oldPostId))
-      },
-      category: getCategory(post),
+      post,
+      // id: String(post.id),
+      // created: post.createdAt,
+      // description: post.description || '',
+      // status: post.status || '',
+      // modified: String(post.edited),
+      // feel: parseInt(post.kudosCount, 10) + parseInt(post.disappointedCount, 10),
+      // mark: parseInt(post.trustCount, 10) + parseInt(post.fakeCount, 10),
+      // is_felt: post.feels.length ? String(post.feels[0].type) : '-1',
+      // is_marked: post.marks.length ? '1' : '0',
+      // your_mark: post.marks.length
+      //   ? {
+      //       mark_content: post.marks[0].content,
+      //       type_of_mark: String(post.marks[0].type)
+      //     }
+      //   : undefined,
+      // image: post.images.map((e) => ({
+      //   id: String(e.order),
+      //   url: e.url
+      // })),
+      // video: post.video ? { url: post.video.url } : undefined,
+      // author: {
+      //   id: String(post.author.id),
+      //   name: post.author.username || '',
+      //   avatar: post.author.avatar,
+      //   coins: String(post.author.coins)
+      //   // listing: post.histories.map((e) => String(e.oldPostId))
+      // },
+      // category: getCategory(post),
       can_edit: getCanEdit(post, user),
       banned: getBanned(post),
       can_mark: getCanMark(post, user),
@@ -214,7 +215,7 @@ export class PostServices {
   }
 
   // Lấy danh sách các bài viết của 1 nhóm(đã test)
-  static async getListPosts({ userId, limit, offset }, groupId) {
+  static async getListPosts({ userId, limit, offset }, groupId, user_id) {
     if (!userId || !groupId) throw new BadRequestError(Message.ID_EMPTY);
     const user = await User.findOne({ where: { id: userId } });
     // Danh sach các userId của người mà block mình
@@ -222,11 +223,11 @@ export class PostServices {
       where: { userId },
       attributes: ['targetId']
     });
-    const postCount = await Post.findAndCountAll({
-      where: {
-        groupId
-      }
-    });
+    // const postCount = await Post.findAndCountAll({
+    //   where: {
+    //     groupId
+    //   }
+    // });
     // Danh sach các userId của người mà bị mình block
     const usersIdBlocking = await Block.findAll({
       where: { targetId: userId },
@@ -265,7 +266,20 @@ export class PostServices {
           as: 'group',
           attributes: ['id', 'groupName', 'description', 'coverPhoto'],
           required: false
+        },
+        {
+          model: Feel,
+          as: 'feels',
+          where: { userId },
+          required: false
         }
+        // ,
+        // {
+        //   model: Mark,
+        //   as: 'marks',
+        //   where: { userId },
+        //   required: false
+        // }
       ],
       attributes: [
         'id',
@@ -308,9 +322,15 @@ export class PostServices {
       limit
     };
 
-    if (Number(groupId) > 0) {
+    if (groupId && Number(groupId) > 0) {
       query.where = {
         groupId
+      };
+    }
+
+    if (user_id && Number(user_id) > 0) {
+      query.where = {
+        authorId: user_id
       };
     }
 
@@ -602,7 +622,11 @@ export class PostServices {
         },
         {
           model: PostVideo,
-          as: 'videos'
+          as: 'videos',
+          where: {
+            // Thêm điều kiện để chỉ lấy các video không rỗng
+            [Op.not]: { id: null }
+          }
         },
         {
           model: Group,
@@ -620,6 +644,7 @@ export class PostServices {
         'edited',
         'categoryId',
         'rate',
+        'createdAt',
         [
           sequelize.literal(
             '(SELECT COUNT(*) FROM "Feels" WHERE "Feels"."postId" = "Post"."id" AND "Feels"."type" = 0)'
@@ -787,6 +812,89 @@ export class PostServices {
     return {
       id: String(postShare.id),
       coins: String(user.coins)
+    };
+  }
+
+  static async getMyPosts({ userId, limit, offset }) {
+    if (!userId) throw new BadRequestError(Message.ID_EMPTY);
+    const user = await User.findByPk(userId);
+
+    const query = {
+      where: { authorId: userId },
+      include: [
+        {
+          model: User,
+          as: 'author',
+          attributes: ['id', 'avatar', 'username', 'email', 'phoneNumber'],
+          required: false
+        },
+        {
+          model: PostImage,
+          as: 'images',
+          order: [['order', 'ASC']],
+          required: false
+        },
+        {
+          model: PostVideo,
+          as: 'videos'
+        },
+        {
+          model: Group,
+          as: 'group',
+          attributes: ['id', 'groupName', 'description', 'coverPhoto'],
+          required: false
+        }
+      ],
+      attributes: [
+        'id',
+        'authorId',
+        'description',
+        'status',
+        'edited',
+        'categoryId',
+        'rate',
+        'createdAt',
+        [
+          sequelize.literal(
+            '(SELECT COUNT(*) FROM "Feels" WHERE "Feels"."postId" = "Post"."id" AND "Feels"."type" = 0)'
+          ),
+          'kudosCount'
+        ],
+        [
+          sequelize.literal(
+            '(SELECT COUNT(*) FROM "Feels" WHERE "Feels"."postId" = "Post"."id" AND "Feels"."type" = 1)'
+          ),
+          'disappointedCount'
+        ],
+        [
+          sequelize.literal(
+            '(SELECT COUNT(*) FROM "Marks" WHERE "Marks"."postId" = "Post"."id" AND "Marks"."type" = 0)'
+          ),
+          'trustCount'
+        ],
+        [
+          sequelize.literal(
+            '(SELECT COUNT(*) FROM "Marks" WHERE "Marks"."postId" = "Post"."id" AND "Marks"."type" = 1)'
+          ),
+          'fakeCount'
+        ]
+      ],
+      order: [['id', 'DESC']],
+      distinct: true,
+      subQuery: false,
+      offset,
+      limit
+    };
+
+    const postTotal = await Post.findAndCountAll(query);
+
+    return {
+      rows: postTotal.rows.map((post) => ({
+        post,
+        can_edit: getCanEdit(post, user),
+        banned: getBanned(post)
+      })),
+      count: postTotal.count
     };
   }
 }

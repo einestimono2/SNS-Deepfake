@@ -28,6 +28,20 @@ class RFSuccessfulState extends RequestedFriendsState {
 
   @override
   List<Object?> get props => [totalCount, friends, timestamp, hasReachedMax];
+
+  RFSuccessfulState copyWith({
+    int? totalCount,
+    List<FriendModel>? friends,
+    bool? hasReachedMax,
+    int? timestamp,
+  }) {
+    return RFSuccessfulState(
+      friends: friends ?? this.friends,
+      totalCount: totalCount ?? this.totalCount,
+      hasReachedMax: hasReachedMax ?? this.hasReachedMax,
+      timestamp: timestamp ?? this.timestamp,
+    );
+  }
 }
 
 final class RFFailureState extends RequestedFriendsState {

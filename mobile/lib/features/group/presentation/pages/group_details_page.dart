@@ -39,6 +39,7 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
   late final _scrollController = ScrollController();
   int _page = 1;
   bool _loadingMore = false;
+  bool _hasReachedMax = false;
 
   final ValueNotifier<bool> _loading = ValueNotifier(false);
 
@@ -86,7 +87,7 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
   void _scrollListener() {
     if (_scrollController.position.pixels ==
             _scrollController.position.maxScrollExtent &&
-        !_loadingMore) {
+        !_loadingMore && !_hasReachedMax) {
       _loadingMore = true;
 
       context.read<GroupPostBloc>().add(LoadMoreListPost(
@@ -183,6 +184,7 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
           return const ShimmerPost(length: 5);
         } else if (state is GroupPostSuccessfulState) {
           _loadingMore = false;
+          _hasReachedMax = state.hasReachedMax;
 
           return Column(
             mainAxisSize: MainAxisSize.min,
@@ -474,6 +476,7 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
                   : context.pushNamed(
                       Routes.otherProfile.name,
                       pathParameters: {"id": admin.id.toString()},
+                      extra: {'username': admin.username},
                     ),
               child: AnimatedImage(
                 width: 0.1.sw,
@@ -511,6 +514,7 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
                                       pathParameters: {
                                         "id": admin.id.toString()
                                       },
+                                      extra: {'username': admin.username},
                                     ),
                           ),
                           TextSpan(

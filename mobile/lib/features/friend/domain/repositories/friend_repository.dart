@@ -24,6 +24,7 @@ abstract class FriendRepository {
   Future<Either<Failure, bool>> refuseRequest(int targetId);
 
   Future<Either<Failure, bool>> sendRequest(int targetId);
+  Future<Either<Failure, bool>> unsentRequest(int targetId);
 
   Future<Either<Failure, bool>> unfriend(int targetId);
 }

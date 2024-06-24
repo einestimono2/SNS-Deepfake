@@ -1,11 +1,11 @@
 import 'dart:io';
 
 import 'package:device_info_plus/device_info_plus.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DeviceUtils {
   DeviceUtils._();
@@ -95,15 +95,21 @@ class DeviceUtils {
     return Platform.isAndroid;
   }
 
-  static void callPhoneNumber(String phoneNumber) async {
+  static Future<void> callPhoneNumber(String phoneNumber) async {
     if (phoneNumber == "") return;
 
     Uri url = Uri(scheme: 'tel', path: phoneNumber);
 
     if (await canLaunchUrl(url)) {
       await launchUrl(url);
-    } else {
-      throw 'Could not launch $url';
+    }
+  }
+
+  static Future<void> mailTo(String email) async {
+    Uri url = Uri(scheme: 'mailto', path: email);
+
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url);
     }
   }
 

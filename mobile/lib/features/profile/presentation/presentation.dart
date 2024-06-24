@@ -1,4 +1,11 @@
-export 'pages/profile_page.dart';
-export 'pages/other_profile_page.dart';
+export 'blocs/blocs.dart';
+export 'pages/buy_coin_page.dart';
+export 'pages/change_password_page.dart';
+export 'pages/create_video_deepfake_page.dart';
 export 'pages/my_profile_page.dart';
+export 'pages/other_all_friend_page.dart';
+export 'pages/other_profile_page.dart';
+export 'pages/profile_page.dart';
 export 'pages/setting_page.dart';
+export 'pages/update_profile_page.dart';
+export 'pages/video_deepfake_page.dart';

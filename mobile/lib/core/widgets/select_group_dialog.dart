@@ -140,6 +140,8 @@ class _SelectGroupCardState extends State<SelectGroupCard> {
           : Text(
               group.description!,
               style: Theme.of(context).textTheme.labelMedium,
+              maxLines: 3,
+              overflow: TextOverflow.ellipsis,
             ),
       useCupertinoCheckmarkStyle: true,
       secondary: Row(

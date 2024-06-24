@@ -27,7 +27,7 @@ class ModelPostAction extends StatelessWidget {
     final bool isOwner = post.canEdit;
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      padding: const EdgeInsets.fromLTRB(12, 6, 12, 14),
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(6),

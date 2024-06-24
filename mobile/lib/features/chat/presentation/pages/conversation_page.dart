@@ -33,6 +33,7 @@ class ConversationPageState extends State<ConversationPage> {
 
   late final ScrollController _scrollController = ScrollController();
   bool _loadingMore = false;
+  bool _hasReachedMax = false;
 
   final ValueNotifier<bool> _focusing = ValueNotifier(false);
 
@@ -122,7 +123,8 @@ class ConversationPageState extends State<ConversationPage> {
   void _scrollListener() {
     if (_scrollController.position.pixels ==
             _scrollController.position.maxScrollExtent &&
-        !_loadingMore) {
+        !_loadingMore &&
+        !_hasReachedMax) {
       _loadingMore = true;
 
       context.read<ConversationDetailsBloc>().add(
@@ -276,6 +278,7 @@ class ConversationPageState extends State<ConversationPage> {
           final length = state.messages.length;
           final memberSeen = _mapMemberSeen(state.messages);
           _loadingMore = false;
+          _hasReachedMax = state.hasReachedMax;
 
           return Scrollbar(
             /* Container để height full vs expanded --> click để ẩn keyboard */

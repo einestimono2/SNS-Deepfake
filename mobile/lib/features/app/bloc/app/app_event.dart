@@ -33,15 +33,6 @@ class UpdateUserStatus extends AppEvent {
   List<Object?> get props => [status];
 }
 
-class UpdateCoin extends AppEvent {
-  final int coin;
-
-  const UpdateCoin(this.coin);
-
-  @override
-  List<Object?> get props => [coin];
-}
-
 class ChangeTheme extends AppEvent {
   final ThemeMode theme;
 

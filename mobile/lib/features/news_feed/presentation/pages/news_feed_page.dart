@@ -28,6 +28,7 @@ class NewsFeedPageState extends State<NewsFeedPage> {
   late final ScrollController _scrollController = ScrollController();
   int _page = 1;
   bool _loadingMore = false;
+  bool _hasReachedMax = false;
   late int myId;
 
   @override
@@ -48,7 +49,8 @@ class NewsFeedPageState extends State<NewsFeedPage> {
   void _scrollListener() {
     if (_scrollController.position.pixels ==
             _scrollController.position.maxScrollExtent &&
-        !_loadingMore) {
+        !_loadingMore &&
+        !_hasReachedMax) {
       _loadingMore = true;
 
       context.read<ListPostBloc>().add(LoadMoreListPost(
@@ -107,6 +109,7 @@ class NewsFeedPageState extends State<NewsFeedPage> {
                 return const ShimmerPost(length: 5);
               } else if (state is ListPostSuccessfulState) {
                 _loadingMore = false;
+                _hasReachedMax = state.hasReachedMax;
 
                 if (state.posts.isEmpty) {
                   return _emptyPost();

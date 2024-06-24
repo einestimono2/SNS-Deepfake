@@ -73,7 +73,7 @@ routers.use('/health', (_req, res) => {
 
 //
 //! Access video or image *Import trước check Unknown route*
-routers.use('/resources', express.static(getStandardPath('../../uploads')));
+routers.use('/media', express.static(getStandardPath('../../uploads')));
 
 // -----
 

@@ -6,7 +6,6 @@ import { getPaginationAttributes, getPaginationSummary } from '#utils';
 export class CommentControllers {
   static getMarkComment = CatchAsyncError(async (req, res) => {
     const { postId } = req.params;
-    console.log(req.query);
     const result = await CommentServices.getMarkComment(
       {
         userId: req.userPayload.userId,
@@ -25,9 +24,22 @@ export class CommentControllers {
   static setMarkComment = CatchAsyncError(async (req, res) => {
     const { userId } = req.userPayload;
     const { postId } = req.params;
-    const data = await CommentServices.setMarkComment(userId, postId, req.body);
+    const data = await CommentServices.setMarkComment(userId, postId, {
+      ...req.body,
+      ...getPaginationAttributes(req.query)
+    });
+
+    const paginationData = getPaginationSummary({
+      ...req.query,
+      result: data.data
+    });
+
     res.created({
-      data
+      data: {
+        data: paginationData.data,
+        coins: data.coins
+      },
+      extra: paginationData.extra
     });
   });
 

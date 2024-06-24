@@ -4,6 +4,7 @@ import '../../../../config/configs.dart';
 import '../../../../core/base/base.dart';
 import '../../../../core/networks/networks.dart';
 import '../../../upload/upload.dart';
+import '../models/comment_model.dart';
 import '../models/post_model.dart';
 
 abstract class PostRemoteDataSource {
@@ -12,6 +13,15 @@ abstract class PostRemoteDataSource {
     String? description,
     String? status,
     required List<String> files,
+  });
+
+  Future<Map<String, dynamic>> createComment({
+    required int postId,
+    int? markId,
+    int? page,
+    int? size,
+    required String content,
+    required int type,
   });
 
   Future<String> deletePost({
@@ -30,6 +40,19 @@ abstract class PostRemoteDataSource {
     int? page,
     int? size,
   });
+
+  Future<PaginationResult<CommentModel>> getListComment({
+    required int postId,
+    int? page,
+    int? size,
+  });
+
+  Future<Map<String, int>> feelPost({
+    required int postId,
+    required int type,
+  });
+
+  Future<Map<String, int>> unfeelPost(postId);
 }
 
 class PostRemoteDataSourceImpl extends PostRemoteDataSource {
@@ -134,5 +157,85 @@ class PostRemoteDataSourceImpl extends PostRemoteDataSource {
     );
 
     return PostModel.fromMap(response.data);
+  }
+
+  @override
+  Future<PaginationResult<CommentModel>> getListComment({
+    required int postId,
+    int? page,
+    int? size,
+  }) async {
+    final response = await apiClient.get(
+      Endpoints.listComment.replaceFirst(":postId", postId.toString()),
+      queryParameters: {
+        "page": page,
+        "size": size,
+      },
+    );
+
+    return PaginationResult.fromBaseResponse(
+      baseResponse: response,
+      mapFunc: (e) => CommentModel.fromMap(e),
+    );
+  }
+
+  @override
+  Future<Map<String, dynamic>> createComment({
+    required int postId,
+    int? markId,
+    int? page,
+    int? size,
+    required String content,
+    required int type,
+  }) async {
+    final response = await apiClient.post(
+        Endpoints.createComment.replaceFirst(":postId", postId.toString()),
+        queryParameters: {
+          "page": page,
+          "size": size,
+        },
+        data: {
+          "markId": markId,
+          "content": content,
+          "type": type,
+        });
+
+    return {
+      "data": response.data["data"]
+          .map<CommentModel>((e) => CommentModel.fromMap(e))
+          .toList(),
+      "coins": response.data["coins"],
+      "pageIndex": response.extra?["pageIndex"] ?? 0,
+      "pageSize": response.extra?["pageSize"] ?? 0,
+      "totalPages": response.extra?["totalPages"] ?? 0,
+      "totalCount": response.extra?["totalCount"] ?? 0,
+    };
+  }
+
+  @override
+  Future<Map<String, int>> feelPost({
+    required int postId,
+    required int type,
+  }) async {
+    final response = await apiClient.post(
+        Endpoints.feelPost.replaceFirst(":postId", postId.toString()),
+        data: {"type": type});
+
+    return {
+      "disappointed": response.data["disappointed"],
+      "kudos": response.data["kudos"],
+    };
+  }
+
+  @override
+  Future<Map<String, int>> unfeelPost(postId) async {
+    final response = await apiClient.delete(
+      Endpoints.unfeelPost.replaceFirst(":postId", postId.toString()),
+    );
+
+    return {
+      "disappointed": response.data["disappointed"],
+      "kudos": response.data["kudos"],
+    };
   }
 }

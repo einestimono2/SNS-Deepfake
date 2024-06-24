@@ -18,6 +18,7 @@ export class FriendServices {
     // Trong bảng Friend userId là id của người gửi yêu cầu,còn targetId là người nhận yêu cầu
     const requestedFriends = await FriendRequest.findAndCountAll({
       where: { targetId: userId },
+      distinct: true,
       include: [
         {
           model: User,
@@ -124,9 +125,7 @@ export class FriendServices {
   }
 
   // 3:Chấp nhận lời mời kết bạn(Cần xem lại sau)
-  static async setAcceptFriend(userId, body) {
-    // Tìm yêu cầu kết bạn
-    const { targetId } = { ...body };
+  static async setAcceptFriend(userId, targetId) {
     // Kiểm tra có yêu cầu gửi kết bạn tới bạn hay không
     // Đối với 1 người gửi request friend tới mình thì userId lưu trữ id của người đó,còn targetId sẽ là id của mình
     const request = await FriendRequest.findOne({
@@ -163,11 +162,12 @@ export class FriendServices {
   }
 
   // 4.Lấy danh sách bạn bè(Đã test nhưng vẫn cần xem lại)
-  static async getUserFriends({ userId, limit, offset }) {
+  static async getUserFriends({ userId, limit, offset }, user_id) {
     // Tìm tất cả bạn của người dùng và số lượng
-
+    user_id ||= userId;
     const friends = await Friend.findAndCountAll({
-      where: { userId },
+      where: { userId: user_id },
+      distinct: true,
       include: [
         {
           model: User,
@@ -183,7 +183,7 @@ export class FriendServices {
               sequelize.literal(
                 `(SELECT COUNT(*) FROM "Friends" AS "same_friend"
                               INNER JOIN "Friends" AS "target_friends" ON "same_friend"."targetId" = "target_friends"."targetId"
-                              WHERE "same_friend"."userId"=${userId}  AND "target_friends"."userId" = "target"."id")`
+                              WHERE "same_friend"."userId"=${user_id}  AND "target_friends"."userId" = "target"."id")`
               ),
               'friendsCount'
             ],
@@ -192,7 +192,7 @@ export class FriendServices {
               sequelize.literal(
                 `(SELECT "same_friend"."targetId" FROM "Friends" AS "same_friend"
                               INNER JOIN "Friends" AS "target_friends" ON "same_friend"."targetId" = "target_friends"."targetId"
-                              WHERE "same_friend"."userId"=${userId}  AND "target_friends"."userId" ="target"."id")`
+                              WHERE "same_friend"."userId"=${user_id}  AND "target_friends"."userId" ="target"."id")`
               ),
               'commonUserIds'
             ]
@@ -265,6 +265,7 @@ export class FriendServices {
           [Op.in]: mutualFriendsSubquery
         }
       },
+      distinct: true,
       attributes: [
         'id',
         'avatar',
@@ -356,11 +357,17 @@ export class FriendServices {
     await FriendRequest.destroy({ where: { userId, targetId } });
   }
 
+  // 7.5. Hủy lời mời kết bạn đã gừi
+  static async unRequestFriend(userId, targetId) {
+    await FriendRequest.destroy({ where: { userId, targetId } });
+  }
+
   // 8. Tìm kiếm bạn bè
   static async searchFriends({ userId, limit, offset }, body) {
     const { searchTerm } = { ...body };
     const friends = await Friend.findAndCountAll({
       where: { userId },
+      distinct: true,
       include: [
         {
           model: User,

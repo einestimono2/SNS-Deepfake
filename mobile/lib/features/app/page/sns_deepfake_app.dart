@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import '../../../config/configs.dart';
+import '../../../core/services/services.dart';
 import '../../../core/theme/app_theme.dart';
 import '../bloc/app/app_bloc.dart';
 
@@ -15,6 +16,15 @@ class SnsDeepfakeApp extends StatefulWidget {
 }
 
 class _SnsDeepfakeAppState extends State<SnsDeepfakeApp> {
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      FirebaseNotificationService.instance.requestNotificationPermission();
+    });
+  }
+
   @override
   void dispose() {
     Hive.close();

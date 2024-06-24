@@ -18,10 +18,10 @@ class SettingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor:
-          Theme.of(context).scaffoldBackgroundColor.withOpacity(0.8),
+          Theme.of(context).scaffoldBackgroundColor.withOpacity(0.95),
       body: SliverPage(
         borderBottom: true,
-        title: "Cài đặt hệ thống",
+        title: "SYSTEM_SETTING_TEXT".tr(),
         centerTitle: true,
         slivers: [
           SliverToBoxAdapter(
@@ -33,7 +33,7 @@ class SettingPage extends StatelessWidget {
                       onTap: () => _handleChangeTheme(context, state.theme),
                       child: ListTile(
                         leading: const Icon(FontAwesomeIcons.palette),
-                        title: const Text("Giao diện"),
+                        title: Text("THEME_TEXT".tr()),
                         trailing:
                             Text(AppMappers.getThemeName(state.theme.name)),
                       ),
@@ -44,7 +44,7 @@ class SettingPage extends StatelessWidget {
                   onTap: () => _handleChangeLanguage(context),
                   child: ListTile(
                     leading: const Icon(FontAwesomeIcons.globe),
-                    title: const Text("Ngôn ngữ"),
+                    title: Text("LANGUAGE_TEXT".tr()),
                     trailing: _languageItem(context.locale.languageCode),
                   ),
                 )

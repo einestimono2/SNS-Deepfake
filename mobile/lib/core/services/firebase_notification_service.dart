@@ -17,7 +17,7 @@ class FirebaseNotificationService {
 
   String? token;
 
-  Future<void> _requestNotificationPermission() async {
+  Future<void> requestNotificationPermission() async {
     AuthorizationStatus status = (await _firebaseMessaging.requestPermission(
       alert: true,
       announcement: true,
@@ -48,8 +48,6 @@ class FirebaseNotificationService {
   }
 
   Future<void> init() async {
-    await _requestNotificationPermission();
-
     /* Device Token */
     _firebaseMessaging.onTokenRefresh.listen(
       (data) => AppLogger.warn('New FCM Token: ${data.toString()}'),

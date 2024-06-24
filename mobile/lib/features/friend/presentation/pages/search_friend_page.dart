@@ -92,6 +92,7 @@ class FriendSearch extends SearchDelegate {
                       ..pushNamed(
                         Routes.otherProfile.name,
                         pathParameters: {"id": state.users[idx].id.toString()},
+                        extra: {'username': state.users[idx].username},
                       ),
                     contentPadding: const EdgeInsets.symmetric(horizontal: 12),
                     leading: AnimatedImage(

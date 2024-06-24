@@ -32,3 +32,12 @@ class LoadMoreRequestedFriends extends RequestedFriendsEvent {
   @override
   List<Object?> get props => [page, size];
 }
+
+class DeleteRequest extends RequestedFriendsEvent {
+  final int id;
+
+  const DeleteRequest(this.id);
+
+  @override
+  List<Object?> get props => [id];
+}

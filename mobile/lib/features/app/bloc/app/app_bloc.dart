@@ -27,7 +27,6 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     on<ChangeUser>(_onChangeUser);
     on<UpdateUserStatus>(_onUpdateUserStatus);
     on<ChangeTheme>(_onChangeTheme);
-    on<UpdateCoin>(_onUpdateCoin);
   }
 
   FutureOr<void> _onAppStarted(AppStarted event, Emitter<AppState> emit) async {
@@ -123,14 +122,5 @@ class AppBloc extends Bloc<AppEvent, AppState> {
         .whenComplete(() => emit(
               state.copyWith(user: state.user, groupIdx: event.idx),
             ));
-  }
-
-  FutureOr<void> _onUpdateCoin(
-    UpdateCoin event,
-    Emitter<AppState> emit,
-  ) async {
-    emit(state.copyWith(
-      user: state.user?.copyWith(coins: event.coin),
-    ));
   }
 }

@@ -169,6 +169,7 @@ export class GroupService {
   // Lấy ra tất cả nhóm trên hệ thống
   static async getAllGroups({ limit, offset }) {
     const result = await Group.findAndCountAll({
+      distinct: true,
       limit,
       offset
     });

@@ -6,6 +6,7 @@ import 'package:get_it/get_it.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:sns_deepfake/features/video/video.dart';
 
 import '../../config/configs.dart';
 import '../../features/app/app.dart';
@@ -14,9 +15,11 @@ import '../../features/chat/chat.dart';
 import '../../features/friend/friend.dart';
 import '../../features/group/group.dart';
 import '../../features/news_feed/news_feed.dart';
+import '../../features/profile/profile.dart';
 import '../../features/search/search.dart';
 import '../../features/upload/upload.dart';
 import '../networks/networks.dart';
+import '../utils/utils.dart';
 
 final sl = GetIt.instance;
 
@@ -37,11 +40,13 @@ Future<void> init() async {
     * CachePolicy.forceCache: Trả về cache nếu còn hạn
     * CachePolicy.refreshForceCache: Gọi API kể cả khi có cache
     */
-    policy: CachePolicy.refreshForceCache,
+    // todo: cache k hd vs download file
+    policy: CachePolicy.noCache, // CachePolicy.forceCache,
     priority: CachePriority.high,
     maxStale: const Duration(days: 30),
     hitCacheOnErrorExcept: [401, 404, 500],
-    keyBuilder: (request) => request.uri.toString(),
+    keyBuilder: (request) =>
+        "${localCache.getValue<String>(AppStrings.accessTokenKey)} ${request.uri}",
     allowPostMethod: true, // cache both POST requests
   );
 
@@ -55,6 +60,8 @@ Future<void> init() async {
   _initFriendFeature();
   _initSearchFeature();
   _initGroupFeature();
+  _initProfileFeature();
+  _initVideoFeature();
 
   /**
    * --> External
@@ -75,6 +82,74 @@ Future<void> init() async {
         cacheOptions: sl(),
       ));
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
+}
+
+void _initVideoFeature() {
+  /* Bloc */
+  sl.registerLazySingleton(() => ListVideoBloc(
+        getListVideoUC: sl(),
+      ));
+
+  /* Use Case */
+  sl.registerLazySingleton(() => GetListVideoUC(repository: sl()));
+
+  /* Repository */
+  sl.registerLazySingleton<VideoRepository>(
+    () => VideoRepositoryImpl(network: sl(), remote: sl()),
+  );
+
+  /* Datasource */
+  sl.registerLazySingleton<VideoRemoteDataSource>(
+    () => VideoRemoteDataSourceImpl(apiClient: sl()),
+  );
+}
+
+void _initProfileFeature() {
+  /* Bloc */
+  sl.registerLazySingleton(() => ProfileActionBloc(
+        updateProfileUC: sl(),
+        getUserProfileUC: sl(),
+        setBlockUC: sl(),
+        unBlockUC: sl(),
+        appBloc: sl(),
+        userFriendsBloc: sl(),
+        userPostsBloc: sl(),
+        listFriendBloc: sl(),
+        changePasswordUC: sl(),
+        buyCoinsUC: sl(),
+      ));
+  sl.registerLazySingleton(() => MyPostsBloc(
+        getMyPosts: sl(),
+      ));
+  sl.registerLazySingleton(() => UserPostsBloc(
+        getUserPostsUC: sl(),
+      ));
+  sl.registerLazySingleton(() => UserFriendsBloc(
+        getUserFriendsUC: sl(),
+      ));
+
+  /* Use Case */
+  sl.registerLazySingleton(() => UpdateProfileUC(repository: sl()));
+  sl.registerLazySingleton(() => GetUserProfileUC(repository: sl()));
+  sl.registerLazySingleton(() => GetUserFriendsUC(repository: sl()));
+  sl.registerLazySingleton(() => GetUserPostsUC(repository: sl()));
+  sl.registerLazySingleton(() => MyPostsUC(repository: sl()));
+  sl.registerLazySingleton(() => SetBlockUC(repository: sl()));
+  sl.registerLazySingleton(() => UnBlockUC(repository: sl()));
+  sl.registerLazySingleton(() => ChangePasswordUC(repository: sl()));
+  sl.registerLazySingleton(() => BuyCoinsUC(repository: sl()));
+
+  /* Repository */
+  sl.registerLazySingleton<ProfileRepository>(
+    () => ProfileRepositoryImpl(network: sl(), remote: sl()),
+  );
+
+  /* Datasource */
+  sl.registerLazySingleton<ProfileRemoteDataSource>(
+    () => ProfileRemoteDataSourceImpl(
+      apiClient: sl(),
+    ),
+  );
 }
 
 void _initGroupFeature() {
@@ -131,10 +206,16 @@ void _initNewsFeedFeature() {
         editPostUC: sl(),
         deletePostUC: sl(),
         getPostDetailsUC: sl(),
+        createCommentUC: sl(),
+        feelPostUC: sl(),
+        unfeelPostUC: sl(),
         listPostBloc: sl(),
         appBloc: sl(),
+        myPostsBloc: sl(),
+        listCommentBloc: sl(),
       ));
   sl.registerLazySingleton(() => ListPostBloc(getListPostUC: sl()));
+  sl.registerLazySingleton(() => ListCommentBloc(getListCommentUC: sl()));
 
   /* Use Case */
   sl.registerLazySingleton(() => CreatePostUC(repository: sl()));
@@ -142,6 +223,10 @@ void _initNewsFeedFeature() {
   sl.registerLazySingleton(() => EditPostUC(repository: sl()));
   sl.registerLazySingleton(() => GetPostDetailsUC(repository: sl()));
   sl.registerLazySingleton(() => DeletePostUC(repository: sl()));
+  sl.registerLazySingleton(() => GetListCommentUC(repository: sl()));
+  sl.registerLazySingleton(() => CreateCommentUC(repository: sl()));
+  sl.registerLazySingleton(() => FeelPostUC(repository: sl()));
+  sl.registerLazySingleton(() => UnfeelPostUC(repository: sl()));
 
   /* Repository */
   sl.registerLazySingleton<PostRepository>(
@@ -172,6 +257,7 @@ void _initFriendFeature() {
         refuseRequestUC: sl(),
         sendRequestUC: sl(),
         unfriendUC: sl(),
+        unsentRequestUC: sl(),
       ));
 
   /* Use Case */
@@ -181,6 +267,7 @@ void _initFriendFeature() {
   sl.registerLazySingleton(() => AcceptRequestUC(repository: sl()));
   sl.registerLazySingleton(() => RefuseRequestUC(repository: sl()));
   sl.registerLazySingleton(() => SendRequestUC(repository: sl()));
+  sl.registerLazySingleton(() => UnsentRequestUC(repository: sl()));
   sl.registerLazySingleton(() => UnfriendUC(repository: sl()));
 
   /* Repository */
@@ -261,6 +348,10 @@ void _initChatFeature() {
 void _initUploadFeature() {
   /* Bloc */
   sl.registerLazySingleton(() => UploadBloc(uploadImageUC: sl()));
+  sl.registerLazySingleton(() => DownloadBloc(
+        dio: sl(),
+        cacheOptions: sl(),
+      ));
 
   /* Use Case */
   sl.registerLazySingleton(() => UploadImageUC(repository: sl()));

@@ -17,32 +17,37 @@ class ErrorCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onRefresh,
-      child: Column(
-        children: [
-          const SizedBox(height: 22),
-          Text(
-            message ?? "SOMETHING_WENT_WRONG_TEXT".tr(),
-            textAlign: TextAlign.center,
-            style: Theme.of(context)
-                .textTheme
-                .headlineSmall
-                ?.copyWith(color: AppColors.kErrorColor),
-          ),
-          const SizedBox(height: 18),
-          SizedBox.square(
-            dimension: 48,
-            child: Image.asset(AppImages.reloadImage),
-          ),
-          const SizedBox(height: 6),
-          Text(
-            "TRY_AGAIN_TEXT".tr(),
-            style: Theme.of(context)
-                .textTheme
-                .titleLarge
-                ?.copyWith(color: AppColors.kPrimaryColor),
-          ),
-          const SizedBox(height: 22),
-        ],
+      borderRadius: BorderRadius.circular(8),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const SizedBox(height: 22),
+            Text(
+              message ?? "SOMETHING_WENT_WRONG_TEXT".tr(),
+              textAlign: TextAlign.center,
+              style: Theme.of(context)
+                  .textTheme
+                  .headlineSmall
+                  ?.copyWith(color: AppColors.kErrorColor),
+            ),
+            const SizedBox(height: 18),
+            SizedBox.square(
+              dimension: 48,
+              child: Image.asset(AppImages.reloadImage),
+            ),
+            const SizedBox(height: 6),
+            Text(
+              "TRY_AGAIN_TEXT".tr(),
+              style: Theme.of(context)
+                  .textTheme
+                  .titleLarge
+                  ?.copyWith(color: AppColors.kPrimaryColor),
+            ),
+            const SizedBox(height: 22),
+          ],
+        ),
       ),
     );
   }

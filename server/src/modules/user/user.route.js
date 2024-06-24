@@ -16,7 +16,7 @@ router.post('/check_verify_code', UserControllers.checkVerifyCode);
 router.post('/logout', isAuthenticated, UserControllers.logout);
 
 router.put('/change_password', isAuthenticated, UserControllers.changePassword);
-router.get('/get_user_info', isAuthenticated, UserControllers.getUserInfo);
+router.get('/get_user_info/:userId', isAuthenticated, UserControllers.getUserInfo);
 router.put('/set_user_info', isAuthenticated, UserControllers.setUserInfo);
 router.patch('/change_profile_after_signup', UserControllers.changeProfileAfterSignup);
 

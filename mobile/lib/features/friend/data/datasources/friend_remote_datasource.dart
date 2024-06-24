@@ -15,6 +15,7 @@ abstract class FriendRemoteDataSource {
   Future<PaginationResult<FriendModel>> getListFriend({int? page, int? size});
 
   Future<bool> sendRequest(int targetId);
+  Future<bool> unsentRequest(int targetId);
   Future<bool> acceptRequest(int targetId);
   Future<bool> refuseRequest(int targetId);
   Future<bool> unfriend(int targetId);
@@ -104,6 +105,15 @@ class FriendRemoteDataSourceImpl extends FriendRemoteDataSource {
   Future<bool> sendRequest(int targetId) async {
     final response = await apiClient.get(
       Endpoints.sendRequest.replaceFirst(":targetId", targetId.toString()),
+    );
+
+    return response.status == "success";
+  }
+  
+  @override
+  Future<bool> unsentRequest(int targetId) async {
+    final response = await apiClient.delete(
+      Endpoints.unsentRequest.replaceFirst(":targetId", targetId.toString()),
     );
 
     return response.status == "success";

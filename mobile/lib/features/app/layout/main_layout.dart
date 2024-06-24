@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:sns_deepfake/features/video/presentation/blocs/blocs.dart';
 
 import '../../../core/utils/utils.dart';
 import '../../chat/chat.dart';
@@ -54,6 +55,10 @@ class _MainLayoutState extends State<MainLayout> {
           page: 1,
           size: AppStrings.conversationPageSize,
         ));
+
+    context.read<ListVideoBloc>().add(const GetListVideo(
+          size: AppStrings.listVideoPageSize,
+        ));
   }
 
   void _handleChange(int idx) {
@@ -101,7 +106,7 @@ class _MainLayoutState extends State<MainLayout> {
           onDestinationSelected: _handleChange,
           destinations: [
             NavigationDestination(
-              icon: Icon(Icons.home, size: 27.sp),
+              icon: Icon(Icons.home, size: 26.sp),
               label: "HOME_TEXT".tr(),
               tooltip: "HOME_TEXT".tr(),
             ),

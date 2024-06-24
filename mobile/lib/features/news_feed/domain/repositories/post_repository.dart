@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 
 import '../../../../core/base/base.dart';
 import '../../../../core/errors/failures.dart';
-import '../../data/models/post_model.dart';
+import '../../data/data.dart';
 
 abstract class PostRepository {
   Future<Either<Failure, BaseResponse>> createPost({
@@ -28,4 +28,26 @@ abstract class PostRepository {
     int? page,
     int? size,
   });
+
+  Future<Either<Failure, PaginationResult<CommentModel>>> getListComment({
+    required int postId,
+    int? page,
+    int? size,
+  });
+
+  Future<Either<Failure, Map<String, dynamic>>> createComment({
+    required int postId,
+    int? markId,
+    int? page,
+    int? size,
+    required String content,
+    required int type,
+  });
+
+  Future<Either<Failure, Map<String, int>>> feelPost({
+    required int postId,
+    required int type,
+  });
+
+  Future<Either<Failure, Map<String, int>>> unfeelPost(postId);
 }

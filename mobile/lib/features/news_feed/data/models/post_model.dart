@@ -26,16 +26,21 @@ class PostModel extends Equatable {
   final bool canEdit;
   final bool banned;
   final String createdAt;
+  final int numShares;
+  final int myFeel;
 
-  int get reactionCount =>
-      disappointedCount + fakeCount + kudosCount + trustCount;
+  int get reactionCount => disappointedCount + kudosCount;
+
+  int get commentCount => trustCount + fakeCount;
 
   List<String> reactionOrder() {
     Map<String, int> _map = {};
     if (kudosCount > 0) _map[AppImages.likeReaction] = kudosCount; // like
-    if (disappointedCount > 0) _map[AppImages.loveReaction] = disappointedCount; // dislike
-    if (trustCount > 0) _map[AppImages.sadReaction] = trustCount;
-    if (fakeCount > 0) _map[AppImages.hahaReaction] = fakeCount;
+    if (disappointedCount > 0) {
+      _map[AppImages.dislikeReaction] = disappointedCount; // dislike
+    }
+    // if (trustCount > 0) _map[AppImages.sadReaction] = trustCount;
+    // if (fakeCount > 0) _map[AppImages.hahaReaction] = fakeCount;
 
     return SplayTreeMap<String, int>.from(
       _map,
@@ -60,6 +65,8 @@ class PostModel extends Equatable {
     this.images = const [],
     this.canEdit = false,
     this.banned = false,
+    this.myFeel = -1,
+    this.numShares = 0,
     required this.createdAt,
   });
 
@@ -82,7 +89,53 @@ class PostModel extends Equatable {
         canEdit,
         banned,
         createdAt,
+        myFeel,
+        numShares
       ];
+
+  PostModel copyWith({
+    int? kudosCount,
+    int? disappointedCount,
+    int? trustCount,
+    int? fakeCount,
+    int? id,
+    String? description,
+    String? status,
+    bool? edited,
+    int? categoryId,
+    int? rate,
+    int? myFeel,
+    int? numShares,
+    MemberModel? author,
+    ShortGroupModel? group,
+    List<PostMediaModel>? videos,
+    List<PostMediaModel>? images,
+    bool? canEdit,
+    bool? banned,
+    String? createdAt,
+  }) {
+    return PostModel(
+      id: id ?? this.id,
+      description: description ?? this.description,
+      status: status ?? this.status,
+      edited: edited ?? this.edited,
+      categoryId: categoryId ?? this.categoryId,
+      rate: rate ?? this.rate,
+      kudosCount: kudosCount ?? this.kudosCount,
+      disappointedCount: disappointedCount ?? this.disappointedCount,
+      trustCount: trustCount ?? this.trustCount,
+      fakeCount: fakeCount ?? this.trustCount,
+      author: author ?? this.author,
+      group: group ?? this.group,
+      videos: videos ?? this.videos,
+      images: images ?? this.images,
+      canEdit: canEdit ?? this.canEdit,
+      banned: banned ?? this.banned,
+      createdAt: createdAt ?? this.createdAt,
+      myFeel: myFeel ?? this.myFeel,
+      numShares: numShares ?? this.numShares,
+    );
+  }
 
   factory PostModel.fromMap(Map<String, dynamic> map) {
     return PostModel(
@@ -110,6 +163,10 @@ class PostModel extends Equatable {
       canEdit: int.parse(map['can_edit'].toString()) != 0,
       banned: int.parse(map['banned'].toString()) != 0,
       createdAt: map['post']['createdAt'] ?? DateTime.now().toString(),
+      myFeel: map['post']['feels']?.length > 0
+          ? map['post']['feels'][0]["type"]
+          : -1,
+      numShares: map['post']['numberOfShared'] ?? 0,
     );
   }
 

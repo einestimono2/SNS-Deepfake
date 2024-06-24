@@ -20,6 +20,7 @@ class RequestedFriendsBloc
   }) : super(RFInitialState()) {
     on<GetRequestedFriends>(_onGetRequestedFriends);
     on<LoadMoreRequestedFriends>(_onLoadMoreRequestedFriends);
+    on<DeleteRequest>(_onDeleteRequest);
   }
 
   FutureOr<void> _onGetRequestedFriends(
@@ -70,5 +71,20 @@ class RequestedFriendsBloc
         ),
       ),
     );
+  }
+
+  FutureOr<void> _onDeleteRequest(
+    DeleteRequest event,
+    Emitter<RequestedFriendsState> emit,
+  ) async {
+    if (state is! RFSuccessfulState) return;
+
+    RFSuccessfulState preLoaded = state as RFSuccessfulState;
+    final _request = preLoaded.friends.where((e) => e.id != event.id).toList();
+    emit(preLoaded.copyWith(
+      friends: _request,
+      totalCount: _request.length,
+      timestamp: DateTime.now().millisecondsSinceEpoch,
+    ));
   }
 }

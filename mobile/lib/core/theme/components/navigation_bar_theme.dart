@@ -15,12 +15,12 @@ class AppNavigationBarTheme {
     labelTextStyle: MaterialStateProperty.resolveWith(
       (states) => states.contains(MaterialState.selected)
           ? TextStyle(
-              fontSize: 10.5.sp,
+              fontSize: 10.sp,
               fontWeight: FontWeight.w700,
               color: AppColors.kPrimaryColor,
             )
           : TextStyle(
-              fontSize: 10.sp,
+              fontSize: 9.5.sp,
               fontWeight: FontWeight.w500,
               color: AppColors.kContentColorLightTheme.withOpacity(0.5),
             ),

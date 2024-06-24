@@ -41,11 +41,14 @@ class Formatter {
     return DateFormat('HH:mm, d/M/yyyy', locale).format(date);
   }
 
-  static String formatCurrency(double amount) {
-    return NumberFormat.currency(locale: 'en_US', symbol: 'đ').format(amount);
+  static String formatCurrency(double amount, [String locale = 'vi']) {
+    return NumberFormat.currency(
+      locale: locale,
+      symbol: "đ",
+    ).format(amount);
   }
 
-  static String formatShortenNumber(double amount){
+  static String formatShortenNumber(double amount) {
     return NumberFormat.compact().format(amount);
   }
 

@@ -60,6 +60,7 @@ class _GroupMemberCardState extends State<GroupMemberCard> {
           : context.pushNamed(
               Routes.otherProfile.name,
               pathParameters: {"id": widget.member.id.toString()},
+              extra: {'username': widget.member.username},
             ),
       contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 3),
       leading: AnimatedImage(

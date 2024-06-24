@@ -55,6 +55,7 @@ export class CommentServices {
       ],
       where: { postId },
       order: [['id', 'DESC']],
+      distinct: true,
       offset,
       limit
     });
@@ -68,7 +69,7 @@ export class CommentServices {
             model: User,
             as: 'user',
             required: false, // Đảm bảo rằng việc join không làm mất bất kỳ bản ghi nào nếu không có kết quả phù hợp
-            attributes: ['id', 'username', 'avatar'],
+            attributes: ['id', 'avatar', 'username', 'email', 'phoneNumber'],
             where: {
               id: {
                 // [Op.notIn]: usersIdBlocked.targetId
@@ -87,26 +88,20 @@ export class CommentServices {
     );
     return {
       rows: markedComments.map((mark) => ({
-        id: String(mark.id),
+        id: mark.id,
         mark_content: mark.content,
         type_of_mark: String(mark.type),
         created: mark.createdAt,
-        poster: {
-          id: String(mark.user.id),
-          name: mark.user.username || '',
-          avatar: mark.user.avatar
-        },
+        poster: mark.user,
         comments: mark.comments.map((comment) => ({
-          content: comment.content,
+          id: comment.id,
+          mark_content: comment.content,
           created: comment.createdAt,
-          poster: {
-            id: String(comment.user.id),
-            name: comment.user.username || '',
-            avatar: comment.user.avatar
-          }
-        })),
-        count: marksTotal.count
-      }))
+          type_of_mark: String(mark.type),
+          poster: comment.user
+        }))
+      })),
+      count: marksTotal.count
     };
   }
 
@@ -115,7 +110,7 @@ export class CommentServices {
     const user = await User.findOne({
       where: { id: userId }
     });
-    const { content, index, count, markId, type } = { ...body };
+    const { content, limit, offset, markId, type } = { ...body };
     // Reply một Mark có sẵn
     if (markId) {
       // Mark là bình luận cấp 1
@@ -213,7 +208,7 @@ export class CommentServices {
       //   target: user
       // });
     }
-    const data = await this.getMarkComment(userId, postId, { index, count });
+    const data = await this.getMarkComment({ userId, limit, offset }, postId);
     return {
       data,
       coins: String(user.coins)
@@ -283,8 +278,8 @@ export class CommentServices {
       Feel.count({ where: { postId, type: FeelType.Kudos } })
     ]);
     return {
-      disappointed: String(disappointedCount),
-      kudos: String(kudosCount)
+      disappointed: disappointedCount,
+      kudos: kudosCount
     };
   }
 
@@ -327,6 +322,7 @@ export class CommentServices {
           }
         }
       },
+      distinct: true,
       order: [['id', 'DESC']],
       offset,
       limit
@@ -357,12 +353,12 @@ export class CommentServices {
     // }
     await Feel.destroy({ where: { postId, userId } });
     const [disappointed, kudos] = await Promise.all([
-      Feel.count({ postId, type: FeelType.Disappointed }),
-      Feel.count({ postId, type: FeelType.Kudos })
+      Feel.count({ where: { postId, type: FeelType.Disappointed } }),
+      Feel.count({ where: { postId, type: FeelType.Kudos } })
     ]);
     return {
-      disappointed: String(disappointed),
-      kudos: String(kudos) || 0
+      disappointed: disappointed || 0,
+      kudos: kudos || 0
     };
   }
 }

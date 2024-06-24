@@ -1,6 +1,7 @@
 import bcryptjs from 'bcryptjs';
 
 import { BlockServices } from '../block/block.service.js';
+import { ConversationService } from '../chat/conversation/conversation.service.js';
 import { BadRequestError, NotFoundError } from '../core/index.js';
 import { FriendRequest } from '../friend/components/friend_request.model.js';
 import { Friend } from '../friend/friend.model.js';
@@ -13,7 +14,7 @@ import { User } from './user.model.js';
 import { AccountStatus, Message } from '#constants';
 import { redis } from '#dbs';
 // const catchAsyncError = require("../middleware/catchAsyncErrors");
-import { generateVerifyCode, SendMail, setFileUsed, signToken } from '#utils';
+import { SendMail, deleteFile, generateVerifyCode, setFileUsed, signToken } from '#utils';
 
 export class userServices {
   static async myProfile(id) {
@@ -227,51 +228,96 @@ export class userServices {
 
   // 7--Lấy thông tin người dùng
   static async getUserInfo(userId, user_id) {
+    // Gán giá trị nếu user_id là null or undefined
+    user_id ||= userId;
+    let blockStatus = 0; // Normal
+
+    // Mình block target
     if (await BlockServices.isBlock(userId, user_id)) {
-      throw new BadRequestError(Message.CAN_NOT_BLOCK);
+      blockStatus = 1;
+    }
+    // Target block mình
+    if (await BlockServices.isBlock(user_id, userId)) {
+      blockStatus = 2;
     }
 
     // Kiểm tra userId có trong bảng User hay không
     const userInfo = await User.findOne({ where: { id: userId } });
-    if (!userInfo) {
+    const _user = await User.findOne({ where: { id: user_id } });
+    if (!userInfo || !_user) {
       throw new BadRequestError(Message.USER_NOT_FOUND);
+    }
+
+    // Trường hợp người ta block mình thì chỉ cần thông tin cơ bản
+    if (blockStatus === 2) {
+      return {
+        id: _user.id,
+        username: _user.username,
+        email: _user.email,
+        avatar: _user.avatar,
+        phoneNumber: _user.phoneNumber,
+        coverImage: _user.coverImage,
+        createdAt: _user.createdAt,
+        totalFriends: -1
+      };
     }
 
     // Lấy số lượng bạn bè....
     const [totalFriends, friend, friendRequested, friendRequesting] = await Promise.all([
-      Friend.count({ userId }),
-      Friend.findOne({ userId, targetId: user_id }),
-      FriendRequest.findOne({ userId, targetId: user_id }),
-      FriendRequest.findOne({ userId: user_id, targetId: userId })
+      Friend.count({ where: { userId: user_id || userId } }),
+      Friend.findOne({ where: { userId, targetId: user_id } }), // Có là bạn bè hay k
+      FriendRequest.findOne({ where: { userId, targetId: user_id } }), // Có gửi yêu cầu kết bạn tới target chưa
+      FriendRequest.findOne({ where: { userId: user_id, targetId: userId } }) // Target có yêu cầu kết bạn tới mình k
     ]);
 
+    let conversationId = -1;
+    if (user_id !== userId) {
+      conversationId =
+        (await ConversationService.findConversationByMemberIds([userId, user_id]))?.Conversation?.id ?? -1;
+    }
+
     return {
-      id: userInfo.id,
-      role: userInfo.role,
-      username: userInfo.username,
-      avatar: userInfo.avatar,
-      phoneNumber: userInfo.phoneNumber,
-      coverImage: userInfo.coverImage,
-      // adress: FamilyInfo.address,
-      // name: FamilyInfo.name,
-      // Danh sách bạn bè
-      listing: String(totalFriends),
-      // is_friend: getIsFriend(friend, friendRequested, friendRequesting),
-      online: '1',
-      coins: userInfo.coins
+      id: _user.id,
+      username: _user.username,
+      email: _user.email,
+      avatar: _user.avatar,
+      phoneNumber: _user.phoneNumber,
+      coverImage: _user.coverImage,
+      createdAt: _user.createdAt,
+      totalFriends,
+      // online: '1',
+      // coins: _user.coins,
+      friendStatus: this.mapFriendStatus(friend, friendRequested, friendRequesting),
+      blockStatus,
+      conversationId
     };
   }
 
-  static async setUserInfo(userId, username, avatar, coverImage) {
+  static mapFriendStatus = (friend, friendRequested, friendRequesting) => {
+    if (friend) return 2;
+    if (friendRequested) return 1;
+    if (friendRequesting) return 3;
+    return 0;
+  };
+
+  static async setUserInfo({ userId, username, avatar, coverImage, phoneNumber }) {
     const userInfo = await User.findOne({ where: { id: userId } });
     // if (!userInfo) {
     //   throw new BadRequestError(Message.USER_NOT_FOUND);
     // }
 
     userInfo.username = username || userInfo.username;
-    userInfo.avatar = avatar || userInfo.avatar;
-    // userInfo.phoneNumber = phoneNumber || userInfo.phoneNumber;
-    userInfo.coverImage = coverImage || userInfo.coverImage;
+    if (avatar) {
+      const _oldUrl = userInfo.avatar;
+      userInfo.avatar = setFileUsed(avatar);
+      deleteFile(_oldUrl);
+    }
+    userInfo.phoneNumber = phoneNumber || userInfo.phoneNumber;
+    if (coverImage) {
+      const _oldUrl = userInfo.coverImage;
+      userInfo.coverImage = setFileUsed(coverImage);
+      deleteFile(_oldUrl);
+    }
     await userInfo.save();
     // if (body.username) user.username = body.username;
     // if (body.phonenumber) user.description = body.phonenumber;
@@ -286,13 +332,7 @@ export class userServices {
     // await this.User.save(user);
     // await this.Family.save();
 
-    return {
-      id: userId,
-      username,
-      // phoneNumber,I
-      avatar,
-      coverImage
-    };
+    return userInfo;
   }
 
   static async checkOldPassword(user, password) {
@@ -307,14 +347,13 @@ export class userServices {
     }
   }
 
-  static async changePassword(userId, newPassword) {
-    const user = await User.findOne({ where: { userId } });
+  static async changePassword(userId, oldPassword, newPassword) {
+    const user = await User.findByPk(userId);
+    // if (await this.comparePassword(oldPassword, user.password)) throw new BadRequestError(Message.WRONG_PASSWORD);
 
     await this.checkOldPassword(user, newPassword);
-
-    const oldPassword = user.password;
     user.password = await this.hashPassword(newPassword);
-    user.token = signToken(user.id, generateVerifyCode(6));
+    // user.token = signToken(user.id, generateVerifyCode(6));
     await user.save();
 
     await PasswordHistory.create({

@@ -10,14 +10,15 @@ import 'package:go_router/go_router.dart';
 import 'package:sns_deepfake/core/utils/utils.dart';
 import 'package:sns_deepfake/features/news_feed/news_feed.dart';
 
-import '../../../../config/configs.dart';
 import '../../../../core/widgets/widgets.dart';
 import '../../../app/app.dart';
 import '../../../group/group.dart';
 import '../widgets/grid_image_video.dart';
 
 class CreatePostPage extends StatefulWidget {
-  const CreatePostPage({super.key});
+  final bool fromMyProfile;
+
+  const CreatePostPage({super.key, this.fromMyProfile = false});
 
   @override
   State<CreatePostPage> createState() => _CreatePostPageState();
@@ -39,7 +40,6 @@ class _CreatePostPageState extends State<CreatePostPage>
 
   @override
   void initState() {
-    context.read<PostActionBloc>().add(ResetState());
     _selectedGroup.value = context.read<AppBloc>().state.groupIdx ?? 0;
 
     super.initState();
@@ -64,16 +64,27 @@ class _CreatePostPageState extends State<CreatePostPage>
     );
   }
 
-  void _handlePost() {
+  void _handlePost(BuildContext context) {
     if (_loading.value) return;
 
     _loading.value = true;
     context.read<PostActionBloc>().add(CreatePostSubmit(
-          groupId: _selectedGroup.value,
-          files: _files,
-          description: _controller.text,
-          status: "status",
-        ));
+        groupId: _selectedGroup.value,
+        files: _files,
+        description: _controller.text,
+        status: "status",
+        onSuccess: () {
+          if (widget.fromMyProfile) {
+            context.pop();
+          } else {
+            // Nếu không dùng goName ngay sau đấy thì sau khi pop xong ấn mở lại page này sẽ k hiện ???
+            context.pop();
+          }
+        },
+        onError: (msg) {
+          _loading.value = false;
+          context.showError(message: msg);
+        }));
   }
 
   void _handlePick(int type) async {
@@ -145,192 +156,176 @@ class _CreatePostPageState extends State<CreatePostPage>
     return Scaffold(
       backgroundColor:
           Theme.of(context).scaffoldBackgroundColor.withOpacity(0.8),
-      body: BlocListener<PostActionBloc, PostActionState>(
-        listener: (context, state) {
-          if (state is PAFailureState) {
-            _loading.value = false;
-            context.showError(message: state.message);
-          } else if (state is PASuccessfulState &&
-              state.type == "CREATE_POST") {
-            _loading.value = false;
-
-            // Nếu không dùng goName ngay sau đấy thì sau khi pop xong ấn mở lại page này sẽ k hiện ???
-            context
-              ..pop()
-              ..goNamed(Routes.newsFeed.name);
-          }
-        },
-        child: SliverPage(
-          title: "CREATE_POST_TITLE_TEXT".tr(),
-          centerTitle: true,
-          leading: IconButton(
-            onPressed: _handleExit,
-            icon: const Icon(FontAwesomeIcons.xmark),
-          ),
-          actions: [
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                padding: EdgeInsets.zero,
-                side: BorderSide.none,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8.r),
-                ),
-              ),
-              onPressed: _postable ? _handlePost : null,
-              child: ValueListenableBuilder(
-                valueListenable: _loading,
-                builder: (context, value, child) => value
-                    ? const AppIndicator(size: 22)
-                    : Text(
-                        "POST_TEXT".tr(),
-                        style: Theme.of(context).textTheme.titleLarge,
-                      ),
-              ),
-            ),
-            SizedBox(width: 6.w),
-          ],
-          slivers: [
-            /* Info */
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
-                child: BlocBuilder<AppBloc, AppState>(
-                  builder: (context, state) {
-                    return Row(
-                      children: [
-                        /* Avatar */
-                        AnimatedImage(
-                          width: 0.125.sw,
-                          height: 0.125.sw,
-                          url: state.user?.avatar?.fullPath ?? "",
-                          isAvatar: true,
-                        ),
-
-                        /* Info + Actions */
-                        SizedBox(width: 8.w),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text(
-                              state.user?.username ?? state.user?.email ?? "",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyLarge
-                                  ?.copyWith(fontWeight: FontWeight.bold),
-                            ),
-                            SizedBox(height: 2.h),
-
-                            /*  */
-                            InkWell(
-                              onTap: () => _handleSelectGroup(
-                                state.groups,
-                                state.user!.id!,
-                              ),
-                              borderRadius: BorderRadius.circular(3),
-                              child: ValueListenableBuilder(
-                                valueListenable: _selectedGroup,
-                                builder: (context, value, child) {
-                                  int _cur = state.groups
-                                      .indexWhere((e) => e.id == value);
-
-                                  return Container(
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(3),
-                                      color: AppColors.kPrimaryColor
-                                          .withOpacity(0.25),
-                                    ),
-                                    padding:
-                                        const EdgeInsets.symmetric(vertical: 3),
-                                    alignment: Alignment.center,
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        const SizedBox(width: 6),
-                                        Icon(
-                                          value != 0
-                                              ? FontAwesomeIcons.lock
-                                              : FontAwesomeIcons.earthAsia,
-                                          size: 13,
-                                        ),
-                                        const SizedBox(width: 6),
-                                        Text(
-                                          _cur == -1
-                                              ? "PUBLIC_TEXT".tr()
-                                              : state.groups[_cur].groupName ??
-                                                  "",
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyMedium
-                                              ?.copyWith(color: Colors.white),
-                                        ),
-                                        const SizedBox(width: 6),
-                                        const Icon(
-                                          FontAwesomeIcons.caretDown,
-                                          size: 13,
-                                        ),
-                                        const SizedBox(width: 3),
-                                      ],
-                                    ),
-                                  );
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    );
-                  },
-                ),
-              ),
-            ),
-
-            /* Text */
-            SliverToBoxAdapter(
-              child: InkWell(
-                onTap: () {},
-                child: TextField(
-                  focusNode: _fn,
-                  onTapOutside: (_) => _fn.unfocus(),
-                  onChanged: _handleInput,
-                  controller: _controller,
-                  maxLines: null,
-                  minLines: _files.isEmpty ? 20 : null,
-                  keyboardType: TextInputType.multiline,
-                  decoration: InputDecoration(
-                    hintText: 'WHATS_ON_YOUR_MIND_TEXT'.tr(),
-                    border: InputBorder.none,
-                    focusedBorder: InputBorder.none,
-                    enabledBorder: InputBorder.none,
-                    isDense: true,
-                    contentPadding: EdgeInsets.symmetric(
-                      horizontal: 10.w,
-                      vertical: 6.h,
-                    ),
-                    hintStyle: Theme.of(context).textTheme.bodySmall,
-                  ),
-                  cursorWidth: 1.5,
-                ),
-              ),
-            ),
-
-            /* Grid Image */
-            SliverToBoxAdapter(
-              child: GridImageVideo(
-                files: _files,
-                onDelete: _handleDelete,
-              ),
-            ),
-
-            /* Space */
-            SliverToBoxAdapter(
-              child: SizedBox(
-                height: 72.h,
-              ),
-            ),
-          ],
+      body: SliverPage(
+        title: "CREATE_POST_TITLE_TEXT".tr(),
+        centerTitle: true,
+        leading: IconButton(
+          onPressed: _handleExit,
+          icon: const Icon(FontAwesomeIcons.xmark),
         ),
+        actions: [
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              padding: EdgeInsets.zero,
+              side: BorderSide.none,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8.r),
+              ),
+            ),
+            onPressed: _postable ? () => _handlePost(context) : null,
+            child: ValueListenableBuilder(
+              valueListenable: _loading,
+              builder: (context, value, child) => value
+                  ? const AppIndicator(size: 22)
+                  : Text(
+                      "POST_TEXT".tr(),
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
+            ),
+          ),
+          SizedBox(width: 6.w),
+        ],
+        slivers: [
+          /* Info */
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
+              child: BlocBuilder<AppBloc, AppState>(
+                builder: (context, state) {
+                  return Row(
+                    children: [
+                      /* Avatar */
+                      AnimatedImage(
+                        width: 0.125.sw,
+                        height: 0.125.sw,
+                        url: state.user?.avatar?.fullPath ?? "",
+                        isAvatar: true,
+                      ),
+
+                      /* Info + Actions */
+                      SizedBox(width: 8.w),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            state.user?.username ?? state.user?.email ?? "",
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyLarge
+                                ?.copyWith(fontWeight: FontWeight.bold),
+                          ),
+                          SizedBox(height: 2.h),
+
+                          /*  */
+                          InkWell(
+                            onTap: () => _handleSelectGroup(
+                              state.groups,
+                              state.user!.id!,
+                            ),
+                            borderRadius: BorderRadius.circular(3),
+                            child: ValueListenableBuilder(
+                              valueListenable: _selectedGroup,
+                              builder: (context, value, child) {
+                                int _cur = state.groups
+                                    .indexWhere((e) => e.id == value);
+
+                                return Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(3),
+                                    color: AppColors.kPrimaryColor
+                                        .withOpacity(0.25),
+                                  ),
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 3),
+                                  alignment: Alignment.center,
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      const SizedBox(width: 6),
+                                      Icon(
+                                        value != 0
+                                            ? FontAwesomeIcons.lock
+                                            : FontAwesomeIcons.earthAsia,
+                                        size: 13,
+                                      ),
+                                      const SizedBox(width: 6),
+                                      Text(
+                                        _cur == -1
+                                            ? "PUBLIC_TEXT".tr()
+                                            : state.groups[_cur].groupName ??
+                                                "",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyMedium
+                                            ?.copyWith(color: Colors.white),
+                                      ),
+                                      const SizedBox(width: 6),
+                                      const Icon(
+                                        FontAwesomeIcons.caretDown,
+                                        size: 13,
+                                      ),
+                                      const SizedBox(width: 3),
+                                    ],
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  );
+                },
+              ),
+            ),
+          ),
+
+          /* Text */
+          SliverToBoxAdapter(
+            child: InkWell(
+              onTap: () {},
+              child: TextField(
+                focusNode: _fn,
+                onTapOutside: (_) => _fn.unfocus(),
+                onChanged: _handleInput,
+                controller: _controller,
+                maxLines: null,
+                minLines: _files.isEmpty ? 20 : null,
+                keyboardType: TextInputType.multiline,
+                decoration: InputDecoration(
+                  hintText: 'WHATS_ON_YOUR_MIND_TEXT'.tr(),
+                  border: InputBorder.none,
+                  focusedBorder: InputBorder.none,
+                  enabledBorder: InputBorder.none,
+                  isDense: true,
+                  contentPadding: EdgeInsets.symmetric(
+                    horizontal: 10.w,
+                    vertical: 6.h,
+                  ),
+                  hintStyle: Theme.of(context).textTheme.bodySmall,
+                ),
+                cursorWidth: 1.5,
+              ),
+            ),
+          ),
+
+          /* Grid Image */
+          SliverToBoxAdapter(
+            child: GridImageVideo(
+              files: _files,
+              onDelete: _handleDelete,
+            ),
+          ),
+
+          /* Space */
+          SliverToBoxAdapter(
+            child: SizedBox(
+              height: 72.h,
+            ),
+          ),
+        ],
       ),
       bottomSheet: BottomSheet(
         enableDrag: true,

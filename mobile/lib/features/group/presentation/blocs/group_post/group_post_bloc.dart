@@ -1,3 +1,5 @@
+// ignore_for_file: invalid_use_of_visible_for_testing_member
+
 import 'dart:async';
 import 'dart:ui';
 
@@ -117,7 +119,11 @@ class GroupPostBloc extends Bloc<GroupPostEvent, GroupPostState> {
 
         event.onSuccess();
 
-        appBloc.add(UpdateCoin(int.parse(data.data['coins'])));
+        appBloc.emit(appBloc.state.copyWith(
+          user: appBloc.state.user
+              ?.copyWith(coins: int.parse(data.data['coins'])),
+          triggerRedirect: false,
+        ));
         listPostBloc.add(AddPost(post));
       },
     );

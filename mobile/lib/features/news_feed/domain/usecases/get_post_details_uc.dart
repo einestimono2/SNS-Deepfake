@@ -5,19 +5,13 @@ import '../../../../core/errors/failures.dart';
 import '../../data/data.dart';
 import '../repositories/post_repository.dart';
 
-class GetPostDetailsUC extends UseCase<PostModel, GetPostDetailsParams> {
+class GetPostDetailsUC extends UseCase<PostModel, IdParams> {
   final PostRepository repository;
 
   GetPostDetailsUC({required this.repository});
 
   @override
   Future<Either<Failure, PostModel>> call(params) async {
-    return await repository.getPostDetails(params.postId);
+    return await repository.getPostDetails(params.id);
   }
-}
-
-class GetPostDetailsParams {
-  final int postId;
-
-  const GetPostDetailsParams(this.postId);
 }

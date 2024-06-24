@@ -218,39 +218,36 @@ class PostGridImage extends StatelessWidget {
     );
 
     return Expanded(
-      child: InkWell(
-        onTap: () => _openBottomSheet(context, imageIdx),
-        child: (imageIdx == 3 && files.length > 5)
-            ? Stack(
-                children: [
-                  _img,
-                  Text(
-                    '+${files.length - 4}',
-                    style: TextStyle(
-                      fontSize: 26.sp,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  )
-                ],
-              )
-            : _img,
-      ),
+      child: (imageIdx == 3 && files.length > 5)
+          ? Stack(
+              children: [
+                _img,
+                Text(
+                  '+${files.length - 4}',
+                  style: TextStyle(
+                    fontSize: 26.sp,
+                    fontWeight: FontWeight.bold,
+                  ),
+                )
+              ],
+            )
+          : _img,
     );
   }
 
-  void _openBottomSheet(BuildContext context, int idx) {
-    showModalBottomSheet(
-      context: context,
-      enableDrag: false,
-      isScrollControlled: true, // full screen
-      useSafeArea: true,
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
-      builder: (context) => ModalPostListMedia(
-        files: files,
-        isVideo: false,
-      ),
-    );
-  }
+  // void _openBottomSheet(BuildContext context, int idx) {
+  //   showModalBottomSheet(
+  //     context: context,
+  //     enableDrag: false,
+  //     isScrollControlled: true, // full screen
+  //     useSafeArea: true,
+  //     shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+  //     builder: (context) => ModalPostListMedia(
+  //       files: files,
+  //       isVideo: false,
+  //     ),
+  //   );
+  // }
 }
 
 class PostGridVideo extends StatelessWidget {

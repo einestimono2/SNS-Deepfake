@@ -10,16 +10,24 @@ import '../../data/data.dart';
 
 class FriendCard extends StatelessWidget {
   final FriendModel friend;
+  final int myId;
 
-  const FriendCard({super.key, required this.friend});
+  const FriendCard({
+    super.key,
+    required this.friend,
+    required this.myId,
+  });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => context.pushNamed(
-        Routes.otherProfile.name,
-        pathParameters: {"id": friend.id.toString()},
-      ),
+      onTap: () => myId == friend.id
+          ? context.pushNamed(Routes.myProfile.name)
+          : context.pushNamed(
+              Routes.otherProfile.name,
+              pathParameters: {"id": friend.id.toString()},
+              extra: {'username': friend.username},
+            ),
       child: Container(
         padding: EdgeInsets.fromLTRB(16.w, 8.h, 8.w, 8.h),
         child: Row(

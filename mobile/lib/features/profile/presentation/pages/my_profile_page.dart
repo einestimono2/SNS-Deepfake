@@ -7,13 +7,19 @@ import 'package:go_router/go_router.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:sns_deepfake/core/utils/utils.dart';
 import 'package:sns_deepfake/features/news_feed/presentation/widgets/color_separate.dart';
+import 'package:sns_deepfake/features/profile/profile.dart';
 
 import '../../../../config/configs.dart';
 import '../../../../core/widgets/widgets.dart';
 import '../../../app/app.dart';
 import '../../../authentication/data/data.dart';
 import '../../../friend/friend.dart';
+import '../../../news_feed/presentation/widgets/post_card.dart';
+import '../../../news_feed/presentation/widgets/shimmer_post.dart';
+import '../blocs/blocs.dart';
 import '../widgets/profile_friend_card.dart';
+import '../widgets/shimmer_user_friends.dart';
+import '../widgets/user_info_card.dart';
 
 class MyProfilePage extends StatefulWidget {
   const MyProfilePage({super.key});
@@ -28,16 +34,94 @@ class _MyProfilePageState extends State<MyProfilePage> {
 
   final double py = 12.0;
 
+  final ValueNotifier<bool> _avatarLoading = ValueNotifier(false);
+  final ValueNotifier<bool> _coverLoading = ValueNotifier(false);
+
+  late final _scrollController = ScrollController();
+  int _page = 1;
+  bool _loadingMore = false;
+  bool _hasReachedMax = false;
+
+  void _handleChangeAvatar(String? url) {
+    if (url == null) return;
+
+    // loading.value = true -- gọi khi chọn ảnh xong r
+    context.read<ProfileActionBloc>().add(UpdateProfileSubmit(
+          avatar: url,
+          onSuccess: () {
+            _avatarLoading.value = false;
+            _avatar.value = url.fullPath;
+          },
+          onError: (msg) {
+            _avatarLoading.value = false;
+            context.showError(message: msg);
+          },
+        ));
+  }
+
+  void _handleChangePhoto(String? url) {
+    if (url == null) return;
+
+    // loading.value = true -- gọi khi chọn ảnh xong r
+    context.read<ProfileActionBloc>().add(UpdateProfileSubmit(
+          coverPhoto: url,
+          onSuccess: () {
+            _coverLoading.value = false;
+            _cover.value = url.fullPath;
+          },
+          onError: (msg) {
+            _coverLoading.value = false;
+            context.showError(message: msg);
+          },
+        ));
+  }
+
   @override
   void initState() {
-    if (context.read<ListFriendBloc>().state is! LFSuccessfulState) {
-      context.read<ListFriendBloc>().add(const GetListFriend(
-            page: 1,
-            size: AppStrings.listFriendPageSize,
-          ));
+    // if (context.read<ListFriendBloc>().state is! LFSuccessfulState) {
+    _getMyFriends();
+    // }
+
+    if (context.read<MyPostsBloc>().state is! MyPostsSuccessfulState) {
+      _getMyPosts();
     }
 
     super.initState();
+
+    _scrollController.addListener(_scrollListener);
+  }
+
+  void _getMyPosts() {
+    context.read<MyPostsBloc>().add(const GetMyPosts(
+          page: 1,
+          size: AppStrings.listFriendPageSize,
+        ));
+  }
+
+  void _getMyFriends() {
+    context.read<ListFriendBloc>().add(const GetListFriend(
+          page: 1,
+          size: AppStrings.listFriendPageSize,
+        ));
+  }
+
+  Future<void> handleRefresh() async {
+    _getMyPosts();
+    _getMyFriends();
+  }
+
+  void _scrollListener() {
+    if (_scrollController.position.pixels ==
+            _scrollController.position.maxScrollExtent &&
+        !_loadingMore &&
+        !_hasReachedMax) {
+      _loadingMore = true;
+
+      context.read<MyPostsBloc>().add(LoadMoreMyPosts(
+            page: ++_page,
+            size: AppStrings.listPostPageSize,
+          ));
+    }
   }
 
   @override
@@ -47,6 +131,8 @@ class _MyProfilePageState extends State<MyProfilePage> {
         title: state.user?.username ?? state.user?.email ?? "PROFILE_TEXT".tr(),
         titleStyle: Theme.of(context).textTheme.headlineSmall?.sectionStyle,
         titleSpacing: 0,
+        controller: _scrollController,
+        onRefresh: handleRefresh,
         slivers: [
           SliverToBoxAdapter(
             child: Stack(
@@ -72,44 +158,28 @@ class _MyProfilePageState extends State<MyProfilePage> {
                         isSliverType: false,
                         paddingVertical: 0,
                       ),
+                      UserInfoCard(user: state.user!, paddingHorizontal: py),
 
                       /*  */
-                      _userInfo(state.user!),
+                      const SizedBox(height: 16),
+                      const ColorSeparate(
+                        isSliverType: false,
+                        paddingVertical: 0,
+                      ),
                       _userFriends(),
+
+                      /*  */
+                      const SizedBox(height: 16),
+                      const ColorSeparate(
+                        isSliverType: false,
+                        paddingVertical: 0,
+                      ),
+                      _userPosts(state.user!),
                     ],
                   ),
                 ),
               ],
             ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _userInfo(UserModel user) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: py),
-      child: Column(
-        children: [
-          SectionTitle(
-            title: "PROFILE_DETAILS_TEXT".tr(),
-            onShowMore: () {},
-            showMoreText: "UPDATE_TEXT".tr(),
-          ),
-          const SizedBox(height: 12),
-          _infoRow(Icons.email, "EMAIL_TEXT".tr(), user.email),
-          const SizedBox(height: 4),
-          Divider(
-            thickness: 0.25,
-            height: 1,
-            color: context.minBackgroundColor(),
-          ),
-          const SizedBox(height: 4),
-          _infoRow(
-            Icons.phone,
-            "PHONE_NUMBER_TEXT".tr(),
-            user.phoneNumber.toString(),
           ),
         ],
       ),
@@ -123,7 +193,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
         (1.sw - py * 2 - separateSize * (numCard - 1)) / numCard;
 
     return Padding(
-      padding: EdgeInsets.only(left: py, right: py, top: 18),
+      padding: EdgeInsets.only(left: py, right: py),
       child: BlocBuilder<ListFriendBloc, ListFriendState>(
         builder: (context, state) {
           int numFriends = state is LFSuccessfulState ? state.totalCount : 0;
@@ -132,7 +202,6 @@ class _MyProfilePageState extends State<MyProfilePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SectionTitle(
-                showTopSeparate: true,
                 title: "PROFILE_FRIENDS_TEXT".tr(),
                 onShowMore: () => context.goNamed(Routes.friend.name),
                 showMoreText: "FIND_FRIEND_TEXT".tr(),
@@ -143,6 +212,26 @@ class _MyProfilePageState extends State<MyProfilePage> {
                   style: Theme.of(context).textTheme.labelMedium,
                 ),
               const SizedBox(height: 16),
+
+              /*  */
+              if (state is LFFailureState)
+                Container(
+                  width: double.infinity,
+                  alignment: Alignment.center,
+                  child: ErrorCard(
+                    message: state.message,
+                    onRefresh: _getMyFriends,
+                  ),
+                ),
+
+              /*  */
+              if (state is LFInProgressState || state is LFInitialState)
+                ShimmerUserFriends(
+                  cardWidth: cardWidth,
+                  separateWidth: separateSize,
+                ),
+
+              /*  */
               if (state is LFSuccessfulState && numFriends == 0)
                 Center(
                   child: NoDataCard(
@@ -159,6 +248,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
                       .map((e) => ProfileFriendCard(
                             friendModel: e,
                             width: cardWidth,
+                            fromMyProfile: true,
                           ))
                       .toList(),
                 ),
@@ -174,37 +264,58 @@ class _MyProfilePageState extends State<MyProfilePage> {
     );
   }
 
-  Widget _infoRow(IconData icon, String label, String text) {
-    return Row(
+  Widget _userPosts(UserModel user) {
+    return Column(
       children: [
-        Row(
-          children: [
-            SizedBox(
-              width: 0.35.sw,
-              child: Row(
-                children: [
-                  Icon(
-                    icon,
-                    size: 14.sp,
-                    color: Theme.of(context).textTheme.labelMedium?.color,
-                  ),
-                  const SizedBox(width: 6),
-                  Text(
-                    label,
-                    style: Theme.of(context)
-                        .textTheme
-                        .labelMedium
-                        ?.copyWith(fontSize: 14.sp),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(width: 6),
-            Text(
-              text,
-              style: Theme.of(context).textTheme.titleMedium,
-            ),
-          ],
+        SectionTitle(
+          margin: EdgeInsets.only(left: py, right: py, bottom: 16),
+          title: "YOUR_POSTS_TEXT".tr(),
+        ),
+
+        /*  */
+        _createPostOption(user),
+        const SizedBox(height: 6),
+        const ColorSeparate(isSliverType: false, paddingVertical: 6),
+
+        /*  */
+        BlocBuilder<MyPostsBloc, MyPostsState>(
+          builder: (context, state) {
+            if (state is MyPostsInProgressState ||
+                state is MyPostsInitialState) {
+              return const ShimmerPost(length: 5);
+            } else if (state is MyPostsSuccessfulState) {
+              _loadingMore = false;
+              _hasReachedMax = state.hasReachedMax;
+
+              if (state.posts.isEmpty) {
+                return const SizedBox.shrink();
+              }
+
+              return ListView.separated(
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                separatorBuilder: (context, index) =>
+                    const ColorSeparate(isSliverType: false),
+                itemCount: state.hasReachedMax
+                    ? state.posts.length
+                    : state.posts.length + 1,
+                itemBuilder: (_, idx) => idx < state.posts.length
+                    ? PostCard(
+                        post: state.posts[idx],
+                        myId: user.id!,
+                      )
+                    : const Padding(
+                        padding: EdgeInsets.only(top: 16.0),
+                        child: Center(child: AppIndicator(size: 32)),
+                      ),
+              );
+            } else {
+              return ErrorCard(
+                onRefresh: _getMyPosts,
+                message: (state as MyPostsFailureState).message,
+              );
+            }
+          },
         ),
       ],
     );
@@ -230,10 +341,11 @@ class _MyProfilePageState extends State<MyProfilePage> {
           Align(
             alignment: Alignment.bottomRight,
             child: UploadButton(
+              loading: _avatarLoading,
               size: 16.r,
               id: "MY_PROFILE_AVATAR",
               onCompleted: (url, id) =>
-                  id == "MY_PROFILE_AVATAR" ? _avatar.value = url : null,
+                  id == "MY_PROFILE_AVATAR" ? _handleChangeAvatar(url) : null,
               icon: FontAwesomeIcons.camera,
               cropStyle: CropStyle.circle,
             ),
@@ -254,22 +366,60 @@ class _MyProfilePageState extends State<MyProfilePage> {
         ),
         child: ValueListenableBuilder(
           valueListenable: _cover,
-          builder: (context, coverImage, child) => coverImage != null
-              ? RemoteImage(url: coverImage.fullPath)
-              : RemoteImage(url: converImage),
+          builder: (context, coverImage, child) => AnimatedImage(
+            url: coverImage != null ? coverImage.fullPath : converImage,
+            errorImage: AppImages.imagePlaceholder,
+          ),
         ),
       ),
       Positioned(
         right: 6.w,
         top: 0.25.sh - 16.r * 2 - 6.w,
         child: UploadButton(
+          loading: _coverLoading,
           size: 16.r,
           id: "MY_PROFILE_COVER_IMAGE",
           onCompleted: (url, id) =>
-              id == "MY_PROFILE_COVER_IMAGE" ? _cover.value = url : null,
+              id == "MY_PROFILE_COVER_IMAGE" ? _handleChangePhoto(url) : null,
           icon: FontAwesomeIcons.camera,
         ),
       ),
     ];
+  }
+
+  Widget _createPostOption(UserModel user) {
+    return Row(
+      children: [
+        SizedBox(width: py),
+        AnimatedImage(
+          width: 0.1.sw,
+          height: 0.1.sw,
+          url: user.avatar?.fullPath ?? "",
+          isAvatar: true,
+        ),
+        Expanded(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 6.w),
+            child: InkWell(
+              borderRadius: BorderRadius.circular(6.r),
+              onTap: () => context.pushNamed(
+                Routes.createPost.name,
+                extra: {"fromMyProfile": true},
+              ),
+              child: Container(
+                height: 0.1.sw,
+                padding: EdgeInsets.only(left: 6.w),
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'WHATS_ON_YOUR_MIND_TEXT'.tr(),
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+              ),
+            ),
+          ),
+        ),
+        SizedBox(width: py),
+      ],
+    );
   }
 }

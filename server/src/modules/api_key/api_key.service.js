@@ -29,7 +29,9 @@ export class ApiKeyServices {
   }
 
   static async getApiKeys() {
-    const apiKeys = await ApiKey.findAndCountAll();
+    const apiKeys = await ApiKey.findAndCountAll({
+      distinct: true
+    });
 
     return {
       apiKeys: apiKeys.rows,

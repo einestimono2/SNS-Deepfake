@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sns_deepfake/core/utils/extensions/image_path.dart';
 import 'package:sns_deepfake/core/utils/extensions/theme_mode.dart';
@@ -25,20 +26,39 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    return SliverPage(
-      title: "PROFILE_TEXT".tr(),
-      actions: [
-        IconButton(
-          tooltip: "SETTING_TEXT".tr(),
-          enableFeedback: true,
-          onPressed: () => context.goNamed(Routes.setting.name),
-          icon: const Icon(Icons.settings),
-        )
-      ],
-      slivers: [
-        BlocBuilder<AppBloc, AppState>(
-          builder: (context, state) {
-            return SliverList.list(
+    return BlocBuilder<AppBloc, AppState>(
+      builder: (context, state) {
+        return SliverPage(
+          title: "PROFILE_TEXT".tr(),
+          actions: [
+            OutlinedButton.icon(
+              onPressed: () => context.goNamed(Routes.buyCoins.name),
+              style: OutlinedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(horizontal: 12),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ),
+              icon: const Icon(
+                FontAwesomeIcons.coins,
+                size: 16,
+                color: Colors.yellow,
+              ),
+              label: Text(
+                state.user?.coins?.toString() ?? "0",
+                style: Theme.of(context).textTheme.bodyLarge,
+              ),
+            ),
+            const SizedBox(width: 8),
+            IconButton(
+              tooltip: "SETTING_TEXT".tr(),
+              enableFeedback: true,
+              onPressed: () => context.goNamed(Routes.setting.name),
+              icon: const Icon(Icons.settings),
+            ),
+          ],
+          slivers: [
+            SliverList.list(
               children: [
                 /* My Info */
                 Divider(
@@ -46,59 +66,91 @@ class _ProfilePageState extends State<ProfilePage> {
                   thickness: 0.5,
                   color: context.minBackgroundColor(),
                 ),
+                _myInfo(context, state),
+
+                /*  */
+                Container(height: 8, color: context.minBackgroundColor()),
+
+                /*  */
                 ListTile(
-                  onTap: () => context.goNamed(Routes.myProfile.name),
-                  contentPadding: EdgeInsets.symmetric(
-                    horizontal: 16.w,
-                    vertical: 4.h,
-                  ),
-                  leading: AnimatedImage(
-                    isAvatar: true,
-                    url: state.user?.avatar?.fullPath ?? "",
-                    width: 0.125.sw,
-                    height: 0.125.sw,
-                  ),
+                  onTap: () => context.goNamed(Routes.buyCoins.name),
+                  leading: const Icon(FontAwesomeIcons.bolt, size: 18),
                   title: Text(
-                    state.user?.username ?? state.user?.email ?? "",
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyMedium
-                        ?.copyWith(fontWeight: FontWeight.bold),
+                    "BUY_COINS_TEXT".tr(),
+                    style: Theme.of(context).textTheme.bodyMedium,
                   ),
-                  subtitle: Text(
-                    "SEE_PERSONAL_PAGE_TEXT".tr(),
-                    style: Theme.of(context).textTheme.bodySmall,
+                ),
+                /*  */
+                ListTile(
+                  onTap: () => context.goNamed(Routes.videoDF.name),
+                  leading: const Icon(FontAwesomeIcons.clapperboard, size: 18),
+                  title: Text(
+                    "Video Deepfake",
+                    style: Theme.of(context).textTheme.bodyMedium,
                   ),
                 ),
 
                 /*  */
-                SizedBox(height: 0.5.sh),
+                Container(height: 8, color: context.minBackgroundColor()),
 
-                /* Logout btn */
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16.w),
-                  child: ElevatedButton.icon(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: context.minBackgroundColor(),
-                      side: BorderSide.none,
-                      padding: EdgeInsets.zero,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(6),
-                      ),
-                    ),
-                    onPressed: _handleLogout,
-                    icon: Icon(Icons.logout, color: context.minTextColor()),
-                    label: Text(
-                      "LOGOUT_TEXT".tr(),
-                      style: TextStyle(color: context.minTextColor()),
-                    ),
+                /*  */
+                ListTile(
+                  onTap: () => context.goNamed(Routes.updatePassword.name),
+                  leading: const Icon(Icons.password, size: 18),
+                  title: Text(
+                    "CHANGE_PASSWORD_TEXT".tr(),
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                ),
+
+                /*  */
+                ListTile(
+                  onTap: _handleLogout,
+                  leading: const Icon(
+                    FontAwesomeIcons.arrowRightFromBracket,
+                    size: 18,
+                  ),
+                  title: Text(
+                    "LOGOUT_TEXT".tr(),
+                    style: Theme.of(context).textTheme.bodyMedium,
                   ),
                 ),
               ],
-            );
-          },
-        )
-      ],
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  ListTile _myInfo(BuildContext context, AppState state) {
+    return ListTile(
+      onTap: () => context.goNamed(Routes.myProfile.name),
+      contentPadding: EdgeInsets.symmetric(
+        horizontal: 16.w,
+        vertical: 4.h,
+      ),
+      leading: AnimatedImage(
+        isAvatar: true,
+        url: state.user?.avatar?.fullPath ?? "",
+        width: 0.125.sw,
+        height: 0.125.sw,
+      ),
+      title: Text(
+        state.user?.username ?? state.user?.email ?? "",
+        style: Theme.of(context)
+            .textTheme
+            .bodyMedium
+            ?.copyWith(fontWeight: FontWeight.bold),
+      ),
+      subtitle: Text(
+        "SEE_PERSONAL_PAGE_TEXT".tr(),
+        style: Theme.of(context).textTheme.bodySmall,
+      ),
+      trailing: const Icon(
+        FontAwesomeIcons.arrowUpRightFromSquare,
+        size: 18,
+      ),
     );
   }
 }

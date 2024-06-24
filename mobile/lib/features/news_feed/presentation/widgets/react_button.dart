@@ -5,15 +5,15 @@ import 'package:sns_deepfake/core/libs/libs.dart';
 import '../../../../core/utils/utils.dart';
 
 class ReactionButton extends StatefulWidget {
-  final String label;
-  final IconData icon;
   final double width;
+  final int currentReaction;
+  final Function(int) onClick;
 
   const ReactionButton({
     super.key,
-    required this.label,
-    required this.icon,
     required this.width,
+    required this.onClick,
+    this.currentReaction = -1,
   });
 
   @override
@@ -28,17 +28,41 @@ class _ReactionButtonState extends State<ReactionButton> {
     return OverlayPopup(
       controller: _controller,
       menu: reactMenu(),
-      verticalMargin: 20.h,
-      horizontalMargin: 0.1.sw,
+      verticalMargin: 25.h,
       showArrow: false,
-      child: NormalReactionButton(
-        label: widget.label,
-        icon: widget.icon,
-        width: widget.width,
-        onTap: () {
-          // TODO: Click -> like
-        },
+      position: PopupPosition.top,
+      child: InkWell(
+        onTap: () => widget.onClick(widget.currentReaction != -1 ? -1 : 1),
         onLongPress: () => _controller.showMenu(),
+        borderRadius: BorderRadius.circular(6.r),
+        child: Container(
+          width: widget.width,
+          alignment: Alignment.center,
+          padding: EdgeInsets.symmetric(vertical: 6.h),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(
+                AppMappers.getReactionIcon(widget.currentReaction),
+                size: 18.sp,
+                color: AppMappers.getReactionColor(
+                    context, widget.currentReaction),
+              ),
+              SizedBox(width: 6.w),
+              Text(
+                AppMappers.getReactionText(widget.currentReaction),
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      height: 0,
+                      color: AppMappers.getReactionColor(
+                        context,
+                        widget.currentReaction,
+                      ),
+                    ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -53,24 +77,26 @@ class _ReactionButtonState extends State<ReactionButton> {
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
         child: Row(
           children: [
-            SizedBox.square(
-              dimension: 36,
-              child: Image.asset(AppImages.likeReaction),
+            GestureDetector(
+              onTap: () {
+                _controller.hideMenu();
+                widget.onClick(1);
+              },
+              child: SizedBox.square(
+                dimension: 36,
+                child: Image.asset(AppImages.likeReaction),
+              ),
             ),
             const SizedBox(width: 6),
-            SizedBox.square(
-              dimension: 36,
-              child: Image.asset(AppImages.loveReaction),
-            ),
-            const SizedBox(width: 6),
-            SizedBox.square(
-              dimension: 36,
-              child: Image.asset(AppImages.hahaReaction),
-            ),
-            const SizedBox(width: 6),
-            SizedBox.square(
-              dimension: 36,
-              child: Image.asset(AppImages.sadReaction),
+            GestureDetector(
+              onTap: () {
+                _controller.hideMenu();
+                widget.onClick(0);
+              },
+              child: SizedBox.square(
+                dimension: 36,
+                child: Image.asset(AppImages.dislikeReaction),
+              ),
             ),
           ],
         ),

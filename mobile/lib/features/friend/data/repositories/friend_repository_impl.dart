@@ -109,4 +109,15 @@ class FriendRepositoryImpl extends BaseRepositoryImpl
       },
     );
   }
+  
+  @override
+  Future<Either<Failure, bool>> unsentRequest(int targetId) async {
+    return await checkNetwork<bool>(
+      () async {
+        final result = await remote.unsentRequest(targetId);
+
+        return Right(result);
+      },
+    );
+  }
 }

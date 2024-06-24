@@ -6,3 +6,4 @@ export 'usecases/get_suggested_friends_uc.dart';
 export 'usecases/refuse_request_uc.dart';
 export 'usecases/send_request_uc.dart';
 export 'usecases/unfriend_uc.dart';
+export 'usecases/unsent_request_uc.dart';
