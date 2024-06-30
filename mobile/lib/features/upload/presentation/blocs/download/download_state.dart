@@ -9,7 +9,14 @@ sealed class DownloadState extends Equatable {
 
 final class DownloadInitialState extends DownloadState {}
 
-final class DownloadInProgressState extends DownloadState {}
+final class DownloadInProgressState extends DownloadState {
+  final int percent;
+
+  const DownloadInProgressState([this.percent = 0]);
+
+  @override
+  List<Object> get props => [percent];
+}
 
 final class DownloadSuccessfulState extends DownloadState {}
 

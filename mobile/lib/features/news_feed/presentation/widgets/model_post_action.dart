@@ -53,15 +53,16 @@ class ModelPostAction extends StatelessWidget {
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
               ),
-            // if (!isOwner)
-            ListTile(
-              onTap: () => _handleReport(context),
-              leading: const Icon(FontAwesomeIcons.circleExclamation, size: 19),
-              title: Text(
-                "ACTION_REPORT_POST_TEXT".tr(),
-                style: Theme.of(context).textTheme.bodyLarge,
+            if (!isOwner)
+              ListTile(
+                onTap: () => _handleReport(context),
+                leading:
+                    const Icon(FontAwesomeIcons.circleExclamation, size: 19),
+                title: Text(
+                  "ACTION_REPORT_POST_TEXT".tr(),
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
               ),
-            ),
           ],
         ),
       ),

@@ -8,14 +8,14 @@ sealed class DownloadEvent extends Equatable {
 }
 
 class DownloadVideoSubmit extends DownloadEvent {
-  final String fileName;
+  final String url;
   final BuildContext context;
 
   const DownloadVideoSubmit({
-    required this.fileName,
+    required this.url,
     required this.context,
   });
 
   @override
-  List<Object> get props => [fileName];
+  List<Object> get props => [url];
 }

@@ -59,6 +59,7 @@ Future<void> entryPoint() async {
             BlocProvider(create: (_) => di.sl<ListFriendBloc>()),
             BlocProvider(create: (_) => di.sl<FriendActionBloc>()),
             BlocProvider(create: (_) => di.sl<SearchUserBloc>()),
+            BlocProvider(create: (_) => di.sl<SearchPostBloc>()),
             BlocProvider(create: (_) => di.sl<SearchHistoryBloc>()),
             BlocProvider(create: (_) => di.sl<PostActionBloc>()),
             BlocProvider(create: (_) => di.sl<ListPostBloc>()),

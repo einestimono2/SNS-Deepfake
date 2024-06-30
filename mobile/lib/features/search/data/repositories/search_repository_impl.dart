@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:sns_deepfake/features/news_feed/data/models/post_model.dart';
 import 'package:sns_deepfake/features/search/data/models/search_model.dart';
 
 import '../../../../core/base/base.dart';
@@ -54,7 +55,7 @@ class SearchRepositoryImpl extends BaseRepositoryImpl
       },
     );
   }
-  
+
   @override
   Future<Either<Failure, bool>> deleteHistory({
     String? keyword,
@@ -70,6 +71,27 @@ class SearchRepositoryImpl extends BaseRepositoryImpl
         );
 
         return Right(result);
+      },
+    );
+  }
+
+  @override
+  Future<Either<Failure, PaginationResult<PostModel>>> searchPost({
+    int? page,
+    int? size,
+    required String keyword,
+    required bool cache,
+  }) async {
+    return await checkNetwork<PaginationResult<PostModel>>(
+      () async {
+        final users = await remote.searchPost(
+          page: page,
+          size: size,
+          keyword: keyword,
+          cache: cache,
+        );
+
+        return Right(users);
       },
     );
   }

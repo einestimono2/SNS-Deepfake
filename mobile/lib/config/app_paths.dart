@@ -1,7 +1,7 @@
 class Endpoints {
   Endpoints._();
 
-  static const String serverIP = "http://192.168.1.6";
+  static const String serverIP = "http://192.168.1.25";
   // static const String serverIP = "http://10.10.0.157";
 
   static const String baseDevelopmentUrl = "$serverIP:8888";
@@ -56,12 +56,14 @@ class Endpoints {
 
   static const String myConversations = '/conversation/list';
   static const String createConversation = '/conversation/create';
+  static const String getSingleConversationByMembers = '/conversation/get_single_conversation_by_members';
   static const String conversationDetails = '/conversation/details/:id';
   static const String seenConversation = '/conversation/seen/:id';
   static const String sendMessage = '/message/create';
   static const String conversationMessages = '/message/list/:conversationId';
 
   static const String searchUser = '/search/search_user'; // GET
+  static const String searchPost = '/search/search_post'; // GET
   static const String searchHistory = '/search/get_saved_search'; // GET
   static const String deleteHistory = '/search/delete_saved_search'; // DELETE
 
@@ -114,6 +116,8 @@ class Routes {
   static final chat = Route(name: "chat", path: "/chat");
   static final conversation =
       Route(name: "conversation", path: "conversation/:id");
+  static final createConversation =
+      Route(name: "create_conversation", path: "create_conversation");
 
   static final video = Route(name: "video", path: "/video");
 

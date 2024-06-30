@@ -158,6 +158,7 @@
     "DELETE_GROUP_DIALOG_CONTENT_TEXT": "Nhóm bị xóa sẽ không thể khôi phục lại. Bạn có chắc muốn tiếp tục?",
     "CREATE_GROUP_POST_HINT_TEXT": "Viết gì đó...",
     "MEMBERS_OF_TEXT": "Thành viên của",
+    "EMPTY_CONVERSATION_PAGE_TEXT": "Gửi tin nhắn đầu tiên để bắt đầu cuộc trò chuyện!",
 
     "SEE_MORE_TEXT": "Xem thêm",
     "SEE_ALL_TEXT": "Xem tất cả",
@@ -228,6 +229,10 @@
         "other": "đang nhập ..."
     },
     "JUST_CREATED_CONVERSATION_TEXT": "Vừa tạo cuộc hội thoại!",
+    "CONVERSATION_NAME_HINT_TEXT": "Tên nhóm (không bắt buộc)",
+    "CONVERSATION_NAME_TEXT": "Tên nhóm",
+    "CREATE_CONVERSATION_TITLE_TEXT": "Tin nhắn mới",
+    "CONVERSATION_MEMBERS_TEXT": "Thành viên",
 
     "DISCOUNT_TEXT": "Khuyến mãi",
     "COIN_PACKAGES_TEXT": "Gói xu",

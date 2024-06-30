@@ -12,19 +12,23 @@ part 'conversation_details_state.dart';
 
 class ConversationDetailsBloc
     extends Bloc<ConversationDetailsEvent, ConversationDetailsState> {
-  final MyConversationsBloc myConversationsBloc;
-  final AppBloc appBloc;
-
+  final GetConversationIdUC getConversationIdUC;
   final GetConversationDetailsUC getConversationDetailsUC;
   final GetConversationMessagesUC getConversationMessagesUC;
   final SeenConversationUC seenConversationUC;
+  final CreateConversationUC createConversationUC;
+
+  final AppBloc appBloc;
+  final MyConversationsBloc myConversationsBloc;
 
   ConversationDetailsBloc({
     required this.myConversationsBloc,
     required this.appBloc,
     required this.getConversationDetailsUC,
     required this.getConversationMessagesUC,
+    required this.createConversationUC,
     required this.seenConversationUC,
+    required this.getConversationIdUC,
   }) : super(CDInitialState()) {
     on<GetConversationDetails>(_onGetConversationDetails);
     on<NewMessageEvent>(_onNewMessageEvent);
@@ -32,6 +36,8 @@ class ConversationDetailsBloc
     on<UpdateMessageEvent>(_onUpdateMessageEvent);
     on<SeenConversation>(_onSeenConversation);
     on<LoadMoreConversationDetails>(_onLoadMoreConversationDetails);
+    on<GetSingleConversationByMembers>(_onGetSingleConversationByMembers);
+    on<CreateGroupChatSubmit>(_onCreateGroupChatSubmit);
   }
 
   FutureOr<void> _onGetConversationDetails(
@@ -201,5 +207,39 @@ class ConversationDetailsBloc
     //     !msg.seenIds.contains(appBloc.state.user!.id)) {
     //   add(SeenConversation(msg.conversationId));
     // }
+  }
+
+  FutureOr<void> _onGetSingleConversationByMembers(
+    GetSingleConversationByMembers event,
+    Emitter<ConversationDetailsState> emit,
+  ) async {
+    final result = await getConversationIdUC(
+      GetConversationIdParams(event.targetId),
+    );
+
+    result.fold(
+      (failure) => event.onError(failure.toString()),
+      (response) => event.onSuccess(response),
+    );
+  }
+
+  FutureOr<void> _onCreateGroupChatSubmit(
+    CreateGroupChatSubmit event,
+    Emitter<ConversationDetailsState> emit,
+  ) async {
+    final result = await createConversationUC(
+      CreateConversationParams(
+        name: event.name,
+        memberIds: event.memberIds,
+        message: "",
+        attachments: [],
+        type: MessageType.system,
+      ),
+    );
+
+    result.fold(
+      (failure) => event.onError(failure.toString()),
+      (conversation) => event.onSuccess(conversation.id),
+    );
   }
 }

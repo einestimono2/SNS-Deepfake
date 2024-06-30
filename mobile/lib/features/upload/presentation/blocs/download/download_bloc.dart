@@ -11,6 +11,7 @@ import 'package:filesystem_picker/filesystem_picker.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:sns_deepfake/core/utils/extensions/image_path.dart';
 
 part 'download_event.dart';
 part 'download_state.dart';
@@ -54,20 +55,34 @@ class DownloadBloc extends Bloc<DownloadEvent, DownloadState> {
 
       if (savePath == null) return;
 
-      emit(DownloadInProgressState());
+      final fileName = event.url.split('/').last;
 
-      Response response = await dio.get(
-        '/media/videos/${event.fileName}',
+      await dio.download(
+        // '/media/videos/${event.fileName}',
+        event.url.fullPath,
+        "$savePath/$fileName",
+        onReceiveProgress: (received, total) {
+          if (total != -1)
+            emit(DownloadInProgressState((received / total * 100).toInt()));
+        },
         options: Options(
-          responseType: ResponseType.stream,
-          headers: {'range': 'bytes=0-'},
+          // responseType: ResponseType.bytes,
+          // headers: {'range': 'bytes=0-'},
+          followRedirects: false,
           extra: cacheOptions.copyWith(policy: CachePolicy.noCache).toExtra(),
         ),
       );
 
-      await downloadFile(response.data, savePath, event.fileName)
-          .whenComplete(() => emit(DownloadSuccessfulState()))
-          .onError((e, stackTrace) => emit(DownloadFailureState(e.toString())));
+      emit(DownloadSuccessfulState());
+
+      // File file = File(savePath);
+      // var raf = file.openSync(mode: FileMode.write);
+      // raf.writeFromSync(response.data);
+      // await raf.close();
+
+      // await downloadFile(response.data, savePath, event.fileName)
+      //     .whenComplete(() => emit(DownloadSuccessfulState()))
+      //     .onError((e, stackTrace) => emit(DownloadFailureState(e.toString())));
     } on DioException catch (e) {
       emit(DownloadFailureState(e.toString()));
     }

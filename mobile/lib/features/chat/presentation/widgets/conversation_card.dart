@@ -45,7 +45,7 @@ class ConversationCard extends StatelessWidget {
         pathParameters: {"id": conversation.id.toString()},
       ),
       child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 12.w),
+        margin: EdgeInsets.symmetric(horizontal: 16.w),
         padding: const EdgeInsets.symmetric(vertical: 8),
         child: Row(
           children: [

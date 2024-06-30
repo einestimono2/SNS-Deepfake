@@ -155,6 +155,7 @@ class ConversationPageState extends State<ConversationPage> {
           ));
     }
 
+    _fn.unfocus();
     _controller.clear();
   }
 
@@ -470,53 +471,69 @@ class ConversationPageState extends State<ConversationPage> {
     return AppBar(
       excludeHeaderSemantics: true,
       scrolledUnderElevation: 0,
-      titleSpacing: 3,
+      titleSpacing: 1,
       title: BlocBuilder<SocketBloc, SocketState>(
         builder: (context, state) {
           final bool _online = isOnline(state.online);
 
           return Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              InkWell(
-                onTap: () {},
-                borderRadius: BorderRadius.circular(1000),
-                child: Row(
-                  children: [
-                    ConversationAvatar(
-                      size: kToolbarHeight - 16,
-                      avatars: conversationId == -1
-                          ? [(widget.friendData!['avatar'] as String).fullPath]
-                          : conversation?.getConversationAvatar(myId) ?? [""],
-                      isOnline: _online,
-                    ),
+              Flexible(
+                child: InkWell(
+                  onTap: () {},
+                  borderRadius: BorderRadius.circular(1000),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      ConversationAvatar(
+                        size: kToolbarHeight - 16,
+                        avatars: conversationId == -1
+                            ? [
+                                (widget.friendData!['avatar'] as String)
+                                    .fullPath
+                              ]
+                            : conversation?.getConversationAvatar(myId) ?? [""],
+                        isOnline: _online,
+                      ),
 
-                    /*  */
-                    SizedBox(width: 8.w),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          conversationId == -1
-                              ? widget.friendData!['username']
-                              : conversation?.getConversationName(myId) ??
-                                  "Unknown",
-                          style: Theme.of(context).textTheme.titleLarge,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
+                      /*  */
+                      SizedBox(width: 8.w),
+                      Flexible(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              conversationId == -1
+                                  ? widget.friendData!['username']
+                                  : conversation?.getConversationName(myId) ??
+                                      "Unknown",
+                              style: Theme.of(context).textTheme.titleLarge,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            if (_online)
+                              Text(
+                                "IS_ACTIVE_TEXT".tr(),
+                                style: Theme.of(context).textTheme.labelMedium,
+                              ),
+                          ],
                         ),
-                        if (_online)
-                          Text(
-                            "IS_ACTIVE_TEXT".tr(),
-                            style: Theme.of(context).textTheme.labelMedium,
-                          ),
-                      ],
-                    ),
+                      ),
 
-                    /*  */
-                    SizedBox(width: 18.w),
-                  ],
+                      /*  */
+                      SizedBox(width: 8.w),
+                    ],
+                  ),
                 ),
               ),
+
+              /*  */
+              if (conversation != null)
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(Icons.info),
+                ),
             ],
           );
         },

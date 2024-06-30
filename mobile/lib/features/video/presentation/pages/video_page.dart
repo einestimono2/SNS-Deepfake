@@ -114,10 +114,23 @@ class _VideoPageState extends State<VideoPage> {
                     height: double.infinity,
                     color: context.minBackgroundColor(),
                     alignment: Alignment.center,
-                    child: const SizedBox(
-                      width: 36,
-                      height: 36,
-                      child: AppIndicator(size: 28),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const SizedBox(
+                          width: 36,
+                          height: 36,
+                          child: AppIndicator(size: 28),
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          "${state.percent}%",
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyLarge
+                              ?.copyWith(color: Colors.white),
+                        ),
+                      ],
                     ),
                   );
                 } else {

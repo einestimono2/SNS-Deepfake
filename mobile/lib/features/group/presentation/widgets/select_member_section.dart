@@ -15,11 +15,13 @@ class SelectMemberSection extends StatefulWidget {
   final ValueNotifier<List<FriendModel>> members;
   final ValueNotifier<List<int>> memberIds;
   final FocusNode? focusNode;
+  final bool initFocus;
 
   const SelectMemberSection({
     super.key,
     this.padding,
     this.focusNode,
+    this.initFocus = false,
     required this.memberIds,
     required this.members,
   });
@@ -65,6 +67,7 @@ class _SelectMemberSectionState extends State<SelectMemberSection> {
             textInputAction: TextInputAction.search,
             focusNode: widget.focusNode,
             controller: _ctl,
+            autoFocus: widget.initFocus && widget.focusNode != null,
             leading: const Icon(Icons.search),
             hintText: "SEARCH_USER_WITH_NAME_OR_EMAIL_TEXT".tr(),
             onChanged: (value) {
@@ -98,7 +101,7 @@ class _SelectMemberSectionState extends State<SelectMemberSection> {
 
         /* Selected members */
         Container(
-          margin: const EdgeInsets.only(top: 16, bottom: 12),
+          margin: const EdgeInsets.only(top: 16),
           padding: widget.padding ?? EdgeInsets.zero,
           width: double.infinity,
           child: ValueListenableBuilder(
@@ -130,6 +133,10 @@ class _SelectMemberSectionState extends State<SelectMemberSection> {
           builder: (context, ids, child) {
             return BlocBuilder<SearchUserBloc, SearchUserState>(
               builder: (context, state) {
+                if (state is SUInitialState) {
+                  return _listSuggest();
+                }
+
                 if (state is SUInProgressState) {
                   return const AppIndicator();
                 }
@@ -178,6 +185,59 @@ class _SelectMemberSectionState extends State<SelectMemberSection> {
           },
         ),
       ],
+    );
+  }
+
+  Widget _listSuggest() {
+    return BlocBuilder<ListFriendBloc, ListFriendState>(
+      builder: (context, state) {
+        if (state is LFSuccessfulState) {
+          return Column(
+            children: [
+              ValueListenableBuilder(
+                valueListenable: widget.memberIds,
+                builder: (context, ids, child) => Column(
+                  children: [
+                    SectionTitle(
+                      margin: widget.padding ?? EdgeInsets.zero,
+                      title: "SUGGESTIONS_TEXT".tr(),
+                    ),
+
+                    /*  */
+                    ListView.builder(
+                      padding: const EdgeInsets.symmetric(vertical: 12),
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: state.friends.length,
+                      itemBuilder: (context, idx) => SelectingMemberCard(
+                        member: state.friends[idx],
+                        isSelected: ids.contains(state.friends[idx].id),
+                        onClick: () {
+                          int pos = ids.indexOf(state.friends[idx].id);
+                          if (pos == -1) {
+                            widget.memberIds.value = widget.memberIds.value
+                                .toList()
+                              ..add(state.friends[idx].id);
+                            widget.members.value = widget.members.value.toList()
+                              ..add(state.friends[idx]);
+                          } else {
+                            widget.memberIds.value =
+                                widget.memberIds.value.toList()..removeAt(pos);
+                            widget.members.value = widget.members.value.toList()
+                              ..removeAt(pos);
+                          }
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          );
+        } else {
+          return const SizedBox.shrink();
+        }
+      },
     );
   }
 }

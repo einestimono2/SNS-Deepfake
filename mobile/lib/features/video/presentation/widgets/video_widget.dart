@@ -34,7 +34,7 @@ class VideoWidget extends StatefulWidget {
 }
 
 class _VideoWidgetState extends State<VideoWidget> {
-  late int myId; 
+  late int myId;
 
   @override
   void initState() {
@@ -54,20 +54,10 @@ class _VideoWidgetState extends State<VideoWidget> {
   }
 
   void _handleDownload() async {
-    final fileName = widget.video.videos[0].url.split('/').last;
-
-    context.read<DownloadBloc>().add(
-          DownloadVideoSubmit(fileName: fileName, context: context),
-        );
-
-    // bool _permission = await PermissionHelper.request([Permission.storage]);
-
-    // print(_permission);
-
-    // if (_permission) {
-    // } else {
-    //   context.showError(message: "Không đủ quyền hạn");
-    // }
+    context.read<DownloadBloc>().add(DownloadVideoSubmit(
+          url: widget.video.videos[0].url,
+          context: context,
+        ));
   }
 
   void _handleNavProfile() {
@@ -222,32 +212,47 @@ class _VideoWidgetState extends State<VideoWidget> {
           child: Column(
             children: [
               const Icon(FontAwesomeIcons.solidHeart, size: 36),
-              Text(
-                "1K",
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyLarge
-                    ?.copyWith(color: Colors.white),
-              ),
+              widget.video.kudosCount + widget.video.disappointedCount > 0
+                  ? Text(
+                      Formatter.formatShortenNumber(
+                        (widget.video.kudosCount +
+                                widget.video.disappointedCount)
+                            .toDouble(),
+                      ),
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyLarge
+                          ?.copyWith(color: Colors.white),
+                    )
+                  : SizedBox(height: 14.sp),
             ],
           ),
-          onTap: () {},
+          onTap: () {
+            // TODO: HERE
+          },
         ),
         SizedBox(height: 0.015.sh),
         InkWell(
           child: Column(
             children: [
               const Icon(FontAwesomeIcons.solidComment, size: 36),
-              Text(
-                "1K",
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyLarge
-                    ?.copyWith(color: Colors.white),
-              ),
+              widget.video.trustCount + widget.video.fakeCount > 0
+                  ? Text(
+                      Formatter.formatShortenNumber(
+                        (widget.video.trustCount + widget.video.fakeCount)
+                            .toDouble(),
+                      ),
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyLarge
+                          ?.copyWith(color: Colors.white),
+                    )
+                  : SizedBox(height: 14.sp),
             ],
           ),
-          onTap: () {},
+          onTap: () {
+            // TODO: HERE
+          },
         ),
         SizedBox(height: 0.015.sh),
         IconButton(

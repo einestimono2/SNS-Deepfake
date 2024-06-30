@@ -1,14 +1,20 @@
-import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
-
 import '../../../../config/configs.dart';
 import '../../../../core/base/base.dart';
 import '../../../../core/networks/networks.dart';
 import '../../../../core/utils/utils.dart';
 import '../../../friend/data/models/friend.model.dart';
+import '../../../news_feed/data/data.dart';
 import '../models/search_model.dart';
 
 abstract class SearchRemoteDataSource {
   Future<PaginationResult<FriendModel>> searchUser({
+    int? page,
+    int? size,
+    required String keyword,
+    required bool cache,
+  });
+
+  Future<PaginationResult<PostModel>> searchPost({
     int? page,
     int? size,
     required String keyword,
@@ -62,7 +68,6 @@ class SearchRemoteDataSourceImpl extends SearchRemoteDataSource {
   }) async {
     final response = await apiClient.get(
       Endpoints.searchHistory,
-      cacheOption: CachePolicy.refreshForceCache,
       queryParameters: {
         "page": page,
         "size": size,
@@ -91,5 +96,28 @@ class SearchRemoteDataSourceImpl extends SearchRemoteDataSource {
     );
 
     return response.status == 'success';
+  }
+
+  @override
+  Future<PaginationResult<PostModel>> searchPost({
+    int? page,
+    int? size,
+    required String keyword,
+    required bool cache,
+  }) async {
+    final response = await apiClient.get(
+      Endpoints.searchPost,
+      queryParameters: {
+        "page": page,
+        "size": size,
+        "keyword": keyword,
+        "cache": cache,
+      },
+    );
+
+    return PaginationResult<PostModel>.fromBaseResponse(
+      baseResponse: response,
+      mapFunc: (e) => PostModel.fromMap(e),
+    );
   }
 }

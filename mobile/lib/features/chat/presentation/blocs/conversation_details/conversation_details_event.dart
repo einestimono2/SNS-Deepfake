@@ -72,3 +72,35 @@ class UpdateMessageEvent extends ConversationDetailsEvent {
   @override
   List<Object?> get props => [updatedMessage];
 }
+
+class GetSingleConversationByMembers extends ConversationDetailsEvent {
+  final int targetId;
+  final Function(int) onSuccess;
+  final Function(String) onError;
+
+  const GetSingleConversationByMembers({
+    required this.targetId,
+    required this.onSuccess,
+    required this.onError,
+  });
+
+  @override
+  List<Object> get props => [targetId];
+}
+
+class CreateGroupChatSubmit extends ConversationDetailsEvent {
+  final String? name;
+  final List<int> memberIds;
+  final Function(int) onSuccess;
+  final Function(String) onError;
+
+  const CreateGroupChatSubmit({
+    required this.name,
+    required this.memberIds,
+    required this.onSuccess,
+    required this.onError,
+  });
+
+  @override
+  List<Object?> get props => [memberIds, name];
+}

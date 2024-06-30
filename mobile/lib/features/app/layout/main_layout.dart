@@ -8,6 +8,8 @@ import 'package:sns_deepfake/features/video/presentation/blocs/blocs.dart';
 
 import '../../../core/utils/utils.dart';
 import '../../chat/chat.dart';
+import '../../friend/friend.dart';
+import '../../search/blocs/blocs.dart';
 import '../bloc/bloc.dart';
 
 class MainLayout extends StatefulWidget {
@@ -36,11 +38,11 @@ class _MainLayoutState extends State<MainLayout> {
     } else {
       socketBloc = context.read<SocketBloc>();
       socketBloc?.add(OpenConnection(userId: userId!));
-
-      _earlyCallApis();
     }
 
     super.initState();
+
+    _earlyCallApis();
   }
 
   @override
@@ -58,6 +60,13 @@ class _MainLayoutState extends State<MainLayout> {
 
     context.read<ListVideoBloc>().add(const GetListVideo(
           size: AppStrings.listVideoPageSize,
+        ));
+
+    context.read<SearchHistoryBloc>().add(GetSearchHistory());
+
+    context.read<ListFriendBloc>().add(const GetListFriend(
+          size: AppStrings.listFriendPageSize,
+          page: 1,
         ));
   }
 

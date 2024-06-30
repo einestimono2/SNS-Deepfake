@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:sns_deepfake/core/widgets/widgets.dart';
 
+import '../../../../config/configs.dart';
 import '../../../../core/utils/utils.dart';
 import '../../../app/app.dart';
 import '../blocs/bloc.dart';
@@ -45,10 +47,9 @@ class ChatPageState extends State<ChatPage> {
     return SliverPage(
       onRefresh: _getMyConversations,
       title: "CHAT_PAGE_TITLE_TEXT".tr(),
-      centerTitle: true,
       actions: [
         IconButton(
-          onPressed: _getMyConversations,
+          onPressed: () => context.goNamed(Routes.createConversation.name),
           icon: const Icon(FontAwesomeIcons.solidPenToSquare, size: 18),
         ),
       ],

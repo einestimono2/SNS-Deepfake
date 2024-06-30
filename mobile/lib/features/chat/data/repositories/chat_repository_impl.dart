@@ -122,4 +122,15 @@ class ChatRepositoryImpl extends BaseRepositoryImpl implements ChatRepository {
       },
     );
   }
+
+  @override
+  Future<Either<Failure, int>> getConversationId(int targetId) async {
+    return await checkNetwork<int>(
+      () async {
+        final id = await remote.getConversationId(targetId);
+
+        return Right(id);
+      },
+    );
+  }
 }

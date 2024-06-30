@@ -373,38 +373,54 @@ class AppRouter {
             // navigatorKey: shellNavigatorKey,
             routes: <RouteBase>[
               GoRoute(
-                  // parentNavigatorKey: shellNavigatorKey,
-                  name: Routes.chat.name,
-                  path: Routes.chat.path,
-                  pageBuilder: (BuildContext context, GoRouterState state) {
-                    return fadeTransition(
-                      state: state,
-                      context: context,
-                      child: ChatPage(key: state.pageKey),
-                    );
-                  },
-                  routes: [
-                    /* Conversation - Chat details */
-                    GoRoute(
-                      parentNavigatorKey: rootNavigatorKey,
-                      name: Routes.conversation.name,
-                      path: Routes.conversation.path,
-                      pageBuilder: (BuildContext context, GoRouterState state) {
-                        return slideTransition(
-                          type: SlideType.rtl,
-                          state: state,
-                          context: context,
-                          child: ConversationPage(
-                            key: state.pageKey,
-                            id: int.parse(state.pathParameters['id']!),
-                            friendData: state.extra == null
-                                ? null
-                                : state.extra as Map<String, dynamic>,
-                          ),
-                        );
-                      },
-                    ),
-                  ]),
+                // parentNavigatorKey: shellNavigatorKey,
+                name: Routes.chat.name,
+                path: Routes.chat.path,
+                pageBuilder: (BuildContext context, GoRouterState state) {
+                  return fadeTransition(
+                    state: state,
+                    context: context,
+                    child: ChatPage(key: state.pageKey),
+                  );
+                },
+                routes: [
+                  /* Conversation - Chat details */
+                  GoRoute(
+                    parentNavigatorKey: rootNavigatorKey,
+                    name: Routes.conversation.name,
+                    path: Routes.conversation.path,
+                    pageBuilder: (BuildContext context, GoRouterState state) {
+                      return slideTransition(
+                        type: SlideType.rtl,
+                        state: state,
+                        context: context,
+                        child: ConversationPage(
+                          key: state.pageKey,
+                          id: int.parse(state.pathParameters['id']!),
+                          friendData: state.extra == null
+                              ? null
+                              : state.extra as Map<String, dynamic>,
+                        ),
+                      );
+                    },
+                  ),
+
+                  /* Create Conversation */
+                  GoRoute(
+                    parentNavigatorKey: rootNavigatorKey,
+                    name: Routes.createConversation.name,
+                    path: Routes.createConversation.path,
+                    pageBuilder: (BuildContext context, GoRouterState state) {
+                      return slideTransition(
+                        type: SlideType.rtl,
+                        state: state,
+                        context: context,
+                        child: CreateConversationPage(key: state.pageKey),
+                      );
+                    },
+                  ),
+                ],
+              ),
             ],
           ),
 

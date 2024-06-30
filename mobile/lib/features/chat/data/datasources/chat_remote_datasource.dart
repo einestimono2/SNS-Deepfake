@@ -15,6 +15,9 @@ abstract class ChatRemoteDataSource {
   Future<ConversationModel> getConversationDetails(int id);
 
   /*  */
+  Future<int> getConversationId(int targetId);
+
+  /*  */
   Future<bool> seenConversation(int id);
 
   /*  */
@@ -154,5 +157,15 @@ class ChatRemoteDataSourceImpl extends ChatRemoteDataSource {
     });
 
     return ConversationModel.fromMap(conversationMap);
+  }
+
+  @override
+  Future<int> getConversationId(int targetId) async {
+    final response = await apiClient.post(
+      Endpoints.getSingleConversationByMembers,
+      data: {"targetId": targetId},
+    );
+
+    return response.data["id"] as int;
   }
 }

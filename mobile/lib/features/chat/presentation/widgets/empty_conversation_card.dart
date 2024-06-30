@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sns_deepfake/core/utils/utils.dart';
@@ -34,17 +35,21 @@ class EmptyConversationCard extends StatelessWidget {
         ),
 
         /*  */
-        const SizedBox(height: 3),
-        Text(
-          "Các bạn hiện đang là bạn bè",
-          style: Theme.of(context).textTheme.bodySmall,
-        ),
+        // const SizedBox(height: 3),
+        // Text(
+        //   "Các bạn hiện đang là bạn bè",
+        //   style: Theme.of(context).textTheme.bodySmall,
+        // ),
 
         /*  */
         const SizedBox(height: 16),
-        Text(
-          "Gửi tin nhắn đầu tiên để bắt đầu cuộc trò chuyện!",
-          style: Theme.of(context).textTheme.bodySmall,
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 0.1.sw),
+          child: Text(
+            "EMPTY_CONVERSATION_PAGE_TEXT".tr(),
+            style: Theme.of(context).textTheme.bodySmall,
+            textAlign: TextAlign.center,
+          ),
         ),
       ],
     );

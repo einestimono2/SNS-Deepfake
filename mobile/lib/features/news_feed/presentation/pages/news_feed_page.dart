@@ -12,6 +12,7 @@ import '../../../app/app.dart';
 import '../blocs/blocs.dart';
 import '../widgets/color_separate.dart';
 import '../widgets/post_card.dart';
+import '../widgets/post_search_button.dart';
 import '../widgets/shimmer_post.dart';
 
 final GlobalKey<NewsFeedPageState> newsFeedPageKey =
@@ -79,12 +80,7 @@ class NewsFeedPageState extends State<NewsFeedPage> {
       onRefresh: _getListPost,
       title: 'Deepfake',
       actions: [
-        // const FriendSearchButton(),
-        IconButton(
-          onPressed: () {},
-          icon: const Icon(Icons.search),
-          style: mediumButtonStyle,
-        ),
+        const PostSearchButton(),
         IconButton(
           onPressed: () => context.pushNamed(Routes.myGroup.name),
           tooltip: "MY_GROUP_TEXT".tr(),

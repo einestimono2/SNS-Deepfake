@@ -16,6 +16,9 @@ abstract class ChatRepository {
   Future<Either<Failure, ConversationModel>> getConversationDetails(int id);
 
   /*  */
+  Future<Either<Failure, int>> getConversationId(int targetId);
+
+  /*  */
   Future<Either<Failure, bool>> seenConversation(int id);
 
   /*  */

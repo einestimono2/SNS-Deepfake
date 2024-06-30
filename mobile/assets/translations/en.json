@@ -158,6 +158,7 @@
     "DELETE_GROUP_DIALOG_CONTENT_TEXT": "Deleted groups cannot be restored. Are you sure you want to continue?",
     "CREATE_GROUP_POST_HINT_TEXT": "Write something...",
     "MEMBERS_OF_TEXT": "Members of",
+    "EMPTY_CONVERSATION_PAGE_TEXT": "Send the first message to start the conversation!",
 
     "SEE_MORE_TEXT": "See more",
     "SEE_ALL_TEXT": "See all",
@@ -228,6 +229,10 @@
         "other": "are typing ..."
     },
     "JUST_CREATED_CONVERSATION_TEXT": "Just created a conversation!",
+    "CONVERSATION_NAME_HINT_TEXT": "Group name (optional)",
+    "CONVERSATION_NAME_TEXT": "Group name",
+    "CREATE_CONVERSATION_TITLE_TEXT": "New message",
+    "CONVERSATION_MEMBERS_TEXT": "Members",
 
     "DISCOUNT_TEXT": "Discount",
     "COIN_PACKAGES_TEXT": "Coin packages",

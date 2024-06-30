@@ -64,7 +64,7 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
 
   void _handleOutOrManage(bool owner) {
     if (owner) {
-      context.goNamed(
+      context.pushNamed(
         Routes.manageGroup.name,
         pathParameters: {"id": widget.id.toString()},
         extra: {"isMyGroup": true},
@@ -87,7 +87,8 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
   void _scrollListener() {
     if (_scrollController.position.pixels ==
             _scrollController.position.maxScrollExtent &&
-        !_loadingMore && !_hasReachedMax) {
+        !_loadingMore &&
+        !_hasReachedMax) {
       _loadingMore = true;
 
       context.read<GroupPostBloc>().add(LoadMoreListPost(
@@ -270,7 +271,7 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
                 borderRadius: BorderRadius.circular(3),
               ),
             ),
-            onPressed: () => context.goNamed(
+            onPressed: () => context.pushNamed(
               Routes.inviteMember.name,
               pathParameters: {"id": widget.id.toString()},
             ),
@@ -298,7 +299,7 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           InkWell(
-            onTap: () => context.goNamed(
+            onTap: () => context.pushNamed(
               Routes.manageGroup.name,
               pathParameters: {"id": widget.id.toString()},
               extra: {"isMyGroup": gr.creatorId == myId},
@@ -431,7 +432,7 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
           if (success)
             IconButton(
               style: customButtonStyle(6),
-              onPressed: () => context.goNamed(
+              onPressed: () => context.pushNamed(
                 Routes.createGroupPost.name,
                 pathParameters: {"id": widget.id.toString()},
               ),
@@ -439,7 +440,7 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
             ),
           if (success)
             IconButton(
-              onPressed: () => context.goNamed(
+              onPressed: () => context.pushNamed(
                 Routes.manageGroup.name,
                 pathParameters: {"id": widget.id.toString()},
                 extra: {"isMyGroup": state.group!.creatorId == myId},

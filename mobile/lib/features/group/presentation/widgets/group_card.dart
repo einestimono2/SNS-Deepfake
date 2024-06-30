@@ -15,7 +15,7 @@ class GroupCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      onTap: () => context.goNamed(
+      onTap: () => context.pushNamed(
         Routes.groupDetails.name,
         pathParameters: {"id": group.id.toString()},
         extra: {
