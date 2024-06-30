@@ -81,4 +81,8 @@ class FinishProfileSubmit extends UserEvent {
   List<Object?> get props => [email, username, phoneNumber, coverImage, avatar];
 }
 
-class LogoutSubmit extends UserEvent {}
+class LogoutSubmit extends UserEvent {
+  final Function() onSuccess;
+
+  const LogoutSubmit({required this.onSuccess});
+}

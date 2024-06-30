@@ -6,6 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sns_deepfake/core/utils/extensions/image_path.dart';
 import 'package:sns_deepfake/core/utils/extensions/theme_mode.dart';
+import 'package:zego_uikit_prebuilt_call/zego_uikit_prebuilt_call.dart';
 
 import '../../../../config/configs.dart';
 import '../../../../core/widgets/widgets.dart';
@@ -21,7 +22,9 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   void _handleLogout() async {
-    context.read<UserBloc>().add(LogoutSubmit());
+    context.read<UserBloc>().add(LogoutSubmit(
+          onSuccess: () => ZegoUIKitPrebuiltCallInvitationService().uninit(),
+        ));
   }
 
   @override

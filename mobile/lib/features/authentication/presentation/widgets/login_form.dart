@@ -174,7 +174,7 @@ class _LoginFormState extends State<LoginForm> {
     return Align(
       alignment: Alignment.centerRight,
       child: TextButton(
-        onPressed: () => context.goNamed(Routes.forgot.name),
+        onPressed: () => context.pushNamed(Routes.forgot.name),
         style: TextButton.styleFrom(
           padding: EdgeInsets.symmetric(vertical: 1, horizontal: 5.w),
           minimumSize: Size.zero,

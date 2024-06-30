@@ -211,13 +211,33 @@ class _VideoWidgetState extends State<VideoWidget> {
         InkWell(
           child: Column(
             children: [
-              const Icon(FontAwesomeIcons.solidHeart, size: 36),
-              widget.video.kudosCount + widget.video.disappointedCount > 0
+              const Icon(Icons.thumb_up, size: 36),
+              widget.video.kudosCount > 0
                   ? Text(
                       Formatter.formatShortenNumber(
-                        (widget.video.kudosCount +
-                                widget.video.disappointedCount)
-                            .toDouble(),
+                        widget.video.kudosCount.toDouble(),
+                      ),
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyLarge
+                          ?.copyWith(color: Colors.white),
+                    )
+                  : SizedBox(height: 14.sp),
+            ],
+          ),
+          onTap: () {
+            // TODO: HERE
+          },
+        ),
+        SizedBox(height: 0.015.sh),
+        InkWell(
+          child: Column(
+            children: [
+              const Icon(Icons.thumb_down, size: 36),
+              widget.video.disappointedCount > 0
+                  ? Text(
+                      Formatter.formatShortenNumber(
+                        widget.video.disappointedCount.toDouble(),
                       ),
                       style: Theme.of(context)
                           .textTheme

@@ -62,8 +62,9 @@ class DownloadBloc extends Bloc<DownloadEvent, DownloadState> {
         event.url.fullPath,
         "$savePath/$fileName",
         onReceiveProgress: (received, total) {
-          if (total != -1)
+          if (total != -1) {
             emit(DownloadInProgressState((received / total * 100).toInt()));
+          }
         },
         options: Options(
           // responseType: ResponseType.bytes,

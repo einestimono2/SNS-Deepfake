@@ -422,7 +422,6 @@ class _OtherProfilePageState extends State<OtherProfilePage> {
         Expanded(
           flex: 3,
           child: ElevatedButton.icon(
-            // TODO: Cần cập nhật lại conversationId của profile khi đã nhắn tin lần đầu tiên
             onPressed: () => context.pushNamed(
               Routes.conversation.name,
               pathParameters: {"id": propfile.conversationId.toString()},

@@ -226,6 +226,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       )),
       (user) {
         emit(const SuccessfulState(type: "LOGOUT"));
+        event.onSuccess.call();
       },
     );
 

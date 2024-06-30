@@ -65,6 +65,10 @@ export const User = postgre.define('User', {
   deletedAt: {
     type: DataTypes.DATE,
     allowNull: true
+  },
+  parentId: {
+    type: DataTypes.INTEGER,
+    allowNull: true
   }
 });
 

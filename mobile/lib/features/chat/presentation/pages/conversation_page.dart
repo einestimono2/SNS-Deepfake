@@ -4,11 +4,13 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sns_deepfake/core/utils/utils.dart';
 import 'package:sns_deepfake/core/widgets/widgets.dart';
 import 'package:sns_deepfake/features/app/app.dart';
 import 'package:sns_deepfake/features/chat/chat.dart';
 import 'package:sns_deepfake/features/chat/presentation/widgets/empty_conversation_card.dart';
+import 'package:zego_uikit_prebuilt_call/zego_uikit_prebuilt_call.dart';
 
 import '../widgets/conversation_avatar.dart';
 import '../widgets/message_card.dart';
@@ -354,7 +356,7 @@ class ConversationPageState extends State<ConversationPage> {
       width: double.infinity,
       padding: const EdgeInsets.fromLTRB(3, 0, 3, 8),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           ValueListenableBuilder(
             valueListenable: _focusing,
@@ -376,7 +378,7 @@ class ConversationPageState extends State<ConversationPage> {
                           borderRadius: BorderRadius.circular(1000),
                           child: Ink(
                             padding: const EdgeInsets.all(6),
-                            child: const Icon(Icons.attach_file),
+                            child: const Icon(Icons.image),
                           ),
                         ),
                         InkWell(
@@ -384,7 +386,10 @@ class ConversationPageState extends State<ConversationPage> {
                           borderRadius: BorderRadius.circular(1000),
                           child: Ink(
                             padding: const EdgeInsets.all(6),
-                            child: const Icon(Icons.attach_file),
+                            child: const Icon(
+                              FontAwesomeIcons.fileVideo,
+                              size: 22,
+                            ),
                           ),
                         ),
                       ],
@@ -530,10 +535,50 @@ class ConversationPageState extends State<ConversationPage> {
 
               /*  */
               if (conversation != null)
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.info),
-                ),
+                ZegoSendCallInvitationButton(
+                  isVideoCall: true,
+                  resourceID: conversation!.id.toString(),
+                  callID: conversation!.id.toString(),
+                  invitees: conversation!.members
+                      .where((e) => e.id != myId)
+                      .map((usr) => ZegoUIKitUser(
+                            id: usr.id.toString(),
+                            name: usr.username ?? usr.email,
+                          ))
+                      .toList(),
+                  icon: ButtonIcon(
+                    icon: const Icon(FontAwesomeIcons.video, size: 22),
+                  ),
+                  iconSize: const Size.fromRadius(22),
+                  buttonSize: const Size.fromRadius(22),
+                  margin: const EdgeInsets.only(right: 6),
+                )
+              // IconButton(
+              //   onPressed: () => ZegoSendCallInvitationButton(
+              //     isVideoCall: true,
+              //     resourceID: conversation!.id.toString(),
+              //     invitees: conversation!.members
+              //         .where((e) => e.id != myId)
+              //         .map((usr) => ZegoUIKitUser(
+              //               id: usr.id.toString(),
+              //               name: usr.username ?? usr.email,
+              //             ))
+              //         .toList(),
+              //   ),
+              //   // context.goNamed(
+              //   //   Routes.videoCall.name,
+              //   //   pathParameters: {"id": conversation!.id.toString()},
+              //   //   extra: {
+              //   //     "isGroupVideo":
+              //   //         conversation!.type == ConversationType.group,
+              //   //     "id": conversation!.id.toString(),
+              //   //     "userName": context.read<AppBloc>().state.user!.username,
+              //   //     "userId":
+              //   //         context.read<AppBloc>().state.user!.id.toString(),
+              //   //   },
+              //   // ),
+              //   icon: const Icon(FontAwesomeIcons.video, size: 22),
+              // ),
             ],
           );
         },

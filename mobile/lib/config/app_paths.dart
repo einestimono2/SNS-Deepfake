@@ -93,6 +93,8 @@ class Routes {
   static final signup = Route(name: "signup", path: "/signup");
 
   static final forgot = Route(name: "forgot", path: "/forgot");
+  
+  static final resetPassword = Route(name: "resetPassword", path: "/resetPassword");
 
   static final verify = Route(name: "verify", path: "/verify");
 
@@ -114,6 +116,7 @@ class Routes {
       Route(name: 'invite_member', path: 'invite_member');
 
   static final chat = Route(name: "chat", path: "/chat");
+  static final videoCall = Route(name: "videoCall", path: "videoCall");
   static final conversation =
       Route(name: "conversation", path: "conversation/:id");
   static final createConversation =

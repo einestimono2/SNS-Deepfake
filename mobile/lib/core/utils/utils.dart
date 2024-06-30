@@ -6,6 +6,7 @@ export './constants/strings.dart';
 export './constants/texts.dart';
 export './constants/vars.dart';
 export './constants/socket.dart';
+export './constants/keys.dart';
 
 export './device/device_utils.dart';
 

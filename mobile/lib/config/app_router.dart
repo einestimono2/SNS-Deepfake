@@ -131,6 +131,20 @@ class AppRouter {
         },
       ),
 
+      /* Reset Password Screen */
+      GoRoute(
+        parentNavigatorKey: rootNavigatorKey,
+        name: Routes.resetPassword.name,
+        path: Routes.resetPassword.path,
+        pageBuilder: (BuildContext context, GoRouterState state) {
+          return fadeTransition(
+            context: context,
+            state: state,
+            child: ResetPasswordPage(key: state.pageKey),
+          );
+        },
+      ),
+
       /* Main Layout */
       StatefulShellRoute.indexedStack(
         parentNavigatorKey: rootNavigatorKey,
@@ -403,6 +417,29 @@ class AppRouter {
                         ),
                       );
                     },
+                    routes: [
+                      GoRoute(
+                        parentNavigatorKey: rootNavigatorKey,
+                        name: Routes.videoCall.name,
+                        path: Routes.videoCall.path,
+                        pageBuilder:
+                            (BuildContext context, GoRouterState state) {
+                          final extra = state.extra as Map<String, dynamic>;
+                          return slideTransition(
+                            type: SlideType.rtl,
+                            state: state,
+                            context: context,
+                            child: CallPage(
+                              key: state.pageKey,
+                              id: extra["id"],
+                              isGroupVideo: extra["isGroupVideo"],
+                              userId: extra["userId"],
+                              userName: extra["userName"],
+                            ),
+                          );
+                        },
+                      ),
+                    ],
                   ),
 
                   /* Create Conversation */

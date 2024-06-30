@@ -5,6 +5,7 @@ import { Block } from '../block/block.model.js';
 import { Comment } from '../comment/comment.model.js';
 import { BadRequestError } from '../core/error.response.js';
 import { Group } from '../group/group/group.model.js';
+import { GroupUser } from '../group/groupuser.model.js';
 import { User } from '../user/user.model.js';
 
 import { Feel } from './models/feel.model.js';
@@ -218,11 +219,19 @@ export class PostServices {
   static async getListPosts({ userId, limit, offset }, groupId, user_id) {
     if (!userId || !groupId) throw new BadRequestError(Message.ID_EMPTY);
     const user = await User.findOne({ where: { id: userId } });
+
     // Danh sach các userId của người mà block mình
     const usersIdBlocked = await Block.findAll({
       where: { userId },
       attributes: ['targetId']
     });
+
+    const userGroups = await GroupUser.findAll({
+      where: { userId },
+      attributes: ['groupId']
+    });
+
+    const groupIds = userGroups.map((group) => group.groupId);
     // const postCount = await Post.findAndCountAll({
     //   where: {
     //     groupId
@@ -235,6 +244,9 @@ export class PostServices {
     });
 
     const query = {
+      where: {
+        [Op.or]: [{ groupId: { [Op.in]: groupIds } }, { groupId: { [Op.eq]: null } }]
+      },
       include: [
         {
           model: User,

@@ -43,6 +43,10 @@
     "COMING_SOON_TEXT": "Sắp ra mắt",
     "SELECT_STARTING_GROUP_TEXT": "Chọn nhóm khởi đầu",
     "ALL_GROUP_TEXT": "Tất cả các nhóm",
+    "FOROGT_PASSWORD_TITLE_TEXT": "Quên mật khẩu",
+    "FOROGT_PASSWORD_CONTENT_TEXT": "Quên mật khẩu?",
+    "FOROGT_PASSWORD_DESCRIPTION_TEXT": "Nhập email của bạn dưới đây để thiết lập lại mật khẩu của bạn",
+    "RESET_PASSWORD_TITLE_TEXT": "Khôi phục mật khẩu",
 
     "SIGN_UP_TEXT": "Đăng ký",
     "SIGNUP_ERROR_TITLE_TEXT": "Đăng ký thất bại",
@@ -213,6 +217,8 @@
         "one": "{} năm trước",
         "other": "{} năm trước"
     },
+
+    "NO_NOTIFICATION_TEXT": "Bạn chưa có thông báo mới nào!",
 
     "CHAT_PAGE_TITLE_TEXT": "Đoạn chat",
     "YOU:_TEXT": "Bạn: ",

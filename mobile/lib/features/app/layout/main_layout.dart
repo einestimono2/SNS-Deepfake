@@ -5,6 +5,8 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sns_deepfake/features/video/presentation/blocs/blocs.dart';
+import 'package:zego_uikit_prebuilt_call/zego_uikit_prebuilt_call.dart';
+import 'package:zego_uikit_signaling_plugin/zego_uikit_signaling_plugin.dart';
 
 import '../../../core/utils/utils.dart';
 import '../../chat/chat.dart';
@@ -38,6 +40,14 @@ class _MainLayoutState extends State<MainLayout> {
     } else {
       socketBloc = context.read<SocketBloc>();
       socketBloc?.add(OpenConnection(userId: userId!));
+
+      ZegoUIKitPrebuiltCallInvitationService().init(
+        appID: AppKeys.zegoAppId,
+        appSign: AppKeys.zegoAppSign,
+        userID: userId.toString(),
+        userName: context.read<AppBloc>().state.user!.username!,
+        plugins: [ZegoUIKitSignalingPlugin()],
+      );
     }
 
     super.initState();

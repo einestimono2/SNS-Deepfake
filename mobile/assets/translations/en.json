@@ -43,6 +43,10 @@
     "COMING_SOON_TEXT": "Coming Soon",
     "SELECT_STARTING_GROUP_TEXT": "Select the starting group",
     "ALL_GROUP_TEXT": "All group",
+    "FOROGT_PASSWORD_TITLE_TEXT": "Forgotten password",
+    "FOROGT_PASSWORD_CONTENT_TEXT": "Forgotten password?",
+    "FOROGT_PASSWORD_DESCRIPTION_TEXT": "Enter your email below to reset your password",
+    "RESET_PASSWORD_TITLE_TEXT": "Reset password",
 
     "SIGN_UP_TEXT": "Sign up",
     "SIGNUP_ERROR_TITLE_TEXT": "Sign Up Failed",
@@ -214,6 +218,8 @@
         "other": "{} years ago"
     },
 
+    "NO_NOTIFICATION_TEXT": "You don't have any new notifications yet!",
+
     "CHAT_PAGE_TITLE_TEXT": "Chat",
     "YOU:_TEXT": "You: ",
     "TYPE_MESSAGE_TEXT": "Type message ...",
@@ -286,7 +292,7 @@
     "THEME_DARK_TEXT": "Dark theme",
     "SYSTEM_SETTING_TEXT": "System setting",
     "THEME_TEXT": "Theme",
-    "LANGUAGE_TEXT": "Theme",
+    "LANGUAGE_TEXT": "Language",
 
     "": ""
 }

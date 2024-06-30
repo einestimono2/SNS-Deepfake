@@ -67,10 +67,10 @@ export class userServices {
       throw new BadRequestError(Message.PHONE_NUMBER_IS_INVALID);
     }
     // Kiểm tra password có trùng email hay không?
-    if (password.indexOf(email) !== -1) {
-      // Kiểm tra password có trùng email hay không?
-      throw new BadRequestError(Message.USER_IS_INVALID);
-    }
+    // if (password.indexOf(email) !== -1) {
+    //   // Kiểm tra password có trùng email hay không?
+    //   throw new BadRequestError(Message.USER_IS_INVALID);
+    // }
 
     // Tạo tài khoản người dùng
     await User.create({
@@ -272,8 +272,7 @@ export class userServices {
 
     let conversationId = -1;
     if (user_id !== userId) {
-      conversationId =
-        (await ConversationService.findConversationByMemberIds([userId, user_id]))?.Conversation?.id ?? -1;
+      conversationId = (await ConversationService.getSingleConversationByMembers({ userId, targetId: user_id })).id;
     }
 
     return {

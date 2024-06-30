@@ -50,6 +50,8 @@ dependencies:
     toastification: ^1.2.1
     url_launcher: ^6.2.5
     video_player: ^2.8.6
+    zego_uikit_prebuilt_call: ^4.12.9
+    zego_uikit_signaling_plugin: ^2.7.14
 
 dev_dependencies:
     change_app_package_name: ^1.1.0 # change bundle or (package name) + directory For Android
