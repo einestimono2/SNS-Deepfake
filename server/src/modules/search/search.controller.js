@@ -8,8 +8,10 @@ export class SearchControllers {
     const result = await SearchServices.searchPost({
       userId: req.userPayload.userId,
       ...getPaginationAttributes(req.query),
-      keyword: req.query.keyword
+      keyword: req.query.keyword,
+      cache: req.query.cache
     });
+
     res.ok(
       getPaginationSummary({
         ...req.query,

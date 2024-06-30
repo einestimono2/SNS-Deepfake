@@ -9,6 +9,12 @@ const router = Router();
 // - [POST] Add
 router.post('/create', isAuthenticated, ConversationController.createConversation);
 
+router.post(
+  '/get_single_conversation_by_members',
+  isAuthenticated,
+  ConversationController.getSingleConversationByMembers
+);
+
 // - [GET] List
 router.get('/list', isAuthenticated, ConversationController.getMyConversations);
 

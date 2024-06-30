@@ -14,26 +14,34 @@ import { User } from '../user/user.model.js';
 
 import { Search } from './search.model.js';
 
-import { Message, SearchType } from '#constants';
+import { AccountStatus, Message, SearchType } from '#constants';
 
 export class SearchServices {
   // Tìm kiếm bài viết
-  static async searchPost({ userId, limit, offset, keyword: _keyword }, body) {
+  static async searchPost({ userId, limit, offset, keyword: _keyword, cache = 'true' }) {
+    if (cache === 'true') {
+      // Lưu thông tin tìm kiếm vào cơ sở dữ liệu
+      const res = await Search.findOrCreate({
+        where: { keyword: _keyword, userId, type: SearchType.Post },
+        default: {
+          keyword: _keyword,
+          userId,
+          type: SearchType.Post
+        }
+      });
+    }
+
     const usersIdBlocked = await Block.findAll({
       where: { userId },
       attributes: ['targetId']
     });
+
     // Danh sach các userId mà bị mình blocgettargetId
     const usersIdBlocking = await Block.findAll({
       where: { targetId: userId },
       attributes: ['userId']
     });
-    // Lưu thông tin tìm kiếm vào cơ sở dữ liệu
-    // const search = await Search.create({
-    //   keyword,
-    //   userId,
-    //   type: SearchType.Post
-    // });
+
     // Tìm kiếm
     const keyword = _keyword.trim().replace(/\s+/g, '|');
     const posts = await Post.findAndCountAll({
@@ -41,6 +49,8 @@ export class SearchServices {
         {
           model: User,
           as: 'author',
+          attributes: ['id', 'avatar', 'username', 'email', 'phoneNumber'],
+          required: false,
           where: {
             id: {
               // [Op.notIn]: usersIdBlocked.targetId
@@ -53,15 +63,19 @@ export class SearchServices {
         },
         {
           model: PostImage,
-          as: 'images'
+          as: 'images',
+          order: [['order', 'ASC']],
+          required: false
         },
         {
           model: PostVideo,
           as: 'videos'
         },
         {
-          model: Mark,
-          as: 'marks'
+          model: Group,
+          as: 'group',
+          attributes: ['id', 'groupName', 'description', 'coverPhoto'],
+          required: false
         },
         {
           model: Feel,
@@ -77,6 +91,30 @@ export class SearchServices {
               `ts_rank_cd(to_tsvector('english', "Post"."description"), to_tsquery('english', '${keyword}'))`
             ),
             'rank'
+          ],
+          [
+            sequelize.literal(
+              '(SELECT COUNT(*) FROM "Feels" WHERE "Feels"."postId" = "Post"."id" AND "Feels"."type" = 0)'
+            ),
+            'kudosCount'
+          ],
+          [
+            sequelize.literal(
+              '(SELECT COUNT(*) FROM "Feels" WHERE "Feels"."postId" = "Post"."id" AND "Feels"."type" = 1)'
+            ),
+            'disappointedCount'
+          ],
+          [
+            sequelize.literal(
+              '(SELECT COUNT(*) FROM "Marks" WHERE "Marks"."postId" = "Post"."id" AND "Marks"."type" = 0)'
+            ),
+            'trustCount'
+          ],
+          [
+            sequelize.literal(
+              '(SELECT COUNT(*) FROM "Marks" WHERE "Marks"."postId" = "Post"."id" AND "Marks"."type" = 1)'
+            ),
+            'fakeCount'
           ]
         ]
       },
@@ -89,55 +127,38 @@ export class SearchServices {
         ['id', 'DESC']
       ],
       distinct: true,
+      subQuery: false,
       offset,
-      limit,
-      subQuery: false
+      limit
     });
     // Lấy số lượng bình luận cho mỗi bài viết
-    for (const post of posts.rows) {
-      const commentsCount = await Comment.count({
-        include: [
-          {
-            model: Mark,
-            as: 'mark',
-            where: { postId: post.id }
-          }
-        ]
-      });
-      post.commentsCount = commentsCount;
-      //   // await post.save();
-    }
+    // for (const post of posts.rows) {
+    //   const commentsCount = await Comment.count({
+    //     include: [
+    //       {
+    //         model: Mark,
+    //         as: 'mark',
+    //         where: { postId: post.id }
+    //       }
+    //     ]
+    //   });
+    //   post.commentsCount = commentsCount;
+    //   //   // await post.save();
+    // }
     // Trả về kết quả được định dạng
     return {
       rows: posts.rows.map((post) => ({
-        id: String(post.id),
-        name: '',
-        image: post.images
-          .sort((a, b) => a.order - b.order)
-          .map((e) => ({
-            id: String(e.order),
-            url: e.url
-          })),
-        video: post.video ? { url: post.video.url } : undefined,
-        described: post.description || '',
-        created: post.createdAt,
-        feel: String(post.feels.length),
-        mark_comment: String(post.marks.length + post.commentsCount),
-        is_felt: post.feels.length > 0 ? '1' : '0',
-        state: post.status || '',
-        author: {
-          id: String(post.author.id),
-          name: post.author.username || '',
-          avatar: post.author.avatar
-        }
+        post,
+        can_edit: '0',
+        banned: post.author.status === AccountStatus.Banned ? '1' : '0'
       })),
       count: posts.count
     };
   }
 
   // Tìm kiếm người dùng
-  static async searchUser({ userId, limit, offset, keyword: _keyword, cache = true }) {
-    if (cache === true) {
+  static async searchUser({ userId, limit, offset, keyword: _keyword, cache = 'true' }) {
+    if (cache === 'true') {
       // Lưu thông tin tìm kiếm vào cơ sở dữ liệu
       await Search.findOrCreate({
         where: { keyword: _keyword, userId, type: SearchType.User },

@@ -1,34 +1,18 @@
-import { Op, Sequelize, where } from 'sequelize';
+import { Op } from 'sequelize';
 
 import { BadRequestError, NotFoundError, UnauthorizedError } from '../../core/error.response.js';
 import { socket } from '../../socket/socket.js';
+import { User } from '../../user/user.model.js';
+import { Message as MessageModel } from '../message/message.model.js';
 import { MessageService } from '../message/message.service.js';
 import { ConversationParticipants } from '../participant.model.js';
 
 import { Conversation } from './conversation.model.js';
 
-import { ConversationType, Message, SocketEvents } from '#constants';
+import { ConversationType, Message, MessageType, SocketEvents } from '#constants';
 
 export class ConversationService {
-  static findConversationByMemberIds = (...members) => {
-    return new Promise((resolve, reject) => {
-      ConversationParticipants.findOne({
-        attributes: ['Conversation.id'],
-        group: ['Conversation.id'],
-        having: [where(Sequelize.fn('array_agg', Sequelize.col('userId')), Op.contained, members)],
-        include: [
-          {
-            // association: 'users',
-            model: Conversation
-          }
-        ]
-      })
-        .then((conversation) => resolve(conversation))
-        .catch((error) => reject(error));
-    });
-  };
-
-  static createConversation = async ({ userId, memberIds, name }) => {
+  static createConversation = async ({ userId, memberIds, name, message }) => {
     if (!userId) throw new UnauthorizedError(Message.USER_NOT_FOUND);
     if (!memberIds) throw new BadRequestError(Message.CONVERSATION_MEMBERS_INVALID);
 
@@ -39,33 +23,103 @@ export class ConversationService {
       const newConversation = await Conversation.create({
         name,
         creatorId: userId,
-        type: ConversationType.Group
-      }).then((conversation) => conversation.setUsers(_members));
+        type: ConversationType.Group,
+        memberIds: _members
+      });
 
-      socket.triggerEvent(_members, SocketEvents.CONVERSATION_NEW, newConversation);
+      await newConversation.setMembers(_members);
 
-      return newConversation;
+      const users = [];
+      for (let i = 0; i < _members.length; i++) {
+        const _user = await User.findByPk(_members[i]);
+        users.push(_user);
+      }
+
+      const msg = await MessageModel.create({
+        message: 'CREATED',
+        conversationId: newConversation.id,
+        type: MessageType.System,
+        senderId: userId, // Từ token
+        seenIds: [userId] // từ token
+      });
+
+      socket.triggerEvent(_members, SocketEvents.CONVERSATION_NEW, {
+        conversation: newConversation,
+        members: users,
+        message: msg
+      });
+
+      return {
+        conversation: newConversation,
+        members: users,
+        message: msg
+      };
     }
 
     /* ========== TH2: Chat riêng 1-1 ========== */
     // -> Đã có
     const _members = [userId, memberIds[0] ?? memberIds];
 
-    const existingConversation = await ConversationService.findConversationByMemberIds(_members);
+    const existingConversation = await Conversation.findOne({
+      where: {
+        type: ConversationType.Single,
+        memberIds: { [Op.contains]: _members }
+      }
+    });
 
     if (existingConversation) {
-      return existingConversation.Conversation;
+      return existingConversation;
     }
 
     // -> Lần đầu chat -> tạo mới
     const newConversation = await Conversation.create({
       creatorId: userId,
-      type: ConversationType.Single
-    }).then((conversation) => conversation.setUsers(_members));
+      type: ConversationType.Single,
+      memberIds: _members
+    });
 
-    socket.triggerEvent(_members, SocketEvents.CONVERSATION_NEW, newConversation);
+    await newConversation.setMembers(_members);
 
-    return newConversation;
+    const users = [];
+    for (let i = 0; i < _members.length; i++) {
+      const _user = await User.findByPk(_members[i]);
+      users.push(_user);
+    }
+
+    const msg = await MessageModel.create({
+      message: message.message,
+      replyId: message.replyId,
+      conversationId: newConversation.id,
+      type: message.type,
+      attachments: message.attachments,
+      senderId: userId, // Từ token
+      seenIds: [userId] // từ token
+    });
+
+    socket.triggerEvent(_members, SocketEvents.CONVERSATION_NEW, {
+      conversation: newConversation,
+      members: users,
+      message: msg
+    });
+
+    return {
+      conversation: newConversation,
+      members: users,
+      message: msg
+    };
+  };
+
+  static getSingleConversationByMembers = async ({ userId, targetId }) => {
+    const res = await Conversation.findOne({
+      where: {
+        type: ConversationType.Single,
+        memberIds: { [Op.contains]: [targetId, userId] }
+      }
+    });
+
+    return {
+      id: res?.id ?? -1
+    };
   };
 
   static getMyConversations = async ({ userId, limit, offset }) => {

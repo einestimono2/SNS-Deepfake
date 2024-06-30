@@ -482,6 +482,7 @@ export class PostServices {
     await post.destroy();
     user.coins -= costs.deletePost;
     await user.save();
+
     return { coins: String(user.coins) };
   }
 

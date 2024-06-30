@@ -33,6 +33,10 @@ export const Conversation = postgre.define(
     lastMessageAt: {
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW
+    },
+    memberIds: {
+      type: DataTypes.ARRAY(DataTypes.INTEGER),
+      defaultValue: []
     }
   },
   {

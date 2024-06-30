@@ -15,6 +15,17 @@ export class ConversationController {
     });
   });
 
+  static getSingleConversationByMembers = CatchAsyncError(async (req, res) => {
+    const id = await ConversationService.getSingleConversationByMembers({
+      ...req.body,
+      userId: req.userPayload.userId
+    });
+
+    res.ok({
+      data: id
+    });
+  });
+
   static getMyConversations = CatchAsyncError(async (req, res) => {
     const result = await ConversationService.getMyConversations({
       userId: req.userPayload.userId,
