@@ -235,10 +235,14 @@
         "other": "đang nhập ..."
     },
     "JUST_CREATED_CONVERSATION_TEXT": "Vừa tạo cuộc hội thoại!",
+    "SEND_IMAGE_TEXT": "Đã gửi hình ảnh",
+    "SEND_VIDEO_TEXT": "Đã gửi video",
     "CONVERSATION_NAME_HINT_TEXT": "Tên nhóm (không bắt buộc)",
     "CONVERSATION_NAME_TEXT": "Tên nhóm",
     "CREATE_CONVERSATION_TITLE_TEXT": "Tin nhắn mới",
     "CONVERSATION_MEMBERS_TEXT": "Thành viên",
+    "REPLY_YOURSELF_TEXT": "chính mình",
+    "IMAGE_TEXT": "Hình ảnh",
 
     "DISCOUNT_TEXT": "Khuyến mãi",
     "COIN_PACKAGES_TEXT": "Gói xu",

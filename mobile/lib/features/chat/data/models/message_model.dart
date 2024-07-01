@@ -14,6 +14,7 @@ class MessageModel extends Equatable {
   final String createdAt;
   final MessageType type;
   final int conversationId;
+  final MessageModel? reply;
 
   const MessageModel({
     required this.attachments,
@@ -21,6 +22,7 @@ class MessageModel extends Equatable {
     required this.id,
     this.replyId,
     this.message,
+    this.reply,
     required this.senderId,
     required this.conversationId,
     required this.seenIds,
@@ -53,6 +55,7 @@ class MessageModel extends Equatable {
           : List<String>.from(map['attachments']),
       createdAt: map['createdAt'] ?? '',
       type: MessageType.values.byName(map['type']),
+      reply: map['reply'] != null ? MessageModel.fromMap(map['reply']) : null,
     );
   }
 

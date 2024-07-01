@@ -235,10 +235,14 @@
         "other": "are typing ..."
     },
     "JUST_CREATED_CONVERSATION_TEXT": "Just created a conversation!",
+    "SEND_IMAGE_TEXT": "Sent image",
+    "SEND_VIDEO_TEXT": "Sent video",
     "CONVERSATION_NAME_HINT_TEXT": "Group name (optional)",
     "CONVERSATION_NAME_TEXT": "Group name",
     "CREATE_CONVERSATION_TITLE_TEXT": "New message",
     "CONVERSATION_MEMBERS_TEXT": "Members",
+    "REPLY_YOURSELF_TEXT": "yourself",
+    "IMAGE_TEXT": "Image",
 
     "DISCOUNT_TEXT": "Discount",
     "COIN_PACKAGES_TEXT": "Coin packages",

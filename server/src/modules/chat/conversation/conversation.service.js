@@ -10,6 +10,7 @@ import { ConversationParticipants } from '../participant.model.js';
 import { Conversation } from './conversation.model.js';
 
 import { ConversationType, Message, MessageType, SocketEvents } from '#constants';
+import { setFileUsed } from '#utils';
 
 export class ConversationService {
   static createConversation = async ({ userId, memberIds, name, message }) => {
@@ -86,26 +87,41 @@ export class ConversationService {
       users.push(_user);
     }
 
+    const attachments = [];
+    for (const url of message.attachments) {
+      attachments.push(setFileUsed(url));
+    }
+
     const msg = await MessageModel.create({
       message: message.message,
       replyId: message.replyId,
       conversationId: newConversation.id,
       type: message.type,
-      attachments: message.attachments,
+      attachments,
       senderId: userId, // Từ token
       seenIds: [userId] // từ token
     });
 
+    let sendMessage = msg.dataValues;
+
+    if (message.replyId) {
+      const reply = await MessageModel.findByPk(message.replyId);
+      sendMessage = {
+        ...sendMessage,
+        reply: reply.dataValues
+      };
+    }
+
     socket.triggerEvent(_members, SocketEvents.CONVERSATION_NEW, {
       conversation: newConversation,
       members: users,
-      message: msg
+      message: sendMessage
     });
 
     return {
       conversation: newConversation,
       members: users,
-      message: msg
+      message: sendMessage
     };
   };
 
@@ -151,7 +167,6 @@ export class ConversationService {
         },
         {
           association: 'messages',
-          attributes: ['id', 'senderId', 'seenIds', 'createdAt', 'message', 'type', 'replyId'],
           order: [['createdAt', 'DESC']],
           limit: 10
         }

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:easy_localization/easy_localization.dart';
+import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -38,6 +39,8 @@ class ConversationPageState extends State<ConversationPage> {
   bool _hasReachedMax = false;
 
   final ValueNotifier<bool> _focusing = ValueNotifier(false);
+  final ValueNotifier<bool> _pickEmoji = ValueNotifier(false);
+  final ValueNotifier<MessageModel?> _replying = ValueNotifier(null);
 
   Timer? _debounce;
   Timer? _endTyping;
@@ -139,25 +142,31 @@ class ConversationPageState extends State<ConversationPage> {
     }
   }
 
-  void _handleSendMessage() {
-    if (_controller.text.isEmpty) return;
+  void _handleSendMessage([List<String> attachments = const []]) {
+    if (_controller.text.isEmpty && attachments.isEmpty) return;
 
     if (conversationId == -1) {
       context.read<MessageBloc>().add(SendFirstMessageSubmit(
             memberIds: [widget.friendData!["id"]],
-            type: MessageType.text,
+            type: attachments.isNotEmpty ? MessageType.media : MessageType.text,
             message: _controller.text,
             onSuccess: handleChangeEmptyConversation,
+            attachments: attachments,
+            replyId: _replying.value?.id,
           ));
     } else {
       context.read<MessageBloc>().add(SendMessageSubmit(
             conversationId: conversation!.id,
-            type: MessageType.text,
+            type: attachments.isNotEmpty ? MessageType.media : MessageType.text,
             message: _controller.text,
+            attachments: attachments,
+            replyId: _replying.value?.id,
           ));
     }
 
     _fn.unfocus();
+    _replying.value = null;
+    _pickEmoji.value = false;
     _controller.clear();
   }
 
@@ -218,6 +227,19 @@ class ConversationPageState extends State<ConversationPage> {
     return _map;
   }
 
+  void _handlePick(int type) async {
+    openUploadBottomSheet(
+      isPickVideo: type == 1,
+      context: context,
+      onSelected: (url) => _handleSendMessage([url]),
+    );
+  }
+
+  void _handleReply(MessageModel msg) {
+    _replying.value = msg;
+    _fn.requestFocus();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -243,6 +265,7 @@ class ConversationPageState extends State<ConversationPage> {
                   onTapUp: (_) {
                     _focusing.value = false;
                     _fn.unfocus();
+                    _pickEmoji.value = false;
                   },
                   child: _buildMessages(),
                 ),
@@ -297,6 +320,7 @@ class ConversationPageState extends State<ConversationPage> {
                 itemCount: state.hasReachedMax ? length : length + 1,
                 itemBuilder: (_, idx) => idx < state.messages.length
                     ? MessageCard(
+                        onReply: _handleReply,
                         lastMessageTime: idx == length - 1
                             ? state.messages[idx].createdAt
                             : state.messages[idx + 1].createdAt,
@@ -355,103 +379,249 @@ class ConversationPageState extends State<ConversationPage> {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.fromLTRB(3, 0, 3, 8),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
+      child: Column(
         children: [
+          /* Replying */
           ValueListenableBuilder(
-            valueListenable: _focusing,
-            builder: (context, value, child) => value
-                ? InkWell(
-                    onTap: () => _focusing.value = false,
-                    borderRadius: BorderRadius.circular(1000),
-                    child: Ink(
-                      padding: const EdgeInsets.all(6),
-                      child: const Icon(Icons.chevron_right),
-                    ),
-                  )
-                : AnimatedContainer(
-                    duration: Durations.long1,
-                    child: Row(
-                      children: [
-                        InkWell(
-                          onTap: () {},
-                          borderRadius: BorderRadius.circular(1000),
-                          child: Ink(
-                            padding: const EdgeInsets.all(6),
-                            child: const Icon(Icons.image),
+            valueListenable: _replying,
+            builder: (context, value, child) => _buildReplyMessage(value),
+          ),
+
+/*  */
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              ValueListenableBuilder(
+                valueListenable: _focusing,
+                builder: (context, value, child) => value
+                    ? InkWell(
+                        onTap: () => _focusing.value = false,
+                        borderRadius: BorderRadius.circular(1000),
+                        child: Ink(
+                          padding: const EdgeInsets.all(6),
+                          child: const Icon(Icons.chevron_right),
+                        ),
+                      )
+                    : AnimatedContainer(
+                        duration: Durations.long1,
+                        child: Row(
+                          children: [
+                            InkWell(
+                              onTap: () => _handlePick(0),
+                              borderRadius: BorderRadius.circular(1000),
+                              child: Ink(
+                                padding: const EdgeInsets.all(6),
+                                child: const Icon(Icons.image),
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () => _handlePick(1),
+                              borderRadius: BorderRadius.circular(1000),
+                              child: Ink(
+                                padding: const EdgeInsets.all(6),
+                                child: const Icon(
+                                  FontAwesomeIcons.fileVideo,
+                                  size: 22,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+              ),
+
+              /*  */
+              Expanded(
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                    color: context.minBackgroundColor(),
+                  ),
+                  margin: EdgeInsets.symmetric(horizontal: 3.w),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: TextField(
+                          focusNode: _fn,
+                          // onTapOutside: (_) => _fn.unfocus(),
+                          onTap: () {
+                            _focusing.value = true;
+                            _pickEmoji.value = false;
+                          },
+                          onChanged: _handleTypeMessage,
+                          controller: _controller,
+                          maxLines: null,
+                          keyboardType: TextInputType.multiline,
+                          decoration: InputDecoration(
+                            isDense: true,
+                            contentPadding:
+                                EdgeInsets.fromLTRB(12.w, 8.h, 0, 8.h),
+                            border: InputBorder.none,
+                            focusedBorder: InputBorder.none,
+                            enabledBorder: InputBorder.none,
+                            hintText: "TYPE_MESSAGE_TEXT".tr(),
                           ),
                         ),
-                        InkWell(
-                          onTap: () {},
-                          borderRadius: BorderRadius.circular(1000),
-                          child: Ink(
-                            padding: const EdgeInsets.all(6),
-                            child: const Icon(
-                              FontAwesomeIcons.fileVideo,
-                              size: 22,
-                            ),
-                          ),
+                      ),
+
+                      /*  */
+                      InkWell(
+                        onTap: () {
+                          _pickEmoji.value = !_pickEmoji.value;
+                          _fn.unfocus();
+                        },
+                        borderRadius: BorderRadius.circular(1000),
+                        child: Ink(
+                          padding: const EdgeInsets.all(3),
+                          child: const Icon(Icons.emoji_emotions, size: 22),
+                        ),
+                      ),
+                      SizedBox(width: 4.w),
+                    ],
+                  ),
+                ),
+              ),
+
+              /*  */
+              InkWell(
+                onTap: _handleSendMessage,
+                borderRadius: BorderRadius.circular(1000),
+                child: Ink(
+                  padding: const EdgeInsets.all(6),
+                  child: const Icon(Icons.send, size: 22),
+                ),
+              ),
+            ],
+          ),
+
+          /* Icon Picker */
+          ValueListenableBuilder(
+            valueListenable: _pickEmoji,
+            builder: (context, value, child) => AnimatedSize(
+              duration: Durations.short2,
+              child: Container(
+                width: double.infinity,
+                height: !value ? 0 : 0.35.sh,
+                margin: const EdgeInsets.only(top: 8),
+                decoration: const BoxDecoration(
+                  boxShadow: highModeShadow,
+                ),
+                child: !value ? const SizedBox.shrink() : _buildEmojiPicker(),
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _buildReplyMessage(MessageModel? msg) {
+    return AnimatedSize(
+      duration: Durations.short4,
+      child: Container(
+        decoration: BoxDecoration(
+          border: msg == null
+              ? null
+              : Border(top: BorderSide(color: context.minBackgroundColor())),
+          boxShadow: highModeShadow,
+        ),
+        padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 8),
+        child: msg == null
+            ? const SizedBox.shrink()
+            : Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        msg.senderId == myId
+                            ? Text(
+                                "${"REPLYING_TO_TEXT".tr()} ${"REPLY_YOURSELF_TEXT".tr()}",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .labelLarge
+                                    ?.copyWith(fontSize: 11.5.sp),
+                              )
+                            : RichText(
+                                text: TextSpan(
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .labelLarge
+                                      ?.copyWith(
+                                        fontSize: 11.5.sp,
+                                      ),
+                                  children: [
+                                    TextSpan(text: "REPLYING_TO_TEXT".tr()),
+                                    const TextSpan(text: " "),
+                                    TextSpan(
+                                      text: memberNames[msg.senderId],
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .labelLarge
+                                          ?.copyWith(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 11.75.sp,
+                                          ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                        const SizedBox(height: 3),
+                        Text(
+                          _getReplyMessageContent(msg),
+                          style: Theme.of(context)
+                              .textTheme
+                              .labelMedium
+                              ?.copyWith(fontSize: 10.5.sp),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ],
                     ),
                   ),
-          ),
-
-          /*  */
-          Expanded(
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16),
-                color: context.minBackgroundColor(),
-              ),
-              margin: EdgeInsets.symmetric(horizontal: 3.w),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: TextField(
-                      focusNode: _fn,
-                      // onTapOutside: (_) => _fn.unfocus(),
-                      onTap: () => _focusing.value = true,
-                      onChanged: _handleTypeMessage,
-                      controller: _controller,
-                      maxLines: null,
-                      keyboardType: TextInputType.multiline,
-                      decoration: InputDecoration(
-                        isDense: true,
-                        contentPadding: EdgeInsets.fromLTRB(12.w, 8.h, 0, 8.h),
-                        border: InputBorder.none,
-                        focusedBorder: InputBorder.none,
-                        enabledBorder: InputBorder.none,
-                        hintText: "TYPE_MESSAGE_TEXT".tr(),
+                  GestureDetector(
+                    onTap: () => _replying.value = null,
+                    child: Container(
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.white12,
                       ),
-                    ),
-                  ),
-
-                  /*  */
-                  InkWell(
-                    onTap: () {},
-                    borderRadius: BorderRadius.circular(1000),
-                    child: Ink(
                       padding: const EdgeInsets.all(3),
-                      child: const Icon(Icons.emoji_emotions, size: 22),
+                      child: const Icon(Icons.clear,
+                          size: 16, color: Colors.white),
                     ),
                   ),
-                  SizedBox(width: 4.w),
                 ],
               ),
-            ),
-          ),
+      ),
+    );
+  }
 
-          /*  */
-          InkWell(
-            onTap: _handleSendMessage,
-            borderRadius: BorderRadius.circular(1000),
-            child: Ink(
-              padding: const EdgeInsets.all(6),
-              child: const Icon(Icons.send, size: 22),
-            ),
-          ),
-        ],
+  String _getReplyMessageContent(MessageModel msg) {
+    if (msg.type == MessageType.media) {
+      return fileIsVideo(msg.attachments.first) ? "Video" : "IMAGE_TEXT".tr();
+    }
+
+    return msg.message ?? "";
+  }
+
+  Widget _buildEmojiPicker() {
+    return EmojiPicker(
+      textEditingController: _controller,
+      onBackspacePressed: () {},
+      config: Config(
+        bottomActionBarConfig: const BottomActionBarConfig(enabled: false),
+        categoryViewConfig: CategoryViewConfig(
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          showBackspaceButton: true,
+        ),
+        emojiViewConfig: EmojiViewConfig(
+          loadingIndicator: const CircularProgressIndicator(),
+          backgroundColor:
+              Theme.of(context).scaffoldBackgroundColor.withOpacity(0.85),
+          columns: 8,
+          emojiSizeMax: 28 * (DeviceUtils.isIOS() ? 1.20 : 1.0),
+        ),
       ),
     );
   }

@@ -7,24 +7,40 @@ import { ConversationService } from '../conversation/conversation.service.js';
 import { Message } from './message.model.js';
 
 import { Message as MessageConst, SocketEvents } from '#constants';
+import { setFileUsed } from '#utils';
 
 export class MessageService {
   static createMessage = async (body) => {
     if (!body.senderId) throw new UnauthorizedError(MessageConst.USER_NOT_FOUND);
     if (!body.conversationId) throw new BadRequestError(MessageConst.CONVERSATION_NOT_FOUND);
 
+    const attachments = [];
+    for (const url of body.attachments) {
+      attachments.push(setFileUsed(url));
+    }
+
     const newMessage = await Message.create({
       message: body.message,
       replyId: body.replyId,
       conversationId: body.conversationId,
       type: body.type,
-      attachments: body.attachments,
+      attachments,
       senderId: body.senderId, // Từ token
       seenIds: [body.senderId] // từ token
     });
 
+    let sendMessage = newMessage.dataValues;
+
+    if (body.replyId) {
+      const reply = await Message.findByPk(body.replyId);
+      sendMessage = {
+        ...sendMessage,
+        reply: reply.dataValues
+      };
+    }
+
     // Trigger Event: tới room đó (thành viên không trong room thì k cần thiết phải nhận)
-    socket.triggerEvent(body.conversationId, SocketEvents.MESSAGE_NEW, newMessage);
+    socket.triggerEvent(body.conversationId, SocketEvents.MESSAGE_NEW, sendMessage);
 
     // Cập nhật lastMessageTimestamp
     const conversation = await ConversationService.updateLastMessageTimestamp({
@@ -44,11 +60,11 @@ export class MessageService {
       {
         conversationId: body.conversationId,
         lastMessageAt: conversation.lastMessageAt,
-        message: newMessage
+        message: sendMessage
       }
     );
 
-    return newMessage;
+    return sendMessage;
   };
 
   static updateMessage = async ({ id, ...body }) => {
@@ -100,12 +116,11 @@ export class MessageService {
       where: { conversationId },
       order: [[Sequelize.col('createdAt'), sort]],
       distinct: true,
-      // include: [
-      //   {
-      //     association: 'sender',
-      //     attributes: ['id', 'avatar', 'username', 'email', 'phoneNumber']
-      //   }
-      // ],
+      include: [
+        {
+          association: 'reply'
+        }
+      ],
       limit,
       offset
     });

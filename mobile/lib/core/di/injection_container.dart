@@ -349,7 +349,7 @@ void _initChatFeature() {
 
   /* Datasource */
   sl.registerLazySingleton<ChatRemoteDataSource>(
-    () => ChatRemoteDataSourceImpl(apiClient: sl()),
+    () => ChatRemoteDataSourceImpl(apiClient: sl(), uploadRemote: sl()),
   );
 }
 

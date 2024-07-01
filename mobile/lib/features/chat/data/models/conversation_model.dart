@@ -99,8 +99,17 @@ class ConversationModel extends Equatable {
       from = "${sender.username ?? sender.email}: ";
     }
 
-    return from +
-        (messages.first.message ?? "JUST_CREATED_CONVERSATION_TEXT".tr());
+    String? msg = messages.first.message;
+    if (messages.first.type == MessageType.media &&
+        messages.first.attachments.firstOrNull != null) {
+      msg = fileIsVideo(messages.first.attachments.first)
+          ? "SEND_VIDEO_TEXT".tr()
+          : "SEND_IMAGE_TEXT".tr();
+    } else if (messages.first.type == MessageType.system) {
+      msg = AppMappers.getSystemMessage(messages.first.message!);
+    }
+
+    return from + (msg ?? "JUST_CREATED_CONVERSATION_TEXT".tr());
   }
 
   bool isReadNewestMessage(int myId) {

@@ -2,6 +2,7 @@ import '../../../../config/configs.dart';
 import '../../../../core/base/base.dart';
 import '../../../../core/networks/networks.dart';
 import '../../../../core/utils/utils.dart';
+import '../../../upload/upload.dart';
 import '../data.dart';
 
 abstract class ChatRemoteDataSource {
@@ -49,8 +50,12 @@ abstract class ChatRemoteDataSource {
 
 class ChatRemoteDataSourceImpl extends ChatRemoteDataSource {
   final ApiClient apiClient;
+  final UploadRemoteDataSource uploadRemote;
 
-  ChatRemoteDataSourceImpl({required this.apiClient});
+  ChatRemoteDataSourceImpl({
+    required this.uploadRemote,
+    required this.apiClient,
+  });
 
   @override
   Future<List<ConversationModel>> myConversations({
@@ -119,12 +124,34 @@ class ChatRemoteDataSourceImpl extends ChatRemoteDataSource {
     int? replyId,
     required List<String> attachments,
   }) async {
+    List<String> images = [];
+    List<String> videos = [];
+
+    for (var e in attachments) {
+      if (fileIsVideo(e)) {
+        videos.add(e);
+      } else {
+        images.add(e);
+      }
+    }
+
+    List<String> urls = [];
+
+    if (videos.isNotEmpty) {
+      final _urls = await uploadRemote.uploadVideos(videos);
+      urls = [...urls, ..._urls];
+    }
+    if (images.isNotEmpty) {
+      final _urls = await uploadRemote.uploadImages(images);
+      urls = [...urls, ..._urls];
+    }
+
     final response = await apiClient.post(Endpoints.sendMessage, data: {
       "conversationId": conversationId,
       "type": type.name,
       "message": message,
       "replyId": replyId,
-      "attachments": attachments,
+      "attachments": urls,
     });
 
     return MessageModel.fromMap(response.data);
@@ -139,12 +166,34 @@ class ChatRemoteDataSourceImpl extends ChatRemoteDataSource {
     required List<int> memberIds,
     String? name,
   }) async {
+    List<String> images = [];
+    List<String> videos = [];
+
+    for (var e in attachments) {
+      if (fileIsVideo(e)) {
+        videos.add(e);
+      } else {
+        images.add(e);
+      }
+    }
+
+    List<String> urls = [];
+
+    if (videos.isNotEmpty) {
+      final _urls = await uploadRemote.uploadVideos(videos);
+      urls = [...urls, ..._urls];
+    }
+    if (images.isNotEmpty) {
+      final _urls = await uploadRemote.uploadImages(images);
+      urls = [...urls, ..._urls];
+    }
+
     final response = await apiClient.post(Endpoints.createConversation, data: {
       "message": {
         "type": type.name,
         "message": message,
         "replyId": replyId,
-        "attachments": attachments,
+        "attachments": urls,
       },
       "name": name,
       "memberIds": memberIds,

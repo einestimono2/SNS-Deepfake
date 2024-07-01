@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/utils/utils.dart';
 import '../../../../core/widgets/widgets.dart';
 import '../../data/data.dart';
+import 'conversation_avatar.dart';
 
 class MessageCard extends StatefulWidget {
   final MessageModel message;
@@ -14,6 +15,7 @@ class MessageCard extends StatefulWidget {
   final Map<int, String> memberAvatars;
   final Map<int, String> memberNames;
   final Map<int, int> memberSeen;
+  final Function(MessageModel) onReply;
 
   const MessageCard({
     super.key,
@@ -24,6 +26,7 @@ class MessageCard extends StatefulWidget {
     required this.memberSeen,
     required this.memberNames,
     required this.idx,
+    required this.onReply,
   });
 
   @override
@@ -51,7 +54,9 @@ class _MessageCardState extends State<MessageCard> {
       List<String> names = [];
 
       widget.memberNames.forEach((id, value) {
-        if (widget.myId != id && widget.memberSeen[id]! <= widget.idx) {
+        if (widget.myId != id &&
+            widget.memberSeen[id] != null &&
+            widget.memberSeen[id]! <= widget.idx) {
           names.add(value);
         }
       });
@@ -68,113 +73,195 @@ class _MessageCardState extends State<MessageCard> {
     final lastMessageTimeNull =
         widget.lastMessageTime == widget.message.createdAt;
 
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      // crossAxisAlignment: CrossAxisAlignment.end,
-      children: [
-        /* Label date -- Nhóm theo các nhóm liên tiếp cách nhau 30p */
-        if (lastMessageTimeNull ||
-            !DateHelper.is30MinutesDifference(
-              widget.lastMessageTime,
-              widget.message.createdAt,
-            ))
-          Container(
-            alignment: Alignment.center,
-            margin: EdgeInsets.only(
-              top: lastMessageTimeNull ? 6 : 18,
-              bottom: 6,
-            ),
-            child: Text(
-              softWrap: true,
-              Formatter.formatMessageTime(
-                  widget.message.createdAt, context.locale.languageCode),
-              style: Theme.of(context).textTheme.labelMedium,
-            ),
-          ),
+    final bool isMediaMessage = widget.message.type == MessageType.media;
 
-        /* Message */
-        Align(
-          alignment: mine ? Alignment.centerRight : Alignment.centerLeft,
-          child: GestureDetector(
-            onTap: () => _isExpanded.value = !_isExpanded.value,
-            child: Stack(
-              alignment: AlignmentDirectional.centerStart,
+    return widget.message.type == MessageType.system
+        ? Align(
+            alignment: Alignment.center,
+            child: Column(
               children: [
-                Container(
-                  decoration: BoxDecoration(
-                    color: AppColors.kPrimaryColor.withOpacity(mine ? 1 : 0.1),
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  constraints: BoxConstraints(
-                    maxWidth: 0.75.sw,
-                  ),
-                  margin: const EdgeInsets.only(left: 12),
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                  child: Text(
-                    widget.message.message ?? "",
-                    style: Theme.of(context).textTheme.bodyMedium,
-                  ),
+                ConversationAvatar(
+                  avatars: widget.memberAvatars.values
+                      .map((e) => e.fullPath)
+                      .toList(),
+                  isOnline: false,
                 ),
-                if (!mine)
-                  CircleAvatar(
-                    backgroundColor: Colors.red,
-                    radius: 11,
-                    child: RemoteImage(
-                      url: widget.memberAvatars[widget.message.senderId]
-                              ?.fullPath ??
-                          "",
-                      isAvatar: true,
-                    ),
-                  ),
+                const SizedBox(height: 8),
+                Text(
+                  AppMappers.getSystemMessage(widget.message.message!),
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
               ],
             ),
-          ),
-        ),
-
-        /*  */
-        ValueListenableBuilder(
-          valueListenable: _isExpanded,
-          builder: (context, value, child) => value
-              ? AnimatedContainer(
-                  duration: Durations.long2,
-                  padding: mine
-                      ? const EdgeInsets.only(right: 12.0, top: 2)
-                      : const EdgeInsets.only(left: 12.0, top: 2),
-                  alignment:
-                      mine ? Alignment.centerRight : Alignment.centerLeft,
+          )
+        : Column(
+            mainAxisSize: MainAxisSize.min,
+            // crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              /* Label date -- Nhóm theo các nhóm liên tiếp cách nhau 30p */
+              if (lastMessageTimeNull ||
+                  !DateHelper.is30MinutesDifference(
+                    widget.lastMessageTime,
+                    widget.message.createdAt,
+                  ))
+                Container(
+                  alignment: Alignment.center,
+                  margin: EdgeInsets.only(
+                    top: lastMessageTimeNull ? 6 : 18,
+                    bottom: 6,
+                  ),
                   child: Text(
-                    _getSeenText(),
+                    softWrap: true,
+                    Formatter.formatMessageTime(
+                        widget.message.createdAt, context.locale.languageCode),
                     style: Theme.of(context).textTheme.labelMedium,
                   ),
-                )
-              : const SizedBox.shrink(),
-        ),
+                ),
 
-        /* List avatar seen */
-        Container(
-          alignment: Alignment.centerRight,
-          padding: const EdgeInsets.only(right: 8),
-          child: Wrap(
-            spacing: 4,
-            children: widget.message.seenIds
-                .map<Widget>((id) =>
-                    (id != widget.myId && widget.memberSeen[id] == widget.idx)
-                        ? Padding(
-                            padding: const EdgeInsets.only(top: 4, bottom: 8),
-                            child: CircleAvatar(
-                              radius: 7,
-                              child: AnimatedImage(
-                                url: widget.memberAvatars[id]!.fullPath,
-                                isAvatar: true,
-                              ),
+              /* Message */
+              Align(
+                alignment: mine ? Alignment.centerRight : Alignment.centerLeft,
+                child: GestureDetector(
+                  onTap: () => _isExpanded.value = !_isExpanded.value,
+                  child: Dismissible(
+                    key: ValueKey(widget.message.id),
+                    confirmDismiss: (direction) {
+                      widget.onReply(widget.message);
+                      return Future.value(false);
+                    },
+                    background: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 6),
+                      child: CircleAvatar(
+                        radius: 22,
+                        backgroundColor: context.minBackgroundColor(),
+                        child: Icon(
+                          Icons.reply,
+                          size: 18,
+                          color: context.minTextColor(),
+                        ),
+                      ),
+                    ),
+                    direction: mine
+                        ? DismissDirection.endToStart
+                        : DismissDirection.startToEnd,
+                    child: Stack(
+                      alignment: AlignmentDirectional.centerStart,
+                      children: [
+                        if (widget.message.reply != null)
+                          Container(
+                            decoration: BoxDecoration(
+                              color: context.minBackgroundColor(),
+                              borderRadius: BorderRadius.circular(16),
                             ),
-                          )
-                        : const SizedBox.shrink())
-                .toList(),
-          ),
-        )
-      ],
-    );
+                            padding: const EdgeInsets.all(8),
+                            margin: const EdgeInsets.only(bottom: 36, left: 12),
+                            child: Text(widget.message.reply!.message ?? ""),
+                          ),
+
+                        /*  */
+                        Container(
+                          decoration: isMediaMessage
+                              ? null
+                              : BoxDecoration(
+                                  color: AppColors.kPrimaryColor
+                                      .withOpacity(mine ? 1 : 0.1),
+                                  borderRadius: BorderRadius.circular(16),
+                                ),
+                          constraints: BoxConstraints(
+                            maxWidth: 0.75.sw,
+                          ),
+                          margin: EdgeInsets.only(
+                            left: 12,
+                            top: widget.message.reply != null ? 24 : 0,
+                          ),
+                          padding: isMediaMessage
+                              ? EdgeInsets.zero
+                              : const EdgeInsets.symmetric(
+                                  horizontal: 16, vertical: 8),
+                          child: _mapMessageType(),
+                        ),
+                        if (!mine)
+                          CircleAvatar(
+                            backgroundColor: Colors.red,
+                            radius: 11,
+                            child: RemoteImage(
+                              url: widget.memberAvatars[widget.message.senderId]
+                                      ?.fullPath ??
+                                  "",
+                              isAvatar: true,
+                            ),
+                          ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+
+              /*  */
+              ValueListenableBuilder(
+                valueListenable: _isExpanded,
+                builder: (context, value, child) => value
+                    ? AnimatedContainer(
+                        duration: Durations.long2,
+                        padding: mine
+                            ? const EdgeInsets.only(right: 12.0, top: 2)
+                            : const EdgeInsets.only(left: 12.0, top: 2),
+                        alignment:
+                            mine ? Alignment.centerRight : Alignment.centerLeft,
+                        child: Text(
+                          _getSeenText(),
+                          style: Theme.of(context).textTheme.labelMedium,
+                        ),
+                      )
+                    : const SizedBox.shrink(),
+              ),
+
+              /* List avatar seen */
+              Container(
+                alignment: Alignment.centerRight,
+                padding: const EdgeInsets.only(right: 8),
+                child: Wrap(
+                  spacing: 4,
+                  children: widget.message.seenIds
+                      .map<Widget>((id) => (id != widget.myId &&
+                              widget.memberSeen[id] == widget.idx)
+                          ? Padding(
+                              padding: const EdgeInsets.only(top: 4, bottom: 8),
+                              child: CircleAvatar(
+                                radius: 7,
+                                child: AnimatedImage(
+                                  url: widget.memberAvatars[id]!.fullPath,
+                                  isAvatar: true,
+                                ),
+                              ),
+                            )
+                          : const SizedBox.shrink())
+                      .toList(),
+                ),
+              )
+            ],
+          );
+  }
+
+  Widget _mapMessageType() {
+    switch (widget.message.type) {
+      case MessageType.text:
+        return Text(
+          widget.message.message ?? "",
+          style: Theme.of(context).textTheme.bodyMedium,
+        );
+      case MessageType.media:
+        return Wrap(
+          children: widget.message.attachments.map((e) {
+            if (fileIsVideo(e)) {
+              return AppVideo(e.fullPath, isNetwork: true);
+            } else {
+              return AnimatedImage(url: e.fullPath, radius: 12);
+            }
+          }).toList(),
+        );
+      default:
+        return const SizedBox.shrink();
+    }
   }
 }

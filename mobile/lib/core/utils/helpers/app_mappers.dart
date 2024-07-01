@@ -106,4 +106,13 @@ class AppMappers {
         return Theme.of(context).textTheme.bodySmall?.color;
     }
   }
+
+  static String getSystemMessage(String key) {
+    switch (key) {
+      case "CREATED":
+        return "JUST_CREATED_CONVERSATION_TEXT".tr();
+      default:
+        return "JUST_CREATED_CONVERSATION_TEXT".tr();
+    }
+  }
 }
