@@ -74,6 +74,7 @@ class _MessageCardState extends State<MessageCard> {
         widget.lastMessageTime == widget.message.createdAt;
 
     final bool isMediaMessage = widget.message.type == MessageType.media;
+    final bool replying = widget.message.reply != null;
 
     return widget.message.type == MessageType.system
         ? Align(
@@ -129,33 +130,45 @@ class _MessageCardState extends State<MessageCard> {
                       widget.onReply(widget.message);
                       return Future.value(false);
                     },
-                    background: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 6),
+                    background: Center(
                       child: CircleAvatar(
-                        radius: 22,
+                        radius: 16,
                         backgroundColor: context.minBackgroundColor(),
-                        child: Icon(
-                          Icons.reply,
-                          size: 18,
-                          color: context.minTextColor(),
-                        ),
+                        child: Icon(Icons.reply, color: context.minTextColor()),
                       ),
                     ),
                     direction: mine
                         ? DismissDirection.endToStart
                         : DismissDirection.startToEnd,
                     child: Stack(
-                      alignment: AlignmentDirectional.centerStart,
+                      alignment: mine
+                          ? AlignmentDirectional.centerEnd
+                          : AlignmentDirectional.centerStart,
                       children: [
-                        if (widget.message.reply != null)
+                        if (replying)
                           Container(
                             decoration: BoxDecoration(
                               color: context.minBackgroundColor(),
-                              borderRadius: BorderRadius.circular(16),
+                              borderRadius: BorderRadius.only(
+                                topLeft: const Radius.circular(12),
+                                topRight: const Radius.circular(12),
+                                bottomLeft: mine
+                                    ? const Radius.circular(12)
+                                    : Radius.zero,
+                                bottomRight: !mine
+                                    ? const Radius.circular(12)
+                                    : Radius.zero,
+                              ),
                             ),
-                            padding: const EdgeInsets.all(8),
-                            margin: const EdgeInsets.only(bottom: 36, left: 12),
-                            child: Text(widget.message.reply!.message ?? ""),
+                            padding: const EdgeInsets.fromLTRB(8, 8, 8, 18),
+                            margin: EdgeInsets.only(
+                              bottom: (8 + 8 + 13.sp),
+                              left: 12,
+                            ),
+                            child: Text(
+                              widget.message.reply!.message ?? "",
+                              style: Theme.of(context).textTheme.labelMedium,
+                            ),
                           ),
 
                         /*  */
@@ -163,16 +176,17 @@ class _MessageCardState extends State<MessageCard> {
                           decoration: isMediaMessage
                               ? null
                               : BoxDecoration(
-                                  color: AppColors.kPrimaryColor
-                                      .withOpacity(mine ? 1 : 0.1),
-                                  borderRadius: BorderRadius.circular(16),
+                                  color: mine
+                                      ? AppColors.kPrimaryColor
+                                      : const Color.fromRGBO(48, 48, 48, 1),
+                                  borderRadius: BorderRadius.circular(14),
                                 ),
                           constraints: BoxConstraints(
                             maxWidth: 0.75.sw,
                           ),
                           margin: EdgeInsets.only(
                             left: 12,
-                            top: widget.message.reply != null ? 24 : 0,
+                            top: replying ? (8 + 24 + 12.sp) / 2 : 0,
                           ),
                           padding: isMediaMessage
                               ? EdgeInsets.zero
@@ -180,15 +194,21 @@ class _MessageCardState extends State<MessageCard> {
                                   horizontal: 16, vertical: 8),
                           child: _mapMessageType(),
                         ),
+
+                        /*  */
                         if (!mine)
-                          CircleAvatar(
-                            backgroundColor: Colors.red,
-                            radius: 11,
-                            child: RemoteImage(
-                              url: widget.memberAvatars[widget.message.senderId]
-                                      ?.fullPath ??
-                                  "",
-                              isAvatar: true,
+                          Positioned(
+                            bottom: replying ? 14 : 8,
+                            child: CircleAvatar(
+                              backgroundColor: Colors.red,
+                              radius: 11,
+                              child: RemoteImage(
+                                url: widget
+                                        .memberAvatars[widget.message.senderId]
+                                        ?.fullPath ??
+                                    "",
+                                isAvatar: true,
+                              ),
                             ),
                           ),
                       ],

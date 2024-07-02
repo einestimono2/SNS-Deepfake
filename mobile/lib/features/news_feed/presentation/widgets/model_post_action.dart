@@ -1,8 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:sns_deepfake/core/utils/extensions/theme_mode.dart';
 
+import '../../../../config/configs.dart';
 import '../../data/data.dart';
 
 class ModelPostAction extends StatelessWidget {
@@ -14,8 +16,13 @@ class ModelPostAction extends StatelessWidget {
     Navigator.pop(context);
   }
 
-  void _handleEdit() {
-    //
+  void _handleEdit(BuildContext context) {
+    Navigator.of(context, rootNavigator: true).pop();
+
+    context.pushNamed(
+      Routes.editPost.name,
+      pathParameters: {"id": post.id.toString()},
+    );
   }
 
   void _handleReport(BuildContext context) {
@@ -37,7 +44,7 @@ class ModelPostAction extends StatelessWidget {
           children: [
             if (isOwner)
               ListTile(
-                onTap: _handleEdit,
+                onTap: () => _handleEdit(context),
                 leading: const Icon(FontAwesomeIcons.pen, size: 18),
                 title: Text(
                   "ACTION_EDIT_POST_TEXT".tr(),

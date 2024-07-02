@@ -102,6 +102,7 @@ class Routes {
 
   static final newsFeed = Route(name: "news_feed", path: "/news_feed");
   static final createPost = Route(name: "create_post", path: "create");
+  static final editPost = Route(name: "edit_post", path: "edit/:id");
   static final postDetails =
       Route(name: "post_details", path: "post_details/:id");
 

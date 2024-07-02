@@ -210,6 +210,24 @@ class AppRouter {
                       );
                     },
                   ),
+                  
+                  /* Edit Post */
+                  GoRoute(
+                    parentNavigatorKey: rootNavigatorKey,
+                    name: Routes.editPost.name,
+                    path: Routes.editPost.path,
+                    pageBuilder: (BuildContext context, GoRouterState state) {
+                      return slideTransition(
+                        type: SlideType.rtl,
+                        state: state,
+                        context: context,
+                        child: EditPostPage(
+                          key: state.pageKey,
+                          id: int.parse(state.pathParameters['id']!),
+                        ),
+                      );
+                    },
+                  ),
                 ],
               ),
 

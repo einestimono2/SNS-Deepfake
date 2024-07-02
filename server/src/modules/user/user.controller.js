@@ -14,8 +14,8 @@ export class UserControllers {
 
   // 1--Đăng ký
   static register = CatchAsyncError(async (req, res) => {
-    const { uuid, role, password, email } = req.body;
-    await userServices.signup(email, password, role, uuid);
+    const { phoneNumber, role, password, email } = req.body;
+    await userServices.signup(phoneNumber, email, password, role);
     res.created({
       message: 'Mã code đã được gửi về mail của bạn'
     });

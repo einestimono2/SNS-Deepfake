@@ -155,7 +155,7 @@ class _CreatePostPageState extends State<CreatePostPage>
     /* Do gắn rootNavigationKey để ẩn bottomNavBar dùng chung */
     return Scaffold(
       backgroundColor:
-          Theme.of(context).scaffoldBackgroundColor.withOpacity(0.8),
+          Theme.of(context).scaffoldBackgroundColor.withOpacity(0.95),
       body: SliverPage(
         title: "CREATE_POST_TITLE_TEXT".tr(),
         centerTitle: true,

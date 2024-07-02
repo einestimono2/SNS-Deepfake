@@ -384,7 +384,7 @@ export class PostServices {
       // Lấy  những ảnh tương ứng được sắp xếp và chỉ lấy ra 2 thuộc tính url và order
       include: [
         { model: PostImage, as: 'images', order: [['order', 'ASC']] },
-        { model: PostVideo, as: 'video' },
+        { model: PostVideo, as: 'videos' },
         { model: Mark, as: 'marks', include: [{ model: Comment, as: 'comments' }] },
         { model: Feel, as: 'feels' }
       ]
@@ -400,37 +400,14 @@ export class PostServices {
       user.coins -= costs.editPost;
       await user.save();
     }
-    // Tạo nhưng chưa insert dữ liệu
-    const oldPost = Post.create({
-      id: post.id,
-      authorId: post.authorId,
-      description: post.description,
-      images: post.images.map((image) =>
-        PostImage.create({
-          url: image.url,
-          order: image.order
-        })
-      ),
-      video:
-        post.video &&
-        PostVideo.create({
-          url: post.video.url
-        }),
-      status: post.status,
-      edited: post.edited,
-      deletedAt: new Date()
-    });
-    // Tạo dữ liệu cho bảng PostHistory
-    await PostHistory.create({
-      postId: post.id,
-      oldPostId: oldPost.id
-    });
-    // Thêm ảnh
-    body.images.forEach(async (image, index) => {
-      for (let i = 0; i < post.images.length; i++) {
-        await post.images[i].push({ url: image, order: index + 1 });
+    // Thêm mới ảnh
+    if (body.images) {
+      let curentOrder = post.images.length;
+      for (const image of body.images) {
+        curentOrder += 1;
+        post.images.push(await PostImage.create({ postId: post.id, url: setFileUsed(image), order: curentOrder }));
       }
-    });
+    }
     const mapImages = Object.fromEntries(post.images.map((e) => [e.order, e]));
     // Sắp xếp lại thứ tự ảnh nếu cần
     if (body.image_sort) {
@@ -445,7 +422,19 @@ export class PostServices {
     // Xóa ảnh nếu cần
     if (body.image_del) {
       const deleted = Object.fromEntries(body.image_del.map((e) => [e, true]));
-      post.images = post.images.filter((image) => !deleted[body.image_del.order]);
+      console.log(deleted);
+      const imagesToDelete = post.images.filter((image) => deleted[image.order]);
+
+      // Xóa ảnh từ cơ sở dữ liệu
+      for (const image of imagesToDelete) {
+        await PostImage.destroy({ where: { id: image.id } });
+      }
+      // Cập nhật danh sách ảnh trong post
+      post.images = post.images.filter((image) => !deleted[image.order]);
+      for (let i = 0; i < post.images.length; i++) {
+        post.images[i].order = i + 1;
+        await post.images[i].save();
+      }
     }
     if (body.description !== undefined && body.description !== null) {
       post.description = body.description;
@@ -458,11 +447,12 @@ export class PostServices {
       if (post.video) {
         post.video.url = body.video;
       } else {
-        post.video = await PostVideo.create({ postId, url: body.video });
+        post.video = await PostVideo.create({ postId, url: setFileUsed(body.video) });
       }
     }
+
     await post.save();
-    // this.notificationService.notifyEditPost({ post, author: user });
+    // await NotificationServices.notifyEditPost({ post, author: user });
     return {
       id: String(post.id),
       coins: String(user.coins)

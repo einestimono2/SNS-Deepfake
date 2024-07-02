@@ -133,6 +133,9 @@
     "REACTION_LIKE_TEXT": "Like",
     "REACTION_DISLIKE_TEXT": "Dislike",
 
+    "EDIT_POST_TITLE_TEXT": "Edit post",
+    "SAVE_TEXT": "Save",
+
     "MY_GROUP_TEXT": "My group",
     "GROUP_MANAGE_TEXT": "Groups you manage",
     "GROUP_JOINED_TEXT": "Groups you've joined",
