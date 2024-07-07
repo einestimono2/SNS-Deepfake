@@ -9,43 +9,39 @@ on:
         paths: "server/**"
     workflow_dispatch:
 env:
-  AZURE_WEB_APP: deepfakesnsapi   
-  DOCKER_IMAGE_NAME: sns_api              
+    AZURE_WEB_APP: deepfakesnsapi
+    DOCKER_IMAGE_NAME: sns_api
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    defaults:
-        run:
-            working-directory: server
-    steps:
-      - uses: actions/checkout@v4
-      - name: Build the Docker image
-        run: docker build . --file Dockerfile --tag '${{env.DOCKER_IMAGE_NAME}}':latest
-      #  username:16120000
-      #  password:Vu161200!
-       -name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+    build:
+        runs-on: ubuntu-latest
+        defaults:
+            run:
+                working-directory: server
+        steps:
+            - uses: actions/checkout@v4
+            - name: Build the Docker image
+              run: docker build . --file Dockerfile --tag '${{env.DOCKER_IMAGE_NAME}}':latest
+            - name: Set up Docker Buildx
+              uses: docker/setup-buildx-action@v3
+            - name: Login to Docker Hub
+              uses: docker/login-action@v1
+              with:
+                  username: ${{ secrets.DOCKER_USERNAME }}
+                  password: ${{ secrets.DOCKER_PASSWORD }}
+            - name: Tag the Docker image
+              run: docker tag '${{env.DOCKER_IMAGE_NAME}}':latest '${{secrets.DOCKER_USERNAME}}'/'${{env.DOCKER_IMAGE_NAME}}':latest
 
-       -name: Login to Docker Hub
-        uses: docker/login-action@v1
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+            - name: Push the Docker image
+              run: docker push '${{secrets.DOCKER_USERNAME}}'/'${{env.DOCKER_IMAGE_NAME}}':latest
 
-       -name: Tag the Docker image
-        run: docker tag '${{env.DOCKER_IMAGE_NAME}}':latest '${{secrets.DOCKER_USERNAME}}'/'${{env.DOCKER_IMAGE_NAME}}':latest
+            - name: Azure Login
+              uses: azure/login@v1
+              with:
+                  creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-       -name: Push the Docker image
-        run: docker push '${{secrets.DOCKER_USERNAME}}'/'${{env.DOCKER_IMAGE_NAME}}':latest
-
-       -name: Azure Login
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-    
-       -name: Azure WebApp Deployment
-        uses: Azure/webapps-deploy@v2
-        with:
-           app-name: '${{env.AZURE_WEB_APP}}'
-           images: '${{secrets.DOCKER_USERNAME}}/${{env.DOCKER_IMAGE_NAME}}:latest'
+            - name: Azure WebApp Deployment
+              uses: Azure/webapps-deploy@v2
+              with:
+                  app-name: "${{env.AZURE_WEB_APP}}"
+                  images: "${{secrets.DOCKER_USERNAME}}/${{env.DOCKER_IMAGE_NAME}}:latest"
