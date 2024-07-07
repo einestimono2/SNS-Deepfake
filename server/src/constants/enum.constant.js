@@ -48,8 +48,8 @@ export const MarkType = {
 };
 
 export const FeelType = {
-  Kudos: 1,
-  Disappointed: 0
+  Kudos: 0,
+  Disappointed: 1
 };
 
 export const CategoryType = {
@@ -70,7 +70,9 @@ export const NotificationType = {
   MarkCommented: 7,
   VideoAdded: 8,
   PostCommented: 9,
-  PlusCoins: 10
+  PlusCoins: 10,
+  ScheduledVideo: 11,
+  CreateVideo: 12
 };
 
 export const ConversationType = {

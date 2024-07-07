@@ -25,6 +25,7 @@
 
     "NO_INTERNET": "No internet connection",
     "EMAIL_TEXT": "Email",
+    "PARENT_EMAIL_TEXT": "Parent's email",
     "EMAIL_EMPTY": "Email is required!",
     "EMAIL_INVALID": "Invalid email address!",
     "PASSWORD_TEXT": "Password",
@@ -114,6 +115,10 @@
         "none": "Comment",
         "other": "{} comments"
     },
+    "NUM_COMMENT_TEXT": {
+        "one": "{} comment",
+        "other": "{} comments"
+    },
     "ACTION_EDIT_POST_TEXT": "Edit post",
     "ACTION_DELETE_POST_TEXT": "Delete post",
     "ACTION_REPORT_POST_TEXT": "Report post",
@@ -132,9 +137,16 @@
     "REPLY_COMMENT_HINT_TEXT": "Write a reply...",
     "REACTION_LIKE_TEXT": "Like",
     "REACTION_DISLIKE_TEXT": "Dislike",
+    "BANNED_COMMENT_NOTIFICATION": "Your comment contains dirty, sensitive word(s)!",
 
     "EDIT_POST_TITLE_TEXT": "Edit post",
     "SAVE_TEXT": "Save",
+    "SUBJECT_TEXT": "Subject",
+    "CONTENT_TEXT": "Content",
+    "REPORT_TEXT": "Report",
+    "REPORT_SUBJECT_EMPTY": "Subject is required!",
+    "REPORT_CONTENT_EMPTY": "Content is required!",
+    "REPORTED_NOTIFICATION": "Your report has been submitted!",
 
     "MY_GROUP_TEXT": "My group",
     "GROUP_MANAGE_TEXT": "Groups you manage",

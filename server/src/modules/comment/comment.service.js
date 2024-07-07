@@ -3,6 +3,8 @@ import { Op } from 'sequelize';
 import { Block } from '../block/block.model.js';
 import { BlockServices } from '../block/block.service.js';
 import { BadRequestError } from '../core/error.response.js';
+import { Notification } from '../notification/notification.model.js';
+import { NotificationServices } from '../notification/notification.service.js';
 import { Feel } from '../post/models/feel.model.js';
 import { Mark } from '../post/models/mark.model.js';
 import { Post } from '../post/post.model.js';
@@ -10,7 +12,7 @@ import { User } from '../user/user.model.js';
 
 import { Comment } from './comment.model.js';
 
-import { FeelType, Message, costs } from '#constants';
+import { FeelType, Message, NotificationType, costs } from '#constants';
 
 export class CommentServices {
   // Lấy ra những bình luận cấp 1 và cấp 2 tương ứng

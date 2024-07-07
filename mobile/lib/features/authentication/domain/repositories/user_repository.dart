@@ -20,6 +20,7 @@ abstract class UserRepository {
 
   Future<Either<Failure, bool>> register({
     required String email,
+    required String parentEmail,
     required String password,
     required int role,
   });
@@ -34,4 +35,11 @@ abstract class UserRepository {
   });
 
   Future<Either<Failure, bool>> logout();
+
+  Future<Either<Failure, bool>> forgotPassword(String email);
+  Future<Either<Failure, bool>> resetPassword({
+    required String email,
+    required String otp,
+    required String password,
+  });
 }

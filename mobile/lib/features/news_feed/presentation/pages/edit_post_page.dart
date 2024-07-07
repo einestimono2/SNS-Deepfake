@@ -1,8 +1,12 @@
+import 'dart:io';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../../../core/utils/utils.dart';
 import '../../../../core/widgets/widgets.dart';
@@ -20,7 +24,8 @@ class EditPostPage extends StatefulWidget {
   State<EditPostPage> createState() => _EditPostPageState();
 }
 
-class _EditPostPageState extends State<EditPostPage> {
+class _EditPostPageState extends State<EditPostPage>
+    with TickerProviderStateMixin {
   final ValueNotifier<bool> _loading = ValueNotifier(false);
   final FocusNode _fn = FocusNode();
 
@@ -48,7 +53,33 @@ class _EditPostPageState extends State<EditPostPage> {
     super.initState();
   }
 
-  void _handleSave() {}
+  void _handleSave() {
+    if (_loading.value) return;
+
+    _loading.value = true;
+    context.read<PostActionBloc>().add(EditPostSubmit(
+          postId: widget.id,
+          groupId: _selectedGroup.value == 0 ? null : _selectedGroup.value,
+          images: _newImages,
+          imageDel: _delImages,
+          videos: _newVideos,
+          videoDel: _delVideos,
+          description: _controller.text,
+          onSuccess: () {
+            _loading.value = false;
+            context.pop();
+          },
+          onError: (msg) {
+            _loading.value = false;
+            context.showError(message: msg);
+          },
+        ));
+    // images: Thêm mới ảnh
+    // image_del: Xóa ảnh
+    // description
+    // status
+    // video
+  }
 
   void _handleChangeGroup(List<GroupModel> groups, int myId) async {
     await showDialog(
@@ -61,6 +92,35 @@ class _EditPostPageState extends State<EditPostPage> {
         btnText: "CONFIRM_TEXT".tr(),
       ),
     ).then((id) => id != null ? _selectedGroup.value = id : null);
+  }
+
+  void _handlePick(int type) async {
+    /* Image or video */
+    if (type == 0) {
+      final files = await FileHelper.pickMultiMedia();
+      if (files != null && files.isNotEmpty) {
+        for (var e in files) {
+          if (fileIsVideo(e.path)) {
+            _newVideos.add(e.path);
+          } else {
+            _newImages.add(e.path);
+          }
+        }
+
+        setState(() {});
+      }
+    }
+    /* Camera */
+    else if (type == 1) {
+      final url = await FileHelper.pickImage(source: ImageSource.camera);
+      if (url != null) {
+        setState(() {
+          if (mounted) {
+            _newImages.add(url);
+          }
+        });
+      }
+    }
   }
 
   @override
@@ -236,10 +296,112 @@ class _EditPostPageState extends State<EditPostPage> {
 
           /* Videos */
           if (_videos.isNotEmpty || _newVideos.isNotEmpty)
-            SliverToBoxAdapter(
-              child: _buildVideos(),
-            )
+            SliverPadding(
+              padding: const EdgeInsets.only(top: 9),
+              sliver: SliverToBoxAdapter(
+                child: _buildVideos(),
+              ),
+            ),
+
+          /* Space - bottomSheet */
+          SliverToBoxAdapter(child: SizedBox(height: 72.h)),
         ],
+      ),
+      bottomSheet: BottomSheet(
+        enableDrag: true,
+        showDragHandle: false,
+        onClosing: () {},
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            top: Radius.circular(16.r),
+          ),
+        ),
+        onDragStart: (_) => showModalBottomSheet(
+          context: context,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              top: Radius.circular(16.r),
+            ),
+          ),
+          builder: (context) => Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              _pickFile(
+                onTap: () => _handlePick(0),
+                icon: Icons.image,
+                color: Colors.green,
+                label: "IMAGE_VIDEO_TEXT".tr(),
+              ),
+              _pickFile(
+                onTap: () => _handlePick(1),
+                icon: Icons.camera,
+                color: Colors.blue,
+                label: "CAMERA_TEXT".tr(),
+              ),
+              SizedBox(height: 12.h),
+            ],
+          ),
+        ),
+        animationController: BottomSheet.createAnimationController(this),
+        builder: (context) => Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Center(
+              child: Container(
+                width: 0.25.sw,
+                height: 5.h,
+                margin: EdgeInsets.symmetric(vertical: 6.h),
+                decoration: BoxDecoration(
+                  color: context.minBackgroundColor(),
+                  borderRadius: BorderRadius.circular(6.r),
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(bottom: 6.h),
+              child: Wrap(
+                spacing: 6.w,
+                children: [
+                  _pickFile(
+                    onTap: () => _handlePick(0),
+                    icon: Icons.image,
+                    color: Colors.green,
+                  ),
+                  _pickFile(
+                    onTap: () => _handlePick(1),
+                    icon: Icons.camera,
+                    color: Colors.blue,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  InkWell _pickFile({
+    required VoidCallback onTap,
+    required IconData icon,
+    Color? color,
+    String? label,
+  }) {
+    return InkWell(
+      borderRadius: BorderRadius.circular(6.r),
+      onTap: onTap,
+      child: Ink(
+        padding: EdgeInsets.symmetric(horizontal: 9.w, vertical: 6.h),
+        child: label == null
+            ? Icon(icon, size: 30.sp, color: color ?? Colors.green)
+            : Row(
+                children: [
+                  SizedBox(width: 6.w),
+                  Icon(icon, size: 30.sp, color: color ?? Colors.green),
+                  SizedBox(width: 12.w),
+                  Text(label),
+                ],
+              ),
       ),
     );
   }
@@ -260,8 +422,8 @@ class _EditPostPageState extends State<EditPostPage> {
       runSpacing: 6,
       spacing: 6,
       children: [
-        ..._images.map((e) => _buildVideo(e, true)),
-        ..._newImages.map((e) => _buildVideo(e, false)),
+        ..._videos.map((e) => _buildVideo(e, true)),
+        ..._newVideos.map((e) => _buildVideo(e, false)),
       ],
     );
   }
@@ -269,7 +431,7 @@ class _EditPostPageState extends State<EditPostPage> {
   Widget _buildImage(String url, bool fromNetwork) {
     return Stack(
       children: [
-        fromNetwork ? AnimatedImage(url: url.fullPath) : LocalImage(path: url),
+        fromNetwork ? AnimatedImage(url: url.fullPath) : Image.file(File(url)),
         Positioned(
           right: 0,
           child: IconButton(
@@ -283,6 +445,7 @@ class _EditPostPageState extends State<EditPostPage> {
                 _images.remove(url);
                 _delImages.add(url);
               } else {
+                File(url).delete();
                 _newImages.remove(url);
               }
             }),
@@ -312,6 +475,7 @@ class _EditPostPageState extends State<EditPostPage> {
                 _videos.remove(url);
                 _delVideos.add(url);
               } else {
+                File(url).delete();
                 _newVideos.remove(url);
               }
             }),

@@ -90,6 +90,16 @@ class _OtpFormState extends State<OtpForm> {
           VerifyOTPSubmit(
             email: user?.email ?? "",
             otp: _otp,
+            onError: (msg) {
+              btnController.reverse();
+              context.showError(
+                title: "VERIFY_ERROR_TITLE_TEXT".tr(),
+                message: msg,
+              );
+            },
+            onSuccess: () {
+              btnController.reverse();
+            },
           ),
         );
   }
@@ -97,58 +107,42 @@ class _OtpFormState extends State<OtpForm> {
   void _handleResendOTP() {
     _resending.value = true;
 
-    context.read<UserBloc>().add(ResendOTPSubmit(email: user?.email ?? ""));
+    context.read<UserBloc>().add(ResendOTPSubmit(
+          email: user?.email ?? "",
+          onError: (msg) {
+            _resending.value = false;
+            context.showError(
+              title: "RESEND_ERROR_TITLE_TEXT".tr(),
+              message: msg,
+            );
+          },
+          onSuccess: () => _resending.value = false,
+        ));
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<UserBloc, UserState>(
-      listener: (context, state) {
-        if (state is FailureState) {
-          String title = "";
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 0.05.sw, vertical: 0.015.sh),
+      child: Form(
+        child: Column(
+          children: [
+            /* Time & Resend */
+            _buildTimer(context),
 
-          if (state.type == "RESEND_OTP") {
-            _resending.value = false;
-            title = "RESEND_ERROR_TITLE_TEXT";
-          } else if (state.type == "VERIFY_OTP") {
-            btnController.reverse();
-            title = "VERIFY_ERROR_TITLE_TEXT";
-          }
+            /* OTP */
+            SizedBox(height: 0.015.sh),
+            _buildOTP(),
 
-          context.showError(
-            title: title.tr(),
-            message: state.message,
-          );
-        } else if (state is SuccessfulState) {
-          if (state.type == "RESEND_OTP") {
-            _resending.value = false;
-          } else if (state.type == "VERIFY_OTP") {
-            btnController.reverse();
-          }
-        }
-      },
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 0.05.sw, vertical: 0.015.sh),
-        child: Form(
-          child: Column(
-            children: [
-              /* Time & Resend */
-              _buildTimer(context),
-
-              /* OTP */
-              SizedBox(height: 0.015.sh),
-              _buildOTP(),
-
-              /* Button */
-              SizedBox(height: 0.15.sh),
-              AnimatedButton(
-                height: 50.h,
-                title: "VERIFY_TEXT".tr(),
-                onPressed: _handleVerify,
-                controller: btnController,
-              ),
-            ],
-          ),
+            /* Button */
+            SizedBox(height: 0.15.sh),
+            AnimatedButton(
+              height: 50.h,
+              title: "VERIFY_TEXT".tr(),
+              onPressed: _handleVerify,
+              controller: btnController,
+            ),
+          ],
         ),
       ),
     );

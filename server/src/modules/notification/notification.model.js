@@ -47,6 +47,10 @@ export const Notification = postgre.define('Notification', {
   },
   userId: {
     type: DataTypes.INTEGER
+  },
+  videoId: {
+    type: DataTypes.INTEGER,
+    allowNull: true
   }
 });
 (() => {

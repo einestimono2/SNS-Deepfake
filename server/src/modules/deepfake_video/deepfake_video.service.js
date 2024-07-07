@@ -1,52 +1,50 @@
 import { UnauthorizedError } from '../core/error.response.js';
+import { NotificationServices } from '../notification/notification.service.js';
 import { User } from '../user/user.model.js';
 
-import { DeepfakeVideo } from './deepfale_video.model.js';
-import { Media } from './media.model.js';
+import { DeepfakeVideo } from './deepfake_video.model.js';
 
+// import { Media } from './media.model.js';
 import { Message } from '#constants';
 
 export class DeepfakeVideoService {
   // Tạo danh sách các đầu vào
-  static async createDeepfakeVideo(userId, body) {
-    if (!userId) throw new UnauthorizedError(Message.USER_IS_INVALID);
-    const { videoUrl, size, fileName } = { ...body };
+  static async createDeepfakeVideo(body) {
+    // if (!userId) throw new UnauthorizedError(Message.USER_IS_INVALID);
+    const { videoUrl, userId, size } = { ...body };
+    console.log(videoUrl);
     let deepfakeVideo = await DeepfakeVideo.create({
       size,
-      videoUrl,
-      fileName,
+      url: videoUrl,
       userId
     });
+    // Thực hiện việc notification
+    await NotificationServices.notifyCreateVideo(userId, deepfakeVideo.id);
     deepfakeVideo = deepfakeVideo.toJSON();
     return deepfakeVideo;
   }
 
   // Lấy danh sách các media liên quan tới người dùng
-  static async getListDeepfakeVideo(userId, body) {
-    const { index, count } = { ...body };
+  static async getListDeepfakeVideo({ userId, offset, limit }) {
     if (!userId) throw new UnauthorizedError(Message.USER_IS_INVALID);
-    const deepfakeVideos = await DeepfakeVideo.findAll({
+    const deepfakeVideos = await DeepfakeVideo.findAndCountAll({
       where: { userId },
       include: [
         {
           model: User,
-          as: 'user'
+          as: 'user',
+          attributes: ['id', 'username', 'email', 'avatar', 'coverImage']
         }
       ],
       order: [['id', 'DESC']],
-      offset: index,
-      limit: count
+      offset,
+      limit
     });
-    const newDeepfakeVideos = [];
-    for (const e of deepfakeVideos) {
-      const deepfakeVideo = e.toJSON();
-      newDeepfakeVideos.push(deepfakeVideo);
-    }
-    console.log(newDeepfakeVideos);
     return {
-      deepfakevideos: newDeepfakeVideos.map((deepfakeVideo) => ({
+      rows: deepfakeVideos.rows.map((deepfakeVideo) => ({
         deepfakeVideo
-      }))
+      })),
+      count: deepfakeVideos.count
     };
   }
 
@@ -71,17 +69,16 @@ export class DeepfakeVideoService {
   }
 
   // Xóa thông tin
-  static async deleteDeepfakeVideo(userId, deepfakevideoId) {
+  static async deleteDeepfakeVideo(userId, videoId) {
     if (!userId) throw new UnauthorizedError(Message.USER_IS_INVALID);
-    const deepfakeVideo = await Media.findOne({
+    const deepfakeVideo = await DeepfakeVideo.findOne({
       where: {
         userId,
-        id: deepfakevideoId
+        id: videoId
       }
     });
     if (deepfakeVideo) {
       await deepfakeVideo.destroy();
     }
-    return {};
   }
 }

@@ -21,6 +21,7 @@ class ListPostBloc extends Bloc<ListPostEvent, ListPostState> {
     on<DeletePost>(_onDeletePost);
     on<UpdateCommentSummary>(_onUpdateCommentSummary);
     on<UpdateFeelSummary>(_onUpdateFeelSummary);
+    on<UpdatePost>(_onUpdatePost);
   }
 
   FutureOr<void> _onGetListPost(
@@ -162,6 +163,29 @@ class ListPostBloc extends Bloc<ListPostEvent, ListPostState> {
             kudosCount: event.kudosCount,
             disappointedCount: event.disappointedCount,
             myFeel: event.type,
+          );
+        } else {
+          return e;
+        }
+      }).toList(),
+      timestamp: DateTime.now().millisecondsSinceEpoch,
+    ));
+  }
+
+  FutureOr<void> _onUpdatePost(
+    UpdatePost event,
+    Emitter<ListPostState> emit,
+  ) async {
+    if (state is! ListPostSuccessfulState) return;
+
+    // Previous value
+    ListPostSuccessfulState preLoaded = state as ListPostSuccessfulState;
+
+    emit(preLoaded.copyWith(
+      posts: preLoaded.posts.map((e) {
+        if (e.id == event.postId) {
+          return e.copyWith(
+            description: event.description,
           );
         } else {
           return e;

@@ -20,6 +20,8 @@ class Endpoints {
   static const String verifyOtp = '/user/check_verify_code';
   static const String resendOtp = '/user/get_verify_code';
   static const String changePassword = '/user/change_password';
+  static const String forgotPassword = '/user/forgot_password/:email';
+  static const String resetPassword = '/user/reset_password';
 
   static const String updateProfile = '/user/set_user_info';
   static const String getProfile = '/user/get_user_info/:userId';
@@ -53,6 +55,8 @@ class Endpoints {
 
   static const String uploadImages = '/media/images';
   static const String uploadVideos = '/media/videos';
+
+  static const String listNotification = '/notification/get_list_notifications';
 
   static const String myConversations = '/conversation/list';
   static const String createConversation = '/conversation/create';

@@ -25,6 +25,7 @@
 
     "NO_INTERNET": "Không có kết nối mạng",
     "EMAIL_TEXT": "Email",
+    "PARENT_EMAIL_TEXT": "Email của cha mẹ",
     "EMAIL_EMPTY": "Email không được trống!",
     "EMAIL_INVALID": "Địa chỉ email không hợp lệ!",
     "PASSWORD_TEXT": "Mật khẩu",
@@ -114,6 +115,10 @@
         "none": "Bình luận",
         "other": "{} bình luận"
     },
+    "NUM_COMMENT_TEXT": {
+        "one": "{} bình luận",
+        "other": "{} bình luận"
+    },
     "ACTION_EDIT_POST_TEXT": "Chỉnh sửa bài viết",
     "ACTION_DELETE_POST_TEXT": "Xóa bài viết",
     "ACTION_REPORT_POST_TEXT": "Báo cáo bài viết",
@@ -132,9 +137,16 @@
     "REPLY_COMMENT_HINT_TEXT": "Viết phản hồi...",
     "REACTION_LIKE_TEXT": "Thích",
     "REACTION_DISLIKE_TEXT": "Thất vọng",
+    "BANNED_COMMENT_NOTIFICATION": "Bình luận của bạn chứa (những) từ ngữ thô tục, nhạy cảm!",
 
     "EDIT_POST_TITLE_TEXT": "Chỉnh sửa bài viết",
     "SAVE_TEXT": "Lưu",
+    "SUBJECT_TEXT": "Tiêu đề",
+    "CONTENT_TEXT": "Nội dung",
+    "REPORT_TEXT": "Báo cáo",
+    "REPORT_SUBJECT_EMPTY": "Tiêu đề không được trống!",
+    "REPORT_CONTENT_EMPTY": "Nội dung không được trống!",
+    "REPORTED_NOTIFICATION": "Báo cáo của bạn đã được gửi!",
 
     "MY_GROUP_TEXT": "Nhóm của tôi",
     "GROUP_MANAGE_TEXT": "Nhóm bạn quản lý",

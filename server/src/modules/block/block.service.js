@@ -13,9 +13,8 @@ export class BlockServices {
   // 1:Lấy danh sách các user mà bị block bởi người dùng hiện tại
   // userId:người sở hữu block
   // targetId:người bị user này block
-  static async getListBlocks(userId, body) {
-    const { index, count } = { ...body };
-    const blocks = await Block.findAll({
+  static async getListBlocks({ userId, limit, offset }) {
+    const blocks = await Block.findAndCountAll({
       where: { userId },
       include: [
         {
@@ -24,9 +23,10 @@ export class BlockServices {
         }
       ],
       order: [['id', 'ASC']],
-      offset: index,
-      limit: count
+      offset,
+      limit
     });
+    console.log(1);
     // blocks sẽ chứa thông tin bảng user và object target tương ứng(ví dụ)
     //               {
     //                   "id": 5,
@@ -52,12 +52,15 @@ export class BlockServices {
     //                       "updatedAt": "2024-04-06T15:34:46.798Z"
     //                   }
     //               },
-    return blocks.map((block) => ({
-      blocks,
-      id: String(block.target.id),
-      name: block.target.username || '',
-      avatar: block.target.avatar
-    }));
+    return {
+      rows: blocks.rows.map((block) => ({
+        blocks,
+        id: String(block.target.id),
+        name: block.target.username || '',
+        avatar: block.target.avatar
+      })),
+      count: blocks.count
+    };
   }
 
   // 2:Set Block 1 user

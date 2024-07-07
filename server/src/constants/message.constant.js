@@ -96,6 +96,9 @@ export const Message = {
   USER_NOT_FOUND: {
     msg: 'User not found!'
   },
+  PARENT_NOT_FOUND: {
+    msg: 'Parent not found!'
+  },
   NO_ENOUGH_COINS: {
     msg: 'No enough coins'
   },

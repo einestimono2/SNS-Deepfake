@@ -12,15 +12,25 @@ abstract class PostRepository {
     required List<String> files,
   });
 
-  Future<Either<Failure, String>> deletePost({
-    required int groupId,
-    required int postId,
-  });
+  Future<Either<Failure, String>> deletePost(int postId);
 
   Future<Either<Failure, PostModel>> getPostDetails(int postId);
 
-  Future<Either<Failure, PostModel>> editPost({
+  Future<Either<Failure, bool>> reportPost({
     required int postId,
+    required String subject,
+    required String content,
+  });
+
+  Future<Either<Failure, Map<String, dynamic>>> editPost({
+    required int postId,
+    List<String>? images,
+    List<String>? videos,
+    List<String>? imageDel,
+    List<String>? videoDel,
+    String? description,
+    String? status,
+    int? groupId,
   });
 
   Future<Either<Failure, PaginationResult<PostModel>>> getListPost({

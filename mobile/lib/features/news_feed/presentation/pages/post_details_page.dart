@@ -30,7 +30,7 @@ class PostDetailsPage extends StatefulWidget {
 }
 
 class _PostDetailsPageState extends State<PostDetailsPage> {
-  late final PostModel post;
+  PostModel? post;
   late final int myId;
 
   final TextEditingController _ctl = TextEditingController();
@@ -52,9 +52,13 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
 
     context.read<PostActionBloc>().add(GetPostDetails(widget.id));
 
-    post = (context.read<ListPostBloc>().state as ListPostSuccessfulState)
+    int idx = (context.read<ListPostBloc>().state as ListPostSuccessfulState)
         .posts
-        .firstWhere((e) => e.id == widget.id);
+        .indexWhere((e) => e.id == widget.id);
+    if (idx != -1) {
+      post = (context.read<ListPostBloc>().state as ListPostSuccessfulState)
+          .posts[idx];
+    }
 
     _getListComment();
 
@@ -104,6 +108,12 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
 
   void _handleComment() {
     if (_loading.value) return;
+
+    if (bannedWords[context.locale.languageCode]!
+        .any((e) => _ctl.text.toLowerCase().contains(e))) {
+      context.showError(message: "BANNED_COMMENT_NOTIFICATION".tr());
+      return;
+    }
 
     _loading.value = true;
     context.read<PostActionBloc>().add(CreateCommentSubmit(
@@ -155,7 +165,27 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
           Expanded(
             child: BlocBuilder<PostActionBloc, PostActionState>(
               builder: (context, state) {
-                final _post = state is PASuccessfulState ? state.post : post;
+                if (post == null) {
+                  if ((state is PAInProgressState || state is PAInitialState)) {
+                    return Container(
+                      height: 1.sh,
+                      width: double.infinity,
+                      alignment: Alignment.center,
+                      child: const AppIndicator(),
+                    );
+                  } else if (state is PASuccessfulState) {
+                    post = state.post;
+                  } else {
+                    return ErrorCard(
+                      message: (state as PAFailureState).message,
+                      onRefresh: () => context
+                          .read<PostActionBloc>()
+                          .add(GetPostDetails(widget.id)),
+                    );
+                  }
+                }
+
+                final _post = state is PASuccessfulState ? state.post : post!;
 
                 return GestureDetector(
                   onTap: () => _reply.value = null,

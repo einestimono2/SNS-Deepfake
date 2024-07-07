@@ -15,6 +15,7 @@ class SignUpUC extends UseCase<bool, SignUpParams> {
       email: params.email,
       password: params.password,
       role: params.role,
+      parentEmail: params.parentEmail,
     );
   }
 }
@@ -22,11 +23,13 @@ class SignUpUC extends UseCase<bool, SignUpParams> {
 class SignUpParams {
   final String email;
   final String password;
+  final String parentEmail;
   final int role;
 
   const SignUpParams({
     required this.email,
     required this.password,
     required this.role,
+    required this.parentEmail,
   });
 }

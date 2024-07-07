@@ -24,12 +24,15 @@ class _SignUpFormState extends State<SignUpForm> {
   final ValueNotifier<int> _role = ValueNotifier(1);
 
   final _emailFN = FocusNode();
+  final _parentEmailFN = FocusNode();
   final _passwordFN = FocusNode();
   final _confirmPasswordFN = FocusNode();
 
-  final _emailController = TextEditingController(text: "einestimono2@gmail.com");
+  final _emailController =
+      TextEditingController(text: "einestimono2@gmail.com");
   final _passwordController = TextEditingController(text: "123123");
   final _confirmPasswordController = TextEditingController(text: "123123");
+  final _parentEmailController = TextEditingController(text: "");
 
   final btnController = AnimatedButtonController();
 
@@ -46,6 +49,7 @@ class _SignUpFormState extends State<SignUpForm> {
               email: _emailController.text,
               password: _passwordController.text,
               role: _role.value,
+              parentEmail: _parentEmailController.text,
             ),
           );
     }
@@ -129,14 +133,13 @@ class _SignUpFormState extends State<SignUpForm> {
                 onTap: () => _handleTap(_confirmPasswordFN, true),
                 onTapOutside: (_) => _handleTap(_confirmPasswordFN, false),
                 focusNode: _confirmPasswordFN,
-                textInputAction: TextInputAction.send,
+                textInputAction: TextInputAction.next,
                 border: true,
                 title: "CONFIRM_PASSWORD_TEXT".tr(),
                 obscureText: _confirmPasswordObscure.value,
                 controller: _confirmPasswordController,
                 validator: (value) => AppValidations.validateConfirmPassword(
                     value, _passwordController.text),
-                onFieldSubmitted: (_) => _nextRequest(null),
                 prefixIcon: Icon(
                   FontAwesomeIcons.lock,
                   size: 18.sp,
@@ -159,12 +162,41 @@ class _SignUpFormState extends State<SignUpForm> {
             SizedBox(height: 24.h),
             ValueListenableBuilder(
               valueListenable: _role,
-              builder: (context, value, child) =>
-                  _buildRoleSelection(context, value),
+              builder: (context, value, child) {
+                return Column(
+                  children: [
+                    _buildRoleSelection(context, value),
+                    Visibility(
+                      visible: value == 0,
+                      replacement: const Padding(
+                        padding: EdgeInsets.symmetric(vertical: 24),
+                        child: SizedBox.shrink(),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 24, bottom: 36),
+                        child: InputFieldWithShadow(
+                          onTapOutside: (_) => _parentEmailFN.unfocus(),
+                          textInputAction: TextInputAction.done,
+                          focusNode: _parentEmailFN,
+                          border: true,
+                          title: "PARENT_EMAIL_TEXT".tr(),
+                          controller: _parentEmailController,
+                          validator: (_) => AppValidations.validateParentEmail(
+                              value != 0, _parentEmailController.text),
+                          onFieldSubmitted: (_) => _handleSignUp(),
+                          prefixIcon: Icon(
+                            FontAwesomeIcons.at,
+                            size: 18.sp,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                );
+              },
             ),
 
             /* Button */
-            SizedBox(height: 0.08.sh),
             AnimatedButton(
               height: 50.h,
               title: "SIGN_UP_TEXT".tr(),
@@ -213,6 +245,7 @@ class _SignUpFormState extends State<SignUpForm> {
   @override
   void dispose() {
     _emailFN.dispose();
+    _parentEmailFN.dispose();
     _passwordFN.dispose();
     _confirmPasswordFN.dispose();
     super.dispose();

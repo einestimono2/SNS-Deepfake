@@ -97,6 +97,8 @@ class _MainLayoutState extends State<MainLayout> {
         }
       },
       child: Scaffold(
+        // TODO: Check lại vs role children
+        resizeToAvoidBottomInset: widget.body.currentIndex == 3 ? false : true,
         body: SafeArea(
           child: widget.body,
         ),
@@ -120,7 +122,7 @@ class _MainLayoutState extends State<MainLayout> {
         ),
         child: NavigationBar(
           animationDuration: const Duration(milliseconds: 500),
-          height: 0.1.sh,
+          height: AppSizes.bottomNavBarHeight,
           selectedIndex: widget.body.currentIndex,
           onDestinationSelected: _handleChange,
           destinations: [

@@ -19,6 +19,24 @@ class AppValidations {
     return null;
   }
 
+  static String? validateParentEmail(bool skip, String? value) {
+    if (skip) return null;
+
+    if (value == null || value.isEmpty) {
+      return "EMAIL_EMPTY".tr();
+    }
+
+    final emailRegExp = RegExp(
+      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
+    );
+
+    if (!emailRegExp.hasMatch(value)) {
+      return "EMAIL_INVALID".tr();
+    }
+
+    return null;
+  }
+
   static String? validatePassword(String? value) {
     if (value == null || value.isEmpty) {
       return "PASSWORD_EMPTY".tr();
@@ -40,13 +58,13 @@ class AppValidations {
 
     return null;
   }
-  
+
   static String? validateNewPassword(String? value, String? oldPassword) {
     if (value == null || value.isEmpty) {
       return "PASSWORD_EMPTY".tr();
     }
 
-    if(value == oldPassword) {
+    if (value == oldPassword) {
       return "NEW_PASSWORD_MATCH_OLD".tr();
     }
 
@@ -86,6 +104,22 @@ class AppValidations {
 
     if (!RegExp(r'(^(?:[+0]9)?[0-9]{10,12}$)').hasMatch(value)) {
       return "PHONE_NUMBER_INVALID".tr();
+    }
+
+    return null;
+  }
+
+  static String? validateSubject(String? value) {
+    if (value == null || value.isEmpty) {
+      return "REPORT_SUBJECT_EMPTY".tr();
+    }
+
+    return null;
+  }
+
+  static String? validateContent(String? value) {
+    if (value == null || value.isEmpty) {
+      return "REPORT_CONTENT_EMPTY".tr();
     }
 
     return null;

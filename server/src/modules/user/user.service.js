@@ -56,16 +56,27 @@ export class userServices {
   }
 
   // 2--Tạo một tài khoản người dùng
-  static async signup(phoneNumber, email, password, role, uuid) {
+  static async signup(phoneNumber, email, password, role, uuid, parentEmail) {
+    let parentId = null;
+
+    if (parentEmail) {
+      const parent = await User.findOne({ where: { email: parentEmail } });
+      if (!parent) {
+        throw new BadRequestError(Message.PARENT_NOT_FOUND);
+      }
+
+      parentId = parent.id;
+    }
+
     // Kiểm tra email đã tồn tại chưa?
     if (await this.checkEmaiExit(email)) {
       throw new BadRequestError(Message.EMAIL_ALREADY_EXISTS);
     }
     // Kiểm tra sdt đã được đăng ký lần nào hay chưa?
-    const exitPhoneNumber = await User.findOne({ where: { phoneNumber } });
-    if (exitPhoneNumber) {
-      throw new BadRequestError(Message.PHONE_NUMBER_IS_INVALID);
-    }
+    // const exitPhoneNumber = await User.findOne({ where: { phoneNumber } });
+    // if (exitPhoneNumber) {
+    //   throw new BadRequestError(Message.PHONE_NUMBER_IS_INVALID);
+    // }
     // Kiểm tra password có trùng email hay không?
     // if (password.indexOf(email) !== -1) {
     //   // Kiểm tra password có trùng email hay không?
@@ -80,11 +91,26 @@ export class userServices {
       uuid,
       status: AccountStatus.Inactive,
       deletedAt: new Date(),
-      coins: 100
+      coins: 100,
+      parentId
     });
 
     // Thực hiện gửi mã xác thực về Email
     await this.getVerifyCode(email);
+  }
+
+  static async forgotPassword({ email }) {
+    const code = await this.getVerifyCode(email);
+
+    return code;
+  }
+
+  static async resetPassword({ email, code, newPassword }) {
+    const user = await this.verifyCode(email, code);
+
+    user.password = await this.hashPassword(newPassword);
+
+    return user.save();
   }
 
   static async comparePassword(password, hashedPassword) {

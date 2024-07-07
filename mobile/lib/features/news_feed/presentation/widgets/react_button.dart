@@ -32,7 +32,7 @@ class _ReactionButtonState extends State<ReactionButton> {
       showArrow: false,
       position: PopupPosition.top,
       child: InkWell(
-        onTap: () => widget.onClick(widget.currentReaction != -1 ? -1 : 1),
+        onTap: () => widget.onClick(widget.currentReaction != -1 ? -1 : 0),
         onLongPress: () => _controller.showMenu(),
         borderRadius: BorderRadius.circular(6.r),
         child: Container(
@@ -80,7 +80,7 @@ class _ReactionButtonState extends State<ReactionButton> {
             GestureDetector(
               onTap: () {
                 _controller.hideMenu();
-                widget.onClick(1);
+                widget.onClick(0);
               },
               child: SizedBox.square(
                 dimension: 36,
@@ -91,7 +91,7 @@ class _ReactionButtonState extends State<ReactionButton> {
             GestureDetector(
               onTap: () {
                 _controller.hideMenu();
-                widget.onClick(0);
+                widget.onClick(1);
               },
               child: SizedBox.square(
                 dimension: 36,

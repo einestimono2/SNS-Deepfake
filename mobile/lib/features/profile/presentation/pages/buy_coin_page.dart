@@ -183,7 +183,10 @@ class _BuyCoinPageState extends State<BuyCoinPage> {
                 child: Container(
                   decoration: BoxDecoration(
                     color: Colors.redAccent.shade400,
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(8),
+                      bottomRight: Radius.circular(8),
+                    ),
                   ),
                   padding:
                       const EdgeInsets.symmetric(horizontal: 6, vertical: 2),

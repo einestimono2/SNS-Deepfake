@@ -49,12 +49,14 @@ class UserRepositoryImpl extends BaseRepositoryImpl implements UserRepository {
   @override
   Future<Either<Failure, bool>> register({
     required String email,
+    required String parentEmail,
     required String password,
     required int role,
   }) async {
     return await checkNetwork<bool>(
       () async {
-        final response = await remote.register(email, password, role);
+        final response =
+            await remote.register(email, parentEmail, password, role);
 
         return Right(response);
       },
@@ -143,6 +145,36 @@ class UserRepositoryImpl extends BaseRepositoryImpl implements UserRepository {
         // ]);
 
         return const Right(true);
+      },
+    );
+  }
+
+  @override
+  Future<Either<Failure, bool>> forgotPassword(String email) async {
+    return await checkNetwork<bool>(
+      () async {
+        final response = await remote.forgotPassword(email);
+
+        return Right(response);
+      },
+    );
+  }
+
+  @override
+  Future<Either<Failure, bool>> resetPassword({
+    required String email,
+    required String otp,
+    required String password,
+  }) async {
+    return await checkNetwork<bool>(
+      () async {
+        final response = await remote.resetPassword(
+          email: email,
+          password: password,
+          otp: otp,
+        );
+
+        return Right(response);
       },
     );
   }

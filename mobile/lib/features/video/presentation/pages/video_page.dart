@@ -50,97 +50,93 @@ class _VideoPageState extends State<VideoPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      height: double.infinity,
-      child: Stack(
-        children: [
-          BlocBuilder<ListVideoBloc, ListVideoState>(
-            builder: (context, state) {
-              return PageView.builder(
-                itemCount: state.videos.length,
-                scrollDirection: Axis.vertical,
-                onPageChanged: (index) =>
-                    context.read<ListVideoBloc>().add(VideoIndexChanged(index)),
-                itemBuilder: (context, index) {
-                  _loading.value = !state.hasReachedMax &&
-                      state.isLoading &&
-                      index == state.videos.length - 1;
+    return Stack(
+      children: [
+        BlocBuilder<ListVideoBloc, ListVideoState>(
+          builder: (context, state) {
+            return PageView.builder(
+              itemCount: state.videos.length,
+              scrollDirection: Axis.vertical,
+              onPageChanged: (index) =>
+                  context.read<ListVideoBloc>().add(VideoIndexChanged(index)),
+              itemBuilder: (context, index) {
+                _loading.value = !state.hasReachedMax &&
+                    state.isLoading &&
+                    index == state.videos.length - 1;
 
-                  return VideoWidget(
-                    isFirstVideo: index == 0,
-                    controller: state.controllers[index]!,
-                    video: state.videos[index],
-                  );
-                },
+                return VideoWidget(
+                  isFirstVideo: index == 0,
+                  controller: state.controllers[index]!,
+                  video: state.videos[index],
+                );
+              },
+            );
+          },
+        ),
+
+        /*  */
+        _header(),
+
+        /* Loading */
+        Align(
+          alignment: Alignment.bottomCenter,
+          child: ValueListenableBuilder(
+            valueListenable: _loading,
+            builder: (context, value, child) {
+              return AnimatedCrossFade(
+                alignment: Alignment.bottomCenter,
+                sizeCurve: Curves.decelerate,
+                duration: const Duration(milliseconds: 400),
+                firstChild: Padding(
+                  padding: EdgeInsets.only(bottom: 0.025.sh),
+                  child: const AppIndicator(size: 28),
+                ),
+                secondChild: const SizedBox.shrink(),
+                crossFadeState: value
+                    ? CrossFadeState.showFirst
+                    : CrossFadeState.showSecond,
               );
             },
           ),
+        ),
 
-          /*  */
-          _header(),
-
-          /* Loading */
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: ValueListenableBuilder(
-              valueListenable: _loading,
-              builder: (context, value, child) {
-                return AnimatedCrossFade(
-                  alignment: Alignment.bottomCenter,
-                  sizeCurve: Curves.decelerate,
-                  duration: const Duration(milliseconds: 400),
-                  firstChild: Padding(
-                    padding: EdgeInsets.only(bottom: 0.025.sh),
-                    child: const AppIndicator(size: 28),
+        /*  */
+        Align(
+          alignment: Alignment.center,
+          child: BlocBuilder<DownloadBloc, DownloadState>(
+            builder: (context, state) {
+              if (state is DownloadInProgressState) {
+                return Container(
+                  width: double.infinity,
+                  height: double.infinity,
+                  color: context.minBackgroundColor(),
+                  alignment: Alignment.center,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const SizedBox(
+                        width: 36,
+                        height: 36,
+                        child: AppIndicator(size: 28),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        "${state.percent}%",
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyLarge
+                            ?.copyWith(color: Colors.white),
+                      ),
+                    ],
                   ),
-                  secondChild: const SizedBox.shrink(),
-                  crossFadeState: value
-                      ? CrossFadeState.showFirst
-                      : CrossFadeState.showSecond,
                 );
-              },
-            ),
+              } else {
+                return const SizedBox.shrink();
+              }
+            },
           ),
-
-          /*  */
-          Align(
-            alignment: Alignment.center,
-            child: BlocBuilder<DownloadBloc, DownloadState>(
-              builder: (context, state) {
-                if (state is DownloadInProgressState) {
-                  return Container(
-                    width: double.infinity,
-                    height: double.infinity,
-                    color: context.minBackgroundColor(),
-                    alignment: Alignment.center,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const SizedBox(
-                          width: 36,
-                          height: 36,
-                          child: AppIndicator(size: 28),
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                          "${state.percent}%",
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyLarge
-                              ?.copyWith(color: Colors.white),
-                        ),
-                      ],
-                    ),
-                  );
-                } else {
-                  return const SizedBox.shrink();
-                }
-              },
-            ),
-          )
-        ],
-      ),
+        )
+      ],
     );
   }
 

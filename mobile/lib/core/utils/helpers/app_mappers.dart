@@ -78,9 +78,9 @@ class AppMappers {
 
   static IconData getReactionIcon(int type) {
     switch (type) {
-      case 0:
-        return FontAwesomeIcons.solidThumbsDown;
       case 1:
+        return FontAwesomeIcons.solidThumbsDown;
+      case 0:
         return FontAwesomeIcons.solidThumbsUp;
       default:
         return FontAwesomeIcons.thumbsUp;
@@ -90,6 +90,8 @@ class AppMappers {
   static String getReactionText(int type) {
     switch (type) {
       case 0:
+        return "REACTION_LIKE_TEXT".tr();
+      case 1:
         return "REACTION_DISLIKE_TEXT".tr();
       default:
         return "REACTION_LIKE_TEXT".tr();
@@ -98,9 +100,9 @@ class AppMappers {
 
   static Color? getReactionColor(BuildContext context, int type) {
     switch (type) {
-      case 0:
-        return AppColors.kErrorColor;
       case 1:
+        return AppColors.kErrorColor;
+      case 0:
         return Colors.blueAccent;
       default:
         return Theme.of(context).textTheme.bodySmall?.color;

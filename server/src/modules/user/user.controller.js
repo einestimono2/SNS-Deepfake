@@ -14,10 +14,24 @@ export class UserControllers {
 
   // 1--Đăng ký
   static register = CatchAsyncError(async (req, res) => {
-    const { phoneNumber, role, password, email } = req.body;
-    await userServices.signup(phoneNumber, email, password, role);
+    const { phoneNumber, role, password, email, parentEmail, uuid } = req.body;
+    await userServices.signup(phoneNumber, email, password, role, uuid, parentEmail);
     res.created({
       message: 'Mã code đã được gửi về mail của bạn'
+    });
+  });
+
+  static forgotPassword = CatchAsyncError(async (req, res) => {
+    await userServices.forgotPassword(req.params);
+    res.ok({
+      message: 'Mã code đã được gửi về mail của bạn'
+    });
+  });
+
+  static resetPassword = CatchAsyncError(async (req, res) => {
+    const user = await userServices.resetPassword(req.body);
+    res.ok({
+      data: user
     });
   });
 

@@ -55,27 +55,54 @@ class CreatePostSubmit extends PostActionEvent {
 
 class DeletePostSubmit extends PostActionEvent {
   final int postId;
-  final int groupId;
+  final VoidCallback onSuccess;
+  final Function(String) onError;
 
-  const DeletePostSubmit({required this.postId, required this.groupId});
+  const DeletePostSubmit({
+    required this.postId,
+    required this.onSuccess,
+    required this.onError,
+  });
 
   @override
-  List<Object?> get props => [postId, groupId];
+  List<Object?> get props => [postId, onError, onSuccess];
 }
 
 class EditPostSubmit extends PostActionEvent {
   final int postId;
-  // final List<String> images;
-  // image_sort
-  // image_del
-  // description
-  // status
-  // video
+  final List<String>? images;
+  final List<String>? videos;
+  final List<String>? imageDel;
+  final List<String>? videoDel;
+  final String? description;
+  final String? status;
+  final VoidCallback onSuccess;
+  final Function(String) onError;
+  final int? groupId;
 
-  const EditPostSubmit(this.postId);
+  const EditPostSubmit({
+    required this.postId,
+    this.images,
+    this.groupId,
+    this.videos,
+    this.imageDel,
+    this.videoDel,
+    this.description,
+    this.status,
+    required this.onSuccess,
+    required this.onError,
+  });
 
   @override
-  List<Object?> get props => [postId];
+  List<Object?> get props => [
+        postId,
+        images,
+        videos,
+        imageDel,
+        videoDel,
+        description,
+        status,
+      ];
 }
 
 class GetPostDetails extends PostActionEvent {
@@ -117,4 +144,23 @@ class UnfeelPost extends PostActionEvent {
 
   @override
   List<Object> get props => [postId];
+}
+
+class ReportPostSubmit extends PostActionEvent {
+  final int postId;
+  final String subject;
+  final String content;
+  final VoidCallback onSuccess;
+  final Function(String) onError;
+
+  const ReportPostSubmit({
+    required this.postId,
+    required this.subject,
+    required this.content,
+    required this.onError,
+    required this.onSuccess,
+  });
+
+  @override
+  List<Object> get props => [postId, subject, content];
 }

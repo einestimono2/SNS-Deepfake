@@ -23,6 +23,7 @@ import 'features/chat/chat.dart';
 import 'features/friend/friend.dart';
 import 'features/group/group.dart';
 import 'features/news_feed/news_feed.dart';
+import 'features/notification/notification.dart';
 import 'features/profile/profile.dart';
 import 'features/search/search.dart';
 import 'features/upload/upload.dart';
@@ -74,6 +75,7 @@ Future<void> entryPoint() async {
             BlocProvider(create: (_) => di.sl<UserFriendsBloc>()),
             BlocProvider(create: (_) => di.sl<ListVideoBloc>()),
             BlocProvider(create: (_) => di.sl<ListCommentBloc>()),
+            BlocProvider(create: (_) => di.sl<ListNotificationBloc>()),
           ],
           child: const SnsDeepfakeApp(),
         ),

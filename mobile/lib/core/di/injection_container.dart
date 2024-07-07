@@ -15,6 +15,7 @@ import '../../features/chat/chat.dart';
 import '../../features/friend/friend.dart';
 import '../../features/group/group.dart';
 import '../../features/news_feed/news_feed.dart';
+import '../../features/notification/notification.dart';
 import '../../features/profile/profile.dart';
 import '../../features/search/search.dart';
 import '../../features/upload/upload.dart';
@@ -62,6 +63,7 @@ Future<void> init() async {
   _initGroupFeature();
   _initProfileFeature();
   _initVideoFeature();
+  _initNotificationFeature();
 
   /**
    * --> External
@@ -84,10 +86,36 @@ Future<void> init() async {
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
 }
 
+void _initNotificationFeature() {
+  /* Bloc */
+  sl.registerLazySingleton(() => ListNotificationBloc(
+        getListNotificationUC: sl(),
+      ));
+
+  /* Use Case */
+  sl.registerLazySingleton(() => GetListNotificationUC(repository: sl()));
+
+  /* Repository */
+  sl.registerLazySingleton<NotificationRepository>(
+    () => NotificationRepositoryImpl(network: sl(), remote: sl()),
+  );
+
+  /* Datasource */
+  sl.registerLazySingleton<NotificationRemoteDataSource>(
+    () => NotificationRemoteDataSourceImpl(apiClient: sl()),
+  );
+}
+
 void _initVideoFeature() {
   /* Bloc */
   sl.registerLazySingleton(() => ListVideoBloc(
         getListVideoUC: sl(),
+        feelPostUC: sl(),
+        unfeelPostUC: sl(),
+        createCommentUC: sl(),
+        listCommentBloc: sl(),
+        listPostBloc: sl(),
+        appBloc: sl(),
       ));
 
   /* Use Case */
@@ -209,6 +237,7 @@ void _initNewsFeedFeature() {
         createCommentUC: sl(),
         feelPostUC: sl(),
         unfeelPostUC: sl(),
+        reportPostUC: sl(),
         listPostBloc: sl(),
         appBloc: sl(),
         myPostsBloc: sl(),
@@ -227,6 +256,7 @@ void _initNewsFeedFeature() {
   sl.registerLazySingleton(() => CreateCommentUC(repository: sl()));
   sl.registerLazySingleton(() => FeelPostUC(repository: sl()));
   sl.registerLazySingleton(() => UnfeelPostUC(repository: sl()));
+  sl.registerLazySingleton(() => ReportPostUC(repository: sl()));
 
   /* Repository */
   sl.registerLazySingleton<PostRepository>(
@@ -385,6 +415,8 @@ void _initAuthenticationFeature() {
         verifyOtpUC: sl(),
         resendOtpUC: sl(),
         finishProfileUC: sl(),
+        forgotPasswordUC: sl(),
+        resetPasswordUC: sl(),
       ));
 
   /* Use Case */
@@ -395,6 +427,8 @@ void _initAuthenticationFeature() {
   sl.registerLazySingleton(() => VerifyOtpUC(repository: sl()));
   sl.registerLazySingleton(() => ResendOtpUC(repository: sl()));
   sl.registerLazySingleton(() => FinishProfileUC(repository: sl()));
+  sl.registerLazySingleton(() => ForgotPasswordUC(repository: sl()));
+  sl.registerLazySingleton(() => ResetPasswordUC(repository: sl()));
 
   /* Repository */
   sl.registerLazySingleton<UserRepository>(

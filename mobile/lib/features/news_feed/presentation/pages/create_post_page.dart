@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:sns_deepfake/core/utils/utils.dart';
 import 'package:sns_deepfake/features/news_feed/news_feed.dart';
 
@@ -102,7 +103,15 @@ class _CreatePostPageState extends State<CreatePostPage>
     }
     /* Camera */
     else if (type == 1) {
-      //
+      final url = await FileHelper.pickImage(source: ImageSource.camera);
+      if (url != null) {
+        setState(() {
+          if (mounted) {
+            _files.add(url);
+            _postable = true;
+          }
+        });
+      }
     }
   }
 
@@ -320,11 +329,7 @@ class _CreatePostPageState extends State<CreatePostPage>
           ),
 
           /* Space */
-          SliverToBoxAdapter(
-            child: SizedBox(
-              height: 72.h,
-            ),
-          ),
+          SliverToBoxAdapter(child: SizedBox(height: 72.h)),
         ],
       ),
       bottomSheet: BottomSheet(

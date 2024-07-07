@@ -80,3 +80,19 @@ class UpdateFeelSummary extends ListPostEvent {
     required this.type,
   });
 }
+
+class UpdatePost extends ListPostEvent {
+  final int postId;
+  final List<String>? images;
+  final List<String>? videos;
+  final int? groupId;
+  final String? description;
+
+  const UpdatePost({
+    required this.postId,
+    this.images,
+    this.videos,
+    this.groupId,
+    this.description,
+  });
+}

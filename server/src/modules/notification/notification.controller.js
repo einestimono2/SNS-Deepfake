@@ -33,6 +33,33 @@ export class NotificationControllers {
     });
   });
 
+  static notifyAddPost = CatchAsyncError(async (req, res) => {
+    const { userId } = req.userPayload;
+    const { postId } = req.query;
+    await NotificationServices.notifyAddPost(postId, userId);
+    res.ok({
+      message: 'Notify Add Post Successfully'
+    });
+  });
+
+  static notifyEditPost = CatchAsyncError(async (req, res) => {
+    const { userId } = req.userPayload;
+    const { postId } = req.query;
+    await NotificationServices.notifyEditPost(postId, userId);
+    res.ok({
+      message: 'Notify Edit Post Successfully'
+    });
+  });
+
+  static notifyPlayVideo = CatchAsyncError(async (req, res) => {
+    const { userId } = req.userPayload;
+    const { targetId, videoId } = req.query;
+    await NotificationServices.notifyPlayVideo(userId, targetId, videoId);
+    res.ok({
+      message: 'Notify Play Video Successfully'
+    });
+  });
+
   static sendMessage = CatchAsyncError(async (req, res) => {
     await NotificationServices.sendMessage(req.body);
 

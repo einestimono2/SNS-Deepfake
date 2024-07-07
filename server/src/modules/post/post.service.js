@@ -18,7 +18,7 @@ import { Report } from './models/report.model.js';
 import { Post } from './post.model.js';
 
 import { Message, costs } from '#constants';
-import { getBanned, getCanEdit, getCanMark, getCanRate, setFileUsed } from '#utils';
+import { deleteFile, getBanned, getCanEdit, getCanMark, getCanRate, setFileUsed } from '#utils';
 
 export class PostServices {
   // Tất cả đều chưa xử lý và notification
@@ -237,6 +237,9 @@ export class PostServices {
     //     groupId
     //   }
     // });
+
+    console.log(groupIds);
+
     // Danh sach các userId của người mà bị mình block
     const usersIdBlocking = await Block.findAll({
       where: { targetId: userId },
@@ -428,6 +431,7 @@ export class PostServices {
       // Xóa ảnh từ cơ sở dữ liệu
       for (const image of imagesToDelete) {
         await PostImage.destroy({ where: { id: image.id } });
+        deleteFile(image.url);
       }
       // Cập nhật danh sách ảnh trong post
       post.images = post.images.filter((image) => !deleted[image.order]);
@@ -442,6 +446,9 @@ export class PostServices {
     if (body.status !== undefined && body.status !== null) {
       post.status = body.status;
     }
+    if (body.groupId !== undefined && body.groupId !== null) {
+      post.groupId = body.groupId;
+    }
     // Xử lý video
     if (body.video) {
       if (post.video) {
@@ -454,16 +461,18 @@ export class PostServices {
     await post.save();
     // await NotificationServices.notifyEditPost({ post, author: user });
     return {
-      id: String(post.id),
-      coins: String(user.coins)
+      id: post.id,
+      coins: String(user.coins),
+      images: post.images
     };
   }
 
   // Xóa một bài viết(Đã test)
-  static async deletePost(userId, postId, body) {
-    const user = await Post.findOne({
-      where: { id: userId, groupId: body.groupId }
+  static async deletePost(userId, postId) {
+    const user = await User.findOne({
+      where: { id: userId }
     });
+
     const post = await Post.findOne({
       where: { id: postId, authorId: userId },
       include: [

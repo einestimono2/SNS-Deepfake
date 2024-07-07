@@ -24,6 +24,7 @@ class PostActionBloc extends Bloc<PostActionEvent, PostActionState> {
   final CreateCommentUC createCommentUC;
   final FeelPostUC feelPostUC;
   final UnfeelPostUC unfeelPostUC;
+  final ReportPostUC reportPostUC;
 
   final AppBloc appBloc;
   final ListPostBloc listPostBloc;
@@ -38,6 +39,7 @@ class PostActionBloc extends Bloc<PostActionEvent, PostActionState> {
     required this.createCommentUC,
     required this.feelPostUC,
     required this.unfeelPostUC,
+    required this.reportPostUC,
     /*  */
     required this.appBloc,
     required this.listPostBloc,
@@ -51,6 +53,7 @@ class PostActionBloc extends Bloc<PostActionEvent, PostActionState> {
     on<GetPostDetails>(_onGetPostDetails);
     on<FeelPost>(_onFeelPost);
     on<UnfeelPost>(_onUnfeelPost);
+    on<ReportPostSubmit>(_onReportPostSubmit);
   }
 
   FutureOr<void> _onCreatePostSubmit(
@@ -106,21 +109,45 @@ class PostActionBloc extends Bloc<PostActionEvent, PostActionState> {
   FutureOr<void> _onEditPostSubmit(
     EditPostSubmit event,
     Emitter<PostActionState> emit,
-  ) async {}
+  ) async {
+    final result = await editPostUC(EditPostParams(
+      postId: event.postId,
+      description: event.description,
+      groupId: event.groupId,
+      status: event.status,
+      imageDel: event.imageDel,
+      images: event.images,
+      videos: event.videos,
+      videoDel: event.videoDel,
+    ));
+
+    result.fold(
+      (failure) => event.onError(failure.toString()),
+      (data) {
+        appBloc.emit(appBloc.state.copyWith(
+          user: appBloc.state.user?.copyWith(coins: int.parse(data['coins'])),
+          triggerRedirect: false,
+        ));
+
+        listPostBloc.add(UpdatePost(
+          postId: event.postId,
+          groupId: event.groupId,
+          description: event.description,
+        ));
+
+        event.onSuccess();
+      },
+    );
+  }
 
   FutureOr<void> _onDeletePostSubmit(
     DeletePostSubmit event,
     Emitter<PostActionState> emit,
   ) async {
-    emit(PAInProgressState());
-
-    final result = await deletePostUC(DeletePostParams(
-      groupId: event.groupId,
-      postId: event.postId,
-    ));
+    final result = await deletePostUC(IdParams(event.postId));
 
     result.fold(
-      (failure) => emit(PAFailureState(failure.toString())),
+      (failure) => event.onError(failure.toString()),
       (data) {
         appBloc.emit(appBloc.state.copyWith(
           user: appBloc.state.user?.copyWith(coins: int.parse(data)),
@@ -128,6 +155,8 @@ class PostActionBloc extends Bloc<PostActionEvent, PostActionState> {
         ));
 
         listPostBloc.add(DeletePost(event.postId));
+
+        event.onSuccess();
       },
     );
   }
@@ -203,7 +232,6 @@ class PostActionBloc extends Bloc<PostActionEvent, PostActionState> {
     Emitter<PostActionState> emit,
   ) async {
     PASuccessfulState? preState;
-
     if (state is PASuccessfulState) {
       preState = state as PASuccessfulState;
     }
@@ -244,24 +272,27 @@ class PostActionBloc extends Bloc<PostActionEvent, PostActionState> {
     UnfeelPost event,
     Emitter<PostActionState> emit,
   ) async {
-    if (state is! PASuccessfulState) return;
-
-    final preState = state as PASuccessfulState;
+    PASuccessfulState? preState;
+    if (state is PASuccessfulState) {
+      preState = state as PASuccessfulState;
+    }
 
     final result = await unfeelPostUC(IdParams(event.postId));
 
     result.fold(
       (failure) => event.onError(failure.toString()),
       (data) {
-        emit(
-          PASuccessfulState(
-              post: preState.post.copyWith(
-                myFeel: -1,
-                kudosCount: data["kudos"]!,
-                disappointedCount: data["disappointed"]!,
-              ),
-              timestamp: DateTime.now().millisecondsSinceEpoch),
-        );
+        if (preState is PASuccessfulState) {
+          emit(
+            PASuccessfulState(
+                post: preState.post.copyWith(
+                  myFeel: -1,
+                  kudosCount: data["kudos"]!,
+                  disappointedCount: data["disappointed"]!,
+                ),
+                timestamp: DateTime.now().millisecondsSinceEpoch),
+          );
+        }
 
         event.onSuccess();
 
@@ -272,6 +303,22 @@ class PostActionBloc extends Bloc<PostActionEvent, PostActionState> {
           type: -1,
         ));
       },
+    );
+  }
+
+  FutureOr<void> _onReportPostSubmit(
+    ReportPostSubmit event,
+    Emitter<PostActionState> emit,
+  ) async {
+    final result = await reportPostUC(ReportPostParams(
+      postId: event.postId,
+      content: event.content,
+      subject: event.subject,
+    ));
+
+    result.fold(
+      (failure) => event.onError(failure.toString()),
+      (data) => event.onSuccess(),
     );
   }
 }

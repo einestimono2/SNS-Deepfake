@@ -56,16 +56,10 @@ class PostRepositoryImpl extends BaseRepositoryImpl implements PostRepository {
   }
 
   @override
-  Future<Either<Failure, String>> deletePost({
-    required int groupId,
-    required int postId,
-  }) async {
+  Future<Either<Failure, String>> deletePost(int postId) async {
     return await checkNetwork<String>(
       () async {
-        final coins = await remote.deletePost(
-          groupId: groupId,
-          postId: postId,
-        );
+        final coins = await remote.deletePost(postId);
 
         return Right(coins);
       },
@@ -84,13 +78,27 @@ class PostRepositoryImpl extends BaseRepositoryImpl implements PostRepository {
   }
 
   @override
-  Future<Either<Failure, PostModel>> editPost({
+  Future<Either<Failure, Map<String, dynamic>>> editPost({
     required int postId,
+    List<String>? images,
+    List<String>? videos,
+    List<String>? imageDel,
+    List<String>? videoDel,
+    String? description,
+    String? status,
+    int? groupId,
   }) async {
-    return await checkNetwork<PostModel>(
+    return await checkNetwork<Map<String, dynamic>>(
       () async {
         final data = await remote.editPost(
           postId: postId,
+          images: images,
+          videos: videos,
+          imageDel: imageDel,
+          videoDel: videoDel,
+          description: description,
+          status: status,
+          groupId: groupId,
         );
 
         return Right(data);
@@ -164,6 +172,25 @@ class PostRepositoryImpl extends BaseRepositoryImpl implements PostRepository {
     return await checkNetwork<Map<String, int>>(
       () async {
         final result = await remote.unfeelPost(postId);
+
+        return Right(result);
+      },
+    );
+  }
+
+  @override
+  Future<Either<Failure, bool>> reportPost({
+    required int postId,
+    required String subject,
+    required String content,
+  }) async {
+    return await checkNetwork<bool>(
+      () async {
+        final result = await remote.reportPost(
+          postId: postId,
+          subject: subject,
+          content: content,
+        );
 
         return Right(result);
       },

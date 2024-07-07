@@ -8,3 +8,4 @@ export 'usecases/edit_post_uc.dart';
 export 'usecases/create_comment_uc.dart';
 export 'usecases/feel_post_uc.dart';
 export 'usecases/unfeel_post_uc.dart';
+export 'usecases/report_post_uc.dart';

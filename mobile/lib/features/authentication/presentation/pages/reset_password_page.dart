@@ -1,13 +1,16 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sns_deepfake/core/utils/utils.dart';
-import 'package:sns_deepfake/features/app/bloc/app/app_bloc.dart';
 import 'package:sns_deepfake/features/authentication/presentation/widgets/reset_password_form.dart';
 
 class ResetPasswordPage extends StatelessWidget {
-  const ResetPasswordPage({super.key});
+  final String email;
+
+  const ResetPasswordPage({
+    super.key,
+    required this.email,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +31,7 @@ class ResetPasswordPage extends StatelessWidget {
 
               /*  */
               SizedBox(height: 0.05.sh),
-              const ResetPasswordForm(),
+              ResetPasswordForm(email: email),
             ],
           ),
         ),
@@ -46,8 +49,7 @@ class ResetPasswordPage extends StatelessWidget {
             style: Theme.of(context).textTheme.bodyMedium.sectionStyle,
             children: [
               TextSpan(
-                text:
-                    " '${context.read<AppBloc>().state.user?.email ?? "einestimono2@gmail.com"}'",
+                text: " '$email'",
                 style: Theme.of(context)
                     .textTheme
                     .bodyMedium

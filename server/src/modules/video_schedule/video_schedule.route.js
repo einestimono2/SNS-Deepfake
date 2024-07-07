@@ -19,6 +19,6 @@ router.get('/get_list_schedule', isAuthenticated, ScheduleController.getListSche
 // router.put('/update_group/:groupId', isAuthenticated, GroupController.updateGroup);
 
 // // - [DELETE] Delete schedule
-// router.delete('/delete_group/:groupId', isAuthenticated, GroupController.deleteGroup);
+router.delete('/delete_schedule/:id', ScheduleController.deleteSchedule);
 
 export const videoScheduleRouter = router;

@@ -42,3 +42,33 @@ customButtonStyle(double radius) => IconButton.styleFrom(
       minimumSize: Size.zero,
       tapTargetSize: MaterialTapTargetSize.shrinkWrap,
     );
+
+const bannedWords = {
+  "en": [
+    "fuck",
+    "aids",
+    "asshole",
+    "assholeish",
+    "bald",
+    "bandito",
+    "black",
+    "boobies",
+    "boobs",
+    "bootsy",
+    "brendan",
+    "dick",
+    "shit",
+    "stupid",
+    "sucked",
+    "sucks",
+  ],
+  "vi": [
+    "địt",
+    "mẹ mày",
+    "cặc",
+    "vãi",
+    "lồn",
+    "bắc kỳ",
+    "nam kỳ",
+  ],
+};

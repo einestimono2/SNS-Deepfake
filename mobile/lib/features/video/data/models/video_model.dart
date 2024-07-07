@@ -19,6 +19,7 @@ class VideoModel extends Equatable {
   final bool canEdit;
   final bool banned;
   final String createdAt;
+  final int myFeel;
 
   const VideoModel({
     required this.id,
@@ -35,6 +36,7 @@ class VideoModel extends Equatable {
     this.canEdit = false,
     this.banned = false,
     required this.createdAt,
+    this.myFeel = -1,
   });
 
   @override
@@ -53,7 +55,44 @@ class VideoModel extends Equatable {
         canEdit,
         banned,
         createdAt,
+        myFeel
       ];
+
+  VideoModel copyWith({
+    int? kudosCount,
+    int? disappointedCount,
+    int? trustCount,
+    int? fakeCount,
+    int? id,
+    int? authorId,
+    String? description,
+    bool? edited,
+    int? myFeel,
+    MemberModel? author,
+    ShortGroupModel? group,
+    List<PostMediaModel>? videos,
+    bool? canEdit,
+    bool? banned,
+    String? createdAt,
+  }) {
+    return VideoModel(
+      id: id ?? this.id,
+      authorId: authorId ?? this.authorId,
+      description: description ?? this.description,
+      edited: edited ?? this.edited,
+      kudosCount: kudosCount ?? this.kudosCount,
+      disappointedCount: disappointedCount ?? this.disappointedCount,
+      trustCount: trustCount ?? this.trustCount,
+      fakeCount: fakeCount ?? this.trustCount,
+      author: author ?? this.author,
+      group: group ?? this.group,
+      videos: videos ?? this.videos,
+      canEdit: canEdit ?? this.canEdit,
+      banned: banned ?? this.banned,
+      createdAt: createdAt ?? this.createdAt,
+      myFeel: myFeel ?? this.myFeel,
+    );
+  }
 
   factory VideoModel.fromMap(Map<String, dynamic> map) {
     return VideoModel(
@@ -76,6 +115,9 @@ class VideoModel extends Equatable {
       canEdit: int.parse(map['can_edit'].toString()) != 0,
       banned: int.parse(map['banned'].toString()) != 0,
       createdAt: map['post']['createdAt'] ?? DateTime.now().toString(),
+      myFeel: map['post']['feels'] != null && map['post']['feels']?.length > 0
+          ? map['post']['feels'][0]["type"]
+          : -1,
     );
   }
 }

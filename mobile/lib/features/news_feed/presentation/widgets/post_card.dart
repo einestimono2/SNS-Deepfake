@@ -335,10 +335,7 @@ class PostCard extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Text(
-          "COMMENT_TEXT".tr(
-            gender: "other",
-            args: [post.commentCount.toString()],
-          ),
+          "NUM_COMMENT_TEXT".plural(post.commentCount),
           style: Theme.of(context).textTheme.labelMedium,
         ),
         // Text("8,1K lượt chia sẻ",

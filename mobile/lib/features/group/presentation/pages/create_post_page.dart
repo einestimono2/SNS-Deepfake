@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:sns_deepfake/features/group/group.dart';
 
 import '../../../../core/utils/utils.dart';
@@ -101,7 +102,15 @@ class _CreateGroupPostPageState extends State<CreateGroupPostPage>
     }
     /* Camera */
     else if (type == 1) {
-      //
+      final url = await FileHelper.pickImage(source: ImageSource.camera);
+      if (url != null) {
+        setState(() {
+          if (mounted) {
+            _files.add(url);
+            _postable = true;
+          }
+        });
+      }
     }
   }
 

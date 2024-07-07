@@ -19,6 +19,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   final VerifyOtpUC verifyOtpUC;
   final ResendOtpUC resendOtpUC;
   final FinishProfileUC finishProfileUC;
+  final ForgotPasswordUC forgotPasswordUC;
+  final ResetPasswordUC resetPasswordUC;
 
   final AppBloc appBloc;
 
@@ -30,6 +32,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     required this.verifyOtpUC,
     required this.resendOtpUC,
     required this.finishProfileUC,
+    required this.forgotPasswordUC,
+    required this.resetPasswordUC,
   }) : super(InitialState()) {
     on<ResetState>(_onResetState);
     on<LoginSubmit>(_onLoginSubmit);
@@ -39,6 +43,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     on<ResendOTPSubmit>(_onResendOTPSubmit);
     on<FinishProfileSubmit>(_onFinishProfileSubmit);
     on<LogoutSubmit>(_onLogoutSubmit);
+    on<ForgotPasswordSubmit>(_onForgotPasswordSubmit);
+    on<ResetPasswordSubmit>(_onResetPasswordSubmit);
   }
 
   FutureOr<void> _onLoginSubmit(
@@ -102,6 +108,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       email: event.email,
       password: event.password,
       role: event.role,
+      parentEmail: event.parentEmail,
     ));
 
     result.fold(
@@ -127,8 +134,6 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     VerifyOTPSubmit event,
     Emitter<UserState> emit,
   ) async {
-    emit(InProgressState());
-
     // Test
     if (event.email.isEmpty) {
       await Future.delayed(const Duration(seconds: 3));
@@ -142,12 +147,9 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     ));
 
     result.fold(
-      (failure) => emit(FailureState(
-        message: failure.toString(),
-        type: "VERIFY_OTP",
-      )),
+      (failure) => event.onError(failure.toString()),
       (status) {
-        emit(const SuccessfulState(type: "VERIFY_OTP"));
+        event.onSuccess();
         appBloc.add(UpdateUserStatus(status: status));
       },
     );
@@ -157,8 +159,6 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     ResendOTPSubmit event,
     Emitter<UserState> emit,
   ) async {
-    emit(InProgressState());
-
     // Test
     if (event.email == "") {
       // await Future.delayed(const Duration(seconds: 3));
@@ -171,13 +171,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     ));
 
     result.fold(
-      (failure) => emit(FailureState(
-        message: failure.toString(),
-        type: "RESEND_OTP",
-      )),
-      (user) {
-        emit(const SuccessfulState(type: "RESEND_OTP"));
-      },
+      (failure) => event.onError(failure.toString()),
+      (user) => event.onSuccess(),
     );
   }
 
@@ -231,5 +226,33 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     );
 
     appBloc.add(const ChangeUser(user: null));
+  }
+
+  FutureOr<void> _onForgotPasswordSubmit(
+    ForgotPasswordSubmit event,
+    Emitter<UserState> emit,
+  ) async {
+    final result = await forgotPasswordUC(ForgotPasswordParams(event.email));
+
+    result.fold(
+      (failure) => event.onError(failure.toString()),
+      (_) => event.onSuccess(),
+    );
+  }
+
+  FutureOr<void> _onResetPasswordSubmit(
+    ResetPasswordSubmit event,
+    Emitter<UserState> emit,
+  ) async {
+    final result = await resetPasswordUC(ResetPasswordParams(
+      email: event.email,
+      password: event.password,
+      otp: event.otp,
+    ));
+
+    result.fold(
+      (failure) => event.onError(failure.toString()),
+      (_) => event.onSuccess(),
+    );
   }
 }

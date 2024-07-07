@@ -21,6 +21,7 @@ class AppStrings {
   static const int listFriendPageSize = 20;
   static const int listVideoPageSize = 3;
   static const int listPostPageSize = 15;
+  static const int listNotificationPageSize = 10;
 
   // Customize
   static const int kPreloadLimit = 1;

@@ -24,13 +24,17 @@ abstract class PostRemoteDataSource {
     required int type,
   });
 
-  Future<String> deletePost({
-    required int groupId,
-    required int postId,
-  });
+  Future<String> deletePost(int postId);
 
-  Future<PostModel> editPost({
+  Future<Map<String, dynamic>> editPost({
     required int postId,
+    List<String>? images,
+    List<String>? videos,
+    List<String>? imageDel,
+    List<String>? videoDel,
+    String? description,
+    String? status,
+    int? groupId,
   });
 
   Future<PostModel> getPostDetails(postId);
@@ -50,6 +54,12 @@ abstract class PostRemoteDataSource {
   Future<Map<String, int>> feelPost({
     required int postId,
     required int type,
+  });
+
+  Future<bool> reportPost({
+    required int postId,
+    required String subject,
+    required String content,
   });
 
   Future<Map<String, int>> unfeelPost(postId);
@@ -127,13 +137,9 @@ class PostRemoteDataSourceImpl extends PostRemoteDataSource {
   }
 
   @override
-  Future<String> deletePost({
-    required int groupId,
-    required int postId,
-  }) async {
+  Future<String> deletePost(int postId) async {
     final response = await apiClient.delete(
       Endpoints.deletePost.replaceFirst(":postId", postId.toString()),
-      data: {"groupId": groupId},
     );
 
     return response.data['coins'];
@@ -149,14 +155,39 @@ class PostRemoteDataSourceImpl extends PostRemoteDataSource {
   }
 
   @override
-  Future<PostModel> editPost({
+  Future<Map<String, dynamic>> editPost({
     required int postId,
+    List<String>? images,
+    List<String>? videos,
+    List<String>? imageDel,
+    List<String>? videoDel,
+    String? description,
+    String? status,
+    int? groupId,
   }) async {
-    final response = await apiClient.put(
-      Endpoints.editPost.replaceFirst(":postId", postId.toString()),
-    );
+    List<String> _videosUrls = [];
+    List<String> _imagesUrls = [];
 
-    return PostModel.fromMap(response.data);
+    if (videos != null && videos.isNotEmpty) {
+      _videosUrls = await uploadRemote.uploadVideos(videos);
+    }
+    if (images != null && images.isNotEmpty) {
+      _imagesUrls = await uploadRemote.uploadImages(images);
+    }
+
+    final response = await apiClient.put(
+        Endpoints.editPost.replaceFirst(":postId", postId.toString()),
+        data: {
+          "images": _imagesUrls,
+          "videos": _videosUrls,
+          "image_del": imageDel,
+          "video_del": videoDel,
+          "description": description,
+          "status": status,
+          "groupId": groupId,
+        });
+
+    return response.data as Map<String, dynamic>;
   }
 
   @override
@@ -237,5 +268,21 @@ class PostRemoteDataSourceImpl extends PostRemoteDataSource {
       "disappointed": response.data["disappointed"],
       "kudos": response.data["kudos"],
     };
+  }
+
+  @override
+  Future<bool> reportPost({
+    required int postId,
+    required String subject,
+    required String content,
+  }) async {
+    final response = await apiClient.post(
+        Endpoints.reportPost.replaceFirst(":postId", postId.toString()),
+        data: {
+          "subject": subject,
+          "details": content,
+        });
+
+    return response.status == "success";
   }
 }

@@ -6,9 +6,9 @@ import { getPaginationAttributes, getPaginationSummary } from '#utils';
 export class ScheduleController {
   static createSchedule = CatchAsyncError(async (req, res) => {
     const { userId } = req.userPayload;
-    const schedule = await ScheduleService.createSchedule(userId, req.body);
+    const result = await ScheduleService.createSchedule(userId, req.body);
     res.created({
-      data: schedule
+      message: 'Tạo mới một lịch chiếu thành công'
     });
   });
 
@@ -21,5 +21,11 @@ export class ScheduleController {
         result
       })
     );
+  });
+
+  static deleteSchedule = CatchAsyncError(async (req, res) => {
+    const { id } = req.params;
+    await ScheduleService.deleteScheduleTime(id);
+    res.ok({ message: 'Xóa lịch thành công' });
   });
 }

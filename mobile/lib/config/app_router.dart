@@ -140,7 +140,10 @@ class AppRouter {
           return fadeTransition(
             context: context,
             state: state,
-            child: ResetPasswordPage(key: state.pageKey),
+            child: ResetPasswordPage(
+              key: state.pageKey,
+              email: (state.extra as Map<String, dynamic>)['email'],
+            ),
           );
         },
       ),
@@ -210,7 +213,7 @@ class AppRouter {
                       );
                     },
                   ),
-                  
+
                   /* Edit Post */
                   GoRoute(
                     parentNavigatorKey: rootNavigatorKey,

@@ -163,7 +163,7 @@ class PostModel extends Equatable {
       canEdit: int.parse(map['can_edit'].toString()) != 0,
       banned: int.parse(map['banned'].toString()) != 0,
       createdAt: map['post']['createdAt'] ?? DateTime.now().toString(),
-      myFeel: map['post']['feels']?.length > 0
+      myFeel: map['post']['feels'] != null && map['post']['feels']?.length > 0
           ? map['post']['feels'][0]["type"]
           : -1,
       numShares: map['post']['numberOfShared'] ?? 0,

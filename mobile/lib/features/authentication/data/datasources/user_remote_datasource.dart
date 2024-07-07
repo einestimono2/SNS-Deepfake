@@ -16,9 +16,20 @@ abstract class UserRemoteDataSource {
     required String username,
     required String phoneNumber,
   });
-  Future<bool> register(String email, String password, int role);
+  Future<bool> register(
+    String email,
+    String parentEmail,
+    String password,
+    int role,
+  );
   Future<int> verifyOtp(String email, String otp);
   Future<bool> resendOtp(String email);
+  Future<bool> forgotPassword(String email);
+  Future<bool> resetPassword({
+    required String email,
+    required String password,
+    required String otp,
+  });
 }
 
 class UserRemoteDataSourceImpl extends UserRemoteDataSource {
@@ -63,6 +74,7 @@ class UserRemoteDataSourceImpl extends UserRemoteDataSource {
   @override
   Future<bool> register(
     String email,
+    String parentEmail,
     String password,
     int role,
   ) async {
@@ -72,6 +84,7 @@ class UserRemoteDataSourceImpl extends UserRemoteDataSource {
       Endpoints.register,
       data: {
         "email": email,
+        "parentEmail": parentEmail,
         "password": password,
         'uuid': uuid,
         'role': role,
@@ -136,6 +149,31 @@ class UserRemoteDataSourceImpl extends UserRemoteDataSource {
     //   local.removeCacheToken(),
     //   local.removeCacheUser(),
     // ]);
+
+    return true;
+  }
+
+  @override
+  Future<bool> forgotPassword(String email) async {
+    await apiClient.get(Endpoints.forgotPassword.replaceFirst(":email", email));
+
+    return true;
+  }
+
+  @override
+  Future<bool> resetPassword({
+    required String email,
+    required String password,
+    required String otp,
+  }) async {
+    await apiClient.post(
+      Endpoints.resetPassword,
+      data: {
+        "email": email,
+        "newPassword": password,
+        "code": otp,
+      },
+    );
 
     return true;
   }

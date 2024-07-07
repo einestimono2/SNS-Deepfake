@@ -4,18 +4,20 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:sns_deepfake/core/utils/utils.dart';
 
 import '../../../../core/widgets/widgets.dart';
-import '../../../app/app.dart';
 import '../../authentication.dart';
 
 class ResetPasswordForm extends StatefulWidget {
   final double spacing;
+  final String email;
 
   const ResetPasswordForm({
     super.key,
     this.spacing = 6,
+    required this.email,
   });
 
   @override
@@ -23,6 +25,8 @@ class ResetPasswordForm extends StatefulWidget {
 }
 
 class _ResetPasswordFormState extends State<ResetPasswordForm> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   final pin1FocusNode = FocusNode();
   final pin2FocusNode = FocusNode();
   final pin3FocusNode = FocusNode();
@@ -38,7 +42,6 @@ class _ResetPasswordFormState extends State<ResetPasswordForm> {
   final _controller6 = TextEditingController();
 
   late final double pinSize;
-  late final UserModel? user;
 
   final btnController = AnimatedButtonController();
   final ValueNotifier<bool> _newObscure = ValueNotifier(true);
@@ -56,7 +59,6 @@ class _ResetPasswordFormState extends State<ResetPasswordForm> {
   @override
   void initState() {
     pinSize = (1.sw - 0.05.sw * 2) / 6 - widget.spacing;
-    user = context.read<AppBloc>().state.user;
 
     super.initState();
 
@@ -80,8 +82,6 @@ class _ResetPasswordFormState extends State<ResetPasswordForm> {
   }
 
   void _handleVerify() {
-    pin6FocusNode.unfocus();
-
     String _otp = _controller1.text +
         _controller2.text +
         _controller3.text +
@@ -94,108 +94,108 @@ class _ResetPasswordFormState extends State<ResetPasswordForm> {
       return;
     }
 
-    btnController.play();
+    if (_formKey.currentState!.validate() &&
+        _newCtl.text.isNotEmpty &&
+        _repeatCtl.text.isNotEmpty) {
+      btnController.play();
+
+      context.read<UserBloc>().add(ResetPasswordSubmit(
+          email: widget.email,
+          password: _newCtl.text,
+          otp: _otp,
+          onSuccess: () => context
+            ..pop()
+            ..pop(),
+          onError: (msg) {
+            btnController.reverse();
+            context.showError(message: msg);
+          }));
+    }
   }
 
   void _handleResendOTP() {
     _resending.value = true;
 
-    context.read<UserBloc>().add(ResendOTPSubmit(email: user?.email ?? ""));
+    context.read<UserBloc>().add(ResendOTPSubmit(
+          email: widget.email,
+          onError: (msg) {
+            _resending.value = false;
+            context.showError(
+              title: "RESEND_ERROR_TITLE_TEXT".tr(),
+              message: msg,
+            );
+          },
+          onSuccess: () => _resending.value = false,
+        ));
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<UserBloc, UserState>(
-      listener: (context, state) {
-        if (state is FailureState) {
-          String title = "";
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 0.05.sw, vertical: 0.015.sh),
+      child: Form(
+        key: _formKey,
+        child: Column(
+          children: [
+            /* Time & Resend */
+            _buildTimer(context),
 
-          if (state.type == "RESEND_OTP") {
-            _resending.value = false;
-            title = "RESEND_ERROR_TITLE_TEXT";
-          } else if (state.type == "VERIFY_OTP") {
-            btnController.reverse();
-            title = "VERIFY_ERROR_TITLE_TEXT";
-          }
+            /* OTP */
+            SizedBox(height: 0.015.sh),
+            _buildOTP(),
 
-          context.showError(
-            title: title.tr(),
-            message: state.message,
-          );
-        } else if (state is SuccessfulState) {
-          if (state.type == "RESEND_OTP") {
-            _resending.value = false;
-          } else if (state.type == "VERIFY_OTP") {
-            btnController.reverse();
-          }
-        }
-      },
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 0.05.sw, vertical: 0.015.sh),
-        child: Form(
-          child: Column(
-            children: [
-              /* Time & Resend */
-              _buildTimer(context),
-
-              /* OTP */
-              SizedBox(height: 0.015.sh),
-              _buildOTP(),
-
-              /*  */
-              SizedBox(height: 0.05.sh),
-              ValueListenableBuilder(
-                valueListenable: _newObscure,
-                builder: (context, value, child) => Column(
-                  children: <Widget>[
-                    SectionTitle(
-                      title: "NEW_PASSWORD_TEXT".tr(),
-                      onShowMore: () => _newObscure.value = !value,
-                      showMoreText:
-                          value ? "SHOW_TEXT".tr() : "HIDDEN_TEXT".tr(),
+            /*  */
+            SizedBox(height: 0.05.sh),
+            ValueListenableBuilder(
+              valueListenable: _newObscure,
+              builder: (context, value, child) => Column(
+                children: <Widget>[
+                  SectionTitle(
+                    title: "NEW_PASSWORD_TEXT".tr(),
+                    onShowMore: () => _newObscure.value = !value,
+                    showMoreText: value ? "SHOW_TEXT".tr() : "HIDDEN_TEXT".tr(),
+                  ),
+                  const SizedBox(height: 12),
+                  InputFieldWithShadow(
+                    onTapOutside: (_) => _newFN.unfocus(),
+                    textInputAction: TextInputAction.next,
+                    focusNode: _newFN,
+                    border: true,
+                    obscureText: value,
+                    hintText: "NEW_PASSWORD_HINT_TEXT".tr(),
+                    controller: _newCtl,
+                    validator: AppValidations.validatePassword,
+                    onFieldSubmitted: (_) => _repeatFN.requestFocus(),
+                  ),
+                  const SizedBox(height: 16),
+                  InputFieldWithShadow(
+                    onTapOutside: (_) => _repeatFN.unfocus(),
+                    textInputAction: TextInputAction.next,
+                    focusNode: _repeatFN,
+                    border: true,
+                    obscureText: value,
+                    hintText: "REPEAT_PASSWORD_HINT_TEXT".tr(),
+                    controller: _repeatCtl,
+                    validator: (value) =>
+                        AppValidations.validateConfirmPassword(
+                      value,
+                      _newCtl.text,
                     ),
-                    const SizedBox(height: 12),
-                    InputFieldWithShadow(
-                      onTapOutside: (_) => _newFN.unfocus(),
-                      textInputAction: TextInputAction.next,
-                      focusNode: _newFN,
-                      border: true,
-                      obscureText: value,
-                      hintText: "NEW_PASSWORD_HINT_TEXT".tr(),
-                      controller: _newCtl,
-                      validator: AppValidations.validatePassword,
-                      onFieldSubmitted: (_) => _repeatFN.requestFocus(),
-                    ),
-                    const SizedBox(height: 16),
-                    InputFieldWithShadow(
-                      onTapOutside: (_) => _repeatFN.unfocus(),
-                      textInputAction: TextInputAction.next,
-                      focusNode: _repeatFN,
-                      border: true,
-                      obscureText: value,
-                      hintText: "REPEAT_PASSWORD_HINT_TEXT".tr(),
-                      controller: _repeatCtl,
-                      validator: (value) =>
-                          AppValidations.validateConfirmPassword(
-                        value,
-                        _newCtl.text,
-                      ),
-                      onFieldSubmitted: (_) => _handleVerify(),
-                    ),
-                  ],
-                ),
+                    onFieldSubmitted: (_) => _handleVerify(),
+                  ),
+                ],
               ),
+            ),
 
-              /* Button */
-              SizedBox(height: 0.05.sh),
-              AnimatedButton(
-                height: 40.h,
-                title: "CONTINUE_TEXT".tr(),
-                onPressed: _handleVerify,
-                controller: btnController,
-              ),
-            ],
-          ),
+            /* Button */
+            SizedBox(height: 0.05.sh),
+            AnimatedButton(
+              height: 40.h,
+              title: "CONTINUE_TEXT".tr(),
+              onPressed: _handleVerify,
+              controller: btnController,
+            ),
+          ],
         ),
       ),
     );

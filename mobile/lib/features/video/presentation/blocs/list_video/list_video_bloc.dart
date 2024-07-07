@@ -1,12 +1,20 @@
+// ignore_for_file: invalid_use_of_visible_for_testing_member
+
 import 'dart:async';
 import 'dart:developer';
 
+import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:video_player/video_player.dart';
 
 import '../../../../../core/base/base.dart';
+import '../../../../../core/errors/failures.dart';
 import '../../../../../core/utils/utils.dart';
+import '../../../../app/bloc/bloc.dart';
+import '../../../../news_feed/data/data.dart';
+import '../../../../news_feed/domain/domain.dart';
+import '../../../../news_feed/presentation/presentation.dart';
 import '../../../data/data.dart';
 import '../../../domain/domain.dart';
 
@@ -15,13 +23,28 @@ part 'list_video_state.dart';
 
 class ListVideoBloc extends Bloc<ListVideoEvent, ListVideoState> {
   final GetListVideoUC getListVideoUC;
+  final FeelPostUC feelPostUC;
+  final UnfeelPostUC unfeelPostUC;
+  final CreateCommentUC createCommentUC;
+
+  final ListCommentBloc listCommentBloc;
+  final ListPostBloc listPostBloc;
+  final AppBloc appBloc;
 
   ListVideoBloc({
     required this.getListVideoUC,
+    required this.feelPostUC,
+    required this.unfeelPostUC,
+    required this.createCommentUC,
+    required this.listCommentBloc,
+    required this.listPostBloc,
+    required this.appBloc,
   }) : super(const ListVideoState()) {
     on<GetListVideo>(_onGetListVideo);
     on<LoadMoreListVideo>(_onLoadMoreListVideo);
     on<VideoIndexChanged>(_onVideoIndexChanged);
+    on<UpdateMyFeel>(_onUpdateMyFeel);
+    on<CreateCommentSubmit>(_onCreateCommentSubmit);
   }
 
   FutureOr<void> _onGetListVideo(
@@ -267,5 +290,110 @@ class ListVideoBloc extends Bloc<ListVideoEvent, ListVideoState> {
 
       log('🚀🚀🚀 DISPOSED $index');
     }
+  }
+
+  FutureOr<void> _onUpdateMyFeel(
+    UpdateMyFeel event,
+    Emitter<ListVideoState> emit,
+  ) async {
+    Either<Failure, Map<String, int>> result;
+
+    if (event.feel == -1) {
+      result = await unfeelPostUC(IdParams(event.videoId));
+    } else {
+      result = await feelPostUC(FeelPostParams(
+        postId: event.videoId,
+        type: event.feel,
+      ));
+    }
+
+    result.fold(
+      (failure) => event.onError(failure.toString()),
+      (data) {
+        emit(state.copyWith(
+            videos: state.videos.map((e) {
+          if (e.id == event.videoId) {
+            return e.copyWith(
+              myFeel: event.feel,
+              kudosCount: data["kudos"]!,
+              disappointedCount: data["disappointed"]!,
+            );
+          } else {
+            return e;
+          }
+        }).toList()));
+
+        event.onSuccess(event.feel, data["kudos"]!, data["disappointed"]!);
+
+        listPostBloc.add(UpdateFeelSummary(
+          postId: event.videoId,
+          kudosCount: data["kudos"]!,
+          disappointedCount: data["disappointed"]!,
+          type: event.feel,
+        ));
+      },
+    );
+  }
+
+  FutureOr<void> _onCreateCommentSubmit(
+    CreateCommentSubmit event,
+    Emitter<ListVideoState> emit,
+  ) async {
+    final result = await createCommentUC(CreateCommentParams(
+      postId: event.postId,
+      content: event.content,
+      type: event.type,
+      page: event.page,
+      size: event.size,
+      markId: event.markId,
+    ));
+
+    result.fold(
+      (failure) => event.onError(failure.toString()),
+      (data) {
+        listCommentBloc.add(UpdateListComment(
+          comments: data["data"],
+          hasReachedMax: data["pageIndex"] == data["totalPages"],
+          totalCount: data["totalCount"],
+        ));
+
+        /* Cập nhật coins */
+        appBloc.emit(appBloc.state.copyWith(
+          triggerRedirect: false,
+          user: appBloc.state.user?.copyWith(coins: int.parse(data['coins'])),
+        ));
+
+        int fakeCounts = 0;
+        int trustCounts = 0;
+
+        for (CommentModel comment in data["data"]) {
+          if (comment.type == 1) {
+            fakeCounts++;
+          } else {
+            trustCounts++;
+          }
+        }
+
+        event.onSuccess(fakeCounts, trustCounts);
+
+        emit(state.copyWith(
+            videos: state.videos.map((e) {
+          if (e.id == event.postId) {
+            return e.copyWith(
+              fakeCount: fakeCounts,
+              trustCount: trustCounts,
+            );
+          } else {
+            return e;
+          }
+        }).toList()));
+
+        listPostBloc.add(UpdateCommentSummary(
+          postId: event.postId,
+          fakeCounts: fakeCounts,
+          trustCounts: trustCounts,
+        ));
+      },
+    );
   }
 }
