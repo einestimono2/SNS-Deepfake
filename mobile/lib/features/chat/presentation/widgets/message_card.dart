@@ -81,15 +81,19 @@ class _MessageCardState extends State<MessageCard> {
             alignment: Alignment.center,
             child: Column(
               children: [
-                ConversationAvatar(
-                  avatars: widget.memberAvatars.values
-                      .map((e) => e.fullPath)
-                      .toList(),
-                  isOnline: false,
-                ),
+                if (widget.message.message == "CREATED")
+                  ConversationAvatar(
+                    avatars: widget.memberAvatars.values
+                        .map((e) => e.fullPath)
+                        .toList(),
+                    isOnline: false,
+                  ),
                 const SizedBox(height: 8),
                 Text(
-                  AppMappers.getSystemMessage(widget.message.message!),
+                  AppMappers.getSystemMessageWithInfo(
+                    widget.message.message!,
+                    widget.memberNames[widget.message.senderId] ?? "",
+                  ),
                   style: Theme.of(context).textTheme.bodySmall,
                 ),
               ],

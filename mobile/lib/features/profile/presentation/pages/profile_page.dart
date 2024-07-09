@@ -21,9 +21,19 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  late final bool isChildRole;
+
+  @override
+  void initState() {
+    isChildRole = context.read<AppBloc>().state.user!.role == 0;
+    super.initState();
+  }
+
   void _handleLogout() async {
     context.read<UserBloc>().add(LogoutSubmit(
-          onSuccess: () => ZegoUIKitPrebuiltCallInvitationService().uninit(),
+          onSuccess: () => isChildRole
+              ? null
+              : ZegoUIKitPrebuiltCallInvitationService().uninit(),
         ));
   }
 
@@ -34,29 +44,32 @@ class _ProfilePageState extends State<ProfilePage> {
         return SliverPage(
           title: "PROFILE_TEXT".tr(),
           actions: [
-            OutlinedButton.icon(
-              onPressed: () => context.goNamed(Routes.buyCoins.name),
-              style: OutlinedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(horizontal: 12),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
+            if (!isChildRole)
+              OutlinedButton.icon(
+                onPressed: () => context.goNamed(Routes.buyCoins.name),
+                style: OutlinedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+                icon: const Icon(
+                  FontAwesomeIcons.coins,
+                  size: 16,
+                  color: Colors.yellow,
+                ),
+                label: Text(
+                  state.user?.coins?.toString() ?? "0",
+                  style: Theme.of(context).textTheme.bodyLarge,
                 ),
               ),
-              icon: const Icon(
-                FontAwesomeIcons.coins,
-                size: 16,
-                color: Colors.yellow,
-              ),
-              label: Text(
-                state.user?.coins?.toString() ?? "0",
-                style: Theme.of(context).textTheme.bodyLarge,
-              ),
-            ),
             const SizedBox(width: 8),
             IconButton(
               tooltip: "SETTING_TEXT".tr(),
               enableFeedback: true,
-              onPressed: () => context.goNamed(Routes.setting.name),
+              onPressed: () => context.goNamed(
+                isChildRole ? Routes.childSetting.name : Routes.setting.name,
+              ),
               icon: const Icon(Icons.settings),
             ),
           ],
@@ -75,30 +88,36 @@ class _ProfilePageState extends State<ProfilePage> {
                 Container(height: 8, color: context.minBackgroundColor()),
 
                 /*  */
-                ListTile(
-                  onTap: () => context.goNamed(Routes.buyCoins.name),
-                  leading: const Icon(FontAwesomeIcons.bolt, size: 18),
-                  title: Text(
-                    "BUY_COINS_TEXT".tr(),
-                    style: Theme.of(context).textTheme.bodyMedium,
+                if (!isChildRole)
+                  ListTile(
+                    onTap: () => context.goNamed(Routes.buyCoins.name),
+                    leading: const Icon(FontAwesomeIcons.bolt, size: 18),
+                    title: Text(
+                      "BUY_COINS_TEXT".tr(),
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
                   ),
-                ),
                 /*  */
-                ListTile(
-                  onTap: () => context.goNamed(Routes.videoDF.name),
-                  leading: const Icon(FontAwesomeIcons.clapperboard, size: 18),
-                  title: Text(
-                    "Video Deepfake",
-                    style: Theme.of(context).textTheme.bodyMedium,
+                if (!isChildRole)
+                  ListTile(
+                    onTap: () => context.goNamed(Routes.videoDF.name),
+                    leading:
+                        const Icon(FontAwesomeIcons.clapperboard, size: 18),
+                    title: Text(
+                      "Video Deepfake",
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
                   ),
-                ),
 
                 /*  */
-                Container(height: 8, color: context.minBackgroundColor()),
+                if (!isChildRole)
+                  Container(height: 8, color: context.minBackgroundColor()),
 
                 /*  */
                 ListTile(
-                  onTap: () => context.goNamed(Routes.updatePassword.name),
+                  onTap: () => context.goNamed(isChildRole
+                      ? Routes.childUpdatePassword.name
+                      : Routes.updatePassword.name),
                   leading: const Icon(Icons.password, size: 18),
                   title: Text(
                     "CHANGE_PASSWORD_TEXT".tr(),
@@ -128,7 +147,8 @@ class _ProfilePageState extends State<ProfilePage> {
 
   ListTile _myInfo(BuildContext context, AppState state) {
     return ListTile(
-      onTap: () => context.goNamed(Routes.myProfile.name),
+      onTap: () => context.goNamed(
+          isChildRole ? Routes.childMyProfile.name : Routes.myProfile.name),
       contentPadding: EdgeInsets.symmetric(
         horizontal: 16.w,
         vertical: 4.h,

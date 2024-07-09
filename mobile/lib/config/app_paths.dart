@@ -1,14 +1,16 @@
 class Endpoints {
   Endpoints._();
 
-  static const String serverIP = "http://192.168.1.25";
+  static const String serverIP = "http://192.168.1.9";
   // static const String serverIP = "http://10.10.0.157";
 
   static const String baseDevelopmentUrl = "$serverIP:8888";
-  static const String baseProductionUrl = "http://localhost:8888";
+  static const String baseProductionUrl =
+      "https://deepfakesnsapi.azurewebsites.net";
 
   static const String socketDevelopmentUrl = "$serverIP:8888";
-  static const String socketProductionUrl = "http://localhost:8888";
+  static const String socketProductionUrl =
+      "https://deepfakesnsapi.azurewebsites.net";
 
   static const String prefixEndpoint = "api/v1";
 
@@ -60,9 +62,11 @@ class Endpoints {
 
   static const String myConversations = '/conversation/list';
   static const String createConversation = '/conversation/create';
-  static const String getSingleConversationByMembers = '/conversation/get_single_conversation_by_members';
+  static const String getSingleConversationByMembers =
+      '/conversation/get_single_conversation_by_members';
   static const String conversationDetails = '/conversation/details/:id';
   static const String seenConversation = '/conversation/seen/:id';
+  static const String updateConversation = '/conversation/update_info/:id';
   static const String sendMessage = '/message/create';
   static const String conversationMessages = '/message/list/:conversationId';
 
@@ -97,8 +101,9 @@ class Routes {
   static final signup = Route(name: "signup", path: "/signup");
 
   static final forgot = Route(name: "forgot", path: "/forgot");
-  
-  static final resetPassword = Route(name: "resetPassword", path: "/resetPassword");
+
+  static final resetPassword =
+      Route(name: "resetPassword", path: "/resetPassword");
 
   static final verify = Route(name: "verify", path: "/verify");
 
@@ -122,30 +127,48 @@ class Routes {
 
   static final chat = Route(name: "chat", path: "/chat");
   static final videoCall = Route(name: "videoCall", path: "videoCall");
+  static final conversationSetting =
+      Route(name: "conversationSetting", path: "conversationSetting");
   static final conversation =
       Route(name: "conversation", path: "conversation/:id");
   static final createConversation =
       Route(name: "create_conversation", path: "create_conversation");
 
   static final video = Route(name: "video", path: "/video");
+  static final childVideo = Route(name: "child_video", path: "/child_video");
 
   static final profile = Route(name: "profile", path: "/profile");
+  static final childProfile =
+      Route(name: "childprofile", path: "/childprofile");
   static final setting = Route(name: "setting", path: "setting");
+  static final childSetting = Route(name: "childSetting", path: "childSetting");
   static final myProfile = Route(name: "myProfile", path: "myProfile");
+  static final childMyProfile =
+      Route(name: "childMyProfile", path: "childMyProfile");
   static final updateProfile =
       Route(name: "update_profile", path: "update_profile");
+  static final childUpdateProfile =
+      Route(name: "child_update_profile", path: "child_update_profile");
   static final buyCoins = Route(name: "buy_coins", path: "buy_coins");
   static final videoDF = Route(name: "video_df", path: "video_df");
   static final createVideoDF =
       Route(name: "create_video_df", path: "create_video_df");
   static final updatePassword =
       Route(name: "update_password", path: "update_password");
+  static final childUpdatePassword =
+      Route(name: "child_update_password", path: "child_update_password");
   static final otherProfile = Route(
     name: "otherProfile",
     path: "/other_profile/:id",
   );
+  static final childOtherProfile = Route(
+    name: "childOtherProfile",
+    path: "/child_other_profile/:id",
+  );
   static final otherFriends =
       Route(name: "other_profile_friends", path: "friends");
+  static final childOtherFriends =
+      Route(name: "child_other_profile_friends", path: "child_friends");
 
   static final notification = Route(
     name: "notification",
@@ -156,15 +179,29 @@ class Routes {
     name: "friend",
     path: "/friend",
   );
+  static final childFriend = Route(
+    name: "childfriend",
+    path: "/childfriend",
+  );
   static final suggestedFriends = Route(
     name: "suggested_friends",
     path: "suggested",
+  );
+  static final childSuggestedFriends = Route(
+    name: "child_suggested_friends",
+    path: "childsuggested",
   );
   static final requestedFriends = Route(
     name: "requested_friends",
     path: "requested",
   );
+  static final childRequestedFriends = Route(
+    name: "child_requested_friends",
+    path: "child_requested",
+  );
   static final allFriend = Route(name: "all_friend", path: "all");
+  static final childAllFriend =
+      Route(name: "child_all_friend", path: "child_all");
 }
 
 class Route {

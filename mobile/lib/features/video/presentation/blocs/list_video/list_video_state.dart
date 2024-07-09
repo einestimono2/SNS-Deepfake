@@ -9,6 +9,7 @@ class ListVideoState extends Equatable {
   final int currentIndex;
   final int currentPage;
   final String? errorMsg;
+  final bool isInitState;
 
   const ListVideoState({
     this.videos = const [],
@@ -19,6 +20,7 @@ class ListVideoState extends Equatable {
     this.currentIndex = 0,
     this.currentPage = 0,
     this.errorMsg,
+    this.isInitState = true,
   });
 
   @override
@@ -52,5 +54,6 @@ class ListVideoState extends Equatable {
         currentIndex: currentIndex ?? this.currentIndex,
         currentPage: currentPage ?? this.currentPage,
         errorMsg: errorMsg,
+        isInitState: false,
       );
 }

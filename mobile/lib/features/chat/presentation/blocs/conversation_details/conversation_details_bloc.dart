@@ -17,6 +17,7 @@ class ConversationDetailsBloc
   final GetConversationMessagesUC getConversationMessagesUC;
   final SeenConversationUC seenConversationUC;
   final CreateConversationUC createConversationUC;
+  final UpdateConversationUC updateConversationUC;
 
   final AppBloc appBloc;
   final MyConversationsBloc myConversationsBloc;
@@ -29,15 +30,19 @@ class ConversationDetailsBloc
     required this.createConversationUC,
     required this.seenConversationUC,
     required this.getConversationIdUC,
+    required this.updateConversationUC,
   }) : super(CDInitialState()) {
     on<GetConversationDetails>(_onGetConversationDetails);
-    on<NewMessageEvent>(_onNewMessageEvent);
-    on<FirstMessageEvent>(_onFirstMessageEvent);
-    on<UpdateMessageEvent>(_onUpdateMessageEvent);
     on<SeenConversation>(_onSeenConversation);
     on<LoadMoreConversationDetails>(_onLoadMoreConversationDetails);
     on<GetSingleConversationByMembers>(_onGetSingleConversationByMembers);
     on<CreateGroupChatSubmit>(_onCreateGroupChatSubmit);
+    on<RenameConversationSubmit>(_onRenameConversationSubmit);
+
+    /* Events */
+    on<NewMessageEvent>(_onNewMessageEvent);
+    on<FirstMessageEvent>(_onFirstMessageEvent);
+    on<UpdateMessageEvent>(_onUpdateMessageEvent);
   }
 
   FutureOr<void> _onGetConversationDetails(
@@ -240,6 +245,23 @@ class ConversationDetailsBloc
     result.fold(
       (failure) => event.onError(failure.toString()),
       (conversation) => event.onSuccess(conversation.id),
+    );
+  }
+
+  FutureOr<void> _onRenameConversationSubmit(
+    RenameConversationSubmit event,
+    Emitter<ConversationDetailsState> emit,
+  ) async {
+    final result = await updateConversationUC(
+      UpdateConversationParams(
+        name: event.name,
+        id: event.id,
+      ),
+    );
+
+    result.fold(
+      (failure) => event.onError(failure.toString()),
+      (data) => event.onSuccess(data),
     );
   }
 }

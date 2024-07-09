@@ -230,4 +230,45 @@ export class ConversationService {
 
     // Trigger Event -> Xóa conversation
   };
+
+  static updateConversationInfo = async ({ id, name, userId }) => {
+    if (!id) throw new BadRequestError(Message.ID_EMPTY);
+
+    const conversation = await Conversation.findByPk(id, {
+      include: {
+        association: 'members',
+        attributes: ['id', 'email'],
+        through: { attributes: [] }
+      }
+    });
+    if (!conversation) throw new NotFoundError(Message.CONVERSATION_NOT_FOUND);
+
+    const msg = await MessageModel.create({
+      message: 'RENAME_CONVERSATION',
+      conversationId: conversation.id,
+      type: MessageType.System,
+      senderId: userId, // Từ token
+      seenIds: [userId] // từ token
+    });
+
+    socket.triggerEvent(conversation.id, SocketEvents.MESSAGE_NEW, msg);
+
+    conversation.name = name;
+    conversation.lastMessageAt = msg.createdAt;
+
+    await conversation.save();
+
+    socket.triggerEvent(
+      conversation.members.map((member) => member.id),
+      SocketEvents.CONVERSATION_UPDATE,
+      {
+        conversationId: conversation.id,
+        lastMessageAt: conversation.lastMessageAt,
+        name: conversation.name,
+        message: msg
+      }
+    );
+
+    return conversation;
+  };
 }

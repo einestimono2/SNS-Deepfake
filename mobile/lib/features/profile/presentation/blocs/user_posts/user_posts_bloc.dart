@@ -19,6 +19,8 @@ class UserPostsBloc extends Bloc<UserPostsEvent, UserPostsState> {
   }) : super(UserPostsInitialState()) {
     on<GetUserPosts>(_onGetUserPosts);
     on<LoadMoreUserPosts>(_onLoadMoreUserPosts);
+    on<UpdateUserPostsFeel>(_onUpdateUserPostsFeel);
+    on<UpdateUserPostsComment>(_onUpdateUserPostsComment);
   }
 
   FutureOr<void> _onGetUserPosts(
@@ -73,5 +75,62 @@ class UserPostsBloc extends Bloc<UserPostsEvent, UserPostsState> {
         ),
       ),
     );
+  }
+
+  FutureOr<void> _onUpdateUserPostsFeel(
+    UpdateUserPostsFeel event,
+    Emitter<UserPostsState> emit,
+  ) async {
+    if (state is! UserPostsSuccessfulState) return;
+
+    // Previous value
+    UserPostsSuccessfulState preLoaded = state as UserPostsSuccessfulState;
+
+    int idx = preLoaded.posts.indexWhere((e) => e.id == event.postId);
+    if (idx == -1) return;
+
+    emit(preLoaded.copyWith(
+      posts: preLoaded.posts.map((e) {
+        if (e.id == event.postId) {
+          return e.copyWith(
+            kudosCount: event.kudosCount,
+            disappointedCount: event.disappointedCount,
+            myFeel: event.type,
+          );
+        } else {
+          return e;
+        }
+      }).toList(),
+      timestamp: DateTime.now().millisecondsSinceEpoch,
+    ));
+  }
+
+  FutureOr<void> _onUpdateUserPostsComment(
+    UpdateUserPostsComment event,
+    Emitter<UserPostsState> emit,
+  ) async {
+    if (state is! UserPostsSuccessfulState) return;
+
+    // Previous value
+    UserPostsSuccessfulState preLoaded = state as UserPostsSuccessfulState;
+
+    int idx = preLoaded.posts.indexWhere((e) => e.id == event.postId);
+    if (idx == -1 ||
+        (preLoaded.posts[idx].fakeCount == event.fakeCounts &&
+            preLoaded.posts[idx].trustCount == event.trustCounts)) return;
+
+    emit(preLoaded.copyWith(
+      posts: preLoaded.posts.map((e) {
+        if (e.id == event.postId) {
+          return e.copyWith(
+            fakeCount: event.fakeCounts,
+            trustCount: event.trustCounts,
+          );
+        } else {
+          return e;
+        }
+      }).toList(),
+      timestamp: DateTime.now().millisecondsSinceEpoch,
+    ));
   }
 }

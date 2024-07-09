@@ -52,7 +52,9 @@ class _MainLayoutState extends State<MainLayout> {
 
     super.initState();
 
-    _earlyCallApis();
+    if (context.read<AppBloc>().state.user!.role != 0) {
+      _earlyCallApis();
+    }
   }
 
   @override
@@ -97,7 +99,6 @@ class _MainLayoutState extends State<MainLayout> {
         }
       },
       child: Scaffold(
-        // TODO: Check lại vs role children
         resizeToAvoidBottomInset: widget.body.currentIndex == 3 ? false : true,
         body: SafeArea(
           child: widget.body,

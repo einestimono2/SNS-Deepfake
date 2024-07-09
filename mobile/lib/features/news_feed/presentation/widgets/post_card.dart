@@ -9,6 +9,7 @@ import 'package:sns_deepfake/core/libs/libs.dart';
 import '../../../../config/configs.dart';
 import '../../../../core/utils/utils.dart';
 import '../../../../core/widgets/widgets.dart';
+import '../../../app/bloc/bloc.dart';
 import '../../data/data.dart';
 import '../blocs/blocs.dart';
 import 'grid_image_video.dart';
@@ -33,16 +34,23 @@ class PostCard extends StatelessWidget {
   });
 
   void _handleNavigateProfile(BuildContext context) {
+    final bool isChildRole = context.read<AppBloc>().state.user!.role == 0;
+
     post.author.id == myId
-        ? context.pushNamed(Routes.myProfile.name)
+        ? context.pushNamed(
+            isChildRole ? Routes.childMyProfile.name : Routes.myProfile.name)
         : context.pushNamed(
-            Routes.otherProfile.name,
+            isChildRole
+                ? Routes.childOtherProfile.name
+                : Routes.otherProfile.name,
             pathParameters: {"id": post.author.id.toString()},
             extra: {'username': post.author.username},
           );
   }
 
   void _handleNavDetail(BuildContext context, [bool focus = false]) {
+    if (context.read<AppBloc>().state.user!.role == 0) return;
+
     context.pushNamed(
       Routes.postDetails.name,
       pathParameters: {"id": post.id.toString()},
@@ -176,14 +184,19 @@ class PostCard extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.only(left: 8.0),
                           child: InkWell(
-                            onTap: () => context.pushNamed(
-                              Routes.groupDetails.name,
-                              pathParameters: {"id": post.id.toString()},
-                              extra: {
-                                "coverPhoto": post.group!.coverPhoto,
-                                "groupName": post.group!.groupName,
-                              },
-                            ),
+                            onTap: () =>
+                                context.read<AppBloc>().state.user!.role == 0
+                                    ? null
+                                    : context.pushNamed(
+                                        Routes.groupDetails.name,
+                                        pathParameters: {
+                                          "id": post.id.toString()
+                                        },
+                                        extra: {
+                                          "coverPhoto": post.group!.coverPhoto,
+                                          "groupName": post.group!.groupName,
+                                        },
+                                      ),
                             child: Text(
                               post.group!.groupName,
                               style: Theme.of(context)
@@ -201,16 +214,17 @@ class PostCard extends StatelessWidget {
           ),
 
           /* Icon dot */
-          IconButton(
-            onPressed: () {
-              openModalBottomSheet(
-                context: context,
-                useRootNavigator: true,
-                child: ModelPostAction(post),
-              );
-            },
-            icon: Icon(Icons.more_horiz, size: 20.sp),
-          )
+          if (context.read<AppBloc>().state.user!.role != 0)
+            IconButton(
+              onPressed: () {
+                openModalBottomSheet(
+                  context: context,
+                  useRootNavigator: true,
+                  child: ModelPostAction(post),
+                );
+              },
+              icon: Icon(Icons.more_horiz, size: 20.sp),
+            )
         ],
       ),
     );

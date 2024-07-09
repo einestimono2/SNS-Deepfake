@@ -54,10 +54,10 @@ export class SettingServices {
   }
 
   //
-  static async getUserPushSettings(userId) {
-    let pushSettings = await Setting.findOne({ where: { userId } });
+  static async getUserPushSettings(user) {
+    let pushSettings = await Setting.findOne({ where: { userId: user.id } });
     if (!pushSettings) {
-      pushSettings = await Setting.create({ where: { userId } });
+      pushSettings = await Setting.create({ userId: user.id });
       await pushSettings.save();
     }
     return pushSettings;

@@ -17,10 +17,16 @@ import { redis } from '#dbs';
 import { SendMail, deleteFile, generateVerifyCode, setFileUsed, signToken } from '#utils';
 
 export class userServices {
-  static async myProfile(id) {
+  static async myProfile(id, fcmToken) {
     const user = await User.findByPk(id);
     if (!user) {
       throw new NotFoundError(Message.USER_NOT_FOUND);
+    }
+
+    const token = await DevToken.findOne({ where: { userId: user.id } });
+    if (token.token !== fcmToken) {
+      token.token = fcmToken;
+      await token.save();
     }
 
     const groups = await GroupService.getMyGroups(user.id);
@@ -121,9 +127,9 @@ export class userServices {
   // 3-- Đăng nhập tài khoản
   static async login({ email, password, uuid, fcmToken }) {
     const user = await User.findOne({
-      where: { email },
+      where: { email }
       // attributes: { exclude: ['password'] },
-      withDeleted: true
+      // withDeleted: true
     });
     if (!user) throw new NotFoundError(Message.EMAIL_NOT_EXISTS);
 

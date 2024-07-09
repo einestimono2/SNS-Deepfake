@@ -22,6 +22,12 @@ abstract class ChatRemoteDataSource {
   Future<bool> seenConversation(int id);
 
   /*  */
+  Future<Map<String, dynamic>> updateConversation({
+    required int id,
+    required String name,
+  });
+
+  /*  */
   Future<PaginationResult<MessageModel>> getConversationMessages({
     required int id,
     int? page,
@@ -216,5 +222,18 @@ class ChatRemoteDataSourceImpl extends ChatRemoteDataSource {
     );
 
     return response.data["id"] as int;
+  }
+
+  @override
+  Future<Map<String, dynamic>> updateConversation({
+    required int id,
+    required String name,
+  }) async {
+    final response = await apiClient.patch(
+      Endpoints.updateConversation.replaceFirst(":id", id.toString()),
+      data: {"name": name},
+    );
+
+    return response.data;
   }
 }

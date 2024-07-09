@@ -52,12 +52,14 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
 
     context.read<PostActionBloc>().add(GetPostDetails(widget.id));
 
-    int idx = (context.read<ListPostBloc>().state as ListPostSuccessfulState)
-        .posts
-        .indexWhere((e) => e.id == widget.id);
-    if (idx != -1) {
-      post = (context.read<ListPostBloc>().state as ListPostSuccessfulState)
-          .posts[idx];
+    if (context.read<ListPostBloc>().state is ListPostSuccessfulState) {
+      int idx = (context.read<ListPostBloc>().state as ListPostSuccessfulState)
+          .posts
+          .indexWhere((e) => e.id == widget.id);
+      if (idx != -1) {
+        post = (context.read<ListPostBloc>().state as ListPostSuccessfulState)
+            .posts[idx];
+      }
     }
 
     _getListComment();

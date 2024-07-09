@@ -19,6 +19,8 @@ class MyPostsBloc extends Bloc<MyPostsEvent, MyPostsState> {
     on<GetMyPosts>(_onGetMyPosts);
     on<LoadMoreMyPosts>(_onLoadMoreMyPosts);
     on<AddMyPost>(_onAddMyPost);
+    on<UpdateMyPostsFeel>(_onUpdateMyPostsFeel);
+    on<UpdateMyPostsComment>(_onUpdateMyPostsComment);
   }
 
   FutureOr<void> _onGetMyPosts(
@@ -84,6 +86,63 @@ class MyPostsBloc extends Bloc<MyPostsEvent, MyPostsState> {
     emit(preState.copyWith(
       totalCount: preState.totalCount + 1,
       posts: [event.post, ...preState.posts],
+      timestamp: DateTime.now().millisecondsSinceEpoch,
+    ));
+  }
+
+  FutureOr<void> _onUpdateMyPostsFeel(
+    UpdateMyPostsFeel event,
+    Emitter<MyPostsState> emit,
+  ) async {
+    if (state is! MyPostsSuccessfulState) return;
+
+    // Previous value
+    MyPostsSuccessfulState preLoaded = state as MyPostsSuccessfulState;
+
+    int idx = preLoaded.posts.indexWhere((e) => e.id == event.postId);
+    if (idx == -1) return;
+
+    emit(preLoaded.copyWith(
+      posts: preLoaded.posts.map((e) {
+        if (e.id == event.postId) {
+          return e.copyWith(
+            kudosCount: event.kudosCount,
+            disappointedCount: event.disappointedCount,
+            myFeel: event.type,
+          );
+        } else {
+          return e;
+        }
+      }).toList(),
+      timestamp: DateTime.now().millisecondsSinceEpoch,
+    ));
+  }
+
+  FutureOr<void> _onUpdateMyPostsComment(
+    UpdateMyPostsComment event,
+    Emitter<MyPostsState> emit,
+  ) async {
+    if (state is! MyPostsSuccessfulState) return;
+
+    // Previous value
+    MyPostsSuccessfulState preLoaded = state as MyPostsSuccessfulState;
+
+    int idx = preLoaded.posts.indexWhere((e) => e.id == event.postId);
+    if (idx == -1 ||
+        (preLoaded.posts[idx].fakeCount == event.fakeCounts &&
+            preLoaded.posts[idx].trustCount == event.trustCounts)) return;
+
+    emit(preLoaded.copyWith(
+      posts: preLoaded.posts.map((e) {
+        if (e.id == event.postId) {
+          return e.copyWith(
+            fakeCount: event.fakeCounts,
+            trustCount: event.trustCounts,
+          );
+        } else {
+          return e;
+        }
+      }).toList(),
       timestamp: DateTime.now().millisecondsSinceEpoch,
     ));
   }

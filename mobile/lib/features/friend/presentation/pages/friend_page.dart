@@ -9,6 +9,7 @@ import 'package:sns_deepfake/features/search/blocs/search_history/search_history
 import '../../../../config/configs.dart';
 import '../../../../core/utils/utils.dart';
 import '../../../../core/widgets/widgets.dart';
+import '../../../app/bloc/bloc.dart';
 import '../blocs/blocs.dart';
 import '../widgets/friend_request_card.dart';
 import '../widgets/friend_suggest_card.dart';
@@ -24,8 +25,12 @@ class FriendPage extends StatefulWidget {
 class _FriendPageState extends State<FriendPage> {
   final ScrollController _controller = ScrollController();
 
+  late final bool isChildRole;
+
   @override
   void initState() {
+    isChildRole = context.read<AppBloc>().state.user!.role == 0;
+
     _getRequestedFriends();
     _getSuggestedFriends();
 
@@ -150,7 +155,9 @@ class _FriendPageState extends State<FriendPage> {
           title: "FRIEND_REQUESTS_TEXT".tr() + (total == 0 ? '' : ' ($total)'),
           showMoreText: "SEE_ALL_TEXT".tr(),
           onShowMore: _showSeeMore
-              ? () => context.goNamed(Routes.requestedFriends.name)
+              ? () => context.goNamed(isChildRole
+                  ? Routes.childRequestedFriends.name
+                  : Routes.requestedFriends.name)
               : null,
         ),
 
@@ -179,7 +186,9 @@ class _FriendPageState extends State<FriendPage> {
         /* See more button */
         if (_showSeeMore)
           SeeAllButton(
-            onClick: () => context.goNamed(Routes.requestedFriends.name),
+            onClick: () => context.goNamed(isChildRole
+                ? Routes.childRequestedFriends.name
+                : Routes.requestedFriends.name),
             margin: EdgeInsets.all(16.w),
           ),
       ],
@@ -219,7 +228,9 @@ class _FriendPageState extends State<FriendPage> {
               style: TextButton.styleFrom(
                 backgroundColor: context.minBackgroundColor(),
               ),
-              onPressed: () => context.goNamed(Routes.suggestedFriends.name),
+              onPressed: () => context.goNamed(isChildRole
+                  ? Routes.childSuggestedFriends.name
+                  : Routes.suggestedFriends.name),
               child: Text(
                 "SUGGESTIONS_TEXT".tr(),
                 style: Theme.of(context).textTheme.bodySmall,
@@ -229,7 +240,9 @@ class _FriendPageState extends State<FriendPage> {
               style: TextButton.styleFrom(
                 backgroundColor: context.minBackgroundColor(),
               ),
-              onPressed: () => context.goNamed(Routes.allFriend.name),
+              onPressed: () => context.goNamed(isChildRole
+                  ? Routes.childAllFriend.name
+                  : Routes.allFriend.name),
               child: Text(
                 "YOUR_FRIENDS_TEXT".tr(),
                 style: Theme.of(context).textTheme.bodySmall,

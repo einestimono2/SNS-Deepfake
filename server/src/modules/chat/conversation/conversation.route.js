@@ -15,6 +15,8 @@ router.post(
   ConversationController.getSingleConversationByMembers
 );
 
+router.patch('/update_info/:id', isAuthenticated, ConversationController.updateConversationInfo);
+
 // - [GET] List
 router.get('/list', isAuthenticated, ConversationController.getMyConversations);
 

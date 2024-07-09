@@ -20,6 +20,8 @@ class SearchPostBloc extends Bloc<SearchPostEvent, SearchPostState> {
     required this.searchHistoryBloc,
   }) : super(SearchPostInitialState()) {
     on<SearchPostSubmit>(_onSearchPostSubmit);
+    on<UpdateSearchPostFeel>(_onUpdateSearchPostFeel);
+    on<UpdateSearchPostComment>(_onUpdateSearchPostComment);
   }
 
   FutureOr<void> _onSearchPostSubmit(
@@ -58,5 +60,62 @@ class SearchPostBloc extends Bloc<SearchPostEvent, SearchPostState> {
         }
       },
     );
+  }
+
+  FutureOr<void> _onUpdateSearchPostFeel(
+    UpdateSearchPostFeel event,
+    Emitter<SearchPostState> emit,
+  ) async {
+    if (state is! SearchPostSuccessfulState) return;
+
+    // Previous value
+    SearchPostSuccessfulState preLoaded = state as SearchPostSuccessfulState;
+
+    int idx = preLoaded.posts.indexWhere((e) => e.id == event.postId);
+    if (idx == -1) return;
+
+    emit(preLoaded.copyWith(
+      posts: preLoaded.posts.map((e) {
+        if (e.id == event.postId) {
+          return e.copyWith(
+            kudosCount: event.kudosCount,
+            disappointedCount: event.disappointedCount,
+            myFeel: event.type,
+          );
+        } else {
+          return e;
+        }
+      }).toList(),
+      timestamp: DateTime.now().millisecondsSinceEpoch,
+    ));
+  }
+
+  FutureOr<void> _onUpdateSearchPostComment(
+    UpdateSearchPostComment event,
+    Emitter<SearchPostState> emit,
+  ) async {
+    if (state is! SearchPostSuccessfulState) return;
+
+    // Previous value
+    SearchPostSuccessfulState preLoaded = state as SearchPostSuccessfulState;
+
+    int idx = preLoaded.posts.indexWhere((e) => e.id == event.postId);
+    if (idx == -1 ||
+        (preLoaded.posts[idx].fakeCount == event.fakeCounts &&
+            preLoaded.posts[idx].trustCount == event.trustCounts)) return;
+
+    emit(preLoaded.copyWith(
+      posts: preLoaded.posts.map((e) {
+        if (e.id == event.postId) {
+          return e.copyWith(
+            fakeCount: event.fakeCounts,
+            trustCount: event.trustCounts,
+          );
+        } else {
+          return e;
+        }
+      }).toList(),
+      timestamp: DateTime.now().millisecondsSinceEpoch,
+    ));
   }
 }

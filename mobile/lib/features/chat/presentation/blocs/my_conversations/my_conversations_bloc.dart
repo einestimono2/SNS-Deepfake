@@ -14,8 +14,11 @@ class MyConversationsBloc
   MyConversationsBloc({required this.myConversationUC})
       : super(InitialState()) {
     on<GetMyConversations>(_onGetMyConversations);
+
+    /* Events */
     on<ConversationLastestEvent>(_onConversationLastestEvent);
     on<ConversationNewEvent>(_onConversationNewEvent);
+    on<ConversationUpdateEvent>(_onConversationUpdateEvent);
   }
 
   FutureOr<void> _onGetMyConversations(
@@ -86,6 +89,40 @@ class MyConversationsBloc
     } else {
       emit(SuccessfulState(
         conversations: [event.conversation],
+        timestamp: DateTime.now().millisecondsSinceEpoch,
+      ));
+    }
+  }
+
+  FutureOr<void> _onConversationUpdateEvent(
+    ConversationUpdateEvent event,
+    Emitter<MyConversationsState> emit,
+  ) async {
+    if (state is SuccessfulState) {
+      final int conversationId = int.parse("${event.data['conversationId']}");
+      final MessageModel message = MessageModel.fromMap(event.data['message']);
+      String lastMessageAt = event.data['lastMessageAt'];
+      String name = event.data['name'];
+
+      final preState = state as SuccessfulState;
+      List<ConversationModel> updatedConversations = [];
+
+      for (var conversation in preState.conversations) {
+        if (conversation.id == conversationId) {
+          ConversationModel _temp = conversation.copyWith(
+            lastMessageAt: lastMessageAt,
+            name: name,
+            messages: [message, ...conversation.messages],
+          );
+
+          updatedConversations.insert(0, _temp);
+        } else {
+          updatedConversations.add(conversation);
+        }
+      }
+
+      emit(SuccessfulState(
+        conversations: updatedConversations,
         timestamp: DateTime.now().millisecondsSinceEpoch,
       ));
     }

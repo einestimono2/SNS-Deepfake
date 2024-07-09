@@ -125,13 +125,13 @@ export class NotificationServices {
   // }
 
   static async createNotification(data) {
-    const { type, userId = 0, targetId, postId, markId, feelId, videoId, coins } = data;
+    const { type, userId, targetId, postId, markId, feelId, videoId } = data;
     let { user, target, post, mark, feel, video } = data;
-    if ((user?.id || userId) === (target?.id || targetId || -1)) {
-      return;
-    }
+    // if ((user?.id || userId) === (target?.id || targetId || -1)) {
+    //   return;
+    // }
     // Nếu user là null or underfined thì đc đc gán,ngược lại thì không được gán
-    user ??= await User.findOne({ where: { id: userId } });
+    user ??= userId ? (await User.findOne({ where: { id: userId } })).toJSON() : undefined;
     target ??= targetId ? (await User.findOne({ where: { id: targetId } })).toJSON() : undefined;
     post ??= postId ? await Post.findOne({ where: { id: postId } }).toJSON() : undefined;
     mark ??= markId ? (await Mark.findOne({ where: { id: markId } })).toJSON() : undefined;
@@ -145,8 +145,8 @@ export class NotificationServices {
       postId: post?.id,
       markId: mark?.id,
       feelId: feel?.id,
-      videoId: video?.id,
-      coins: coins ?? null
+      videoId: video?.id
+      // coins: coins ?? null
     });
     // return notification;
     // Sử dụng Firebase cloud messaging để thực hiện gửi thông báo tới thiết bị

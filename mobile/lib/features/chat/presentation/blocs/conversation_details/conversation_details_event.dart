@@ -104,3 +104,17 @@ class CreateGroupChatSubmit extends ConversationDetailsEvent {
   @override
   List<Object?> get props => [memberIds, name];
 }
+
+class RenameConversationSubmit extends ConversationDetailsEvent {
+  final int id;
+  final String name;
+  final Function(Map<String, dynamic>) onSuccess;
+  final Function(String) onError;
+
+  const RenameConversationSubmit({
+    required this.id,
+    required this.name,
+    required this.onSuccess,
+    required this.onError,
+  });
+}

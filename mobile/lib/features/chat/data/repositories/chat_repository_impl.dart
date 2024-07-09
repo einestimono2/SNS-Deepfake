@@ -56,6 +56,20 @@ class ChatRepositoryImpl extends BaseRepositoryImpl implements ChatRepository {
   }
 
   @override
+  Future<Either<Failure, Map<String, dynamic>>> updateConversation({
+    required int id,
+    required String name,
+  }) async {
+    return await checkNetwork<Map<String, dynamic>>(
+      () async {
+        final res = await remote.updateConversation(id: id, name: name);
+
+        return Right(res);
+      },
+    );
+  }
+
+  @override
   Future<Either<Failure, PaginationResult<MessageModel>>>
       getConversationMessages({
     required int id,

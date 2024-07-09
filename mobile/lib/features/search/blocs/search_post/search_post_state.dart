@@ -27,6 +27,20 @@ final class SearchPostSuccessfulState extends SearchPostState {
 
   @override
   List<Object?> get props => [posts, timestamp, hasReachedMax, totalCount];
+
+  SearchPostSuccessfulState copyWith({
+    int? totalCount,
+    List<PostModel>? posts,
+    bool? hasReachedMax,
+    int? timestamp,
+  }) {
+    return SearchPostSuccessfulState(
+      posts: posts ?? this.posts,
+      totalCount: totalCount ?? this.totalCount,
+      hasReachedMax: hasReachedMax ?? this.hasReachedMax,
+      timestamp: timestamp ?? this.timestamp,
+    );
+  }
 }
 
 final class SearchPostFailureState extends SearchPostState {

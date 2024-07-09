@@ -39,7 +39,12 @@ class UserRemoteDataSourceImpl extends UserRemoteDataSource {
 
   @override
   Future<Map<String, dynamic>> getUser() async {
-    final response = await apiClient.get(Endpoints.verify);
+    final response = await apiClient.get(
+      Endpoints.verify,
+      queryParameters: {
+        'fcmToken': FirebaseNotificationService.instance.token ?? "",
+      },
+    );
 
     return {
       "user": UserModel.fromMap(response.data['user']),

@@ -645,8 +645,14 @@ export class PostServices {
           as: 'group',
           attributes: ['id', 'groupName', 'description', 'coverPhoto']
         },
-        { model: Feel, as: 'feels' },
-        { model: Mark, as: 'marks' }
+        {
+          model: Feel,
+          as: 'feels',
+          where: { userId },
+          required: false
+        }
+        // ,
+        // { model: Mark, as: 'marks' }
       ],
       attributes: [
         'id',
@@ -682,7 +688,7 @@ export class PostServices {
           'fakeCount'
         ]
       ],
-      order: [['id', 'DESC']],
+      order: [['createdAt', 'DESC']],
       distinct: true,
       subQuery: false,
       offset,
@@ -696,26 +702,7 @@ export class PostServices {
     }
 
     const postTotal = await Post.findAndCountAll(query);
-    // const posts = [];
-    // for (const e of postTotal) {
-    //   const post = e.toJSON();
-    //   posts.push(post);
-    // }
-    // Tính số lượng comment của 1 bài viết
-    // for (let i = 0; i < posts.length; i++) {
-    //   const post = posts[i];
-    //   if (post.marksCount > 0) {
-    //     const commentsCount = await Comment.count({
-    //       where: {
-    //         postId: post.id
-    //       }
-    //     });
-    //     post.commentsCount = commentsCount;
-    //   } else {
-    //     post.commentsCount = 0;
-    //   }
-    // }
-    // const lastId = posts.length > 0 ? posts[posts.length - 1].id : null;
+
     return {
       rows: postTotal.rows.map((post) => ({
         post,
@@ -854,6 +841,12 @@ export class PostServices {
           model: Group,
           as: 'group',
           attributes: ['id', 'groupName', 'description', 'coverPhoto'],
+          required: false
+        },
+        {
+          model: Feel,
+          as: 'feels',
+          where: { userId },
           required: false
         }
       ],

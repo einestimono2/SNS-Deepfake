@@ -22,6 +22,12 @@ abstract class ChatRepository {
   Future<Either<Failure, bool>> seenConversation(int id);
 
   /*  */
+  Future<Either<Failure, Map<String, dynamic>>> updateConversation({
+    required int id,
+    required String name,
+  });
+
+  /*  */
   Future<Either<Failure, PaginationResult<MessageModel>>>
       getConversationMessages({
     required int id,

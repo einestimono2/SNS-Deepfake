@@ -99,6 +99,12 @@ class SocketBloc extends Bloc<SocketEvent, SocketState> {
             .add(FirstMessageEvent(conversation.messages.first));
       },
     );
+    _socket.on(
+      SocketEvents.CONVERSATION_UPDATE,
+      (data) {
+        myConversationsBloc.add(ConversationUpdateEvent(data));
+      },
+    );
   }
 
   @override

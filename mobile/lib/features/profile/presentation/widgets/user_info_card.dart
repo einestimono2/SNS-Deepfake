@@ -1,11 +1,13 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sns_deepfake/core/utils/utils.dart';
 
 import '../../../../config/configs.dart';
 import '../../../../core/widgets/widgets.dart';
+import '../../../app/bloc/bloc.dart';
 import '../../../authentication/data/data.dart';
 
 class UserInfoCard extends StatelessWidget {
@@ -29,7 +31,10 @@ class UserInfoCard extends StatelessWidget {
           isMyProfile
               ? SectionTitle(
                   title: "PROFILE_DETAILS_TEXT".tr(),
-                  onShowMore: () => context.goNamed(Routes.updateProfile.name),
+                  onShowMore: () => context.goNamed(
+                      context.read<AppBloc>().state.user!.role == 0
+                          ? Routes.childUpdateProfile.name
+                          : Routes.updateProfile.name),
                   showMoreText: "UPDATE_TEXT".tr(),
                 )
               : SectionTitle(title: "PROFILE_DETAILS_TEXT".tr()),

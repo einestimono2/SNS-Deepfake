@@ -42,6 +42,8 @@ class _MyProfilePageState extends State<MyProfilePage> {
   bool _loadingMore = false;
   bool _hasReachedMax = false;
 
+  late final bool isChildRole;
+
   void _handleChangeAvatar(String? url) {
     if (url == null) return;
 
@@ -78,6 +80,8 @@ class _MyProfilePageState extends State<MyProfilePage> {
 
   @override
   void initState() {
+    isChildRole = context.read<AppBloc>().state.user?.role == 0;
+
     // if (context.read<ListFriendBloc>().state is! LFSuccessfulState) {
     _getMyFriends();
     // }
@@ -203,7 +207,8 @@ class _MyProfilePageState extends State<MyProfilePage> {
             children: [
               SectionTitle(
                 title: "PROFILE_FRIENDS_TEXT".tr(),
-                onShowMore: () => context.goNamed(Routes.friend.name),
+                onShowMore: () => context.goNamed(
+                    isChildRole ? Routes.childFriend.name : Routes.friend.name),
                 showMoreText: "FIND_FRIEND_TEXT".tr(),
               ),
               if (numFriends != 0)
@@ -255,7 +260,9 @@ class _MyProfilePageState extends State<MyProfilePage> {
               if (state is LFSuccessfulState && numFriends > numCard * 2)
                 SeeAllButton(
                   margin: const EdgeInsets.symmetric(vertical: 16),
-                  onClick: () => context.pushNamed(Routes.allFriend.name),
+                  onClick: () => context.pushNamed(isChildRole
+                      ? Routes.childAllFriend.name
+                      : Routes.allFriend.name),
                 )
             ],
           );
@@ -273,9 +280,11 @@ class _MyProfilePageState extends State<MyProfilePage> {
         ),
 
         /*  */
-        _createPostOption(user),
-        const SizedBox(height: 6),
-        const ColorSeparate(isSliverType: false, paddingVertical: 6),
+        if (!isChildRole) ...[
+          _createPostOption(user),
+          const SizedBox(height: 6),
+          const ColorSeparate(isSliverType: false, paddingVertical: 6),
+        ],
 
         /*  */
         BlocBuilder<MyPostsBloc, MyPostsState>(

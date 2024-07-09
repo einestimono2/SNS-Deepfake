@@ -23,3 +23,29 @@ class SearchPostSubmit extends SearchPostEvent {
   @override
   List<Object?> get props => [page, size, keyword, saveHistory];
 }
+
+class UpdateSearchPostFeel extends SearchPostEvent {
+  final int postId;
+  final int kudosCount;
+  final int disappointedCount;
+  final int type;
+
+  const UpdateSearchPostFeel({
+    required this.postId,
+    required this.kudosCount,
+    required this.disappointedCount,
+    required this.type,
+  });
+}
+
+class UpdateSearchPostComment extends SearchPostEvent {
+  final int postId;
+  final int fakeCounts;
+  final int trustCounts;
+
+  const UpdateSearchPostComment({
+    required this.postId,
+    required this.fakeCounts,
+    required this.trustCounts,
+  });
+}

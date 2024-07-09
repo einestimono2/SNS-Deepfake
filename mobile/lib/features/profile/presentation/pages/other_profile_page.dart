@@ -44,13 +44,14 @@ class _OtherProfilePageState extends State<OtherProfilePage> {
   bool _loadingMore = false;
   bool _hasReachedMax = false;
 
-  late ProfileModel profile;
-
   final ValueNotifier<bool> _friendActionLoading = ValueNotifier<bool>(false);
   final ValueNotifier<bool> _blockActionLoading = ValueNotifier<bool>(false);
 
+  late final bool isChildRole;
+
   @override
   void initState() {
+    isChildRole = context.read<AppBloc>().state.user!.role == 0;
     myId = context.read<AppBloc>().state.user!.id!;
     _getUser();
 
@@ -347,7 +348,7 @@ class _OtherProfilePageState extends State<OtherProfilePage> {
     );
   }
 
-  Widget _buildActionButtons(ProfileModel propfile) {
+  Widget _buildActionButtons(ProfileModel profile) {
     return Row(
       children: [
         SizedBox(width: py),
@@ -384,10 +385,10 @@ class _OtherProfilePageState extends State<OtherProfilePage> {
                     ],
                   ),
                 ).then(
-                  (value) => _handleFriendAction(propfile.friendStatus, value),
+                  (value) => _handleFriendAction(profile.friendStatus, value),
                 );
               } else {
-                _handleFriendAction(propfile.friendStatus);
+                _handleFriendAction(profile.friendStatus);
               }
             },
             style: ElevatedButton.styleFrom(
@@ -405,12 +406,12 @@ class _OtherProfilePageState extends State<OtherProfilePage> {
               builder: (context, value, child) => value
                   ? const AppIndicator(size: 16)
                   : Icon(
-                      AppMappers.getFriendStatusIcon(propfile.friendStatus),
+                      AppMappers.getFriendStatusIcon(profile.friendStatus),
                       size: 16,
                     ),
             ),
             label: Text(
-              AppMappers.getFriendStatusText(propfile.friendStatus),
+              AppMappers.getFriendStatusText(profile.friendStatus),
               style: Theme.of(context)
                   .textTheme
                   .bodyLarge
@@ -419,43 +420,44 @@ class _OtherProfilePageState extends State<OtherProfilePage> {
           ),
         ),
         const SizedBox(width: 8),
-        Expanded(
-          flex: 3,
-          child: ElevatedButton.icon(
-            onPressed: () => context.pushNamed(
-              Routes.conversation.name,
-              pathParameters: {"id": propfile.conversationId.toString()},
-              extra: {
-                "id": widget.id,
-                "avatar": propfile.avatar ?? "",
-                "username": propfile.username,
-              },
-            ),
-            style: ElevatedButton.styleFrom(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(6),
+        if (!isChildRole)
+          Expanded(
+            flex: 3,
+            child: ElevatedButton.icon(
+              onPressed: () => context.pushNamed(
+                Routes.conversation.name,
+                pathParameters: {"id": profile.conversationId.toString()},
+                extra: {
+                  "id": widget.id,
+                  "avatar": profile.avatar ?? "",
+                  "username": profile.username,
+                },
               ),
-              backgroundColor: Colors.grey.shade600,
-              side: BorderSide.none,
-              padding: const EdgeInsets.symmetric(vertical: 12),
-              minimumSize: Size.zero,
-              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-            ),
-            icon: const Icon(FontAwesomeIcons.message, size: 16),
-            label: Text(
-              "MESSAGE_ACTION_TEXT".tr(),
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyLarge
-                  ?.copyWith(color: Colors.white),
+              style: ElevatedButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(6),
+                ),
+                backgroundColor: Colors.grey.shade600,
+                side: BorderSide.none,
+                padding: const EdgeInsets.symmetric(vertical: 12),
+                minimumSize: Size.zero,
+                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              ),
+              icon: const Icon(FontAwesomeIcons.message, size: 16),
+              label: Text(
+                "MESSAGE_ACTION_TEXT".tr(),
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyLarge
+                    ?.copyWith(color: Colors.white),
+              ),
             ),
           ),
-        ),
         const SizedBox(width: 8),
         Expanded(
           flex: 2,
           child: ElevatedButton.icon(
-            onPressed: () => _handleBlockAction(propfile.blockStatus),
+            onPressed: () => _handleBlockAction(profile.blockStatus),
             style: ElevatedButton.styleFrom(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(6),
@@ -471,12 +473,12 @@ class _OtherProfilePageState extends State<OtherProfilePage> {
               builder: (context, value, child) => value
                   ? const AppIndicator(size: 16)
                   : Icon(
-                      AppMappers.getBlockStatusIcon(propfile.blockStatus),
+                      AppMappers.getBlockStatusIcon(profile.blockStatus),
                       size: 16,
                     ),
             ),
             label: Text(
-              AppMappers.getBlockStatusText(propfile.blockStatus),
+              AppMappers.getBlockStatusText(profile.blockStatus),
               style: Theme.of(context)
                   .textTheme
                   .bodyLarge
@@ -579,7 +581,9 @@ class _OtherProfilePageState extends State<OtherProfilePage> {
                 SeeAllButton(
                   margin: const EdgeInsets.symmetric(vertical: 16),
                   onClick: () => context.pushNamed(
-                    Routes.otherFriends.name,
+                    isChildRole
+                        ? Routes.childOtherFriends.name
+                        : Routes.otherFriends.name,
                     pathParameters: {"id": widget.id.toString()},
                     extra: {'username': widget.username},
                   ),

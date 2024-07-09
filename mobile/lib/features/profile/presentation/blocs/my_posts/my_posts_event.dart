@@ -41,3 +41,29 @@ class AddMyPost extends MyPostsEvent {
   @override
   List<Object?> get props => [post];
 }
+
+class UpdateMyPostsFeel extends MyPostsEvent {
+  final int postId;
+  final int kudosCount;
+  final int disappointedCount;
+  final int type;
+
+  const UpdateMyPostsFeel({
+    required this.postId,
+    required this.kudosCount,
+    required this.disappointedCount,
+    required this.type,
+  });
+}
+
+class UpdateMyPostsComment extends MyPostsEvent {
+  final int postId;
+  final int fakeCounts;
+  final int trustCounts;
+
+  const UpdateMyPostsComment({
+    required this.postId,
+    required this.fakeCounts,
+    required this.trustCounts,
+  });
+}

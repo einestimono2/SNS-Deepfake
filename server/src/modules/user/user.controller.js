@@ -6,7 +6,7 @@ import { CatchAsyncError } from '#middlewares';
 export class UserControllers {
   // 0-- Kiểm tra hạn
   static verifyToken = CatchAsyncError(async (req, res) => {
-    const me = await userServices.myProfile(req.userPayload.userId);
+    const me = await userServices.myProfile(req.userPayload.userId, req.query.fcmToken);
     res.ok({
       data: me
     });

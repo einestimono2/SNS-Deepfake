@@ -28,12 +28,16 @@ class ProfileFriendCard extends StatelessWidget {
           ? context.showInfo(message: "YOURSELF_TEXT".tr())
           : fromMyProfile
               ? context.pushNamed(
-                  Routes.otherProfile.name,
+                  context.read<AppBloc>().state.user!.role == 0
+                      ? Routes.childOtherProfile.name
+                      : Routes.otherProfile.name,
                   pathParameters: {"id": friendModel.id.toString()},
                   extra: {'username': friendModel.username},
                 )
               : context.pushReplacementNamed(
-                  Routes.otherProfile.name,
+                  context.read<AppBloc>().state.user!.role == 0
+                      ? Routes.childOtherProfile.name
+                      : Routes.otherProfile.name,
                   pathParameters: {"id": friendModel.id.toString()},
                   extra: {'username': friendModel.username},
                 ),

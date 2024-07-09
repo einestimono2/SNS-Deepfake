@@ -66,4 +66,16 @@ export class ConversationController {
 
     res.ok();
   });
+
+  static updateConversationInfo = CatchAsyncError(async (req, res) => {
+    const conversation = await ConversationService.updateConversationInfo({
+      ...req.body,
+      userId: req.userPayload.userId,
+      id: req.params.id
+    });
+
+    res.ok({
+      data: conversation
+    });
+  });
 }

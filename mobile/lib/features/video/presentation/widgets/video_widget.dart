@@ -41,6 +41,8 @@ class _VideoWidgetState extends State<VideoWidget> {
   final ValueNotifier<bool> _pause = ValueNotifier(false);
   late final ValueNotifier<Map<String, dynamic>> _status;
 
+  final ValueNotifier<bool> isInitialized = ValueNotifier(false);
+
   @override
   void initState() {
     myId = context.read<AppBloc>().state.user!.id!;
@@ -52,11 +54,15 @@ class _VideoWidgetState extends State<VideoWidget> {
       "trusts": widget.video.trustCount,
     });
 
+    if (!widget.controller.value.isInitialized) {
+      widget.controller.addListener(_handleInitStatus);
+    } else {
+      isInitialized.value = true;
+    }
+
     super.initState();
 
-    widget.controller.setLooping(true);
-
-    if (widget.isFirstVideo) {
+    if (widget.isFirstVideo && context.read<AppBloc>().state.user!.role != 0) {
       WidgetsBinding.instance.addPostFrameCallback((call) {
         if (mounted) {
           widget.controller.seekTo(Duration.zero).then(
@@ -64,6 +70,14 @@ class _VideoWidgetState extends State<VideoWidget> {
               );
         }
       });
+    }
+  }
+
+  void _handleInitStatus() {
+    if (widget.controller.value.isInitialized && !isInitialized.value) {
+      isInitialized.value = true;
+
+      widget.controller.removeListener(_handleInitStatus);
     }
   }
 
@@ -79,11 +93,15 @@ class _VideoWidgetState extends State<VideoWidget> {
   void _handleNavProfile() {
     _handlePause();
 
+    bool isChild = context.read<AppBloc>().state.user!.role == 0;
+
     if (widget.video.authorId == myId) {
-      context.pushNamed(Routes.myProfile.name);
+      context.pushNamed(
+        isChild ? Routes.childMyProfile.name : Routes.myProfile.name,
+      );
     } else {
       context.pushNamed(
-        Routes.otherProfile.name,
+        isChild ? Routes.childOtherProfile.name : Routes.otherProfile.name,
         pathParameters: {"id": widget.video.authorId.toString()},
         extra: {'username': widget.video.author.username},
       );
@@ -105,7 +123,7 @@ class _VideoWidgetState extends State<VideoWidget> {
     return Stack(
       children: [
         /*  */
-        Expanded(
+        Positioned.fill(
           child: widget.controller.value.hasError
               ? Center(
                   child: SizedBox(
@@ -125,7 +143,7 @@ class _VideoWidgetState extends State<VideoWidget> {
           valueListenable: _pause,
           builder: (context, value, child) {
             return value
-                ? Expanded(
+                ? Positioned.fill(
                     child: GestureDetector(
                       onTap: _handleResume,
                       child: Center(
@@ -163,14 +181,19 @@ class _VideoWidgetState extends State<VideoWidget> {
         /*  */
         Align(
           alignment: Alignment.bottomCenter,
-          child: VideoProgressIndicator(
-            widget.controller,
-            allowScrubbing: true,
-            padding: EdgeInsets.zero,
-            colors: const VideoProgressColors(
-              backgroundColor: Colors.white,
-              playedColor: AppColors.kPrimaryColor,
-            ),
+          child: ValueListenableBuilder(
+            valueListenable: isInitialized,
+            builder: (context, value, child) => !value
+                ? const SizedBox.shrink()
+                : VideoProgressIndicator(
+                    widget.controller,
+                    allowScrubbing: true,
+                    padding: EdgeInsets.zero,
+                    colors: const VideoProgressColors(
+                      backgroundColor: Colors.white,
+                      playedColor: AppColors.kPrimaryColor,
+                    ),
+                  ),
           ),
         ),
       ],

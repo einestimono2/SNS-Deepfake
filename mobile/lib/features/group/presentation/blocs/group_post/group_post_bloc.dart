@@ -29,6 +29,8 @@ class GroupPostBloc extends Bloc<GroupPostEvent, GroupPostState> {
     on<GetListPost>(_onGetListPost);
     on<LoadMoreListPost>(_onLoadMoreListPost);
     on<CreateGroupPostSubmit>(_onCreateGroupPostSubmit);
+    on<UpdateGroupPostFeel>(_onUpdateGroupPostFeel);
+    on<UpdateGroupPostComment>(_onUpdateGroupPostComment);
   }
 
   FutureOr<void> _onGetListPost(
@@ -127,5 +129,62 @@ class GroupPostBloc extends Bloc<GroupPostEvent, GroupPostState> {
         listPostBloc.add(AddPost(post));
       },
     );
+  }
+
+  FutureOr<void> _onUpdateGroupPostFeel(
+    UpdateGroupPostFeel event,
+    Emitter<GroupPostState> emit,
+  ) async {
+    if (state is! GroupPostSuccessfulState) return;
+
+    // Previous value
+    GroupPostSuccessfulState preLoaded = state as GroupPostSuccessfulState;
+
+    int idx = preLoaded.posts.indexWhere((e) => e.id == event.postId);
+    if (idx == -1) return;
+
+    emit(preLoaded.copyWith(
+      posts: preLoaded.posts.map((e) {
+        if (e.id == event.postId) {
+          return e.copyWith(
+            kudosCount: event.kudosCount,
+            disappointedCount: event.disappointedCount,
+            myFeel: event.type,
+          );
+        } else {
+          return e;
+        }
+      }).toList(),
+      timestamp: DateTime.now().millisecondsSinceEpoch,
+    ));
+  }
+
+  FutureOr<void> _onUpdateGroupPostComment(
+    UpdateGroupPostComment event,
+    Emitter<GroupPostState> emit,
+  ) async {
+    if (state is! GroupPostSuccessfulState) return;
+
+    // Previous value
+    GroupPostSuccessfulState preLoaded = state as GroupPostSuccessfulState;
+
+    int idx = preLoaded.posts.indexWhere((e) => e.id == event.postId);
+    if (idx == -1 ||
+        (preLoaded.posts[idx].fakeCount == event.fakeCounts &&
+            preLoaded.posts[idx].trustCount == event.trustCounts)) return;
+
+    emit(preLoaded.copyWith(
+      posts: preLoaded.posts.map((e) {
+        if (e.id == event.postId) {
+          return e.copyWith(
+            fakeCount: event.fakeCounts,
+            trustCount: event.trustCounts,
+          );
+        } else {
+          return e;
+        }
+      }).toList(),
+      timestamp: DateTime.now().millisecondsSinceEpoch,
+    ));
   }
 }

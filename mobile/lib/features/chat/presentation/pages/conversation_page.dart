@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:sns_deepfake/core/utils/utils.dart';
 import 'package:sns_deepfake/core/widgets/widgets.dart';
 import 'package:sns_deepfake/features/app/app.dart';
@@ -13,6 +14,7 @@ import 'package:sns_deepfake/features/chat/chat.dart';
 import 'package:sns_deepfake/features/chat/presentation/widgets/empty_conversation_card.dart';
 import 'package:zego_uikit_prebuilt_call/zego_uikit_prebuilt_call.dart';
 
+import '../../../../config/configs.dart';
 import '../widgets/conversation_avatar.dart';
 import '../widgets/message_card.dart';
 
@@ -656,7 +658,12 @@ class ConversationPageState extends State<ConversationPage> {
             children: [
               Flexible(
                 child: InkWell(
-                  onTap: () {},
+                  onTap: () => context.goNamed(
+                    Routes.conversationSetting.name,
+                    pathParameters: {
+                      "id": widget.id.toString(),
+                    },
+                  ),
                   borderRadius: BorderRadius.circular(1000),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
@@ -723,32 +730,6 @@ class ConversationPageState extends State<ConversationPage> {
                   buttonSize: const Size.fromRadius(22),
                   margin: const EdgeInsets.only(right: 6),
                 )
-              // IconButton(
-              //   onPressed: () => ZegoSendCallInvitationButton(
-              //     isVideoCall: true,
-              //     resourceID: conversation!.id.toString(),
-              //     invitees: conversation!.members
-              //         .where((e) => e.id != myId)
-              //         .map((usr) => ZegoUIKitUser(
-              //               id: usr.id.toString(),
-              //               name: usr.username ?? usr.email,
-              //             ))
-              //         .toList(),
-              //   ),
-              //   // context.goNamed(
-              //   //   Routes.videoCall.name,
-              //   //   pathParameters: {"id": conversation!.id.toString()},
-              //   //   extra: {
-              //   //     "isGroupVideo":
-              //   //         conversation!.type == ConversationType.group,
-              //   //     "id": conversation!.id.toString(),
-              //   //     "userName": context.read<AppBloc>().state.user!.username,
-              //   //     "userId":
-              //   //         context.read<AppBloc>().state.user!.id.toString(),
-              //   //   },
-              //   // ),
-              //   icon: const Icon(FontAwesomeIcons.video, size: 22),
-              // ),
             ],
           );
         },

@@ -13,6 +13,7 @@
         {
             "name": "Mobile ProdMode",
             "type": "dart",
+            "noDebug": true,
             "flutterMode": "debug",
             "request": "launch",
             "program": "mobile/lib/main_production.dart",

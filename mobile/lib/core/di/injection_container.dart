@@ -242,6 +242,9 @@ void _initNewsFeedFeature() {
         appBloc: sl(),
         myPostsBloc: sl(),
         listCommentBloc: sl(),
+        groupPostBloc: sl(),
+        searchPostBloc: sl(),
+        userPostsBloc: sl(),
       ));
   sl.registerLazySingleton(() => ListPostBloc(getListPostUC: sl()));
   sl.registerLazySingleton(() => ListCommentBloc(getListCommentUC: sl()));
@@ -354,6 +357,7 @@ void _initChatFeature() {
         seenConversationUC: sl(),
         getConversationMessagesUC: sl(),
         getConversationIdUC: sl(),
+        updateConversationUC: sl(),
       ));
   sl.registerLazySingleton(
     () => MessageBloc(
@@ -371,6 +375,7 @@ void _initChatFeature() {
   sl.registerLazySingleton(() => SeenConversationUC(repository: sl()));
   sl.registerLazySingleton(() => CreateConversationUC(repository: sl()));
   sl.registerLazySingleton(() => GetConversationIdUC(repository: sl()));
+  sl.registerLazySingleton(() => UpdateConversationUC(repository: sl()));
 
   /* Repository */
   sl.registerLazySingleton<ChatRepository>(

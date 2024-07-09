@@ -7,11 +7,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sns_deepfake/core/base/base.dart';
 import 'package:sns_deepfake/core/base/base_usecase.dart';
+import 'package:sns_deepfake/features/group/group.dart';
 import 'package:sns_deepfake/features/news_feed/news_feed.dart';
+import 'package:sns_deepfake/features/profile/presentation/blocs/blocs.dart';
+import 'package:sns_deepfake/features/search/blocs/search_post/search_post_bloc.dart';
 
 import '../../../../app/bloc/bloc.dart';
-import '../../../../group/data/data.dart';
 import '../../../../profile/profile.dart';
+import '../../../../search/blocs/blocs.dart';
 
 part 'post_action_event.dart';
 part 'post_action_state.dart';
@@ -29,7 +32,10 @@ class PostActionBloc extends Bloc<PostActionEvent, PostActionState> {
   final AppBloc appBloc;
   final ListPostBloc listPostBloc;
   final MyPostsBloc myPostsBloc;
+  final UserPostsBloc userPostsBloc;
   final ListCommentBloc listCommentBloc;
+  final GroupPostBloc groupPostBloc;
+  final SearchPostBloc searchPostBloc;
 
   PostActionBloc({
     required this.createPostUC,
@@ -44,7 +50,10 @@ class PostActionBloc extends Bloc<PostActionEvent, PostActionState> {
     required this.appBloc,
     required this.listPostBloc,
     required this.myPostsBloc,
+    required this.userPostsBloc,
     required this.listCommentBloc,
+    required this.groupPostBloc,
+    required this.searchPostBloc,
   }) : super(PAInitialState()) {
     on<CreateCommentSubmit>(_onCreateCommentSubmit);
     on<CreatePostSubmit>(_onCreatePostSubmit);
@@ -223,6 +232,30 @@ class PostActionBloc extends Bloc<PostActionEvent, PostActionState> {
           fakeCounts: fakeCounts,
           trustCounts: trustCounts,
         ));
+
+        groupPostBloc.add(UpdateGroupPostComment(
+          postId: event.postId,
+          fakeCounts: fakeCounts,
+          trustCounts: trustCounts,
+        ));
+
+        searchPostBloc.add(UpdateSearchPostComment(
+          postId: event.postId,
+          fakeCounts: fakeCounts,
+          trustCounts: trustCounts,
+        ));
+
+        myPostsBloc.add(UpdateMyPostsComment(
+          postId: event.postId,
+          fakeCounts: fakeCounts,
+          trustCounts: trustCounts,
+        ));
+
+        userPostsBloc.add(UpdateUserPostsComment(
+          postId: event.postId,
+          fakeCounts: fakeCounts,
+          trustCounts: trustCounts,
+        ));
       },
     );
   }
@@ -264,6 +297,34 @@ class PostActionBloc extends Bloc<PostActionEvent, PostActionState> {
           disappointedCount: data["disappointed"]!,
           type: event.type,
         ));
+
+        groupPostBloc.add(UpdateGroupPostFeel(
+          postId: event.postId,
+          kudosCount: data["kudos"]!,
+          disappointedCount: data["disappointed"]!,
+          type: event.type,
+        ));
+
+        searchPostBloc.add(UpdateSearchPostFeel(
+          postId: event.postId,
+          kudosCount: data["kudos"]!,
+          disappointedCount: data["disappointed"]!,
+          type: event.type,
+        ));
+
+        myPostsBloc.add(UpdateMyPostsFeel(
+          postId: event.postId,
+          kudosCount: data["kudos"]!,
+          disappointedCount: data["disappointed"]!,
+          type: event.type,
+        ));
+
+        userPostsBloc.add(UpdateUserPostsFeel(
+          postId: event.postId,
+          kudosCount: data["kudos"]!,
+          disappointedCount: data["disappointed"]!,
+          type: event.type,
+        ));
       },
     );
   }
@@ -297,6 +358,34 @@ class PostActionBloc extends Bloc<PostActionEvent, PostActionState> {
         event.onSuccess();
 
         listPostBloc.add(UpdateFeelSummary(
+          postId: event.postId,
+          kudosCount: data["kudos"]!,
+          disappointedCount: data["disappointed"]!,
+          type: -1,
+        ));
+
+        groupPostBloc.add(UpdateGroupPostFeel(
+          postId: event.postId,
+          kudosCount: data["kudos"]!,
+          disappointedCount: data["disappointed"]!,
+          type: -1,
+        ));
+
+        searchPostBloc.add(UpdateSearchPostFeel(
+          postId: event.postId,
+          kudosCount: data["kudos"]!,
+          disappointedCount: data["disappointed"]!,
+          type: -1,
+        ));
+
+        myPostsBloc.add(UpdateMyPostsFeel(
+          postId: event.postId,
+          kudosCount: data["kudos"]!,
+          disappointedCount: data["disappointed"]!,
+          type: -1,
+        ));
+
+        userPostsBloc.add(UpdateUserPostsFeel(
           postId: event.postId,
           kudosCount: data["kudos"]!,
           disappointedCount: data["disappointed"]!,

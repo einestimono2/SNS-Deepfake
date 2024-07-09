@@ -57,3 +57,29 @@ class CreateGroupPostSubmit extends GroupPostEvent {
   @override
   List<Object?> get props => [group, description, status, files];
 }
+
+class UpdateGroupPostFeel extends GroupPostEvent {
+  final int postId;
+  final int kudosCount;
+  final int disappointedCount;
+  final int type;
+
+  const UpdateGroupPostFeel({
+    required this.postId,
+    required this.kudosCount,
+    required this.disappointedCount,
+    required this.type,
+  });
+}
+
+class UpdateGroupPostComment extends GroupPostEvent {
+  final int postId;
+  final int fakeCounts;
+  final int trustCounts;
+
+  const UpdateGroupPostComment({
+    required this.postId,
+    required this.fakeCounts,
+    required this.trustCounts,
+  });
+}

@@ -9,6 +9,7 @@ import 'package:sns_deepfake/features/friend/friend.dart';
 
 import '../../../../config/configs.dart';
 import '../../../../core/widgets/widgets.dart';
+import '../../../app/bloc/bloc.dart';
 
 class FriendSuggestCard extends StatefulWidget {
   final FriendModel friend;
@@ -59,7 +60,9 @@ class _FriendSuggestCardState extends State<FriendSuggestCard> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () => context.pushNamed(
-        Routes.otherProfile.name,
+        context.read<AppBloc>().state.user!.role == 0
+            ? Routes.childOtherProfile.name
+            : Routes.otherProfile.name,
         pathParameters: {"id": widget.friend.id.toString()},
         extra: {'username': widget.friend.username},
       ),

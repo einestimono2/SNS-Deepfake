@@ -10,6 +10,7 @@ import 'package:sns_deepfake/features/search/search.dart';
 import '../../../../config/configs.dart';
 import '../../../../core/utils/utils.dart';
 import '../../../../core/widgets/widgets.dart';
+import '../../../app/bloc/bloc.dart';
 
 class FriendSearch extends SearchDelegate {
   Timer? _debounce;
@@ -90,7 +91,9 @@ class FriendSearch extends SearchDelegate {
                     onTap: () => context
                       ..pop()
                       ..pushNamed(
-                        Routes.otherProfile.name,
+                        context.read<AppBloc>().state.user!.role == 0
+                            ? Routes.childOtherProfile.name
+                            : Routes.otherProfile.name,
                         pathParameters: {"id": state.users[idx].id.toString()},
                         extra: {'username': state.users[idx].username},
                       ),

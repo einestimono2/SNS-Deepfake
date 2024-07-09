@@ -148,6 +148,220 @@ class AppRouter {
         },
       ),
 
+      /* Child layout */
+      StatefulShellRoute.indexedStack(
+        parentNavigatorKey: rootNavigatorKey,
+        pageBuilder: (context, state, navigationShell) => NoTransitionPage(
+          child: ChildLayout(
+            key: state.pageKey,
+            body: navigationShell,
+          ),
+        ),
+        branches: <StatefulShellBranch>[
+          /* Video */
+          StatefulShellBranch(
+            // navigatorKey: shellNavigatorKey,
+            routes: <RouteBase>[
+              GoRoute(
+                // parentNavigatorKey: shellNavigatorKey,
+                name: Routes.childVideo.name,
+                path: Routes.childVideo.path,
+                pageBuilder: (BuildContext context, GoRouterState state) {
+                  return fadeTransition(
+                    state: state,
+                    context: context,
+                    child: VideoPage(key: state.pageKey),
+                  );
+                },
+              ),
+            ],
+          ),
+
+          /* Friend */
+          StatefulShellBranch(
+            // navigatorKey: shellNavigatorKey,
+            routes: <RouteBase>[
+              GoRoute(
+                // parentNavigatorKey: shellNavigatorKey,
+                name: Routes.childFriend.name,
+                path: Routes.childFriend.path,
+                pageBuilder: (BuildContext context, GoRouterState state) {
+                  return fadeTransition(
+                    state: state,
+                    context: context,
+                    child: FriendPage(key: state.pageKey),
+                  );
+                },
+                routes: [
+                  /* Suggested Friends */
+                  GoRoute(
+                    name: Routes.childSuggestedFriends.name,
+                    path: Routes.childSuggestedFriends.path,
+                    pageBuilder: (BuildContext context, GoRouterState state) {
+                      return slideTransition(
+                        type: SlideType.rtl,
+                        state: state,
+                        context: context,
+                        child: SuggestedFriendsPage(key: state.pageKey),
+                      );
+                    },
+                  ),
+
+                  /* Requested Friends */
+                  GoRoute(
+                    name: Routes.childRequestedFriends.name,
+                    path: Routes.childRequestedFriends.path,
+                    pageBuilder: (BuildContext context, GoRouterState state) {
+                      return slideTransition(
+                        type: SlideType.rtl,
+                        state: state,
+                        context: context,
+                        child: RequestedFriendsPage(key: state.pageKey),
+                      );
+                    },
+                  ),
+
+                  /* All Friends */
+                  GoRoute(
+                    name: Routes.childAllFriend.name,
+                    path: Routes.childAllFriend.path,
+                    pageBuilder: (BuildContext context, GoRouterState state) {
+                      return slideTransition(
+                        type: SlideType.rtl,
+                        state: state,
+                        context: context,
+                        child: AllFriendPage(key: state.pageKey),
+                      );
+                    },
+                  ),
+                ],
+              ),
+            ],
+          ),
+
+          /* Profile */
+          StatefulShellBranch(
+            // navigatorKey: shellNavigatorKey,
+            routes: <RouteBase>[
+              GoRoute(
+                // parentNavigatorKey: shellNavigatorKey,
+                name: Routes.childProfile.name,
+                path: Routes.childProfile.path,
+                pageBuilder: (BuildContext context, GoRouterState state) {
+                  return fadeTransition(
+                    state: state,
+                    context: context,
+                    child: ProfilePage(key: state.pageKey),
+                  );
+                },
+                routes: [
+                  /* Setting */
+                  GoRoute(
+                    parentNavigatorKey: rootNavigatorKey,
+                    name: Routes.childSetting.name,
+                    path: Routes.childSetting.path,
+                    pageBuilder: (BuildContext context, GoRouterState state) {
+                      return slideTransition(
+                        type: SlideType.rtl,
+                        state: state,
+                        context: context,
+                        child: SettingPage(key: state.pageKey),
+                      );
+                    },
+                  ),
+
+                  /* Update Password */
+                  GoRoute(
+                    name: Routes.childUpdatePassword.name,
+                    path: Routes.childUpdatePassword.path,
+                    pageBuilder: (BuildContext context, GoRouterState state) {
+                      return slideTransition(
+                        type: SlideType.rtl,
+                        state: state,
+                        context: context,
+                        child: ChangePasswordPage(key: state.pageKey),
+                      );
+                    },
+                  ),
+
+                  /* My Profile */
+                  GoRoute(
+                    name: Routes.childMyProfile.name,
+                    path: Routes.childMyProfile.path,
+                    pageBuilder: (BuildContext context, GoRouterState state) {
+                      return slideTransition(
+                        type: SlideType.rtl,
+                        state: state,
+                        context: context,
+                        child: MyProfilePage(key: state.pageKey),
+                      );
+                    },
+                    routes: [
+                      /* Update Profile */
+                      GoRoute(
+                        name: Routes.childUpdateProfile.name,
+                        path: Routes.childUpdateProfile.path,
+                        pageBuilder:
+                            (BuildContext context, GoRouterState state) {
+                          return slideTransition(
+                            type: SlideType.rtl,
+                            state: state,
+                            context: context,
+                            child: UpdateProfilePage(key: state.pageKey),
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+
+              /* Other Profile */
+              GoRoute(
+                // parentNavigatorKey: shellNavigatorKey,
+                name: Routes.childOtherProfile.name,
+                path: Routes.childOtherProfile.path,
+                pageBuilder: (BuildContext context, GoRouterState state) {
+                  return slideTransition(
+                    type: SlideType.rtl,
+                    state: state,
+                    context: context,
+                    child: OtherProfilePage(
+                      key: state.pageKey,
+                      id: int.parse(state.pathParameters['id']!),
+                      username:
+                          (state.extra as Map<String, dynamic>?)?['username'] ??
+                              "",
+                    ),
+                  );
+                },
+                routes: [
+                  /* All Friends */
+                  GoRoute(
+                    name: Routes.childOtherFriends.name,
+                    path: Routes.childOtherFriends.path,
+                    pageBuilder: (BuildContext context, GoRouterState state) {
+                      return slideTransition(
+                        type: SlideType.rtl,
+                        state: state,
+                        context: context,
+                        child: OtherAllFriendPage(
+                          key: state.pageKey,
+                          id: int.parse(state.pathParameters['id']!),
+                          username: (state.extra
+                                  as Map<String, dynamic>?)?['username'] ??
+                              "",
+                        ),
+                      );
+                    },
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      ),
+
       /* Main Layout */
       StatefulShellRoute.indexedStack(
         parentNavigatorKey: rootNavigatorKey,
@@ -460,6 +674,24 @@ class AppRouter {
                           );
                         },
                       ),
+                      GoRoute(
+                        parentNavigatorKey: rootNavigatorKey,
+                        name: Routes.conversationSetting.name,
+                        path: Routes.conversationSetting.path,
+                        pageBuilder:
+                            (BuildContext context, GoRouterState state) {
+
+                          return slideTransition(
+                            type: SlideType.rtl,
+                            state: state,
+                            context: context,
+                            child: ConversationSettingPage(
+                              key: state.pageKey,
+                              id: int.parse(state.pathParameters['id']!),
+                            ),
+                          );
+                        },
+                      ),
                     ],
                   ),
 
@@ -693,7 +925,8 @@ class AppRouter {
       // unauthenticated + splash --> login
       if (userState.authStatus == AuthStatus.unauthenticated &&
           (state.matchedLocation == Routes.splash.path ||
-              state.matchedLocation == Routes.profile.path)) {
+              state.matchedLocation == Routes.profile.path ||
+              state.matchedLocation == Routes.childProfile.path)) {
         return Routes.login.path;
       }
 
@@ -720,7 +953,9 @@ class AppRouter {
             /* Trường hợp khởi động lại app + trường hợp complete profile xong */
             if (finishing || initializing || logging) {
               return userState.user!.token != null
-                  ? Routes.newsFeed.path
+                  ? userState.user!.role == 0
+                      ? Routes.childVideo.path
+                      : Routes.newsFeed.path
                   : Routes.login.path;
             }
             /* Trường hợp khi đã ở trong main layout thì k redirect gì cả */

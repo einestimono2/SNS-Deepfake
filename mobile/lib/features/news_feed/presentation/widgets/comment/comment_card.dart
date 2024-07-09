@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
@@ -7,6 +8,7 @@ import 'package:sns_deepfake/core/utils/utils.dart';
 
 import '../../../../../config/configs.dart';
 import '../../../../../core/widgets/widgets.dart';
+import '../../../../app/bloc/bloc.dart';
 import '../../../data/data.dart';
 
 class CommentCard extends StatelessWidget {
@@ -29,10 +31,16 @@ class CommentCard extends StatelessWidget {
 
   // TODO: Có lỗi gì đó xảy ra --> Trùng key
   void _handleNavProfile(BuildContext context) {
+    Navigator.of(context, rootNavigator: true).pop();
+
     isAuthor
-        ? context.pushNamed(Routes.myProfile.name)
+        ? context.pushNamed(context.read<AppBloc>().state.user!.role == 0
+            ? Routes.childMyProfile.name
+            : Routes.myProfile.name)
         : context.pushNamed(
-            Routes.otherProfile.name,
+            context.read<AppBloc>().state.user!.role == 0
+                ? Routes.childOtherProfile.name
+                : Routes.otherProfile.name,
             pathParameters: {"id": comment.author.id.toString()},
             extra: {'username': comment.author.username},
           );

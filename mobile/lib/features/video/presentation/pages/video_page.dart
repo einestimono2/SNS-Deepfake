@@ -34,11 +34,6 @@ class _VideoPageState extends State<VideoPage> {
 
   @override
   void initState() {
-    if (context.read<ListVideoBloc>().state.currentPage == 0 ||
-        context.read<ListVideoBloc>().state.errorMsg != null) {
-      _getListVideo();
-    }
-
     super.initState();
   }
 
@@ -54,6 +49,15 @@ class _VideoPageState extends State<VideoPage> {
       children: [
         BlocBuilder<ListVideoBloc, ListVideoState>(
           builder: (context, state) {
+            if (state.isInitState) {
+              return Container(
+                width: double.infinity,
+                height: 0.85.sh,
+                alignment: Alignment.center,
+                child: const AppIndicator(),
+              );
+            }
+
             return PageView.builder(
               itemCount: state.videos.length,
               scrollDirection: Axis.vertical,

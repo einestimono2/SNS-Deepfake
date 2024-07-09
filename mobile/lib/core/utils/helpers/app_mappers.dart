@@ -113,8 +113,21 @@ class AppMappers {
     switch (key) {
       case "CREATED":
         return "JUST_CREATED_CONVERSATION_TEXT".tr();
+      case "RENAME_CONVERSATION":
+        return "JUST_RENAMED_CONVERSATION_TEXT".tr();
       default:
-        return "JUST_CREATED_CONVERSATION_TEXT".tr();
+        return "Unknown system message";
+    }
+  }
+
+  static String getSystemMessageWithInfo(String key, [String name = ""]) {
+    switch (key) {
+      case "CREATED":
+        return "USER_CREATED_CONVERSATION_TEXT".tr(namedArgs: {"name": name});
+      case "RENAME_CONVERSATION":
+        return "USER_RENAMED_CONVERSATION_TEXT".tr(namedArgs: {"name": name});
+      default:
+        return "Unknown system message";
     }
   }
 }

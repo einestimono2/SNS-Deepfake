@@ -9,6 +9,7 @@ import 'package:sns_deepfake/features/friend/friend.dart';
 import '../../../../config/configs.dart';
 import '../../../../core/utils/utils.dart';
 import '../../../../core/widgets/widgets.dart';
+import '../../../app/bloc/bloc.dart';
 
 class FriendRequestCard extends StatefulWidget {
   final FriendModel friend;
@@ -59,7 +60,9 @@ class _FriendRequestCardState extends State<FriendRequestCard> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () => context.pushNamed(
-        Routes.otherProfile.name,
+        context.read<AppBloc>().state.user!.role == 0
+            ? Routes.childOtherProfile.name
+            : Routes.otherProfile.name,
         pathParameters: {"id": widget.friend.id.toString()},
         extra: {'username': widget.friend.username},
       ),
@@ -141,6 +144,10 @@ class _FriendRequestCardState extends State<FriendRequestCard> {
       valueListenable: _requestStatus,
       builder: (context, value, child) {
         if (value == 0) {
+          if (context.read<AppBloc>().state.user!.role == 0) {
+            return const SizedBox.shrink();
+          }
+
           return SizedBox(
             width: double.infinity,
             child: ElevatedButton.icon(

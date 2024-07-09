@@ -7,6 +7,7 @@ import { conversationRouter } from './chat/conversation/conversation.route.js';
 import { messageRouter } from './chat/message/message.route.js';
 import { commentRouter } from './comment/comment.route.js';
 import { NotFoundError } from './core/index.js';
+import { deepfakeVideoRouter } from './deepfake_video/deepfake_video.route.js';
 import { friendRouter } from './friend/friend.route.js';
 import { groupRouter } from './group/group/group.route.js';
 import { mediaRouter } from './media/media.route.js';
@@ -58,6 +59,9 @@ routers.use(`${Strings.API_PREFIX}/group`, groupRouter);
 
 // 15.VideoSchedule
 routers.use(`${Strings.API_PREFIX}/video_schedule`, videoScheduleRouter);
+
+// 16.VideoSchedule
+routers.use(`${Strings.API_PREFIX}/videodeepfake`, deepfakeVideoRouter);
 
 // #. Check Health - test server
 routers.use('/health', (_req, res) => {

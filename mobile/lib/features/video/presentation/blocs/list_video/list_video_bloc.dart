@@ -72,7 +72,9 @@ class ListVideoBloc extends Bloc<ListVideoEvent, ListVideoState> {
         await _initializeControllerAtIndex(0);
 
         /// Play 1st video
-        // _playControllerAtIndex(0);
+        if (appBloc.state.user!.role == 0) {
+          _playControllerAtIndex(0);
+        }
 
         /// Initialize 2nd video
         await _initializeControllerAtIndex(1);
@@ -241,9 +243,12 @@ class ListVideoBloc extends Bloc<ListVideoEvent, ListVideoState> {
       state.controllers[index] = _controller;
 
       // Initialize
-      await _controller.initialize().onError((error, stackTrace) {
-        AppLogger.error(error.toString(), error);
-      });
+      await _controller
+          .initialize()
+          .then((value) => _controller.setLooping(true))
+          .onError(
+            (error, stackTrace) => AppLogger.error(error.toString(), error),
+          );
 
       log('🚀🚀🚀 INITIALIZED $index');
     }
