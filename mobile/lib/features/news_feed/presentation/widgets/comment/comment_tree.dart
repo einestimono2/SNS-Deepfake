@@ -162,6 +162,7 @@ class _CommentTreeState extends State<CommentTree> {
         avatarSize: widget.childAvatarSize,
         onReply: widget.onReply,
         isNested: true,
+        myId: myId,
       ),
     );
   }
@@ -224,6 +225,7 @@ class _CommentTreeState extends State<CommentTree> {
             isAuthor: widget.comment.author.id == widget.authorId,
             avatarSize: widget.rootAvatarSize,
             onReply: widget.onReply,
+            myId: myId,
           )
         : CustomPaint(
             painter: RootPainter(
@@ -236,6 +238,7 @@ class _CommentTreeState extends State<CommentTree> {
               isAuthor: widget.comment.author.id == widget.authorId,
               avatarSize: widget.rootAvatarSize,
               onReply: widget.onReply,
+              myId: myId,
             ),
           );
   }

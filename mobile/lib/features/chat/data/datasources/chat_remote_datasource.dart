@@ -22,6 +22,22 @@ abstract class ChatRemoteDataSource {
   Future<bool> seenConversation(int id);
 
   /*  */
+  Future<bool> deleteConversation(int id);
+
+  /*  */
+  Future<bool> deleteMember({
+    required int id,
+    required int memberId,
+    required bool kick,
+  });
+
+  /*  */
+  Future<List<MemberModel>> addMember({
+    required int id,
+    required List<int> memberIds,
+  });
+
+  /*  */
   Future<Map<String, dynamic>> updateConversation({
     required int id,
     required String name,
@@ -235,5 +251,46 @@ class ChatRemoteDataSourceImpl extends ChatRemoteDataSource {
     );
 
     return response.data;
+  }
+
+  @override
+  Future<List<MemberModel>> addMember({
+    required int id,
+    required List<int> memberIds,
+  }) async {
+    final response = await apiClient.post(
+      Endpoints.addMemberConversation.replaceFirst(":id", id.toString()),
+      data: {"memberIds": memberIds},
+    );
+
+    return List<MemberModel>.from(
+      response.data.map((x) => MemberModel.fromMap(x)),
+    );
+  }
+
+  @override
+  Future<bool> deleteMember({
+    required int id,
+    required int memberId,
+    required bool kick,
+  }) async {
+    final response = await apiClient.post(
+      Endpoints.deleteMemberConversation.replaceFirst(":id", id.toString()),
+      data: {
+        "memberId": memberId,
+        "kick": kick,
+      },
+    );
+
+    return response.status == "success";
+  }
+
+  @override
+  Future<bool> deleteConversation(int id) async {
+    final response = await apiClient.delete(
+      Endpoints.conversationDetails.replaceFirst(":id", id.toString()),
+    );
+
+    return response.status == "success";
   }
 }

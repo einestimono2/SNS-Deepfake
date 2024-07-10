@@ -1,6 +1,6 @@
 import { Op } from 'sequelize';
 
-import { BadRequestError, NotFoundError, UnauthorizedError } from '../../core/error.response.js';
+import { BadRequestError, ForbiddenError, NotFoundError, UnauthorizedError } from '../../core/error.response.js';
 import { socket } from '../../socket/socket.js';
 import { User } from '../../user/user.model.js';
 import { Message as MessageModel } from '../message/message.model.js';
@@ -47,13 +47,19 @@ export class ConversationService {
       socket.triggerEvent(_members, SocketEvents.CONVERSATION_NEW, {
         conversation: newConversation,
         members: users,
-        message: msg
+        message: {
+          ...msg.dataValues,
+          sender: users[0] // userId là mình tương ứng vị trí đầu tiên khi add list
+        }
       });
 
       return {
         conversation: newConversation,
         members: users,
-        message: msg
+        message: {
+          ...msg.dataValues,
+          sender: users[0] // userId là mình tương ứng vị trí đầu tiên khi add list
+        }
       };
     }
 
@@ -102,7 +108,10 @@ export class ConversationService {
       seenIds: [userId] // từ token
     });
 
-    let sendMessage = msg.dataValues;
+    let sendMessage = {
+      ...msg.dataValues,
+      sender: users[0] // userId là mình tương ứng vị trí đầu tiên khi add list
+    };
 
     if (message.replyId) {
       const reply = await MessageModel.findByPk(message.replyId);
@@ -167,8 +176,14 @@ export class ConversationService {
         },
         {
           association: 'messages',
-          order: [['createdAt', 'DESC']],
-          limit: 10
+          order: [['id', 'DESC']],
+          limit: 1,
+          include: [
+            {
+              association: 'sender',
+              attributes: ['id', 'avatar', 'username', 'email', 'phoneNumber']
+            }
+          ]
         }
       ]
     });
@@ -223,12 +238,29 @@ export class ConversationService {
     return conversation;
   };
 
-  static deleteConversation = async ({ id }) => {
+  static deleteConversation = async ({ id, userId }) => {
     if (!id) throw BadRequestError(Message.ID_EMPTY);
 
-    // TODO: Delete conversation
+    const conversation = await Conversation.findByPk(id, {
+      include: {
+        association: 'members',
+        attributes: ['id', 'email'],
+        through: { attributes: [] }
+      }
+    });
+    if (!conversation) throw new NotFoundError(Message.CONVERSATION_NOT_FOUND);
+
+    if (conversation.creatorId !== userId) throw new ForbiddenError(Message.USER_NOT_CONVERSATION_CREATOR);
+    await conversation.destroy(); // Tự xóa các message vs thành viên do ràng buộc
 
     // Trigger Event -> Xóa conversation
+    socket.triggerEvent(
+      conversation.members.map((member) => member.id),
+      SocketEvents.CONVERSATION_REMOVE,
+      {
+        conversationId: id
+      }
+    );
   };
 
   static updateConversationInfo = async ({ id, name, userId }) => {
@@ -251,7 +283,16 @@ export class ConversationService {
       seenIds: [userId] // từ token
     });
 
-    socket.triggerEvent(conversation.id, SocketEvents.MESSAGE_NEW, msg);
+    const sender = await User.findByPk(userId);
+
+    socket.triggerEvent(
+      conversation.members.map((member) => member.id),
+      SocketEvents.MESSAGE_NEW,
+      {
+        ...msg.dataValues,
+        sender: sender.dataValues
+      }
+    );
 
     conversation.name = name;
     conversation.lastMessageAt = msg.createdAt;
@@ -265,10 +306,143 @@ export class ConversationService {
         conversationId: conversation.id,
         lastMessageAt: conversation.lastMessageAt,
         name: conversation.name,
-        message: msg
+        message: {
+          ...msg.dataValues,
+          sender: sender.dataValues
+        }
       }
     );
 
     return conversation;
+  };
+
+  static addMembers = async ({ id, memberIds, userId }) => {
+    if (!id) throw new BadRequestError(Message.ID_EMPTY);
+
+    const existingMember = await ConversationParticipants.findOne({
+      where: {
+        conversationId: id,
+        userId: memberIds
+      }
+    });
+    if (existingMember) throw new NotFoundError(Message.MEMBER_EXISTS);
+
+    // Them moi
+    for (const _id of memberIds) {
+      await ConversationParticipants.create({
+        conversationId: id,
+        userId: _id
+      });
+    }
+
+    const conversation = await Conversation.findByPk(id, {
+      include: {
+        association: 'members',
+        attributes: ['id', 'avatar', 'username', 'email', 'phoneNumber'],
+        through: { attributes: [] }
+      }
+    });
+    if (!conversation) throw new NotFoundError(Message.CONVERSATION_NOT_FOUND);
+
+    // Tạo message system tương ứng với từng người đc thêm
+    const addMessages = [];
+    for (const _id of memberIds) {
+      const msg = await MessageModel.create({
+        message: 'ADD_MEMBER',
+        conversationId: id,
+        type: MessageType.System,
+        senderId: _id, // Để sender để có thể lấy thông tin sau khi kick
+        seenIds: [userId] // từ token
+      });
+
+      addMessages.push({
+        ...msg.dataValues,
+        sender: conversation.members.find((e) => e.id === _id)
+      });
+    }
+
+    // Gửi tới những người trong phòng thông tin từng người đc thêm
+    socket.triggerEvent(
+      conversation.members.map((member) => member.id),
+      SocketEvents.MESSAGE_NEWS,
+      addMessages
+    );
+
+    // Cập nhật conversation table
+    conversation.lastMessageAt = addMessages[addMessages.length - 1].createdAt;
+    conversation.memberIds = conversation.members.map((member) => member.id);
+    await conversation.save();
+
+    socket.triggerEvent(
+      conversation.members.map((member) => member.id),
+      SocketEvents.CONVERSATION_ADD_MEMBER,
+      {
+        conversationId: conversation.id,
+        conversation,
+        memberIds,
+        lastMessageAt: conversation.lastMessageAt,
+        message: addMessages[addMessages.length - 1]
+      }
+    );
+
+    return conversation.members.filter((member) => memberIds.includes(member.id));
+  };
+
+  static deleteMembers = async ({ id, memberId, userId, kick }) => {
+    if (!id) throw new BadRequestError(Message.ID_EMPTY);
+
+    const existingMember = await ConversationParticipants.findOne({
+      where: {
+        conversationId: id,
+        userId: memberId
+      }
+    });
+    if (!existingMember) throw new NotFoundError(Message.USER_NOT_FOUND);
+
+    // Xóa member đó
+    await existingMember.destroy();
+
+    // !
+    const conversation = await Conversation.findByPk(id, {
+      include: {
+        association: 'members',
+        attributes: ['id', 'email'],
+        through: { attributes: [] }
+      }
+    });
+    if (!conversation) throw new NotFoundError(Message.CONVERSATION_NOT_FOUND);
+
+    // Trigger event tới những người đang mở conversation
+    const msg = await MessageModel.create({
+      message: kick ? 'KICK_MEMBER' : 'LEAVE_MEMBER',
+      conversationId: id,
+      type: MessageType.System,
+      senderId: memberId, // Để sender để có thể lấy thông tin sau khi kick
+      seenIds: [userId] // từ token
+    });
+    const sender = await User.findByPk(memberId);
+    socket.triggerEvent(
+      kick
+        ? [...conversation.members.map((member) => member.id), memberId]
+        : conversation.members.map((member) => member.id),
+      SocketEvents.MESSAGE_NEW,
+      { ...msg.dataValues, sender: sender.dataValues }
+    );
+
+    conversation.lastMessageAt = msg.createdAt;
+    conversation.memberIds = conversation.members.map((member) => member.id);
+    await conversation.save();
+
+    // Xóa conversation đó ở từng member
+    socket.triggerEvent(
+      [...conversation.members.map((member) => member.id), memberId],
+      SocketEvents.CONVERSATION_LEAVE,
+      {
+        conversationId: conversation.id,
+        memberId,
+        lastMessageAt: conversation.lastMessageAt,
+        message: { ...msg.dataValues, sender: sender.dataValues }
+      }
+    );
   };
 }

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
@@ -89,15 +91,17 @@ class AnimatedImage extends StatelessWidget {
     );
   }
 
-  CachedNetworkImage _buildFadeInImage() {
-    return CachedNetworkImage(
-      placeholder: (context, url) =>
-          _defaultImage(AppImages.imagePlaceholder, isAvatar, radius, fit),
-      imageUrl: url,
-      fit: fit,
-      errorWidget: (context, error, stackTrace) =>
-          _defaultImage(errorImage, isAvatar, radius, fit),
-    );
+  Widget _buildFadeInImage() {
+    return url == ""
+        ? _defaultImage(errorImage, isAvatar, radius, fit)
+        : CachedNetworkImage(
+            placeholder: (context, url) => _defaultImage(
+                AppImages.imagePlaceholder, isAvatar, radius, fit),
+            imageUrl: url,
+            fit: fit,
+            errorWidget: (context, error, stackTrace) =>
+                _defaultImage(errorImage, isAvatar, radius, fit),
+          );
   }
 }
 
@@ -108,6 +112,7 @@ class LocalImage extends StatelessWidget {
   final double? radius;
   final bool isAvatar;
   final BoxFit fit;
+  final bool fromFile;
 
   const LocalImage({
     super.key,
@@ -115,6 +120,7 @@ class LocalImage extends StatelessWidget {
     this.height,
     required this.path,
     this.isAvatar = false,
+    this.fromFile = false,
     this.radius,
     this.fit = BoxFit.cover,
   });
@@ -129,12 +135,19 @@ class LocalImage extends StatelessWidget {
   }
 
   Widget _assetImage() {
-    return Image.asset(
-      path,
-      fit: fit,
-      errorBuilder: (context, error, stackTrace) =>
-          _defaultImage(AppImages.errorImage, isAvatar, radius, fit),
-    );
+    return fromFile
+        ? Image.file(
+            File(path),
+            fit: fit,
+            errorBuilder: (context, error, stackTrace) =>
+                _defaultImage(AppImages.errorImage, isAvatar, radius, fit),
+          )
+        : Image.asset(
+            path,
+            fit: fit,
+            errorBuilder: (context, error, stackTrace) =>
+                _defaultImage(AppImages.errorImage, isAvatar, radius, fit),
+          );
   }
 }
 

@@ -12,10 +12,12 @@ class MessageCard extends StatefulWidget {
   final String lastMessageTime;
   final int myId;
   final int idx;
+  final int creatorId;
   final Map<int, String> memberAvatars;
   final Map<int, String> memberNames;
   final Map<int, int> memberSeen;
   final Function(MessageModel) onReply;
+  final bool isGroup;
 
   const MessageCard({
     super.key,
@@ -27,6 +29,8 @@ class MessageCard extends StatefulWidget {
     required this.memberNames,
     required this.idx,
     required this.onReply,
+    required this.creatorId,
+    required this.isGroup,
   });
 
   @override
@@ -89,13 +93,7 @@ class _MessageCardState extends State<MessageCard> {
                     isOnline: false,
                   ),
                 const SizedBox(height: 8),
-                Text(
-                  AppMappers.getSystemMessageWithInfo(
-                    widget.message.message!,
-                    widget.memberNames[widget.message.senderId] ?? "",
-                  ),
-                  style: Theme.of(context).textTheme.bodySmall,
-                ),
+                _buildSystemMessage(),
               ],
             ),
           )
@@ -120,6 +118,21 @@ class _MessageCardState extends State<MessageCard> {
                     Formatter.formatMessageTime(
                         widget.message.createdAt, context.locale.languageCode),
                     style: Theme.of(context).textTheme.labelMedium,
+                  ),
+                ),
+
+              /*  */
+              if (widget.isGroup && !mine)
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 18),
+                    child: Text(
+                      widget.memberNames[widget.message.senderId] ??
+                          widget.message.sender?.username ??
+                          "",
+                      style: Theme.of(context).textTheme.labelMedium,
+                    ),
                   ),
                 ),
 
@@ -206,10 +219,11 @@ class _MessageCardState extends State<MessageCard> {
                             child: CircleAvatar(
                               backgroundColor: Colors.red,
                               radius: 11,
-                              child: RemoteImage(
+                              child: AnimatedImage(
                                 url: widget
                                         .memberAvatars[widget.message.senderId]
                                         ?.fullPath ??
+                                    widget.message.sender?.avatar?.fullPath ??
                                     "",
                                 isAvatar: true,
                               ),
@@ -254,7 +268,9 @@ class _MessageCardState extends State<MessageCard> {
                               child: CircleAvatar(
                                 radius: 7,
                                 child: AnimatedImage(
-                                  url: widget.memberAvatars[id]!.fullPath,
+                                  url: widget.memberAvatars[id]?.fullPath ??
+                                      widget.message.sender?.avatar?.fullPath ??
+                                      "",
                                   isAvatar: true,
                                 ),
                               ),
@@ -265,6 +281,44 @@ class _MessageCardState extends State<MessageCard> {
               )
             ],
           );
+  }
+
+  Widget _buildSystemMessage() {
+    String text = "";
+
+    if (widget.message.message == "KICK_MEMBER") {
+      text = widget.message.senderId == widget.myId
+          ? "YOU_REMOVED_FROM_CONVERSATION_TEXT".tr()
+          : AppMappers.getSystemMessageWithInfo(
+              widget.message.message!,
+              widget.memberNames[widget.creatorId] ?? "",
+              widget.message.sender!.username,
+            );
+    } else if (widget.message.message == "LEAVE_MEMBER") {
+      text = widget.message.senderId == widget.myId
+          ? "YOU_LEAVED_CONVERSATION_TEXT".tr()
+          : AppMappers.getSystemMessageWithInfo(
+              widget.message.message!,
+              widget.message.sender!.username,
+            );
+    } else if (widget.message.message == "ADD_MEMBER") {
+      text = AppMappers.getSystemMessageWithInfo(
+        widget.message.message!,
+        widget.memberNames[widget.creatorId] ?? "",
+        widget.message.sender!.username,
+      );
+    } else {
+      text = AppMappers.getSystemMessageWithInfo(
+        widget.message.message!,
+        widget.memberNames[widget.message.senderId] ?? "",
+      );
+    }
+
+    return Text(
+      text,
+      style: Theme.of(context).textTheme.bodySmall,
+      textAlign: TextAlign.center,
+    );
   }
 
   Widget _mapMessageType() {

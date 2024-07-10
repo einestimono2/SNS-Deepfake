@@ -60,8 +60,6 @@ export const Post = postgre.define('Post', {
   // Định nghĩa các mối quan hệ
   // User ---sở hữu---*> Post(quan hệ 1-n)
   Post.belongsTo(User, { foreignKey: 'authorId', as: 'author', onDelete: 'CASCADE' });
-  // User ---có loại---> Post(quan hệ 1 - 1)
-  Post.belongsTo(Category, { foreignKey: 'categoryId', as: 'category', onDelete: 'SET NULL' });
   // Post ---có ---*> PostImage(quan hệ 1 - n)
   Post.hasMany(PostImage, { foreignKey: 'postId', as: 'images', onDelete: 'CASCADE' });
   // Post ---có ---> PostVideo(quan hệ 1 - 1)
@@ -80,7 +78,5 @@ export const Post = postgre.define('Post', {
   Post.hasMany(PostView, { foreignKey: 'postId', as: 'views', onDelete: 'CASCADE' });
   Mark.hasMany(Comment, { onDelete: 'CASCADE', foreignKey: 'markId', as: 'comments' });
   Comment.belongsTo(Mark, { onDelete: 'CASCADE', foreignKey: 'markId', as: 'mark' });
-  // Post ---có ---*> Share(quan hệ 1 - n)
-  // Post.hasMany(Share, { foreignKey: 'postId', as: 'shares', onDelete: 'CASCADE' });
   Post.sync({ alter: true }).then(() => logger.info("Table 'Post' synced!"));
 })();

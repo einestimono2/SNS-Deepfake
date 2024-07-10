@@ -49,7 +49,7 @@ export const GroupUser = postgre.define(
   GroupUser.belongsTo(Group, { foreignKey: 'groupId', as: 'groupofuser' });
 
   User.hasMany(GroupUser, { foreignKey: 'userId' });
-  GroupUser.belongsTo(User, { foreignKey: 'userId' });
+  GroupUser.belongsTo(User, { foreignKey: 'userId', as: 'user' });
   // GroupUser.belongsTo(Group, { foreignKey: 'groupId' });
   GroupUser.sync({ alter: true }).then(() => logger.info("Table 'GroupUser' synced!"));
 })();

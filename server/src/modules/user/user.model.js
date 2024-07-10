@@ -48,9 +48,6 @@ export const User = postgre.define('User', {
   username: {
     type: DataTypes.STRING
   },
-  // dateOfBirth: {
-  //   type: DataTypes.DATE
-  // },
   status: {
     type: DataTypes.INTEGER,
     default: AccountStatus.Pending

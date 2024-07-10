@@ -22,6 +22,22 @@ abstract class ChatRepository {
   Future<Either<Failure, bool>> seenConversation(int id);
 
   /*  */
+  Future<Either<Failure, bool>> deleteConversation(int id);
+
+  /*  */
+  Future<Either<Failure, bool>> deleteMember({
+    required int id,
+    required int memberId,
+    required bool kick,
+  });
+
+  /*  */
+  Future<Either<Failure, List<MemberModel>>> addMember({
+    required int id,
+    required List<int> memberIds,
+  });
+
+  /*  */
   Future<Either<Failure, Map<String, dynamic>>> updateConversation({
     required int id,
     required String name,

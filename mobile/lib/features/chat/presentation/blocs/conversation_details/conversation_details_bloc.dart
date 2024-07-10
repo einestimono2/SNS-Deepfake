@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sns_deepfake/core/base/base.dart';
 import 'package:sns_deepfake/features/chat/chat.dart';
 
 import '../../../../../core/utils/utils.dart';
@@ -18,6 +19,9 @@ class ConversationDetailsBloc
   final SeenConversationUC seenConversationUC;
   final CreateConversationUC createConversationUC;
   final UpdateConversationUC updateConversationUC;
+  final AddConversationMemberUC addConversationMemberUC;
+  final DeleteConversationMemberUC deleteConversationMemberUC;
+  final DeleteConversationUC deleteConversationUC;
 
   final AppBloc appBloc;
   final MyConversationsBloc myConversationsBloc;
@@ -31,6 +35,9 @@ class ConversationDetailsBloc
     required this.seenConversationUC,
     required this.getConversationIdUC,
     required this.updateConversationUC,
+    required this.addConversationMemberUC,
+    required this.deleteConversationMemberUC,
+    required this.deleteConversationUC,
   }) : super(CDInitialState()) {
     on<GetConversationDetails>(_onGetConversationDetails);
     on<SeenConversation>(_onSeenConversation);
@@ -38,9 +45,13 @@ class ConversationDetailsBloc
     on<GetSingleConversationByMembers>(_onGetSingleConversationByMembers);
     on<CreateGroupChatSubmit>(_onCreateGroupChatSubmit);
     on<RenameConversationSubmit>(_onRenameConversationSubmit);
+    on<DeleteMemberSubmit>(_onDeleteMemberSubmit);
+    on<AddMemberSubmit>(_onAddMemberSubmit);
+    on<DeleteConversationSubmit>(_onDeleteConversationSubmit);
 
     /* Events */
     on<NewMessageEvent>(_onNewMessageEvent);
+    on<NewMessagesEvent>(_onNewMessagesEvent);
     on<FirstMessageEvent>(_onFirstMessageEvent);
     on<UpdateMessageEvent>(_onUpdateMessageEvent);
   }
@@ -124,6 +135,30 @@ class ConversationDetailsBloc
       // Seen message đó luôn nếu  chưa có
       if (appBloc.state.user != null &&
           !msg.seenIds.contains(appBloc.state.user!.id)) {
+        add(SeenConversation(oldState.conversationId));
+      }
+    }
+  }
+
+  FutureOr<void> _onNewMessagesEvent(
+    NewMessagesEvent event,
+    Emitter<ConversationDetailsState> emit,
+  ) async {
+    if (state is CDSuccessfulState &&
+        (state as CDSuccessfulState).conversationId ==
+            event.newMessages[0]['conversationId']) {
+      List<MessageModel> msgs = List<MessageModel>.from(
+          event.newMessages.map((x) => MessageModel.fromMap(x)));
+      final oldState = (state as CDSuccessfulState);
+
+      emit(oldState.copyWith(
+        messages: [...msgs.reversed, ...(oldState.messages)],
+        timestamp: DateTime.now().millisecondsSinceEpoch,
+      ));
+
+      // Seen message đó luôn nếu  chưa có
+      if (appBloc.state.user != null &&
+          !msgs.last.seenIds.contains(appBloc.state.user!.id)) {
         add(SeenConversation(oldState.conversationId));
       }
     }
@@ -262,6 +297,53 @@ class ConversationDetailsBloc
     result.fold(
       (failure) => event.onError(failure.toString()),
       (data) => event.onSuccess(data),
+    );
+  }
+
+  FutureOr<void> _onDeleteMemberSubmit(
+    DeleteMemberSubmit event,
+    Emitter<ConversationDetailsState> emit,
+  ) async {
+    final result = await deleteConversationMemberUC(
+      DeleteConversationMemberParams(
+        kick: event.kick,
+        memberId: event.memberId,
+        id: event.id,
+      ),
+    );
+
+    result.fold(
+      (failure) => event.onError(failure.toString()),
+      (data) => event.onSuccess(),
+    );
+  }
+
+  FutureOr<void> _onAddMemberSubmit(
+    AddMemberSubmit event,
+    Emitter<ConversationDetailsState> emit,
+  ) async {
+    final result = await addConversationMemberUC(
+      AddConversationMemberParams(
+        memberIds: event.memberIds,
+        id: event.id,
+      ),
+    );
+
+    result.fold(
+      (failure) => event.onError(failure.toString()),
+      (data) => event.onSuccess(data),
+    );
+  }
+
+  FutureOr<void> _onDeleteConversationSubmit(
+    DeleteConversationSubmit event,
+    Emitter<ConversationDetailsState> emit,
+  ) async {
+    final result = await deleteConversationUC(IdParams(event.id));
+
+    result.fold(
+      (failure) => event.onError(failure.toString()),
+      (data) => event.onSuccess(),
     );
   }
 }

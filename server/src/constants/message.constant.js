@@ -96,6 +96,15 @@ export const Message = {
   USER_NOT_FOUND: {
     msg: 'User not found!'
   },
+  MEMBER_EXISTS: {
+    msg: 'Member already exists!'
+  },
+  USER_NOT_CONVERSATION_CREATOR: {
+    msg: 'Bạn không thể xóa nhóm do không phải chủ nhóm!'
+  },
+  NOT_ENOUGH_DEEPFAKE_DATA: {
+    msg: 'Trường "title" "video" "image" không được để trống!'
+  },
   PARENT_NOT_FOUND: {
     msg: 'Parent not found!'
   },

@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sns_deepfake/features/chat/presentation/blocs/bloc.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 
 import '../../../../config/configs.dart';
@@ -74,6 +75,11 @@ class SocketBloc extends Bloc<SocketEvent, SocketState> {
       (data) => conversationDetailsBloc.add(NewMessageEvent(newMessage: data)),
     );
     _socket.on(
+      SocketEvents.MESSAGE_NEWS,
+      (data) =>
+          conversationDetailsBloc.add(NewMessagesEvent(newMessages: data)),
+    );
+    _socket.on(
       SocketEvents.MESSAGE_UPDATE,
       (data) =>
           conversationDetailsBloc.add(UpdateMessageEvent(updatedMessage: data)),
@@ -103,6 +109,26 @@ class SocketBloc extends Bloc<SocketEvent, SocketState> {
       SocketEvents.CONVERSATION_UPDATE,
       (data) {
         myConversationsBloc.add(ConversationUpdateEvent(data));
+      },
+    );
+    _socket.on(
+      SocketEvents.CONVERSATION_REMOVE,
+      (data) {
+        myConversationsBloc.add(ConversationRemoveEvent(
+          int.parse("${data['conversationId']}"),
+        ));
+      },
+    );
+    _socket.on(
+      SocketEvents.CONVERSATION_LEAVE,
+      (data) {
+        myConversationsBloc.add(ConversationLeaveEvent(data));
+      },
+    );
+    _socket.on(
+      SocketEvents.CONVERSATION_ADD_MEMBER,
+      (data) {
+        myConversationsBloc.add(ConversationAddMemberEvent(data));
       },
     );
   }

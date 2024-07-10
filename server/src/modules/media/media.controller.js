@@ -143,9 +143,11 @@ export class MediaControllers {
 
   static createMedia = CatchAsyncError(async (req, res) => {
     const { userId } = req.userPayload;
-    const media = await MediaService.createMedia(userId, req.body);
-    res.created({
-      data: media
+    const { image, video } = req.files;
+
+    await MediaService.createMedia(userId, image, video);
+    res.ok({
+      message: 'Đã gửi dữ liệu lên server thành công'
     });
   });
 

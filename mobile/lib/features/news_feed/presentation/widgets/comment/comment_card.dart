@@ -14,6 +14,7 @@ import '../../../data/data.dart';
 class CommentCard extends StatelessWidget {
   final CommentModel comment;
   final bool isAuthor;
+  final int myId;
   final double avatarSize;
   final EdgeInsets margin;
   final Function(CommentModel) onReply;
@@ -26,14 +27,14 @@ class CommentCard extends StatelessWidget {
     required this.avatarSize,
     this.margin = EdgeInsets.zero,
     required this.onReply,
+    required this.myId,
     this.isNested = false,
   });
 
-  // TODO: Có lỗi gì đó xảy ra --> Trùng key
   void _handleNavProfile(BuildContext context) {
     Navigator.of(context, rootNavigator: true).pop();
 
-    isAuthor
+    myId == comment.author.id
         ? context.pushNamed(context.read<AppBloc>().state.user!.role == 0
             ? Routes.childMyProfile.name
             : Routes.myProfile.name)

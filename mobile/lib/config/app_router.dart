@@ -313,39 +313,18 @@ class AppRouter {
                       ),
                     ],
                   ),
-                ],
-              ),
 
-              /* Other Profile */
-              GoRoute(
-                // parentNavigatorKey: shellNavigatorKey,
-                name: Routes.childOtherProfile.name,
-                path: Routes.childOtherProfile.path,
-                pageBuilder: (BuildContext context, GoRouterState state) {
-                  return slideTransition(
-                    type: SlideType.rtl,
-                    state: state,
-                    context: context,
-                    child: OtherProfilePage(
-                      key: state.pageKey,
-                      id: int.parse(state.pathParameters['id']!),
-                      username:
-                          (state.extra as Map<String, dynamic>?)?['username'] ??
-                              "",
-                    ),
-                  );
-                },
-                routes: [
-                  /* All Friends */
+                  /* Other Profile */
                   GoRoute(
-                    name: Routes.childOtherFriends.name,
-                    path: Routes.childOtherFriends.path,
+                    // parentNavigatorKey: shellNavigatorKey,
+                    name: Routes.childOtherProfile.name,
+                    path: Routes.childOtherProfile.path,
                     pageBuilder: (BuildContext context, GoRouterState state) {
                       return slideTransition(
                         type: SlideType.rtl,
                         state: state,
                         context: context,
-                        child: OtherAllFriendPage(
+                        child: OtherProfilePage(
                           key: state.pageKey,
                           id: int.parse(state.pathParameters['id']!),
                           username: (state.extra
@@ -354,6 +333,28 @@ class AppRouter {
                         ),
                       );
                     },
+                    routes: [
+                      /* All Friends */
+                      GoRoute(
+                        name: Routes.childOtherFriends.name,
+                        path: Routes.childOtherFriends.path,
+                        pageBuilder:
+                            (BuildContext context, GoRouterState state) {
+                          return slideTransition(
+                            type: SlideType.rtl,
+                            state: state,
+                            context: context,
+                            child: OtherAllFriendPage(
+                              key: state.pageKey,
+                              id: int.parse(state.pathParameters['id']!),
+                              username: (state.extra
+                                      as Map<String, dynamic>?)?['username'] ??
+                                  "",
+                            ),
+                          );
+                        },
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -680,7 +681,6 @@ class AppRouter {
                         path: Routes.conversationSetting.path,
                         pageBuilder:
                             (BuildContext context, GoRouterState state) {
-
                           return slideTransition(
                             type: SlideType.rtl,
                             state: state,
@@ -691,6 +691,25 @@ class AppRouter {
                             ),
                           );
                         },
+                        routes: [
+                          GoRoute(
+                            parentNavigatorKey: rootNavigatorKey,
+                            name: Routes.conversationListMember.name,
+                            path: Routes.conversationListMember.path,
+                            pageBuilder:
+                                (BuildContext context, GoRouterState state) {
+                              return slideTransition(
+                                type: SlideType.rtl,
+                                state: state,
+                                context: context,
+                                child: ConversationListMemberPage(
+                                  key: state.pageKey,
+                                  id: int.parse(state.pathParameters['id']!),
+                                ),
+                              );
+                            },
+                          ),
+                        ],
                       ),
                     ],
                   ),
@@ -869,40 +888,18 @@ class AppRouter {
                       ),
                     ],
                   ),
-                ],
-              ),
 
-              /* Other Profile */
-              GoRoute(
-                // parentNavigatorKey: shellNavigatorKey,
-                name: Routes.otherProfile.name,
-                path: Routes.otherProfile.path,
-                pageBuilder: (BuildContext context, GoRouterState state) {
-                  return slideTransition(
-                    type: SlideType.rtl,
-                    state: state,
-                    context: context,
-                    child: OtherProfilePage(
-                      key: state.pageKey,
-                      id: int.parse(state.pathParameters['id']!),
-                      username:
-                          (state.extra as Map<String, dynamic>?)?['username'] ??
-                              "",
-                    ),
-                  );
-                },
-                routes: [
-                  /* All Friends */
+                  /* Other Profile */
                   GoRoute(
-                    name: Routes.otherFriends.name,
-                    path: Routes.otherFriends.path,
+                    // parentNavigatorKey: shellNavigatorKey,
+                    name: Routes.otherProfile.name,
+                    path: Routes.otherProfile.path,
                     pageBuilder: (BuildContext context, GoRouterState state) {
                       return slideTransition(
                         type: SlideType.rtl,
                         state: state,
                         context: context,
-                        child: OtherAllFriendPage(
-                          key: state.pageKey,
+                        child: OtherProfilePage(
                           id: int.parse(state.pathParameters['id']!),
                           username: (state.extra
                                   as Map<String, dynamic>?)?['username'] ??
@@ -910,6 +907,28 @@ class AppRouter {
                         ),
                       );
                     },
+                    routes: [
+                      /* All Friends */
+                      GoRoute(
+                        name: Routes.otherFriends.name,
+                        path: Routes.otherFriends.path,
+                        pageBuilder:
+                            (BuildContext context, GoRouterState state) {
+                          return slideTransition(
+                            type: SlideType.rtl,
+                            state: state,
+                            context: context,
+                            child: OtherAllFriendPage(
+                              key: state.pageKey,
+                              id: int.parse(state.pathParameters['id']!),
+                              username: (state.extra
+                                      as Map<String, dynamic>?)?['username'] ??
+                                  "",
+                            ),
+                          );
+                        },
+                      ),
+                    ],
                   ),
                 ],
               ),

@@ -2,13 +2,16 @@ import { Router } from 'express';
 
 import { DeepfakeVideoControllers } from './deepfake_video.controller.js';
 
-import { isAuthenticated } from '#middlewares';
+import { isAuthenticated, uploadVideo } from '#middlewares';
 
 const router = Router();
 
-router.post('/create_deepfakevideo', DeepfakeVideoControllers.createDeepfakeVideo);
+router.post('/create', isAuthenticated, DeepfakeVideoControllers.createDeepfakeVideo);
 
-router.get('/get_list_deepfakevideo', isAuthenticated, DeepfakeVideoControllers.getListDeepfakeVideo);
+router.post('/finish', uploadVideo.single('video'), DeepfakeVideoControllers.finishDeepfakeVideo);
 
-router.delete('/delete_deepfakevideo/:videoId', isAuthenticated, DeepfakeVideoControllers.deleteDeepfakeVideo);
+router.get('/list', isAuthenticated, DeepfakeVideoControllers.getListDeepfakeVideo);
+
+router.delete('/delete/:id', isAuthenticated, DeepfakeVideoControllers.deleteDeepfakeVideo);
+
 export const deepfakeVideoRouter = router;

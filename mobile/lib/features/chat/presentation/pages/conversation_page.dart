@@ -43,6 +43,7 @@ class ConversationPageState extends State<ConversationPage> {
   final ValueNotifier<bool> _focusing = ValueNotifier(false);
   final ValueNotifier<bool> _pickEmoji = ValueNotifier(false);
   final ValueNotifier<MessageModel?> _replying = ValueNotifier(null);
+  final ValueNotifier<bool> _kicked = ValueNotifier(false);
 
   Timer? _debounce;
   Timer? _endTyping;
@@ -53,8 +54,8 @@ class ConversationPageState extends State<ConversationPage> {
   late int conversationId;
 
   late SocketBloc _socketBloc;
-  late final Map<int, String> memberAvatars;
-  late final Map<int, String> memberNames;
+  late Map<int, String> memberAvatars;
+  late Map<int, String> memberNames;
 
   @override
   void initState() {
@@ -242,6 +243,26 @@ class ConversationPageState extends State<ConversationPage> {
     _fn.requestFocus();
   }
 
+  void _handleKicked() {
+    Future.delayed(Duration.zero, () async {
+      _kicked.value = true;
+      _socketBloc.add(LeaveConversation(conversationId));
+    });
+  }
+
+  void _handleUpdateInfo() {
+    setState(() {
+      if (mounted) {
+        conversation =
+            (context.read<MyConversationsBloc>().state as SuccessfulState)
+                .conversations
+                .firstWhere((e) => e.id == conversationId);
+
+        _initDeclare();
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -283,7 +304,11 @@ class ConversationPageState extends State<ConversationPage> {
               ),
 
               /*  */
-              _buildInputField(context),
+              ValueListenableBuilder(
+                valueListenable: _kicked,
+                builder: (context, value, child) =>
+                    value ? const SizedBox.shrink() : _buildInputField(context),
+              ),
             ],
           ),
         ),
@@ -308,6 +333,16 @@ class ConversationPageState extends State<ConversationPage> {
           _loadingMore = false;
           _hasReachedMax = state.hasReachedMax;
 
+          // Trường hợp mình vẫn trong ở trang nhắn tin nhưng bị chủ nhóm kích
+          // thì không comment và nhận tin nhắn đc nữa
+          if (state.messages.isNotEmpty &&
+              state.messages.first.type == MessageType.system &&
+              state.messages.first.message == "KICK_MEMBER" &&
+              state.messages.first.senderId == myId &&
+              !_kicked.value) {
+            _handleKicked();
+          }
+
           return Scrollbar(
             /* Container để height full vs expanded --> click để ẩn keyboard */
             child: Container(
@@ -320,22 +355,28 @@ class ConversationPageState extends State<ConversationPage> {
                     const EdgeInsets.symmetric(horizontal: 12, vertical: 18),
                 separatorBuilder: (context, index) => const SizedBox(height: 3),
                 itemCount: state.hasReachedMax ? length : length + 1,
-                itemBuilder: (_, idx) => idx < state.messages.length
-                    ? MessageCard(
-                        onReply: _handleReply,
-                        lastMessageTime: idx == length - 1
-                            ? state.messages[idx].createdAt
-                            : state.messages[idx + 1].createdAt,
-                        message: state.messages[idx],
-                        myId: myId,
-                        memberSeen: memberSeen,
-                        idx: idx,
-                        memberAvatars: memberAvatars,
-                        memberNames: memberNames,
-                      )
-                    : const Center(
-                        child: AppIndicator(size: 32),
-                      ),
+                itemBuilder: (_, idx) {
+                  if (idx < state.messages.length) {
+                    final MessageModel msg = state.messages[idx];
+
+                    return MessageCard(
+                      onReply: _handleReply,
+                      lastMessageTime: idx == length - 1
+                          ? msg.createdAt
+                          : state.messages[idx + 1].createdAt,
+                      message: msg,
+                      myId: myId,
+                      memberSeen: memberSeen,
+                      idx: idx,
+                      memberAvatars: memberAvatars,
+                      memberNames: memberNames,
+                      creatorId: conversation!.creatorId,
+                      isGroup: conversation!.type == ConversationType.group,
+                    );
+                  }
+
+                  return const Center(child: AppIndicator(size: 32));
+                },
               ),
             ),
           );
@@ -658,12 +699,18 @@ class ConversationPageState extends State<ConversationPage> {
             children: [
               Flexible(
                 child: InkWell(
-                  onTap: () => context.goNamed(
-                    Routes.conversationSetting.name,
-                    pathParameters: {
-                      "id": widget.id.toString(),
-                    },
-                  ),
+                  onTap: () => _kicked.value
+                      ? null
+                      : context.pushNamed(
+                          Routes.conversationSetting.name,
+                          pathParameters: {
+                            "id": widget.id.toString(),
+                          },
+                        ).then((value) {
+                          if (value != null && value == true) {
+                            _handleUpdateInfo();
+                          }
+                        }),
                   borderRadius: BorderRadius.circular(1000),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
@@ -712,23 +759,28 @@ class ConversationPageState extends State<ConversationPage> {
 
               /*  */
               if (conversation != null)
-                ZegoSendCallInvitationButton(
-                  isVideoCall: true,
-                  resourceID: conversation!.id.toString(),
-                  callID: conversation!.id.toString(),
-                  invitees: conversation!.members
-                      .where((e) => e.id != myId)
-                      .map((usr) => ZegoUIKitUser(
-                            id: usr.id.toString(),
-                            name: usr.username ?? usr.email,
-                          ))
-                      .toList(),
-                  icon: ButtonIcon(
-                    icon: const Icon(FontAwesomeIcons.video, size: 22),
-                  ),
-                  iconSize: const Size.fromRadius(22),
-                  buttonSize: const Size.fromRadius(22),
-                  margin: const EdgeInsets.only(right: 6),
+                ValueListenableBuilder(
+                  valueListenable: _kicked,
+                  builder: (context, value, child) => _kicked.value
+                      ? const SizedBox.shrink()
+                      : ZegoSendCallInvitationButton(
+                          isVideoCall: true,
+                          resourceID: conversation!.id.toString(),
+                          callID: conversation!.id.toString(),
+                          invitees: conversation!.members
+                              .where((e) => e.id != myId)
+                              .map((usr) => ZegoUIKitUser(
+                                    id: usr.id.toString(),
+                                    name: usr.username ?? usr.email,
+                                  ))
+                              .toList(),
+                          icon: ButtonIcon(
+                            icon: const Icon(FontAwesomeIcons.video, size: 22),
+                          ),
+                          iconSize: const Size.fromRadius(22),
+                          buttonSize: const Size.fromRadius(22),
+                          margin: const EdgeInsets.only(right: 6),
+                        ),
                 )
             ],
           );

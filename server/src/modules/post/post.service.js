@@ -10,7 +10,6 @@ import { User } from '../user/user.model.js';
 
 import { Feel } from './models/feel.model.js';
 import { Mark } from './models/mark.model.js';
-import { PostHistory } from './models/post.history.js';
 import { PostImage } from './models/post_image.model.js';
 import { PostVideo } from './models/post_video.model.js';
 import { PostView } from './models/post_view.model.js';
@@ -55,8 +54,7 @@ export class PostServices {
         const fileVideoUsed = setFileUsed(video);
         return PostVideo.create({
           postId: post.id,
-          url: fileVideoUsed,
-          order: i + 1
+          url: fileVideoUsed
         });
       });
 
@@ -82,7 +80,7 @@ export class PostServices {
     user.lastActive = new Date();
     await user.save();
     await post.save();
-    // this.notificationService.notifyAddPost({ post, author: user });
+    // await NotificationServices.notifyAddPost({ post, author: user });
     // Thong bao
     return {
       post: {
@@ -123,10 +121,6 @@ export class PostServices {
         {
           model: PostVideo,
           as: 'videos'
-        },
-        {
-          model: PostHistory,
-          as: 'histories'
         },
         {
           model: Feel,
@@ -474,13 +468,7 @@ export class PostServices {
     });
 
     const post = await Post.findOne({
-      where: { id: postId, authorId: userId },
-      include: [
-        {
-          model: PostHistory,
-          as: 'histories'
-        }
-      ]
+      where: { id: postId, authorId: userId }
     });
     if (!post) {
       throw new BadRequestError(Message.POST_NOT_FOUND);

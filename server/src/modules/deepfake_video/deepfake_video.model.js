@@ -13,11 +13,16 @@ export const DeepfakeVideo = postgre.define('DeepfakeVideo', {
   },
   url: {
     type: DataTypes.STRING,
-    allowNull: true
+    allowNull: false
   },
-  size: {
+  title: {
     type: DataTypes.STRING,
-    allowNull: true
+    allowNull: false
+  },
+  status: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    defaultValue: 0
   },
   userId: {
     type: DataTypes.INTEGER,
@@ -30,5 +35,6 @@ export const DeepfakeVideo = postgre.define('DeepfakeVideo', {
   // User ---sở hữu---*> Media(quan hệ 1-n)
   User.hasMany(DeepfakeVideo, { foreignKey: 'userId', as: 'deepfakevideosofuser', onDelete: 'CASCADE' });
   DeepfakeVideo.belongsTo(User, { foreignKey: 'userId', as: 'user', onDelete: 'CASCADE' });
+
   DeepfakeVideo.sync({ alter: true }).then(() => logger.info("Table 'DeepfakeVideo' synced!"));
 })();

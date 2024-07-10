@@ -17,6 +17,9 @@ router.post(
 
 router.patch('/update_info/:id', isAuthenticated, ConversationController.updateConversationInfo);
 
+router.post('/add_members/:id', isAuthenticated, ConversationController.addMembers);
+router.post('/delete_members/:id', isAuthenticated, ConversationController.deleteMembers);
+
 // - [GET] List
 router.get('/list', isAuthenticated, ConversationController.getMyConversations);
 

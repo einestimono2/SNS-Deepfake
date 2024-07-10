@@ -11,7 +11,7 @@ import { DevToken } from './models/device_token.model.js';
 import { PasswordHistory } from './models/password_history.model.js';
 import { User } from './user.model.js';
 
-import { AccountStatus, Message } from '#constants';
+import { AccountStatus, Message, Roles } from '#constants';
 import { redis } from '#dbs';
 // const catchAsyncError = require("../middleware/catchAsyncErrors");
 import { SendMail, deleteFile, generateVerifyCode, setFileUsed, signToken } from '#utils';
@@ -395,6 +395,29 @@ export class userServices {
     console.log(user.token);
     return {
       token: user.token
+    };
+  }
+
+  // Lấy thông tin trẻ của một bố mẹ
+  static async getChildrenInfo(userId) {
+    // Kiểm tra userId có trong bảng User hay không
+    const parentInfo = await User.findOne({ where: { id: userId } });
+    if (!parentInfo && parentInfo.role === Roles.Parent) {
+      throw new BadRequestError(Message.USER_NOT_FOUND);
+    }
+    const children = await User.findAndCountAll({
+      where: { parentId: userId },
+      attributes: ['id', 'email', 'avatar', 'username']
+    });
+
+    return {
+      rows: children.rows.map((child) => ({
+        id: String(child.id),
+        email: child.email,
+        avatar: child.avatar || '',
+        username: child.username || ''
+      })),
+      count: children.count
     };
   }
 }

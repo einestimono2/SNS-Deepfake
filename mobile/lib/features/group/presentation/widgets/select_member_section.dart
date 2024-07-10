@@ -56,6 +56,7 @@ class _SelectMemberSectionState extends State<SelectMemberSection> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
         /* Search Box */
         Padding(

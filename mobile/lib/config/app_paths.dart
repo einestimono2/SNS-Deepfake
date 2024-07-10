@@ -66,6 +66,8 @@ class Endpoints {
       '/conversation/get_single_conversation_by_members';
   static const String conversationDetails = '/conversation/details/:id';
   static const String seenConversation = '/conversation/seen/:id';
+  static const String addMemberConversation = '/conversation/add_members/:id';
+  static const String deleteMemberConversation = '/conversation/delete_members/:id';
   static const String updateConversation = '/conversation/update_info/:id';
   static const String sendMessage = '/message/create';
   static const String conversationMessages = '/message/list/:conversationId';
@@ -129,6 +131,8 @@ class Routes {
   static final videoCall = Route(name: "videoCall", path: "videoCall");
   static final conversationSetting =
       Route(name: "conversationSetting", path: "conversationSetting");
+  static final conversationListMember =
+      Route(name: "conversationListMember", path: "conversationListMember");
   static final conversation =
       Route(name: "conversation", path: "conversation/:id");
   static final createConversation =
@@ -159,11 +163,11 @@ class Routes {
       Route(name: "child_update_password", path: "child_update_password");
   static final otherProfile = Route(
     name: "otherProfile",
-    path: "/other_profile/:id",
+    path: "other_profile/:id",
   );
   static final childOtherProfile = Route(
     name: "childOtherProfile",
-    path: "/child_other_profile/:id",
+    path: "child_other_profile/:id",
   );
   static final otherFriends =
       Route(name: "other_profile_friends", path: "friends");

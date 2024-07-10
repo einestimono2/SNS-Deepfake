@@ -55,6 +55,15 @@ class NewMessageEvent extends ConversationDetailsEvent {
   List<Object?> get props => [newMessage];
 }
 
+class NewMessagesEvent extends ConversationDetailsEvent {
+  final dynamic newMessages;
+
+  const NewMessagesEvent({required this.newMessages});
+
+  @override
+  List<Object?> get props => [newMessages];
+}
+
 class FirstMessageEvent extends ConversationDetailsEvent {
   final MessageModel message;
 
@@ -114,6 +123,48 @@ class RenameConversationSubmit extends ConversationDetailsEvent {
   const RenameConversationSubmit({
     required this.id,
     required this.name,
+    required this.onSuccess,
+    required this.onError,
+  });
+}
+
+class DeleteMemberSubmit extends ConversationDetailsEvent {
+  final int id;
+  final int memberId;
+  final bool kick;
+  final Function() onSuccess;
+  final Function(String) onError;
+
+  const DeleteMemberSubmit({
+    required this.id,
+    required this.kick,
+    required this.memberId,
+    required this.onSuccess,
+    required this.onError,
+  });
+}
+
+class AddMemberSubmit extends ConversationDetailsEvent {
+  final int id;
+  final List<int> memberIds;
+  final Function(List<MemberModel>) onSuccess;
+  final Function(String) onError;
+
+  const AddMemberSubmit({
+    required this.id,
+    required this.memberIds,
+    required this.onSuccess,
+    required this.onError,
+  });
+}
+
+class DeleteConversationSubmit extends ConversationDetailsEvent {
+  final int id;
+  final Function() onSuccess;
+  final Function(String) onError;
+
+  const DeleteConversationSubmit({
+    required this.id,
     required this.onSuccess,
     required this.onError,
   });

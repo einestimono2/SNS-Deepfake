@@ -82,69 +82,72 @@ class _CreateConversationPageState extends State<CreateConversationPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SliverPage(
-        title: "CREATE_CONVERSATION_TITLE_TEXT".tr(),
-        centerTitle: true,
-        slivers: [
-          SliverPadding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            sliver: SliverList.list(
-              children: [
-                /* Members */
-                SectionTitle(
-                  margin: const EdgeInsets.symmetric(vertical: 6),
-                  title: "CONVERSATION_MEMBERS_TEXT".tr(),
-                ),
-                SelectMemberSection(
-                  memberIds: _memberIds,
-                  members: _members,
-                  focusNode: _searchFN,
-                  initFocus: true,
-                ),
-
-                /*  */
-                ValueListenableBuilder(
-                  valueListenable: _memberIds,
-                  builder: (context, value, child) => Column(
-                    children: [
-                      if (value.length > 1)
-                        /* Tên nhóm */
-                        SectionTitle(
-                          margin: const EdgeInsets.symmetric(vertical: 6),
-                          title: "CONVERSATION_NAME_TEXT".tr(),
-                        ),
-                      if (value.length > 1)
-                        TextFormField(
-                          onTap: () => _nameFN.requestFocus(),
-                          onTapOutside: (_) => _nameFN.unfocus(),
-                          textInputAction: TextInputAction.next,
-                          focusNode: _nameFN,
-                          controller: _nameController,
-                          onFieldSubmitted: (_) => _nameFN.unfocus(),
-                          decoration: InputDecoration(
-                            hintText: "CONVERSATION_NAME_HINT_TEXT".tr(),
-                            contentPadding:
-                                const EdgeInsets.symmetric(horizontal: 12),
-                          ),
-                        ),
-
-                      /*  */
-                      const SizedBox(height: 36),
-                      if (value.isNotEmpty)
-                        AnimatedButton(
-                          height: 36.h,
-                          title: "CREATE_TEXT".tr(),
-                          onPressed: _handleCreate,
-                          controller: btnController,
-                        ),
-                    ],
+    return GestureDetector(
+      onTap: () => _searchFN.unfocus(),
+      child: Scaffold(
+        body: SliverPage(
+          title: "CREATE_CONVERSATION_TITLE_TEXT".tr(),
+          centerTitle: true,
+          slivers: [
+            SliverPadding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              sliver: SliverList.list(
+                children: [
+                  /* Members */
+                  SectionTitle(
+                    margin: const EdgeInsets.symmetric(vertical: 6),
+                    title: "CONVERSATION_MEMBERS_TEXT".tr(),
                   ),
-                ),
-              ],
+                  SelectMemberSection(
+                    memberIds: _memberIds,
+                    members: _members,
+                    focusNode: _searchFN,
+                    initFocus: true,
+                  ),
+
+                  /*  */
+                  ValueListenableBuilder(
+                    valueListenable: _memberIds,
+                    builder: (context, value, child) => Column(
+                      children: [
+                        if (value.length > 1)
+                          /* Tên nhóm */
+                          SectionTitle(
+                            margin: const EdgeInsets.symmetric(vertical: 6),
+                            title: "CONVERSATION_NAME_TEXT".tr(),
+                          ),
+                        if (value.length > 1)
+                          TextFormField(
+                            onTap: () => _nameFN.requestFocus(),
+                            onTapOutside: (_) => _nameFN.unfocus(),
+                            textInputAction: TextInputAction.next,
+                            focusNode: _nameFN,
+                            controller: _nameController,
+                            onFieldSubmitted: (_) => _nameFN.unfocus(),
+                            decoration: InputDecoration(
+                              hintText: "CONVERSATION_NAME_HINT_TEXT".tr(),
+                              contentPadding:
+                                  const EdgeInsets.symmetric(horizontal: 12),
+                            ),
+                          ),
+
+                        /*  */
+                        const SizedBox(height: 36),
+                        if (value.isNotEmpty)
+                          AnimatedButton(
+                            height: 36.h,
+                            title: "CREATE_TEXT".tr(),
+                            onPressed: _handleCreate,
+                            controller: btnController,
+                          ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -12,7 +12,7 @@ import { User } from '../user/user.model.js';
 
 import { Comment } from './comment.model.js';
 
-import { FeelType, Message, NotificationType, costs } from '#constants';
+import { costs, FeelType, Message, NotificationType, Roles } from '#constants';
 
 export class CommentServices {
   // Lấy ra những bình luận cấp 1 và cấp 2 tương ứng
@@ -112,7 +112,12 @@ export class CommentServices {
     const user = await User.findOne({
       where: { id: userId }
     });
-    const { content, limit, offset, markId, type } = { ...body };
+
+    // Kiểm tra role của người dùng(bố mẹ cho phép bình luận)
+    if (user.role === Roles.Children) {
+      throw new BadRequestError(Message.INSUFFICIENT_ACCESS_RIGHTS);
+    }
+    const { content, markId, limit, offset, type } = { ...body };
     // Reply một Mark có sẵn
     if (markId) {
       // Mark là bình luận cấp 1
@@ -136,7 +141,7 @@ export class CommentServices {
         content,
         userId
       });
-      //   NotificationServices.createNotification({
+      // NotificationServices.createNotification({
       //   type: NotificationType.PostCommented,
       //   userId: mark.post.authorId,
       //   post: mark.post,
@@ -145,7 +150,7 @@ export class CommentServices {
       // });
 
       // if (mark.userId !== mark.post.authorId) {
-      //   this.notificationService.createNotification({
+      //   NotificationServices.createNotification({
       //     type: NotificationType.MarkCommented,
       //     userId: mark.userId,
       //     post: mark.post,
@@ -178,7 +183,7 @@ export class CommentServices {
           mark.content = content;
         }
         await mark.save();
-        // await this.notificationRepo.destroy({
+        // await Notification.destroy({
         //   where: {
         //     type: NotificationType.PostMarked,
         //     targetId: user.id,
@@ -202,7 +207,7 @@ export class CommentServices {
       }
       user.lastActive = new Date();
       await user.save();
-      // this.notificationService.createNotification({
+      // await NotificationServices.createNotification({
       //   type: NotificationType.PostMarked,
       //   userId: post.authorId,
       //   post,
@@ -243,9 +248,9 @@ export class CommentServices {
         checkReduceCoins = true;
         feel.type = type;
         // Xóa thông báo liên quan đến cảm xúc trước đó
-        // await Notification.destroy({
-        //   where: { type: NotificationType.PostFelt, targetId: user.id, feelId: feel.id }
-        // });
+        await Notification.destroy({
+          where: { type: NotificationType.PostFelt, targetId: user.id, feelId: feel.id }
+        });
       }
     } else {
       // Nếu cảm xúc chưa tồn tại, tạo mới
@@ -268,13 +273,13 @@ export class CommentServices {
       await feel.save();
     }
     // Tạo thông báo
-    // await Notification.create({
-    //   type: NotificationType.PostFelt,
-    //   userId: post.authorId,
-    //   postId: post.id,
-    //   targetId: user.id,
-    //   feelId: feel.id
-    // });
+    NotificationServices.createNotification({
+      type: NotificationType.PostFelt,
+      userId: post.authorId,
+      post,
+      target: user,
+      feel
+    });
     const [disappointedCount, kudosCount] = await Promise.all([
       Feel.count({ where: { postId, type: FeelType.Disappointed } }),
       Feel.count({ where: { postId, type: FeelType.Kudos } })

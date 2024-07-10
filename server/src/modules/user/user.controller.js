@@ -91,4 +91,10 @@ export class UserControllers {
     const response = await userServices.changePassword(userId, oldPassword, newPassword);
     res.ok({ message: 'Password changed!', data: response });
   });
+
+  static getChildrenInfo = CatchAsyncError(async (req, res) => {
+    const { userId } = req.userPayload;
+    const childrenInfo = await userServices.getChildrenInfo(userId);
+    res.ok({ data: childrenInfo });
+  });
 }

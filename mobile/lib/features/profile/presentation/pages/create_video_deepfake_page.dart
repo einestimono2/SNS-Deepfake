@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sns_deepfake/core/widgets/adaptive/app_indicator.dart';
@@ -74,93 +75,111 @@ class _CreateVideoDeepfakePageState extends State<CreateVideoDeepfakePage> {
             ),
           ),
         ),
+        const SizedBox(width: 16),
       ],
       slivers: [
         SliverPadding(
           padding: const EdgeInsets.fromLTRB(16, 3, 16, 16),
-          sliver: SliverList.list(children: [
-            SectionTitle(
-              title: "ORIGIN_VIDEO_TEXT".tr(),
-              margin: const EdgeInsets.only(bottom: 8),
-              onShowMore: () {
-                _video.value = null;
-                _creatable.value = false;
-              },
-              showMoreText: "DELETE_TEXT".tr(),
-            ),
-            Container(
-              constraints: BoxConstraints(
-                minHeight: 0.35.sh,
+          sliver: SliverList.list(
+            children: [
+              SectionTitle(
+                title: "ORIGIN_VIDEO_TEXT".tr(),
+                margin: const EdgeInsets.only(bottom: 8),
+                onShowMore: () {
+                  _video.value = null;
+                  _creatable.value = false;
+                },
+                showMoreText: "DELETE_TEXT".tr(),
               ),
-              width: double.infinity,
-              child: ValueListenableBuilder(
-                valueListenable: _video,
-                builder: (context, video, child) => video != null
-                    ? AppVideo(video)
-                    : InkWell(
-                        borderRadius: BorderRadius.circular(8),
-                        onTap: _handleUploadVideo,
-                        child: Container(
-                          width: double.infinity,
-                          height: 0.35.sh,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            border: Border.all(
+              Container(
+                constraints: BoxConstraints(
+                  minHeight: 0.35.sh,
+                ),
+                width: double.infinity,
+                child: ValueListenableBuilder(
+                  valueListenable: _video,
+                  builder: (context, video, child) => video != null
+                      ? AppVideo(video)
+                      : InkWell(
+                          borderRadius: BorderRadius.circular(8),
+                          onTap: _handleUploadVideo,
+                          child: Container(
+                            width: double.infinity,
+                            height: 0.35.sh,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(
+                                color: context.minBackgroundColor(),
+                              ),
                               color: context.minBackgroundColor(),
+                              boxShadow: highModeShadow,
                             ),
-                            color: context.minBackgroundColor(),
-                            boxShadow: highModeShadow,
+                            alignment: Alignment.center,
+                            child: const Icon(Icons.upload, size: 64),
                           ),
-                          alignment: Alignment.center,
-                          child: const Icon(Icons.upload, size: 64),
                         ),
-                      ),
+                ),
               ),
-            ),
 
-            /*  */
-            SectionTitle(
-              showTopSeparate: true,
-              title: "ORIGIN_IMAGE_TEXT".tr(),
-              margin: const EdgeInsets.only(bottom: 8, top: 18),
-              onShowMore: () {
-                _image.value = null;
-                _creatable.value = false;
-              },
-              showMoreText: "DELETE_TEXT".tr(),
-            ),
-            Container(
-              constraints: BoxConstraints(
-                minHeight: 0.35.sh,
+              /*  */
+              SectionTitle(
+                showTopSeparate: true,
+                title: "ORIGIN_IMAGE_TEXT".tr(),
+                margin: const EdgeInsets.only(bottom: 8, top: 18),
+                onShowMore: () {
+                  _image.value = null;
+                  _creatable.value = false;
+                },
+                showMoreText: "DELETE_TEXT".tr(),
               ),
-              width: double.infinity,
-              child: ValueListenableBuilder(
-                valueListenable: _image,
-                builder: (context, image, child) => image != null
-                    ? LocalImage(path: image)
-                    : InkWell(
-                        borderRadius: BorderRadius.circular(8),
-                        onTap: _handleUploadImage,
-                        child: Container(
-                          width: double.infinity,
-                          height: 0.35.sh,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            border: Border.all(
+              Container(
+                constraints: BoxConstraints(
+                  minHeight: 0.35.sh,
+                ),
+                width: double.infinity,
+                child: ValueListenableBuilder(
+                  valueListenable: _image,
+                  builder: (context, image, child) => image != null
+                      ? LocalImage(
+                          path: image,
+                          fromFile: true,
+                        )
+                      : InkWell(
+                          borderRadius: BorderRadius.circular(8),
+                          onTap: _handleUploadImage,
+                          child: Container(
+                            width: double.infinity,
+                            height: 0.35.sh,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(
+                                color: context.minBackgroundColor(),
+                              ),
                               color: context.minBackgroundColor(),
+                              boxShadow: highModeShadow,
                             ),
-                            color: context.minBackgroundColor(),
-                            boxShadow: highModeShadow,
+                            alignment: Alignment.center,
+                            child: const Icon(Icons.upload, size: 64),
                           ),
-                          alignment: Alignment.center,
-                          child: const Icon(Icons.upload, size: 64),
                         ),
-                      ),
+                ),
               ),
-            ),
 
-            /*  */
-          ]),
+              /*  */
+              SectionTitle(
+                showTopSeparate: true,
+                title: "ORIGIN_AUDIOS_TEXT".tr(),
+                margin: const EdgeInsets.only(bottom: 8, top: 18),
+                onShowMore: () async {
+                  String? selectedDirectory =
+                      await FilePicker.platform.getDirectoryPath();
+
+                  print("======> $selectedDirectory");
+                },
+                showMoreText: "DELETE_ALL_TEXT".tr(),
+              ),
+            ],
+          ),
         ),
       ],
     );

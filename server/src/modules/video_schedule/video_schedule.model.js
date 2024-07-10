@@ -28,6 +28,10 @@ export const VideoSchedule = postgre.define('VideoSchedule', {
   time: {
     type: DataTypes.DATE,
     allowNull: false
+  },
+  repeat: {
+    type: DataTypes.INTEGER,
+    defaultValue: 0
   }
 });
 

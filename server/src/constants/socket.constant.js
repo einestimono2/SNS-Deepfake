@@ -1,5 +1,6 @@
 export const SocketEvents = {
   MESSAGE_NEW: 'message::new',
+  MESSAGE_NEWS: 'message::news',
   MESSAGE_REMOVE: 'message::remove',
   MESSAGE_UPDATE: 'message::update',
 
@@ -11,6 +12,7 @@ export const SocketEvents = {
 
   CONVERSATION_JOIN: 'conversation::join',
   CONVERSATION_LEAVE: 'conversation::leave',
+  CONVERSATION_ADD_MEMBER: 'conversation::add_member',
 
   USER_ONLINE: 'user::online',
 

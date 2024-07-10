@@ -348,7 +348,10 @@ void _initSearchFeature() {
 
 void _initChatFeature() {
   /* Bloc */
-  sl.registerLazySingleton(() => MyConversationsBloc(myConversationUC: sl()));
+  sl.registerLazySingleton(() => MyConversationsBloc(
+        myConversationUC: sl(),
+        appBloc: sl(),
+      ));
   sl.registerLazySingleton(() => ConversationDetailsBloc(
         myConversationsBloc: sl(),
         appBloc: sl(),
@@ -358,6 +361,9 @@ void _initChatFeature() {
         getConversationMessagesUC: sl(),
         getConversationIdUC: sl(),
         updateConversationUC: sl(),
+        addConversationMemberUC: sl(),
+        deleteConversationMemberUC: sl(),
+        deleteConversationUC: sl(),
       ));
   sl.registerLazySingleton(
     () => MessageBloc(
@@ -376,6 +382,9 @@ void _initChatFeature() {
   sl.registerLazySingleton(() => CreateConversationUC(repository: sl()));
   sl.registerLazySingleton(() => GetConversationIdUC(repository: sl()));
   sl.registerLazySingleton(() => UpdateConversationUC(repository: sl()));
+  sl.registerLazySingleton(() => AddConversationMemberUC(repository: sl()));
+  sl.registerLazySingleton(() => DeleteConversationMemberUC(repository: sl()));
+  sl.registerLazySingleton(() => DeleteConversationUC(repository: sl()));
 
   /* Repository */
   sl.registerLazySingleton<ChatRepository>(

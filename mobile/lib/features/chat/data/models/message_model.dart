@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
+import 'package:sns_deepfake/features/authentication/authentication.dart';
 
 import '../../../../core/utils/utils.dart';
 
@@ -15,6 +16,7 @@ class MessageModel extends Equatable {
   final MessageType type;
   final int conversationId;
   final MessageModel? reply;
+  final ShortUserModel? sender;
 
   const MessageModel({
     required this.attachments,
@@ -27,6 +29,7 @@ class MessageModel extends Equatable {
     required this.conversationId,
     required this.seenIds,
     required this.createdAt,
+    required this.sender,
   });
 
   @override
@@ -42,7 +45,10 @@ class MessageModel extends Equatable {
         conversationId
       ];
 
-  factory MessageModel.fromMap(Map<String, dynamic> map) {
+  factory MessageModel.fromMap(
+    Map<String, dynamic> map, [
+    bool skipSender = false,
+  ]) {
     return MessageModel(
       id: map['id']?.toInt() ?? 0,
       replyId: map['replyId']?.toInt(),
@@ -55,7 +61,10 @@ class MessageModel extends Equatable {
           : List<String>.from(map['attachments']),
       createdAt: map['createdAt'] ?? '',
       type: MessageType.values.byName(map['type']),
-      reply: map['reply'] != null ? MessageModel.fromMap(map['reply']) : null,
+      reply: map['reply'] != null
+          ? MessageModel.fromMap(map['reply'], true)
+          : null,
+      sender: skipSender ? null : ShortUserModel.fromMap(map['sender']),
     );
   }
 

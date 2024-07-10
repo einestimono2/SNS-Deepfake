@@ -51,6 +51,15 @@ export class NotificationControllers {
     });
   });
 
+  static notifyCreateVideo = CatchAsyncError(async (req, res) => {
+    const { userId } = req.userPayload;
+    const { videoId } = req.query;
+    await NotificationServices.notifyCreateVideo(userId, videoId);
+    res.ok({
+      message: 'Notify Create Video Successfully'
+    });
+  });
+
   static notifyPlayVideo = CatchAsyncError(async (req, res) => {
     const { userId } = req.userPayload;
     const { targetId, videoId } = req.query;

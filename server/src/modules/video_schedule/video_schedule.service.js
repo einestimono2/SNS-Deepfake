@@ -1,4 +1,4 @@
-import cron from 'node-cron';
+import schedule from 'node-schedule';
 
 import { UnauthorizedError } from '../core/error.response.js';
 // import { PostVideo } from '../post/models/post_video.model.js';
@@ -7,67 +7,26 @@ import { User } from '../user/user.model.js';
 
 import { VideoSchedule } from './video_schedule.model.js';
 
+import { NotificationServices } from '##/modules/notification/notification.service';
 import { Message } from '#constants';
 
 const jobs = new Map();
+
 export class ScheduleService {
   // Tạo lịch phát video
   static async createSchedule(userId, body) {
-    // const { videoId, targetId, time, frequency } = { ...body };
-    // if (!userId) throw new UnauthorizedError(Message.USER_IS_INVALID);
-    // // // Danh sách các thành viên
-    // // const newSchedule = await VideoSchedule.create({
-    // //   videoId,
-    // //   userId: targetId,
-    // //   targetId: userId,
-    // //   time,
-    // //   frequency
-    // // });
-    // const schedule = {
-    //   id: '4',
-    //   name: 'Nam',
-    //   time: '0 2 * * * *'
-    // };
-    // // const second = time.getSeconds();
-    // // const minute = time.getMinutes();
-    // // const hour = time.getHours();
-    // // const day = time.getDate();
-    // // const month = time.getMonth() + 1;
-    // // const year = time.getFullYear();
-
-    // const job = cron.schedule(
-    //   schedule.time,
-    //   () => {
-    //     // Thực hiện gửi noti
-    //     // await NotificationServices.createNotification({
-    //     //   type: newSchedule ? NotificationType.VideoAdded : NotificationType.PostAdded,
-    //     //   userId,
-    //     //   targetId,
-    //     //   videoId
-    //     // });
-    //     console.log(schedule);
-    //   },
-    //   {
-    //     scheduled: true,
-    //     timezone: 'Asia/Ho_Chi_Minh'
-    //   }
-    // );
-    // job.start();
-    // jobs.set(schedule.id, job);
-    // console.log(jobs);
-    // return schedule;
-
-    const { receiverId, videoId, time } = { ...body };
+    const { receiverId, videoId, time, repeat } = { ...body };
 
     // Create new schedule
     const newSchedule = await VideoSchedule.create({
       targetId: userId,
       userId: receiverId,
       videoId,
-      time: new Date(time)
+      time: new Date(time),
+      repeat
     });
 
-    const schedule = await VideoSchedule.findOne({
+    const _schedule = await VideoSchedule.findOne({
       where: { id: newSchedule.id },
       include: [
         { model: User, as: 'sender' },
@@ -77,7 +36,7 @@ export class ScheduleService {
     });
 
     // Add new schedule to the cron jobs
-    await this.addSchedule(schedule.toJSON());
+    await this.addSchedule(_schedule.toJSON());
   }
 
   // Lấy danh sách lịch phát video của một user
@@ -130,85 +89,12 @@ export class ScheduleService {
     };
   }
 
-  static async getScheduleById(req) {
-    const { id } = req.params;
-    // Danh sách các thành viên
-    let schedule = await VideoSchedule.findAll({
-      where: { id },
-      include: [
-        // Thông tin người gửi
-        {
-          model: User,
-          as: 'sender'
-        },
-        // Thông tin người nhận
-        {
-          model: User,
-          as: 'receiver'
-        }
-      ]
-    });
-    console.log(schedule.toJSON);
-    schedule = schedule.toJSON;
-    return {
-      scheduler: {
-        id: String(schedule.id),
-        sender: {
-          id: String(schedule.sender.id),
-          name: schedule.sender.username || '',
-          avatar: schedule.sender.avatar
-        },
-        receiver: {
-          id: String(schedule.receiver.id),
-          name: schedule.receiver.username || '',
-          avatar: schedule.receiver.avatar
-        },
-        video: {
-          id: String(schedule.video.id),
-          url: schedule.video.url || ''
-        },
-        startTime: schedule.startTime,
-        endTime: schedule.endTime,
-        status: schedule.status || ''
-      }
-    };
-  }
+  static async deleteScheduleTime(userId, videoId) {
+    const _schedule = await VideoSchedule.findOne({ where: { targetId: userId, videoId } });
 
-  static async updateScheduleTime(req, body) {
-    const { id } = req.params;
-    const { startTime, endTime } = { ...body };
-    // Danh sách các thành viên
-    let schedule = await VideoSchedule.findAll({
-      where: { id },
-      include: [
-        // Thông tin người gửi
-        {
-          model: User,
-          as: 'sender'
-        },
-        // Thông tin người nhận
-        {
-          model: User,
-          as: 'receiver'
-        }
-      ]
-    });
-    console.log(schedule.toJSON);
-    schedule = schedule.toJSON;
-  }
-
-  static async deleteScheduleTime(id) {
-    // Danh sách các thành viên
-    // const schedule = await VideoSchedule.findByPk(id);
-
-    // await VideoSchedule.destroy({ where: { id } });
+    await VideoSchedule.destroy({ where: { id: schedule.id } });
     // Cancel the cron job
-    const job = jobs.get(id);
-    if (job) {
-      job.stop();
-      jobs.delete(id);
-      console.log(jobs);
-    }
+    schedule.scheduledJobs[_schedule.id.toString()].cancel();
   }
 
   // Thực hiện việc hẹn phát video
@@ -221,40 +107,36 @@ export class ScheduleService {
         { model: DeepfakeVideo, as: 'video' }
       ]
     });
-    const schedules = schedulesTotal.map((schedule) => schedule.toJSON());
+    const schedules = schedulesTotal.map((_schedule) => schedule.toJSON());
 
     // Duyệt qua từng schedules và lập lịch phát video
-    schedules.forEach((schedule) => {
+    schedules.forEach((_schedule) => {
       this.addSchedule(schedule);
     });
   }
 
-  static async addSchedule(schedule) {
-    const second = new Date(schedule.time).getSeconds();
-    const minute = new Date(schedule.time).getMinutes();
-    const hour = new Date(schedule.time).getHours();
-    const day = new Date(schedule.time).getDate();
-    const month = new Date(schedule.time).getMonth() + 1;
+  static async addSchedule(_schedule) {
+    const minute = new Date(_schedule.time).getMinutes();
+    const hour = new Date(_schedule.time).getHours();
+    const day = new Date(_schedule.time).getDate();
+    const month = new Date(_schedule.time).getMonth() + 1;
 
-    console.log(second);
-    console.log(minute);
-    console.log(hour);
-    const cronExpression = `${second} ${minute} ${hour} ${day} ${month} `;
-    const job = cron.schedule(
-      cronExpression,
-      async () => {
-        // Thực hiện logic để gửi notification
-        // await NotificationServices.notifyPlayVideo(schedule.receiver, schedule.sender, schedule.video.id);
-        console.log(schedule);
-        job.stop();
-        jobs.delete(schedule.id);
-      },
-      {
-        scheduled: true,
-        timezone: 'Asia/Ho_Chi_Minh'
-      }
-    );
-    jobs.set(schedule.id, job);
-    console.log(jobs);
+    // const cronExpression = `${second} ${minute} ${hour} ${day} ${month} * `;
+    let cronExpression;
+    if (_schedule.repeat === 0) cronExpression = `0 ${minute} ${hour} ${day} ${month} * `;
+    else cronExpression = `0 ${minute} ${hour} * * * `;
+
+    const job = schedule.scheduleJob(_schedule.id.toString(), cronExpression, async function () {
+      // TODO:" NOtification"
+      await NotificationServices.notifyPlayVideo(_schedule.targetId, _schedule.userId, _schedule.videoId);
+      console.log(_schedule.id);
+
+      if (_schedule.repeat === 0) job.cancel();
+    });
+
+    // schedule.scheduledJobs[_schedule.id.toString()].cancel();
+    // schedule.scheduledJobs.get(id)
+
+    // console.log(job.);
   }
 }

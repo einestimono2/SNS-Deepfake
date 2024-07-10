@@ -89,6 +89,24 @@ class ConversationModel extends Equatable {
   String getNewestMessage(int myId) {
     if (messages.isEmpty) return "JUST_CREATED_CONVERSATION_TEXT".tr();
 
+    // Trường hợp member bị kích
+    if (messages.first.type == MessageType.system &&
+        (messages.first.message == "KICK_MEMBER")) {
+      MemberModel owner = members.firstWhere((e) => e.id == creatorId);
+      return "${owner.username ?? owner.email}: ${"DELETED_MEMBER_CONVERSATION_TEXT".tr(
+        namedArgs: {"name": messages.first.sender!.username},
+      )}";
+    } else if (messages.first.type == MessageType.system &&
+        (messages.first.message == "ADD_MEMBER")) {
+      MemberModel owner = members.firstWhere((e) => e.id == creatorId);
+      return "${owner.username ?? owner.email}: ${"ADDED_MEMBER_CONVERSATION_TEXT".tr(
+        namedArgs: {"name": messages.first.sender!.username},
+      )}";
+    } else if (messages.first.type == MessageType.system &&
+        (messages.first.message == "LEAVE_MEMBER")) {
+      return "${messages.first.sender!.username}: ${"LEAVED_CONVERSATION_TEXT".tr()}";
+    }
+
     String from = "";
     MemberModel sender =
         members.firstWhere((member) => member.id == messages.first.senderId);

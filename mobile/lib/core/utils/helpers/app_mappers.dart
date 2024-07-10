@@ -120,12 +120,24 @@ class AppMappers {
     }
   }
 
-  static String getSystemMessageWithInfo(String key, [String name = ""]) {
+  static String getSystemMessageWithInfo(
+    String key, [
+    String name = "",
+    String name2 = "",
+  ]) {
     switch (key) {
       case "CREATED":
         return "USER_CREATED_CONVERSATION_TEXT".tr(namedArgs: {"name": name});
       case "RENAME_CONVERSATION":
         return "USER_RENAMED_CONVERSATION_TEXT".tr(namedArgs: {"name": name});
+      case "KICK_MEMBER":
+        return "USER_KICKED_CONVERSATION_TEXT"
+            .tr(namedArgs: {"name": name, "name2": name2});
+      case "LEAVE_MEMBER":
+        return "USER_LEAVED_CONVERSATION_TEXT".tr(namedArgs: {"name": name});
+      case "ADD_MEMBER":
+        return "USER_ADDED_CONVERSATION_TEXT"
+            .tr(namedArgs: {"name": name, "name2": name2});
       default:
         return "Unknown system message";
     }

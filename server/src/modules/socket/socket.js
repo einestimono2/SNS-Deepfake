@@ -128,17 +128,18 @@ class SocketServer {
     }, []);
   }
 
-  triggerEvent(room, event, data) {
+  triggerEvent(room, event, data, isRoom) {
+    isRoom = isRoom || false;
     let _room;
 
     // Truyền mảng users
     if (Array.isArray(room)) {
       _room = this.mapUserIdsToSocketIds(room);
     } else {
-      _room = this.mapper.get(room) ?? room;
+      _room = isRoom ? room : this.mapper.get(room) ?? room;
     }
 
-    this.io.to(_room).emit(event, data);
+    this.io.in(_room).emit(event, data);
   }
 }
 

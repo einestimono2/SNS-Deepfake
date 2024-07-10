@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:get_it/get_it.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import '../utils.dart';
@@ -87,7 +90,7 @@ class FileHelper {
 
     return imgs;
   }
-  
+
   static Future<List<XFile>?> pickMultiMedia({
     int? limit,
     int quality = 100,
@@ -122,5 +125,20 @@ class FileHelper {
       source: source,
       maxDuration: maxDuration,
     );
+  }
+
+  static Future<Directory?> getDownloadDirectory() async {
+    Directory? directory;
+
+    if (Platform.isIOS) {
+      directory = await getApplicationDocumentsDirectory();
+    } else {
+      directory = Directory('/storage/emulated/0/Download');
+      if (!await directory.exists()) {
+        directory = await getExternalStorageDirectory();
+      }
+    }
+
+    return directory;
   }
 }

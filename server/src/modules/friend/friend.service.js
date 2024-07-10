@@ -3,12 +3,13 @@ import sequelize, { Op } from 'sequelize';
 import { Block } from '../block/block.model.js';
 import { BlockServices } from '../block/block.service.js';
 import { BadRequestError } from '../core/error.response.js';
+import { NotificationServices } from '../notification/notification.service.js';
 import { User } from '../user/user.model.js';
 
 import { FriendRequest } from './components/friend_request.model.js';
 import { Friend } from './friend.model.js';
 
-import { AccountStatus, Message } from '#constants';
+import { AccountStatus, Message, NotificationType } from '#constants';
 import { redis } from '#dbs';
 
 export class FriendServices {
@@ -41,13 +42,6 @@ export class FriendServices {
               'friendsCount'
             ],
             [
-              // Lấy thông tin bạn chung của 2 người
-              // sequelize.literal(
-              //   `(SELECT ARRAY_AGG("same_friend"."targetId") FROM "Friends" AS "same_friend"
-              // INNER JOIN "Friends" AS "target_friends" ON "same_friend"."targetId" = "target_friends"."targetId"
-              // WHERE "same_friend"."userId" = ${userId} AND "target_friends"."userId" = "user"."id")`
-              // ),
-              // 'commonUserIds'
               sequelize.literal(
                 `(SELECT ARRAY_AGG("u"."avatar") FROM "Users" AS "u"
                 WHERE "u"."id" IN (
@@ -111,13 +105,14 @@ export class FriendServices {
     const requestedFriends = await FriendRequest.count({
       where: { userId }
     });
-    // Lấy thông tin của người nhận yêu cầu
-    // const target = await User.findOne({ where: { id: targetId } });
+    // Lấy thông tin của người gửi và nhận yêu cầu
+    const user = await User.findOne({ where: { id: userId } });
+    const target = await User.findOne({ where: { id: targetId } });
     // Tạo thông báo cho người nhận yêu cầu
-    // await this.notificationService.createNotification({
+    // await NotificationServices.createNotification({
     //   type: NotificationType.FriendRequest,
-    //   user: target,
-    //   target: user
+    //   user: target.toJson(),
+    //   target: user.toJson()
     // });
     return {
       requested_friends: String(requestedFriends)
@@ -152,13 +147,14 @@ export class FriendServices {
       })
     ]);
 
+    const user = await User.findOne({ where: { id: userId } });
     await FriendRequest.destroy({ where: { id: request.id } });
     // Tạo thông báo cho người gửi yêu cầu
-    // await this.notificationService.createNotification({
-    //   type: NotificationType.FriendAccepted,
-    //   userId: request.userId,
-    //   target: user
-    // });
+    await NotificationServices.createNotification({
+      type: NotificationType.FriendAccepted,
+      userId: request.userId,
+      target: user
+    });
   }
 
   // 4.Lấy danh sách bạn bè(Đã test nhưng vẫn cần xem lại)
@@ -218,15 +214,6 @@ export class FriendServices {
       })),
       count: friends.count
     };
-    // {
-    //   friends: friends.map((friend) => ({
-    //     id: String(friend.target.id),
-    //     username: friend.target.username || '',
-    //     avatar: friend.target.avatar,
-    //     same_friends: String(friend.target.friendsCount),
-    //     created: friend.target.createdAt
-    //   }))
-    // };
   }
 
   // 5.Lấy danh sách gợi ý là bạn bè

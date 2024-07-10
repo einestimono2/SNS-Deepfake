@@ -24,8 +24,9 @@ export class ScheduleController {
   });
 
   static deleteSchedule = CatchAsyncError(async (req, res) => {
-    const { id } = req.params;
-    await ScheduleService.deleteScheduleTime(id);
+    const { userId } = req.userPayload;
+    const { videoId } = req.params;
+    await ScheduleService.deleteScheduleTime(userId, videoId);
     res.ok({ message: 'Xóa lịch thành công' });
   });
 }

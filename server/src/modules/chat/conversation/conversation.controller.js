@@ -61,7 +61,8 @@ export class ConversationController {
 
   static deleteConversation = CatchAsyncError(async (req, res) => {
     await ConversationService.deleteConversation({
-      id: req.params.id
+      id: req.params.id,
+      userId: req.userPayload.userId
     });
 
     res.ok();
@@ -77,5 +78,27 @@ export class ConversationController {
     res.ok({
       data: conversation
     });
+  });
+
+  static addMembers = CatchAsyncError(async (req, res) => {
+    const conversation = await ConversationService.addMembers({
+      ...req.body,
+      userId: req.userPayload.userId,
+      id: req.params.id
+    });
+
+    res.ok({
+      data: conversation
+    });
+  });
+
+  static deleteMembers = CatchAsyncError(async (req, res) => {
+    await ConversationService.deleteMembers({
+      ...req.body,
+      userId: req.userPayload.userId,
+      id: req.params.id
+    });
+
+    res.ok();
   });
 }

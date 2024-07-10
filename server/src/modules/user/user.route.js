@@ -19,6 +19,7 @@ router.put('/change_password', isAuthenticated, UserControllers.changePassword);
 router.get('/get_user_info/:userId', isAuthenticated, UserControllers.getUserInfo);
 router.put('/set_user_info', isAuthenticated, UserControllers.setUserInfo);
 router.patch('/change_profile_after_signup', UserControllers.changeProfileAfterSignup);
+router.get('/get_children_info', isAuthenticated, UserControllers.getChildrenInfo);
 
 router.get('/forgot_password/:email', UserControllers.forgotPassword);
 router.post('/reset_password', UserControllers.resetPassword);

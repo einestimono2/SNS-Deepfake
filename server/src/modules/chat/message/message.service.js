@@ -2,6 +2,7 @@ import { Sequelize } from 'sequelize';
 
 import { BadRequestError, UnauthorizedError } from '../../core/error.response.js';
 import { socket } from '../../socket/socket.js';
+import { User } from '../../user/user.model.js';
 import { ConversationService } from '../conversation/conversation.service.js';
 
 import { Message } from './message.model.js';
@@ -29,10 +30,21 @@ export class MessageService {
       seenIds: [body.senderId] // từ token
     });
 
-    let sendMessage = newMessage.dataValues;
+    const sender = await User.findByPk(body.senderId);
+    let sendMessage = {
+      ...newMessage.dataValues,
+      sender: sender.dataValues
+    };
 
     if (body.replyId) {
-      const reply = await Message.findByPk(body.replyId);
+      const reply = await Message.findByPk(body.replyId, {
+        include: [
+          {
+            association: 'sender',
+            attributes: ['id', 'avatar', 'username', 'email', 'phoneNumber']
+          }
+        ]
+      });
       sendMessage = {
         ...sendMessage,
         reply: reply.dataValues
@@ -40,7 +52,7 @@ export class MessageService {
     }
 
     // Trigger Event: tới room đó (thành viên không trong room thì k cần thiết phải nhận)
-    socket.triggerEvent(body.conversationId, SocketEvents.MESSAGE_NEW, sendMessage);
+    socket.triggerEvent(body.conversationId, SocketEvents.MESSAGE_NEW, sendMessage, true);
 
     // Cập nhật lastMessageTimestamp
     const conversation = await ConversationService.updateLastMessageTimestamp({
@@ -86,7 +98,16 @@ export class MessageService {
     const lastMessage = await Message.findOne({
       where: { conversationId },
       order: [['createdAt', 'DESC']],
-      limit: 1
+      limit: 1,
+      include: [
+        {
+          association: 'reply'
+        },
+        {
+          association: 'sender',
+          attributes: ['id', 'avatar', 'username', 'email', 'phoneNumber']
+        }
+      ]
     });
 
     if (lastMessage && !lastMessage.seenIds?.includes(targetId)) {
@@ -119,6 +140,10 @@ export class MessageService {
       include: [
         {
           association: 'reply'
+        },
+        {
+          association: 'sender',
+          attributes: ['id', 'avatar', 'username', 'email', 'phoneNumber']
         }
       ],
       limit,
