@@ -6,6 +6,7 @@ import { UnprocessableEntityError } from '../modules/core/index.js';
 import { getStandardPath } from './path.js';
 
 import { Message, Strings } from '#constants';
+import { getMediaFromPath } from '#utils';
 
 export const unlinkFileFromPath = (_path) => {
   if (!_path) return;
@@ -95,7 +96,7 @@ export const setFileUnused = (filePath) => {
 };
 
 export const deleteFile = (filePath) => {
-  if (filePath && fs.existsSync(filePath)) {
-    fs.unlinkSync(filePath);
+  if (filePath && fs.existsSync(getMediaFromPath(filePath))) {
+    fs.unlinkSync(getMediaFromPath(filePath));
   }
 };

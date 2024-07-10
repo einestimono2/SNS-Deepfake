@@ -2,7 +2,7 @@ import { Op } from 'sequelize';
 
 import { Block } from '../block/block.model.js';
 import { BlockServices } from '../block/block.service.js';
-import { BadRequestError } from '../core/error.response.js';
+import { BadRequestError, ForbiddenError } from '../core/error.response.js';
 import { Notification } from '../notification/notification.model.js';
 import { NotificationServices } from '../notification/notification.service.js';
 import { Feel } from '../post/models/feel.model.js';
@@ -115,7 +115,7 @@ export class CommentServices {
 
     // Kiểm tra role của người dùng(bố mẹ cho phép bình luận)
     if (user.role === Roles.Children) {
-      throw new BadRequestError(Message.INSUFFICIENT_ACCESS_RIGHTS);
+      throw new ForbiddenError(Message.INSUFFICIENT_ACCESS_RIGHTS);
     }
     const { content, markId, limit, offset, type } = { ...body };
     // Reply một Mark có sẵn
@@ -334,7 +334,6 @@ export class CommentServices {
       offset,
       limit
     });
-    console.log(feelTotal.rows);
     return feelTotal;
     // feelTotal.rows.map((feel) => ({
     //   id: String(feel.id),

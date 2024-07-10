@@ -84,68 +84,54 @@ export class SearchServices {
           required: false
         }
       ],
-      attributes: {
-        include: [
-          [
-            sequelize.literal(
-              `ts_rank_cd(to_tsvector('english', "Post"."description"), to_tsquery('english', '${keyword}'))`
-            ),
-            'rank'
-          ],
-          [
-            sequelize.literal(
-              '(SELECT COUNT(*) FROM "Feels" WHERE "Feels"."postId" = "Post"."id" AND "Feels"."type" = 0)'
-            ),
-            'kudosCount'
-          ],
-          [
-            sequelize.literal(
-              '(SELECT COUNT(*) FROM "Feels" WHERE "Feels"."postId" = "Post"."id" AND "Feels"."type" = 1)'
-            ),
-            'disappointedCount'
-          ],
-          [
-            sequelize.literal(
-              '(SELECT COUNT(*) FROM "Marks" WHERE "Marks"."postId" = "Post"."id" AND "Marks"."type" = 0)'
-            ),
-            'trustCount'
-          ],
-          [
-            sequelize.literal(
-              '(SELECT COUNT(*) FROM "Marks" WHERE "Marks"."postId" = "Post"."id" AND "Marks"."type" = 1)'
-            ),
-            'fakeCount'
-          ]
+      attributes: [
+        // include: [
+        // [
+        //   sequelize.literal(
+        //     `ts_rank_cd(to_tsvector('english', "Post"."description"), to_tsquery('english', '${keyword}'))`
+        //   ),
+        //   'rank'
+        // ],
+        'id',
+        'authorId',
+        'description',
+        'status',
+        'edited',
+        'categoryId',
+        'rate',
+        'createdAt',
+        [
+          sequelize.literal(
+            '(SELECT COUNT(*) FROM "Feels" WHERE "Feels"."postId" = "Post"."id" AND "Feels"."type" = 0)'
+          ),
+          'kudosCount'
+        ],
+        [
+          sequelize.literal(
+            '(SELECT COUNT(*) FROM "Feels" WHERE "Feels"."postId" = "Post"."id" AND "Feels"."type" = 1)'
+          ),
+          'disappointedCount'
+        ],
+        [
+          sequelize.literal(
+            '(SELECT COUNT(*) FROM "Marks" WHERE "Marks"."postId" = "Post"."id" AND "Marks"."type" = 0)'
+          ),
+          'trustCount'
+        ],
+        [
+          sequelize.literal(
+            '(SELECT COUNT(*) FROM "Marks" WHERE "Marks"."postId" = "Post"."id" AND "Marks"."type" = 1)'
+          ),
+          'fakeCount'
         ]
-      },
-      where: sequelize.literal(
-        ' ts_rank_cd(to_tsvector(\'english\', "Post"."description"), to_tsquery(\'english\', :keyword)) > 0'
-      ),
-      replacements: { keyword },
-      order: [
-        ['rank', 'DESC'],
-        ['id', 'DESC']
       ],
+      where: sequelize.literal(`to_tsvector('english', "Post"."description") @@ to_tsquery('english', '${keyword}')`),
+      order: [['id', 'DESC']],
       distinct: true,
       subQuery: false,
       offset,
       limit
     });
-    // Lấy số lượng bình luận cho mỗi bài viết
-    // for (const post of posts.rows) {
-    //   const commentsCount = await Comment.count({
-    //     include: [
-    //       {
-    //         model: Mark,
-    //         as: 'mark',
-    //         where: { postId: post.id }
-    //       }
-    //     ]
-    //   });
-    //   post.commentsCount = commentsCount;
-    //   //   // await post.save();
-    // }
-    // Trả về kết quả được định dạng
     return {
       rows: posts.rows.map((post) => ({
         post,
@@ -191,7 +177,7 @@ export class SearchServices {
             ...usersIdBlocking.map((block) => block.userId)
           ]
         },
-        [Op.and]: sequelize.literal(`ts_rank_cd(to_tsvector(username), to_tsquery('${keyword}'))>0`)
+        [Op.and]: sequelize.literal(`to_tsvector(username) @@ to_tsquery('${keyword}')`)
       },
       attributes: [
         'id',
@@ -205,20 +191,6 @@ export class SearchServices {
           ),
           'commonfriendsCount'
         ]
-        // ,
-        // [
-        //   sequelize.literal(
-        //     `(SELECT ARRAY_AGG("u"."avatar") FROM "Users" AS "u"
-        //         WHERE "u"."id" IN (
-        //         SELECT "same_friend"."targetId" FROM "Friends" AS "same_friend"
-        //         INNER JOIN "Friends" AS "target_friends" ON "same_friend"."targetId" = "target_friends"."targetId"
-        //         WHERE "same_friend"."userId" = ${userId} AND "target_friends"."userId" = "User"."id"
-        //          )
-        //         LIMIT 5
-        //          )`
-        //   ),
-        //   'commonUserAvatars'
-        // ]
       ],
       distinct: true,
       replacements: { keyword },

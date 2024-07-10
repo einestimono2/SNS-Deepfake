@@ -32,14 +32,6 @@ export class PostServices {
     if (user.coins < costs.createPost) {
       throw new BadRequestError(Message.NO_ENOUGH_COINS);
     }
-    // Kiểm tra các trường đầu vào
-    // if (!description && !status && (!images || !images.length) && !video) {
-    //   throw new BadRequestError(Message.FILE_NOT_FOUND);
-    // }
-
-    // Goi truoc ham Post.create de tao model
-    // setFileUsed();
-    // Tạo dữ liệu cho bảng post
     const post = await Post.create({
       authorId: userId,
       description,
@@ -101,42 +93,43 @@ export class PostServices {
         id: userId
       }
     });
-    const postTotal = await Post.findOne({
-      where: {
-        id: postId
-        // [Op.and]: [{ id: postId }, { groupId }]
-      },
-      include: [
-        {
-          model: User,
-          as: 'author',
-          attributes: ['id', 'avatar', 'username', 'email', 'phoneNumber']
-          // where: { author, blocked: null },
+    const postTotal = await Post.findOne(
+      {
+        where: {
+          id: postId
+          // [Op.and]: [{ id: postId }, { groupId }]
         },
-        {
-          model: PostImage,
-          as: 'images',
-          order: [['order', 'ASC']]
-        },
-        {
-          model: PostVideo,
-          as: 'videos'
-        },
-        {
-          model: Feel,
-          as: 'feels',
-          where: { userId },
-          required: false
-        },
-        {
-          model: Mark,
-          as: 'marks',
-          where: { userId },
-          required: false
-        }
-      ],
-      attributes: {
         include: [
+          {
+            model: User,
+            as: 'author',
+            attributes: ['id', 'avatar', 'username', 'email', 'phoneNumber']
+            // where: { author, blocked: null },
+          },
+          {
+            model: PostImage,
+            as: 'images',
+            order: [['order', 'ASC']]
+          },
+          {
+            model: PostVideo,
+            as: 'videos'
+          },
+          {
+            model: Feel,
+            as: 'feels',
+            where: { userId },
+            required: false
+          },
+          {
+            model: Mark,
+            as: 'marks',
+            where: { userId },
+            required: false
+          }
+        ],
+        attributes: [
+          // include: [
           [
             sequelize.literal(
               '(SELECT COUNT(*) FROM "Feels" WHERE "Feels"."postId" = "Post"."id" AND "Feels"."type" = 0)'
@@ -162,49 +155,19 @@ export class PostServices {
             'fakeCount'
           ]
         ]
-      },
-      group: ['Post.id', 'author.id', 'images.id', 'videos.id', 'feels.id', 'marks.id', 'histories.id']
-    });
+      }
+      // group: ['Post.id', 'author.id', 'images.id', 'videos.id', 'feels.id', 'marks.id', 'histories.id']
+    );
     if (!postTotal) {
       throw new BadRequestError(Message.POST_NOT_FOUND);
     }
     const post = postTotal.toJSON();
     return {
       post,
-      // id: String(post.id),
-      // created: post.createdAt,
-      // description: post.description || '',
-      // status: post.status || '',
-      // modified: String(post.edited),
-      // feel: parseInt(post.kudosCount, 10) + parseInt(post.disappointedCount, 10),
-      // mark: parseInt(post.trustCount, 10) + parseInt(post.fakeCount, 10),
-      // is_felt: post.feels.length ? String(post.feels[0].type) : '-1',
-      // is_marked: post.marks.length ? '1' : '0',
-      // your_mark: post.marks.length
-      //   ? {
-      //       mark_content: post.marks[0].content,
-      //       type_of_mark: String(post.marks[0].type)
-      //     }
-      //   : undefined,
-      // image: post.images.map((e) => ({
-      //   id: String(e.order),
-      //   url: e.url
-      // })),
-      // video: post.video ? { url: post.video.url } : undefined,
-      // author: {
-      //   id: String(post.author.id),
-      //   name: post.author.username || '',
-      //   avatar: post.author.avatar,
-      //   coins: String(post.author.coins)
-      //   // listing: post.histories.map((e) => String(e.oldPostId))
-      // },
-      // category: getCategory(post),
       can_edit: getCanEdit(post, user),
-      banned: getBanned(post),
+      // banned: getBanned(post),
       can_mark: getCanMark(post, user),
-      can_rate: getCanRate(post, user),
-      // url: '',
-      // messages: '',
+      // can_rate: getCanRate(post, user),
       deleted: post.deletedAt ? post.deletedAt : undefined
     };
   }
@@ -231,8 +194,6 @@ export class PostServices {
     //     groupId
     //   }
     // });
-
-    console.log(groupIds);
 
     // Danh sach các userId của người mà bị mình block
     const usersIdBlocking = await Block.findAll({
@@ -344,28 +305,11 @@ export class PostServices {
     }
 
     const postTotal = await Post.findAndCountAll(query);
-    // if (!postTotal?.count) {
-    //   throw new BadRequestError(Message.POST_NOT_FOUND);
-    // }
-
-    //= =========Còn xử lý đoạn Mark===============
-    // const posts = [];
-    // for (const e of postTotal.rows) {
-    //   const post = e.toJSON();
-    //   posts.push(post);
-    // }
-    // for (const post of postTotal.rows) {
-    //   console.log(post.toJSON());
-    //   const commentsCount = await Comment.count({
-    //     where: { markId: post.id }
-    //   });
-    //   post.commentsCount = commentsCount || 0;
-    // }
     return {
       rows: postTotal.rows.map((post) => ({
         post,
-        can_edit: getCanEdit(post, user),
-        banned: getBanned(post)
+        can_edit: getCanEdit(post, user)
+        // banned: getBanned(post)
       })),
       count: postTotal.count
     };
@@ -604,8 +548,16 @@ export class PostServices {
       where: { targetId: userId },
       attributes: ['userId']
     });
+    const userGroups = await GroupUser.findAll({
+      where: { userId },
+      attributes: ['groupId']
+    });
 
+    const groupIds = userGroups.map((group) => group.groupId);
     const query = {
+      where: {
+        [Op.or]: [{ groupId: { [Op.in]: groupIds } }, { groupId: { [Op.eq]: null } }]
+      },
       include: [
         {
           model: User,
@@ -701,106 +653,106 @@ export class PostServices {
     };
   }
 
-  static async setSharededPost(userId, postId) {
-    // Tìm postView dựa trên postId
-    const post = await Post.findOne({ where: { postId } });
+  // static async setSharededPost(userId, postId) {
+  //   // Tìm postView dựa trên postId
+  //   const post = await Post.findOne({ where: { postId } });
 
-    // Tăng giá trị lượt sharecount lên 1
-    post.shareCount += 1;
-    // Lưu hoặc cập nhật postView vào cơ sở dữ liệu
-    await post.save();
-    return {
-      viewed: String(post.shareCount)
-    };
-  }
+  //   // Tăng giá trị lượt sharecount lên 1
+  //   post.shareCount += 1;
+  //   // Lưu hoặc cập nhật postView vào cơ sở dữ liệu
+  //   await post.save();
+  //   return {
+  //     viewed: String(post.shareCount)
+  //   };
+  // }
 
   // Chia sẻ bài viết vào 1 nhóm
-  static async sharePostToGroup(userId, body) {
-    const { groupId, postId } = { ...body };
-    if (!groupId || !userId) throw new BadRequestError(Message.ID_EMPTY);
-    const user = await User.findOne({ where: { id: userId } });
-    // Kiểm tra số coins của user
-    if (user.coins < costs.sharePost) {
-      throw new BadRequestError(Message.NO_ENOUGH_COINS);
-    }
-    const postToShare = await Post.findOne({
-      where: { id: postId },
-      include: [
-        {
-          model: User,
-          as: 'author',
-          attributes: ['id', 'avatar', 'username', 'email', 'phoneNumber']
-        },
-        { model: PostImage, as: 'images', order: [['order', 'ASC']] },
-        { model: PostVideo, as: 'video' },
-        { model: Feel, as: 'feels' },
-        { model: Mark, as: 'marks' }
-      ],
-      attributes: {
-        include: [
-          [
-            sequelize.literal(
-              '(SELECT COUNT(*) FROM "Feels" WHERE "Feels"."postId" = "Post"."id" AND "Feels"."type" = 0)'
-            ),
-            'kudosCount'
-          ],
-          [
-            sequelize.literal(
-              '(SELECT COUNT(*) FROM "Feels" WHERE "Feels"."postId" = "Post"."id" AND "Feels"."type" = 1)'
-            ),
-            'disappointedCount'
-          ],
-          [
-            sequelize.literal(
-              '(SELECT COUNT(*) FROM "Marks" WHERE "Marks"."postId" = "Post"."id" AND "Marks"."type" = 0)'
-            ),
-            'trustCount'
-          ],
-          [
-            sequelize.literal(
-              '(SELECT COUNT(*) FROM "Marks" WHERE "Marks"."postId" = "Post"."id" AND "Marks"."type" = 1)'
-            ),
-            'fakeCount'
-          ]
-        ]
-      }
-    });
-    const postShare = postToShare.toJSON();
-    const postCreate = await Post.create({
-      authorId: userId,
-      description: body.description,
-      status: body.status,
-      groupId,
-      postShareId: postId
-    });
+  // static async sharePostToGroup(userId, body) {
+  //   const { groupId, postId } = { ...body };
+  //   if (!groupId || !userId) throw new BadRequestError(Message.ID_EMPTY);
+  //   const user = await User.findOne({ where: { id: userId } });
+  //   // Kiểm tra số coins của user
+  //   if (user.coins < costs.sharePost) {
+  //     throw new BadRequestError(Message.NO_ENOUGH_COINS);
+  //   }
+  //   const postToShare = await Post.findOne({
+  //     where: { id: postId },
+  //     include: [
+  //       {
+  //         model: User,
+  //         as: 'author',
+  //         attributes: ['id', 'avatar', 'username', 'email', 'phoneNumber']
+  //       },
+  //       { model: PostImage, as: 'images', order: [['order', 'ASC']] },
+  //       { model: PostVideo, as: 'video' },
+  //       { model: Feel, as: 'feels' },
+  //       { model: Mark, as: 'marks' }
+  //     ],
+  //     attributes: {
+  //       include: [
+  //         [
+  //           sequelize.literal(
+  //             '(SELECT COUNT(*) FROM "Feels" WHERE "Feels"."postId" = "Post"."id" AND "Feels"."type" = 0)'
+  //           ),
+  //           'kudosCount'
+  //         ],
+  //         [
+  //           sequelize.literal(
+  //             '(SELECT COUNT(*) FROM "Feels" WHERE "Feels"."postId" = "Post"."id" AND "Feels"."type" = 1)'
+  //           ),
+  //           'disappointedCount'
+  //         ],
+  //         [
+  //           sequelize.literal(
+  //             '(SELECT COUNT(*) FROM "Marks" WHERE "Marks"."postId" = "Post"."id" AND "Marks"."type" = 0)'
+  //           ),
+  //           'trustCount'
+  //         ],
+  //         [
+  //           sequelize.literal(
+  //             '(SELECT COUNT(*) FROM "Marks" WHERE "Marks"."postId" = "Post"."id" AND "Marks"."type" = 1)'
+  //           ),
+  //           'fakeCount'
+  //         ]
+  //       ]
+  //     }
+  //   });
+  //   const postShare = postToShare.toJSON();
+  //   const postCreate = await Post.create({
+  //     authorId: userId,
+  //     description: body.description,
+  //     status: body.status,
+  //     groupId,
+  //     postShareId: postId
+  //   });
 
-    // Lưu dữ liệu vào bảng postvideo và postimage
-    if (postShare.video) {
-      const fileVideoUsed = setFileUsed(postShare.video.url);
-      await PostVideo.create({ postId: postCreate.id, url: fileVideoUsed });
-    }
-    // if (body.images?.length) {
-    //   const imagePromises = images.map((image, i) => {
-    //     const fileImageUsed = setFileUsed(image);
-    //     return PostImage.create({
-    //       postId: post.id,
-    //       url: fileImageUsed,
-    //       order: i + 1
-    //     });
-    //   });
-    //   await Promise.all(imagePromises);
-    // }
-    // Cập nhật số coins
-    user.coins -= costs.sharePost;
-    user.lastActive = new Date();
-    await user.save();
-    // this.notificationService.notifyAddPost({ post, author: user });
-    // Thong bao
-    return {
-      id: String(postShare.id),
-      coins: String(user.coins)
-    };
-  }
+  //   // Lưu dữ liệu vào bảng postvideo và postimage
+  //   if (postShare.video) {
+  //     const fileVideoUsed = setFileUsed(postShare.video.url);
+  //     await PostVideo.create({ postId: postCreate.id, url: fileVideoUsed });
+  //   }
+  //   // if (body.images?.length) {
+  //   //   const imagePromises = images.map((image, i) => {
+  //   //     const fileImageUsed = setFileUsed(image);
+  //   //     return PostImage.create({
+  //   //       postId: post.id,
+  //   //       url: fileImageUsed,
+  //   //       order: i + 1
+  //   //     });
+  //   //   });
+  //   //   await Promise.all(imagePromises);
+  //   // }
+  //   // Cập nhật số coins
+  //   user.coins -= costs.sharePost;
+  //   user.lastActive = new Date();
+  //   await user.save();
+  //   // this.notificationService.notifyAddPost({ post, author: user });
+  //   // Thong bao
+  //   return {
+  //     id: String(postShare.id),
+  //     coins: String(user.coins)
+  //   };
+  // }
 
   static async getMyPosts({ userId, limit, offset }) {
     if (!userId) throw new BadRequestError(Message.ID_EMPTY);

@@ -1,6 +1,6 @@
 import schedule from 'node-schedule';
 
-import { UnauthorizedError } from '../core/error.response.js';
+import { ForbiddenError, UnauthorizedError } from '../core/error.response.js';
 // import { PostVideo } from '../post/models/post_video.model.js';
 import { DeepfakeVideo } from '../deepfake_video/deepfake_video.model.js';
 import { User } from '../user/user.model.js';
@@ -16,7 +16,11 @@ export class ScheduleService {
   // Tạo lịch phát video
   static async createSchedule(userId, body) {
     const { receiverId, videoId, time, repeat } = { ...body };
-
+    const user = await User.findByPk(userId);
+    // Trẻ - role == 0
+    if (user.role === 0) {
+      throw new ForbiddenError(Message.INSUFFICIENT_ACCESS_RIGHTS);
+    }
     // Create new schedule
     const newSchedule = await VideoSchedule.create({
       targetId: userId,

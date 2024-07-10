@@ -47,7 +47,7 @@ export class DeepfakeVideoService {
     });
 
     try {
-      await axios.post(ServerAI, form, {
+      const response = await axios.post(ServerAI, form, {
         headers: {
           'Content-Type': 'multipart/form-data'
         },
@@ -59,6 +59,8 @@ export class DeepfakeVideoService {
         }
       });
 
+      console.log(response.data);
+
       return deepfakeVideo;
     } catch (error) {
       await deepfakeVideo.destroy();
@@ -68,6 +70,8 @@ export class DeepfakeVideoService {
   }
 
   static async finishDeepfakeVideo({ videoId, videoName }) {
+    console.log(`${videoId} - ${videoName}`);
+
     const video = await DeepfakeVideo.findByPk(videoId);
     if (!video) return;
 

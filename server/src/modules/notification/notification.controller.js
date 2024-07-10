@@ -45,6 +45,7 @@ export class NotificationControllers {
   static notifyEditPost = CatchAsyncError(async (req, res) => {
     const { userId } = req.userPayload;
     const { postId } = req.query;
+    console.log(postId);
     await NotificationServices.notifyEditPost(postId, userId);
     res.ok({
       message: 'Notify Edit Post Successfully'

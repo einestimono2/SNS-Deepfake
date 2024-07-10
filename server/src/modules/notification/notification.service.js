@@ -15,6 +15,7 @@ import { User } from '../user/user.model.js';
 import { Notification } from './notification.model.js';
 
 import { DevToken } from '##/modules/user/models/device_token.model';
+import { VideoSchedule } from '##/modules/video_schedule/video_schedule.model';
 import { NotificationType } from '#constants';
 
 export class NotificationServices {
@@ -125,8 +126,8 @@ export class NotificationServices {
   // }
 
   static async createNotification(data) {
-    const { type, userId, targetId, postId, markId, feelId, videoId } = data;
-    let { user, target, post, mark, feel, video } = data;
+    const { type, userId, targetId, postId, markId, feelId, videoId, videoDeepfakeId } = data;
+    let { user, target, post, mark, feel, video, videodeepfake } = data;
     // if ((user?.id || userId) === (target?.id || targetId || -1)) {
     //   return;
     // }
@@ -136,7 +137,11 @@ export class NotificationServices {
     post ??= postId ? await Post.findOne({ where: { id: postId } }).toJSON() : undefined;
     mark ??= markId ? (await Mark.findOne({ where: { id: markId } })).toJSON() : undefined;
     feel ??= feelId ? (await Feel.findOne({ where: { id: feelId } })).toJSON() : undefined;
-    video ??= videoId ? (await DeepfakeVideo.findOne({ where: { id: videoId } })).toJSON() : undefined;
+    video ??= videoId ? (await VideoSchedule.findOne({ where: { id: videoId } })).toJSON() : undefined;
+    videodeepfake ??= videoDeepfakeId
+      ? (await DeepfakeVideo.findOne({ where: { id: videoDeepfakeId } })).toJSON()
+      : undefined;
+
     // Không tạo giá trị của trường thông qua biến tham chiếu
     const notification = await Notification.create({
       type,
@@ -145,7 +150,8 @@ export class NotificationServices {
       postId: post?.id,
       markId: mark?.id,
       feelId: feel?.id,
-      videoId: video?.id
+      videoId: video?.id,
+      videoDeepfakeId: videodeepfake?.id
       // coins: coins ?? null
     });
     // return notification;
@@ -209,7 +215,6 @@ export class NotificationServices {
       offset,
       subQuery: false
     });
-    console.log(this.mapNotification(notifications.rows[0]));
     setTimeout(() => {
       for (const notification of notifications.rows) {
         notification.read = true;
@@ -314,6 +319,7 @@ export class NotificationServices {
     const post = await Post.findOne({ where: { id: postId } });
     const author = await User.findOne({ where: { id: authorId } });
     const marks = await Mark.findAll({ where: { postId } });
+    console.log(marks);
     for (const mark of marks) {
       if (mark.userId === authorId) {
         return;
@@ -332,8 +338,10 @@ export class NotificationServices {
     const user = await User.findOne({ where: { id: userId } });
     const target = await User.findOne({ where: { id: targetId } });
     // Lấy push setting từ csdl
+    console.log(userId);
     const pushSettings = await SettingServices.getUserPushSettings(user);
     const receiveNotification = pushSettings.fromFriends;
+
     // Nếu bạn bè để setting nhận thông báo
     if (receiveNotification) {
       await this.createNotification({
@@ -356,7 +364,7 @@ export class NotificationServices {
         type: NotificationType.CreateVideo,
         user: user.toJSON(),
         target: user.toJSON(),
-        videoId
+        videoDeepfakeId: videoId
       });
     }
   }

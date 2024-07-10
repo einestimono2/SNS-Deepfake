@@ -78,16 +78,6 @@ export class userServices {
     if (await this.checkEmaiExit(email)) {
       throw new BadRequestError(Message.EMAIL_ALREADY_EXISTS);
     }
-    // Kiểm tra sdt đã được đăng ký lần nào hay chưa?
-    // const exitPhoneNumber = await User.findOne({ where: { phoneNumber } });
-    // if (exitPhoneNumber) {
-    //   throw new BadRequestError(Message.PHONE_NUMBER_IS_INVALID);
-    // }
-    // Kiểm tra password có trùng email hay không?
-    // if (password.indexOf(email) !== -1) {
-    //   // Kiểm tra password có trùng email hay không?
-    //   throw new BadRequestError(Message.USER_IS_INVALID);
-    // }
 
     // Tạo tài khoản người dùng
     await User.create({
