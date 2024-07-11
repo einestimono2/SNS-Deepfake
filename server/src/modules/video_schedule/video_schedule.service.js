@@ -87,7 +87,9 @@ export class ScheduleService {
           id: String(scheduler.video.id),
           url: scheduler.video.url || ''
         },
-        time: scheduler.time
+        time: scheduler.time,
+        repeat: scheduler.repeat,
+        createdAt: scheduler.createdAt
       })),
       count: listSchedule.count
     };
@@ -96,7 +98,8 @@ export class ScheduleService {
   static async deleteScheduleTime(userId, videoId) {
     const _schedule = await VideoSchedule.findOne({ where: { targetId: userId, videoId } });
 
-    await VideoSchedule.destroy({ where: { id: schedule.id } });
+    await VideoSchedule.destroy({ where: { id: videoId } });
+
     // Cancel the cron job
     schedule.scheduledJobs[_schedule.id.toString()].cancel();
   }
@@ -111,7 +114,7 @@ export class ScheduleService {
         { model: DeepfakeVideo, as: 'video' }
       ]
     });
-    const schedules = schedulesTotal.map((_schedule) => schedule.toJSON());
+    const schedules = schedulesTotal.map((_schedule) => _schedule.toJSON());
 
     // Duyệt qua từng schedules và lập lịch phát video
     schedules.forEach((_schedule) => {
@@ -130,10 +133,8 @@ export class ScheduleService {
     if (_schedule.repeat === 0) cronExpression = `0 ${minute} ${hour} ${day} ${month} * `;
     else cronExpression = `0 ${minute} ${hour} * * * `;
 
-    const job = schedule.scheduleJob(_schedule.id.toString(), cronExpression, async function () {
-      // TODO:" NOtification"
-      await NotificationServices.notifyPlayVideo(_schedule.targetId, _schedule.userId, _schedule.videoId);
-      console.log(_schedule.id);
+    const job = schedule.scheduleJob(_schedule.id.toString(), cronExpression, function () {
+      NotificationServices.notifyPlayVideo(_schedule.targetId, _schedule.userId, _schedule.videoId);
 
       if (_schedule.repeat === 0) job.cancel();
     });

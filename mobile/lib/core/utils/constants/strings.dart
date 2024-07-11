@@ -16,6 +16,9 @@ class AppStrings {
   static const int messagePageSize = 20;
   static const int commentPageSize = 10;
 
+  static const int pendingDeepfakePageSize = 2;
+  static const int videoDeepfakePageSize = 10;
+
   static const int requestedFriendsPageSize = 20;
   static const int suggestedFriendsPageSize = 30;
   static const int listFriendPageSize = 20;

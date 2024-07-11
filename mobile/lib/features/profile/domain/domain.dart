@@ -1,4 +1,5 @@
 export 'repositories/profile_repository.dart';
+export 'repositories/deepfake_repository.dart';
 export 'usecases/update_profile_uc.dart';
 export 'usecases/my_posts_uc.dart';
 export 'usecases/get_user_profile_uc.dart';
@@ -8,3 +9,9 @@ export 'usecases/set_block_uc.dart';
 export 'usecases/un_block_uc.dart';
 export 'usecases/change_password_uc.dart';
 export 'usecases/buy_coins_uc.dart';
+export 'usecases/get_list_video_deepfake_uc.dart';
+export 'usecases/create_video_deepfake_uc.dart';
+export 'usecases/create_schedule_uc.dart';
+export 'usecases/get_my_children_uc.dart';
+export 'usecases/get_list_schedule_uc.dart';
+export 'usecases/delete_schedule_uc.dart';

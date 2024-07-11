@@ -124,4 +124,12 @@ class AppValidations {
 
     return null;
   }
+  
+  static String? validateTitle(String? value) {
+    if (value == null || value.isEmpty) {
+      return "TITLE_EMPTY".tr();
+    }
+
+    return null;
+  }
 }

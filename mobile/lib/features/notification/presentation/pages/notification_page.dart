@@ -2,8 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:sns_deepfake/core/utils/extensions/text_theme.dart';
-import 'package:sns_deepfake/core/widgets/sliver_page.dart';
 import 'package:sns_deepfake/features/notification/presentation/blocs/list_notification/list_notification_bloc.dart';
 
 import '../../../../core/utils/utils.dart';

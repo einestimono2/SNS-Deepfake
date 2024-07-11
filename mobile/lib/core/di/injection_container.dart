@@ -64,6 +64,7 @@ Future<void> init() async {
   _initProfileFeature();
   _initVideoFeature();
   _initNotificationFeature();
+  _initDeepfakeFeature();
 
   /**
    * --> External
@@ -132,6 +133,34 @@ void _initVideoFeature() {
   );
 }
 
+void _initDeepfakeFeature() {
+  /* Bloc */
+  sl.registerLazySingleton(() => MyVideoDeepfakeBloc(
+        getListVideoDeepfakeUC: sl(),
+      ));
+  sl.registerLazySingleton(() => MyPendingVideoDeepfakeBloc(
+        getListVideoDeepfakeUC: sl(),
+      ));
+  sl.registerLazySingleton(() => DeepfakeBloc(
+        createVideoDeepfakeUC: sl(),
+        myPendingVideoDeepfakeBloc: sl(),
+      ));
+
+  /* Use Case */
+  sl.registerLazySingleton(() => CreateVideoDeepfakeUC(repository: sl()));
+  sl.registerLazySingleton(() => GetListVideoDeepfakeUC(repository: sl()));
+
+  /* Repository */
+  sl.registerLazySingleton<DeepfakeRepository>(
+    () => DeepfakeRepositoryImpl(network: sl(), remote: sl()),
+  );
+
+  /* Datasource */
+  sl.registerLazySingleton<DeepfakeRemoteDataSource>(
+    () => DeepfakeRemoteDataSourceImpl(apiClient: sl(), uploadRemote: sl()),
+  );
+}
+
 void _initProfileFeature() {
   /* Bloc */
   sl.registerLazySingleton(() => ProfileActionBloc(
@@ -155,6 +184,14 @@ void _initProfileFeature() {
   sl.registerLazySingleton(() => UserFriendsBloc(
         getUserFriendsUC: sl(),
       ));
+  sl.registerLazySingleton(() => MyChildrenBloc(
+        getMyChildrenUC: sl(),
+      ));
+  sl.registerLazySingleton(() => ListScheduleBloc(
+        createScheduleUC: sl(),
+        getListScheduleUC: sl(),
+        deleteScheduleUC: sl(),
+      ));
 
   /* Use Case */
   sl.registerLazySingleton(() => UpdateProfileUC(repository: sl()));
@@ -166,6 +203,10 @@ void _initProfileFeature() {
   sl.registerLazySingleton(() => UnBlockUC(repository: sl()));
   sl.registerLazySingleton(() => ChangePasswordUC(repository: sl()));
   sl.registerLazySingleton(() => BuyCoinsUC(repository: sl()));
+  sl.registerLazySingleton(() => GetMyChildrenUC(repository: sl()));
+  sl.registerLazySingleton(() => CreateScheduleUC(repository: sl()));
+  sl.registerLazySingleton(() => GetListScheduleUC(repository: sl()));
+  sl.registerLazySingleton(() => DeleteScheduleUC(repository: sl()));
 
   /* Repository */
   sl.registerLazySingleton<ProfileRepository>(

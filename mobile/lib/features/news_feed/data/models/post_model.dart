@@ -13,8 +13,6 @@ class PostModel extends Equatable {
   final String? description;
   final String? status;
   final bool edited;
-  final int? categoryId;
-  final int? rate;
   final int kudosCount;
   final int disappointedCount;
   final int trustCount;
@@ -24,7 +22,6 @@ class PostModel extends Equatable {
   final List<PostMediaModel> videos;
   final List<PostMediaModel> images;
   final bool canEdit;
-  final bool banned;
   final String createdAt;
   final int numShares;
   final int myFeel;
@@ -53,8 +50,6 @@ class PostModel extends Equatable {
     this.description,
     this.status,
     this.edited = false,
-    this.categoryId,
-    this.rate,
     this.kudosCount = 0,
     this.disappointedCount = 0,
     this.trustCount = 0,
@@ -64,7 +59,6 @@ class PostModel extends Equatable {
     this.videos = const [],
     this.images = const [],
     this.canEdit = false,
-    this.banned = false,
     this.myFeel = -1,
     this.numShares = 0,
     required this.createdAt,
@@ -76,8 +70,6 @@ class PostModel extends Equatable {
         description,
         status,
         edited,
-        categoryId,
-        rate,
         kudosCount,
         disappointedCount,
         trustCount,
@@ -87,7 +79,6 @@ class PostModel extends Equatable {
         videos,
         images,
         canEdit,
-        banned,
         createdAt,
         myFeel,
         numShares
@@ -119,8 +110,6 @@ class PostModel extends Equatable {
       description: description ?? this.description,
       status: status ?? this.status,
       edited: edited ?? this.edited,
-      categoryId: categoryId ?? this.categoryId,
-      rate: rate ?? this.rate,
       kudosCount: kudosCount ?? this.kudosCount,
       disappointedCount: disappointedCount ?? this.disappointedCount,
       trustCount: trustCount ?? this.trustCount,
@@ -130,7 +119,6 @@ class PostModel extends Equatable {
       videos: videos ?? this.videos,
       images: images ?? this.images,
       canEdit: canEdit ?? this.canEdit,
-      banned: banned ?? this.banned,
       createdAt: createdAt ?? this.createdAt,
       myFeel: myFeel ?? this.myFeel,
       numShares: numShares ?? this.numShares,
@@ -143,8 +131,6 @@ class PostModel extends Equatable {
       description: map['post']['description'],
       status: map['post']['status'],
       edited: int.parse(map['post']['edited'].toString()) != 0,
-      categoryId: map['post']['categoryId']?.toInt(),
-      rate: map['post']['rate']?.toInt(),
       kudosCount: int.parse(map['post']['kudosCount']?.toString() ?? '0'),
       disappointedCount:
           int.parse(map['post']['disappointedCount']?.toString() ?? '0'),
@@ -161,7 +147,6 @@ class PostModel extends Equatable {
         map['post']['images']?.map((x) => PostMediaModel.fromMap(x)),
       ),
       canEdit: int.parse(map['can_edit'].toString()) != 0,
-      banned: int.parse(map['banned'].toString()) != 0,
       createdAt: map['post']['createdAt'] ?? DateTime.now().toString(),
       myFeel: map['post']['feels'] != null && map['post']['feels']?.length > 0
           ? map['post']['feels'][0]["type"]

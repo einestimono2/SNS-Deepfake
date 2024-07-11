@@ -9,6 +9,7 @@ class SectionTitle extends StatelessWidget {
   final EdgeInsetsGeometry? margin;
   final EdgeInsetsGeometry? padding;
   final bool showTopSeparate;
+  final List<Widget>? actions;
 
   const SectionTitle({
     super.key,
@@ -18,6 +19,7 @@ class SectionTitle extends StatelessWidget {
     this.margin,
     this.showTopSeparate = false,
     this.padding,
+    this.actions,
   });
 
   @override
@@ -42,7 +44,11 @@ class SectionTitle extends StatelessWidget {
             title,
             style: Theme.of(context).textTheme.titleLarge,
           ),
-          if (onShowMore != null)
+          if (actions != null)
+            Row(
+              children: actions!,
+            )
+          else if (onShowMore != null)
             TextButton(
               onPressed: onShowMore,
               style: TextButton.styleFrom(

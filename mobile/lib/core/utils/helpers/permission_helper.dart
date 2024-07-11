@@ -36,4 +36,10 @@ class PermissionHelper {
 
     return status.values.every((e) => e.isGranted);
   }
+
+  static Future<bool> requestMicrophone() async {
+    final status = await Permission.audio.request();
+
+    return status.isGranted;
+  }
 }

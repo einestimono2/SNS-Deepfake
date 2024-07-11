@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../../data/data.dart';
@@ -9,15 +10,15 @@ class NotificationCard extends StatelessWidget {
   String getNotificationTitle() {
     switch (notification.type) {
       case 1: // FriendRequest
-        return "Nguyễn Văn A đã gửi lời mời kết bạn!";
+        return "FRIEND_REQUEST_NOTI_TEXT".tr();
       case 2: // FriendAccepted
-        return "Nguyễn Văn A đã chấp nhận yêu cầu kết bạn!";
+        return "FRIEND_ACCEPTED_NOTI_TEXT".tr();
       case 3: // PostAdded
-        return "Đã thêm mới bài viết";
+        return "POST_ADDED_NOTI_TEXT".tr();
       case 4: // PostUpdated
-        return "Đã cập nhật bài viết";
+        return "PostUpdated";
       case 5: // PostFelt
-        return "Nguyễn Văn A đã ";
+        return "POST_FELT_NOTI_TEXT".tr();
       case 6: // PostMarked
         return "PostMarked";
       case 7: // MarkCommented
@@ -28,8 +29,12 @@ class NotificationCard extends StatelessWidget {
         return "PostCommented";
       case 10: // PlusCoins
         return "PlusCoins";
+      case 11: // ScheduledVideo
+        return "ScheduledVideo";
+      case 12: // CreateVideo
+        return "FINISH_DEEPFAKE_NOTI_TEXT".tr();
       default:
-        return "Default";
+        return "Unknown";
     }
   }
 

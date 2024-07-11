@@ -34,6 +34,8 @@ abstract class ProfileRepository {
 
   Future<Either<Failure, ProfileModel>> getUserProfile(int id);
 
+  Future<Either<Failure, List<ShortUserModel>>> getMyChildren();
+
   Future<Either<Failure, bool>> block(int id);
   Future<Either<Failure, bool>> unblock(int id);
 
@@ -41,6 +43,6 @@ abstract class ProfileRepository {
     required String newPassword,
     required String oldPassword,
   });
-  
+
   Future<Either<Failure, int>> buyCoins(int amount);
 }

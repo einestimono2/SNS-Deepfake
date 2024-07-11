@@ -402,7 +402,7 @@ export class userServices {
 
     return {
       rows: children.rows.map((child) => ({
-        id: String(child.id),
+        id: child.id,
         email: child.email,
         avatar: child.avatar || '',
         username: child.username || ''

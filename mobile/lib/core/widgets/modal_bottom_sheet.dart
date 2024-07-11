@@ -32,27 +32,29 @@ Future<dynamic> openModalBottomSheet({
     isDismissible: isDismissible,
     showDragHandle: false,
     useSafeArea: fullscreen,
-    builder: (context) => Column(
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        if (!fullscreen)
-          Center(
-            child: Container(
-              width: 0.2.sw,
-              height: 5.h,
-              margin: EdgeInsets.symmetric(vertical: 8.h),
-              decoration: BoxDecoration(
-                color: context.minBackgroundColor(),
-                borderRadius: BorderRadius.circular(6.r),
+    builder: (context) => SingleChildScrollView(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          if (!fullscreen)
+            Center(
+              child: Container(
+                width: 0.2.sw,
+                height: 5.h,
+                margin: EdgeInsets.symmetric(vertical: 8.h),
+                decoration: BoxDecoration(
+                  color: context.minBackgroundColor(),
+                  borderRadius: BorderRadius.circular(6.r),
+                ),
               ),
             ),
-          ),
 
-        /*  */
-        child,
+          /*  */
+          child,
 
-        /*  */
-      ],
+          /*  */
+        ],
+      ),
     ),
   );
 }

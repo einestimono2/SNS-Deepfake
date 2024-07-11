@@ -832,32 +832,69 @@ class AppRouter {
 
                   /* Video Deepfake */
                   GoRoute(
-                      name: Routes.videoDF.name,
-                      path: Routes.videoDF.path,
-                      pageBuilder: (BuildContext context, GoRouterState state) {
-                        return slideTransition(
-                          type: SlideType.rtl,
-                          state: state,
-                          context: context,
-                          child: VideoDeepfakePage(key: state.pageKey),
-                        );
-                      },
-                      routes: [
-                        GoRoute(
-                          name: Routes.createVideoDF.name,
-                          path: Routes.createVideoDF.path,
-                          pageBuilder:
-                              (BuildContext context, GoRouterState state) {
-                            return slideTransition(
-                              type: SlideType.rtl,
-                              state: state,
-                              context: context,
-                              child:
-                                  CreateVideoDeepfakePage(key: state.pageKey),
-                            );
-                          },
-                        ),
-                      ]),
+                    name: Routes.videoDF.name,
+                    path: Routes.videoDF.path,
+                    pageBuilder: (BuildContext context, GoRouterState state) {
+                      return slideTransition(
+                        type: SlideType.rtl,
+                        state: state,
+                        context: context,
+                        child: VideoDeepfakePage(key: state.pageKey),
+                      );
+                    },
+                    routes: [
+                      GoRoute(
+                        parentNavigatorKey: rootNavigatorKey,
+                        name: Routes.createVideoDF.name,
+                        path: Routes.createVideoDF.path,
+                        pageBuilder:
+                            (BuildContext context, GoRouterState state) {
+                          return slideTransition(
+                            type: SlideType.rtl,
+                            state: state,
+                            context: context,
+                            child: CreateVideoDeepfakePage(key: state.pageKey),
+                          );
+                        },
+                      ),
+
+                      /*  */
+                      GoRoute(
+                        parentNavigatorKey: rootNavigatorKey,
+                        name: Routes.mySchedule.name,
+                        path: Routes.mySchedule.path,
+                        pageBuilder:
+                            (BuildContext context, GoRouterState state) {
+                          return slideTransition(
+                            type: SlideType.rtl,
+                            state: state,
+                            context: context,
+                            child: MySchedulePage(key: state.pageKey),
+                          );
+                        },
+                      ),
+
+                      /*  */
+                      GoRoute(
+                        parentNavigatorKey: rootNavigatorKey,
+                        name: Routes.scheduleVideo.name,
+                        path: Routes.scheduleVideo.path,
+                        pageBuilder:
+                            (BuildContext context, GoRouterState state) {
+                          return slideTransition(
+                            type: SlideType.rtl,
+                            state: state,
+                            context: context,
+                            child: ScheduleVideoPage(
+                              key: state.pageKey,
+                              videoId: (state.extra
+                                  as Map<String, dynamic>)['videoId'],
+                            ),
+                          );
+                        },
+                      ),
+                    ],
+                  ),
 
                   /* My Profile */
                   GoRoute(

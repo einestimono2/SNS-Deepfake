@@ -33,6 +33,8 @@ abstract class ProfileRemoteDataSource {
 
   Future<ProfileModel> getUserProfile(int id);
 
+  Future<List<ShortUserModel>> getMyChildren();
+
   Future<int> buyCoins(int amount);
 
   Future<bool> block(int id);
@@ -181,5 +183,14 @@ class ProfileRemoteDataSourceImpl extends ProfileRemoteDataSource {
     );
 
     return int.parse(response.data['coins'].toString());
+  }
+
+  @override
+  Future<List<ShortUserModel>> getMyChildren() async {
+    final response = await apiClient.get(Endpoints.myChildren);
+
+    return List<ShortUserModel>.from(
+      response.data['rows'].map((e) => ShortUserModel.fromMap(e)),
+    );
   }
 }

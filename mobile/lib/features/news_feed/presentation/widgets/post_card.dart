@@ -270,8 +270,7 @@ class PostCard extends StatelessWidget {
           ),
 
         /* Video Section - Không cần padding horizontal */
-        // TODO: Hiện đang để 1 video cho đỡ lag
-        if (post.videos.isNotEmpty && post.videos.length == 1000)
+        if (post.videos.isNotEmpty)
           Wrap(
             runSpacing: 6,
             children: post.videos
@@ -282,6 +281,7 @@ class PostCard extends StatelessWidget {
                       child: AppVideo(
                         post.videos.first.url.fullPath,
                         isNetwork: true,
+                        onlyShowThumbnail: true,
                       ),
                     ))
                 .toList(),

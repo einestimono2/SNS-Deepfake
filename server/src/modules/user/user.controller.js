@@ -95,6 +95,7 @@ export class UserControllers {
   static getChildrenInfo = CatchAsyncError(async (req, res) => {
     const { userId } = req.userPayload;
     const childrenInfo = await userServices.getChildrenInfo(userId);
+
     res.ok({ data: childrenInfo });
   });
 }

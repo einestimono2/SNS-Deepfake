@@ -155,4 +155,15 @@ class ProfileRepositoryImpl extends BaseRepositoryImpl
       },
     );
   }
+
+  @override
+  Future<Either<Failure, List<ShortUserModel>>> getMyChildren() async {
+    return await checkNetwork<List<ShortUserModel>>(
+      () async {
+        final data = await remote.getMyChildren();
+
+        return Right(data);
+      },
+    );
+  }
 }

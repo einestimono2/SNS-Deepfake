@@ -37,11 +37,11 @@ class _VideoPageState extends State<VideoPage> {
     super.initState();
   }
 
-  Future<void> _getListVideo() async {
-    context
-        .read<ListVideoBloc>()
-        .add(const GetListVideo(size: AppStrings.listVideoPageSize));
-  }
+  // Future<void> _getListVideo() async {
+  //   context
+  //       .read<ListVideoBloc>()
+  //       .add(const GetListVideo(size: AppStrings.listVideoPageSize));
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +79,7 @@ class _VideoPageState extends State<VideoPage> {
         ),
 
         /*  */
-        _header(),
+        // _header(),
 
         /* Loading */
         Align(

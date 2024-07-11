@@ -45,7 +45,10 @@ class _AppVideoState extends State<AppVideo> {
   void initState() {
     _controller = getType()
       ..initialize().then((_) {
-        if (widget.onlyShowThumbnail) return;
+        if (widget.onlyShowThumbnail) {
+          setState(() {});
+          return;
+        }
 
         chewieController = ChewieController(
           videoPlayerController: _controller,

@@ -9,3 +9,5 @@ export 'pages/profile_page.dart';
 export 'pages/setting_page.dart';
 export 'pages/update_profile_page.dart';
 export 'pages/video_deepfake_page.dart';
+export 'pages/my_schedule_page.dart';
+export 'pages/schedule_video_page.dart';

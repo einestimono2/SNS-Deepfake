@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:sns_deepfake/features/profile/presentation/blocs/blocs.dart';
 import 'package:sns_deepfake/features/video/presentation/blocs/blocs.dart';
 import 'package:zego_uikit_prebuilt_call/zego_uikit_prebuilt_call.dart';
 import 'package:zego_uikit_signaling_plugin/zego_uikit_signaling_plugin.dart';
@@ -80,6 +81,8 @@ class _MainLayoutState extends State<MainLayout> {
           size: AppStrings.listFriendPageSize,
           page: 1,
         ));
+
+    context.read<MyChildrenBloc>().add(GetMyChildren());
   }
 
   void _handleChange(int idx) {

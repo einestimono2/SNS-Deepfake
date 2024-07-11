@@ -61,7 +61,7 @@ export class DeepfakeVideoService {
 
       console.log(response.data);
 
-      return deepfakeVideo;
+      return { ...deepfakeVideo.dataValues, user: user.dataValues };
     } catch (error) {
       await deepfakeVideo.destroy();
       setFileUnused(usedVideo);

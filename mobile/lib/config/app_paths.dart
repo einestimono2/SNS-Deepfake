@@ -56,9 +56,19 @@ class Endpoints {
   static const String leaveGroup = '/group/leave_group/:groupId'; // DELETE
 
   static const String uploadImages = '/media/images';
+  static const String uploadAudios = '/media/audios';
   static const String uploadVideos = '/media/videos';
 
   static const String listNotification = '/notification/get_list_notifications';
+
+  static const String myChildren = '/user/get_children_info';
+
+  static const String listVideoDeepfake = '/videodeepfake/list';
+  static const String createVideoDeepfake = '/videodeepfake/create';
+
+  static const String createSchedule = '/video_schedule/create_schedule';
+  static const String deleteSchedule = '/video_schedule/delete_schedule/:videoId';
+  static const String listSchedule = '/video_schedule/get_list_schedule';
 
   static const String myConversations = '/conversation/list';
   static const String createConversation = '/conversation/create';
@@ -157,6 +167,10 @@ class Routes {
   static final videoDF = Route(name: "video_df", path: "video_df");
   static final createVideoDF =
       Route(name: "create_video_df", path: "create_video_df");
+  static final scheduleVideo =
+      Route(name: "scheduleVideo", path: "scheduleVideo");
+  static final mySchedule =
+      Route(name: "mySchedule", path: "mySchedule");
   static final updatePassword =
       Route(name: "update_password", path: "update_password");
   static final childUpdatePassword =
