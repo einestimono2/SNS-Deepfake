@@ -8,7 +8,10 @@ import morgan from 'morgan';
 import { initializeFirebaseAdmin } from '#configs';
 import { postgreDb } from '#dbs';
 import { ErrorMiddleware } from '#middlewares';
+// eslint-disable-next-line import/order
 import { routers } from '#modules';
+// eslint-disable-next-line import/order
+import { ScheduleService } from './modules/video_schedule/video_schedule.service.js';
 import { logger, uploadCleaningSchedule, verifyEnvironmentVariables } from '#utils';
 
 //! Cấu hình env
@@ -23,6 +26,8 @@ uploadCleaningSchedule.start();
 //! Khởi tạo
 initializeFirebaseAdmin();
 const app = express();
+
+ScheduleService.ScheduleTime();
 
 //! Middlewares
 // Cache --> Speed up

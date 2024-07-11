@@ -118,7 +118,7 @@ export class ScheduleService {
 
     // Duyệt qua từng schedules và lập lịch phát video
     schedules.forEach((_schedule) => {
-      this.addSchedule(schedule);
+      this.addSchedule(_schedule);
     });
   }
 

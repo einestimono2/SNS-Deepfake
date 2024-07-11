@@ -15,7 +15,6 @@ import { User } from '../user/user.model.js';
 import { Notification } from './notification.model.js';
 
 import { DevToken } from '##/modules/user/models/device_token.model';
-import { VideoSchedule } from '##/modules/video_schedule/video_schedule.model';
 import { NotificationType } from '#constants';
 
 export class NotificationServices {
@@ -127,6 +126,7 @@ export class NotificationServices {
 
   static async createNotification(data) {
     const { type, userId, targetId, postId, markId, feelId, videoId, videoDeepfakeId } = data;
+    // eslint-disable-next-line prefer-const
     let { user, target, post, mark, feel, video, videodeepfake } = data;
     // if ((user?.id || userId) === (target?.id || targetId || -1)) {
     //   return;
@@ -137,10 +137,12 @@ export class NotificationServices {
     post ??= postId ? await Post.findOne({ where: { id: postId } }).toJSON() : undefined;
     mark ??= markId ? (await Mark.findOne({ where: { id: markId } })).toJSON() : undefined;
     feel ??= feelId ? (await Feel.findOne({ where: { id: feelId } })).toJSON() : undefined;
-    video ??= videoId ? (await VideoSchedule.findOne({ where: { id: videoId } })).toJSON() : undefined;
+    // video ??= videoId ? (await VideoSchedule.findOne({ where: { id: videoId } })).toJSON() : undefined;
     videodeepfake ??= videoDeepfakeId
       ? (await DeepfakeVideo.findOne({ where: { id: videoDeepfakeId } })).toJSON()
       : undefined;
+
+    console.log(video);
 
     // Không tạo giá trị của trường thông qua biến tham chiếu
     const notification = await Notification.create({
